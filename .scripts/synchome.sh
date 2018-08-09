@@ -2,7 +2,7 @@
 #Copies git files to home
 HOME="/home/lucca"
 
-cp -r $HOME/Repos/RICE/.config/* $HOME
+cp -r $HOME/Repos/RICE/.config/* $HOME/.config
 cp -r $HOME/Repos/RICE/.scripts $HOME
 cp -r $HOME/Repos/RICE/.urxvt $HOME
 cp -r $HOME/Repos/RICE/.vim $HOME

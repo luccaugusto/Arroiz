@@ -8,7 +8,8 @@ cp -r $CONFIG_DIR/i3 $REPO/.config
 cp -r $CONFIG_DIR/qutebrowser $REPO/.config
 cp -r $CONFIG_DIR/polybar $REPO/.config
 cp -r $CONFIG_DIR/neofetch $REPO/.config
-echo "Copying vim urxvt and bash files"
+echo "Copying vim, urxvt,scripts and bash files"
+cp -r /home/lucca/.scripts/* $REPO/.scripts
 cp -r /home/lucca/.urxvt $REPO
 cp -r /home/lucca/.vim $REPO
 cp /home/lucca/.vimrc $REPO
@@ -17,3 +18,8 @@ cp /home/lucca/.bash_profile $REPO
 cp /home/lucca/.bashrc  $REPO
 cp /home/lucca/.Xresources $REPO
 cp /home/lucca/.Xauthority $REPO
+
+cd $REPO
+git commit -a
+git push
+cd /home/lucca/
