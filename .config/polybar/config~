@@ -1,0 +1,361 @@
+;======== TODO =======================
+;
+;Put song module on bar
+;
+;=====================================
+
+
+[bar/top]
+monitor = eDP-1
+width = 100%
+height = 25
+tray-position = right
+tray-detached = false
+
+background = #00000000
+foreground = #ccffffff
+
+line-color = ${bar/top.background}
+line-size = 16
+
+spacing = 2
+padding-right = 5
+module-margin = 2
+
+font-0 = NotoSans-Regular:size=8;-1
+font-1 = MaterialIcons:size=10;0
+font-2 = Termsynu:size=8:antialias=false;-2
+font-3 = FontAwesome:size=10;0
+
+modules-left = i3 volume backlight menu-apps
+modules-center = xwindow
+modules-right = mpd xkeyboard wireless-network battery date
+
+[bar/bottom]
+monitor = eDP-1
+bottom = true
+width = 100%
+height = 10 
+
+background = ${bar/top.background}
+foreground = ${bar/top.foreground}
+;
+;line-color = ${bar/top.background}
+;line-size = 2
+;
+spacing = 3
+padding-right = 4
+;module-margin-left = 0
+;module-margin-right = 6
+
+font-0 = NotoSans-Regular:size=8;-1
+font-1 = MaterialIcons:size=10;0
+font-2 = Termsynu:size=8:antialias=false;-2
+font-3 = FontAwesome:size=10;0
+
+modules-left = cpu date
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:30:...%
+
+[module/backlight]
+type = internal/backlight
+card = radeon_bl0
+format = <label>
+
+label =  %percentage%%
+
+
+;bar-width = 10
+;bar-indicator = |
+;bar-indicator-font = 3
+;bar-indicator-foreground = #ff
+;bar-fill = ─
+;bar-fill-font = 3
+;bar-fill-foreground = #c9665e
+;bar-empty = ─
+;bar-empty-font = 3
+;bar-empty-foreground = #44
+
+;bar-width = 10
+;bar-indicator = |
+;bar-indicator-font = 3
+;bar-indicator-foreground = #ff
+;bar-fill = ─
+;bar-fill-font = 3
+;bar-fill-foreground = #c9665e
+;bar-empty = ─
+;bar-empty-font = 3
+;bar-empty-foreground = #44
+
+
+[module/battery]
+type = internal/battery
+full-at = 99
+
+label-charging =  %percentage%%
+
+format-charging = <animation-charging> <label-charging>
+format-discharging = <ramp-capacity> <label-discharging>
+format-full = <ramp-capacity> <label-full>
+
+ramp-capacity-0 = 
+ramp-capacity-0-foreground = #f53c3c
+ramp-capacity-1 = 
+ramp-capacity-1-foreground = #ffa900
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+;bar-capacity-width = 10
+;bar-capacity-format = %{+u}%{+o}%fill%%empty%%{-u}%{-o}
+;bar-capacity-fill = █
+;bar-capacity-fill-foreground = #ddffffff
+;bar-capacity-fill-font = 3
+;bar-capacity-empty = █
+;bar-capacity-empty-font = 3
+;bar-capacity-empty-foreground = #44ffffff
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-framerate = 750
+
+[module/mpd]
+type = internal/mpd
+
+host = 127.0.0.1
+port = 6600
+password = mysecretpassword
+
+; Seconds to sleep between progressbar/song timer sync
+; Default: 1
+;interval = 2
+
+[module/i3]
+type = internal/i3
+
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 10;
+ws-icon-4 = 4;
+ws-icon-default = 
+
+format = <label-state> <label-mode>
+
+label-dimmed-underline = ${BAR.background}
+
+label-mode = %mode%
+label-mode-padding = 3
+
+label-focused = %icon%
+label-focused-foreground = #0099FF
+label-focused-background = #000000
+;label-focused-underline = #c9665e
+;label-focused-font = 7
+label-focused-padding = 2
+
+label-occupied = %icon%
+label-occupied-foreground = #dd
+;label-occupied-underline = #666
+label-occupied-font = 4
+label-occupied-padding = 2
+
+label-urgent = %icon%
+label-urgent-foreground = #000000
+label-urgent-background = #bd2c40
+;label-urgent-underline = #9b0a20
+label-urgent-font = 4
+label-urgent-padding = 2
+
+label-unfocused = %icon%
+label-unfocused-foreground = #55
+label-unfocused-font = 4
+label-unfocused-padding = 2
+
+[module/cpu]
+type = internal/cpu
+interval = 0.5
+format = <label><ramp-coreload>
+label = CPU
+
+ramp-coreload-0 = ▁
+ramp-coreload-0-font = 2
+ramp-coreload-0-foreground = #aaff77
+ramp-coreload-1 = ▂
+ramp-coreload-1-font = 2
+ramp-coreload-1-foreground = #aaff77
+ramp-coreload-2 = ▃
+ramp-coreload-2-font = 2
+ramp-coreload-2-foreground = #aaff77
+ramp-coreload-3 = ▄
+ramp-coreload-3-font = 2
+ramp-coreload-3-foreground = #aaff77
+ramp-coreload-4 = ▅
+ramp-coreload-4-font = 2
+ramp-coreload-4-foreground = #fba922
+ramp-coreload-5 = ▆
+ramp-coreload-5-font = 2
+ramp-coreload-5-foreground = #fba922
+ramp-coreload-6 = ▇
+ramp-coreload-6-font = 2
+ramp-coreload-6-foreground = #ff5555
+ramp-coreload-7 = █
+ramp-coreload-7-font = 2
+ramp-coreload-7-foreground = #ff5555
+
+[module/date]
+type = internal/date
+date =  %%{F#99}%Y-%m-%d%%{F-}  %%{F#fff}%H:%M%%{F-}
+date-alt = %%{F#fff}%A, %d %B %Y  %%{F#fff}%H:%M%%{F#666}:%%{F#fba922}%S%%{F-}
+
+[module/memory]
+type = internal/memory
+format = <label> <bar-used>
+label = RAM
+
+bar-used-width = 30
+bar-used-foreground-0 = #aaff77
+bar-used-foreground-1 = #aaff77
+bar-used-foreground-2 = #fba922
+bar-used-foreground-3 = #ff5555
+bar-used-indicator = |
+bar-used-indicator-font = 6
+bar-used-indicator-foreground = #ff
+bar-used-fill = ─
+bar-used-fill-font = 6
+bar-used-empty = ─
+bar-used-empty-font = 6
+bar-used-empty-foreground = #444444
+
+[module/wireless-network]
+type = internal/network
+interface = wlp3s0 
+interval = 3.0
+ping-interval = 10
+
+format-connected = <ramp-signal> <label-connected>
+label-connected = %essid%
+label-disconnected =    not connected
+label-disconnected-foreground = #66
+
+ramp-signal-0 = 
+;ramp-signal-1 = 
+;ramp-signal-2 = 
+;ramp-signal-3 = 
+;ramp-signal-4 = 
+
+animation-packetloss-0 = 
+animation-packetloss-0-foreground = #ffa64c
+animation-packetloss-1 = 
+animation-packetloss-1-foreground = ${bar/top.foreground}
+animation-packetloss-framerate = 500
+
+[module/wired-network]
+type = internal/network
+interface = net0
+interval = 3.0
+
+label-connected =    %{T3}%local_ip%%{T-}
+label-disconnected-foreground = #66
+
+[module/xkeyboard]
+type = internal/xkeyboard
+blacklist-0 = num lock
+
+format-prefix = " "
+format-prefix-foreground = #eeeeee
+
+label-layout = %layout%
+
+label-indicator-padding = 2
+label-indicator-margin = 1
+label-indicator-background = #000000000
+
+[module/volume]
+type = internal/volume
+headphone-id = 9
+
+format-volume = <ramp-volume><label-volume>
+label-muted =  muted
+label-muted-foreground = #66
+
+ramp-volume-0 = 
+;ramp-volume-1 = 
+;ramp-volume-2 = 
+;ramp-volume-3 = 
+
+[module/menu-apps]
+type = custom/menu
+
+; If true, <label-toggle> will be to the left of the menu items (default).
+; If false, it will be on the right of all the items.
+expand-right = true
+
+; "menu-LEVEL-N" has the same properties as "label-NAME" with
+; the additional "exec" property
+;
+; Available exec commands:
+;   menu-open-LEVEL
+;   menu-close
+; Other commands will be executed using "/usr/bin/env sh -c $COMMAND"
+
+menu-0-0 = Browsers
+menu-0-0-exec = menu-open-1
+menu-0-1 = Multimedia
+menu-0-1-exec = menu-open-2
+menu-0-2 = PowerMenu
+menu-0-2-exec = menu-open-3
+
+menu-1-0 =  Firefox
+menu-1-0-exec = firefox &
+menu-1-1 = Qutebrowser
+menu-1-1-exec = qutebrowser &
+menu-1-2 =  Back
+menu-1-2-exec = menu-open-0
+
+menu-2-0 =  Spotify
+menu-2-0-exec = spotify &
+menu-2-1 = Krita
+menu-2-1-exec = krita &
+menu-2-2 = Don`t Panic!
+menu-2-2-exec = dontpanic &
+menu-2-3 =  Back
+menu-2-3-exec = menu-open-0
+
+
+menu-3-0 = Terminate WM
+menu-3-0-exec = i3 quit -1
+menu-3-1 = Reboot
+menu-3-1-exec = shutdown -r now
+menu-3-2 =  Power off
+menu-3-2-exec = shutdown -h now
+menu-3-3 =  Back
+menu-3-3-exec = menu-open-0
+
+; Available tags:
+;   <label-toggle> (default) - gets replaced with <label-(open|close)>
+;   <menu> (default)
+;format = <label-toggle> <menu>
+
+label-open =  Menu
+label-close = 
+
+; Optional item separator
+; Default: none
+label-separator = 
+
+format-padding = 3
+
+
+
+[module/clock]
+type = internal/date
+interval = 2
+date = %%{F#999}%Y-%m-%d%%{F-}  %%{F#fff}%H:%M%%{F-}
+
+;vim:ft=dosini

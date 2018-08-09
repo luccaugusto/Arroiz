@@ -1,0 +1,117 @@
+URxvt.background:	#1F1D19
+URxvt.foreground:	#DEDEDE
+URxvt.font:			xft:DejaVu Sans Mono:pixelsize=12:antialias=true:hinting=true
+URxvt.boldFont:		xft:DejaVu Sans Mono:bold:pixelsize=12:antialias=true:hinting=true
+URxvt.scrollBar:	false
+URxvt.saveLines:	65535
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
+URxvt.keysym.M-s: perl:keyboard-select:search
+URxvt.keysym.M-u: perl:url-select:select_next
+URxvt.keysym.M-c:   perl:clipboard:copy
+URxvt.keysym.M-v:   perl:clipboard:paste
+URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
+Xft*dpi:       96
+Xft*antialias: True
+Xft*hinting:   Full
+URxvt.keysym.KP_Add:    +
+URxvt.keysym.KP_Subtract: -
+URxvt.keysym.KP_Multiply: *
+URxvt.keysym.KP_Divide  : /
+URxvt.keysym.KP_Decimal : .
+URxvt.keysym.KP_Separator : ,
+URxvt.keysym.KP_1:      1
+URxvt.keysym.KP_2:      2
+URxvt.keysym.KP_3:      3
+URxvt.keysym.KP_4:      4
+URxvt.keysym.KP_5:      5
+URxvt.keysym.KP_6:      6
+URxvt.keysym.KP_7:      7
+URxvt.keysym.KP_8:      8
+URxvt.keysym.KP_9:      9
+URxvt.keysym.KP_0: 	0
+
+URxvt.perl-ext-common: default,matcher,tabbed,keyboard-select,url-select,clipboard
+URxvt.url-launcher: /usr/bin/xdg-open
+URxvt.matcher.button: 1
+URxvt.matcher.rend.0: Uline Bold fg5
+
+URxvt.tabbed.tabbar-fg: 2
+URxvt.tabbed.tabbar-bg: 0
+URxvt.tabbed.tab-fg: 3
+URxvt.tabbed.tab-bg: 0 
+
+
+
+!! fake transparancy
+URxvt*.transparent: true
+! URxvt*.shading: 0 to 99 darkens, 101 to 200 lightens
+URxvt*.shading: 15
+ 
+!URxvt.font: xft:DejaVu Sans Mono for Powerline:size=9
+!URxvt.font: xft:xos4 Terminess Powerline:size=10
+!URxvt.font: -*-terminesspowerline-medium-*-*-*-*-*-72-*-*-*-*-*
+!URxvt.font: -*-terminesspowerline-medium-*-*-*-*-*-100-*-*-*-*-*
+!URxvt.letterSpace: -1
+ 
+!!{{{ colors - brighter jwk:
+!!brighter jwr ! !JWR dark scheme; see:
+!! https://terminal.sexy/#AAAA____MzMzjEZlKHNzfHyZOVVzXkaMMWWMiZyhPT09v02AU6amnp7LR3qzfmKzYJa_wMDA
+ 
+ 
+! special
+*.foreground:   #94aef2
+*.background:   #000000
+*.cursorColor:  #94aef2
+ 
+! black
+*.color0:       #151515
+*.color8:       #3d3d3d
+ 
+! red
+*.color1:       #b92a6a
+*.color9:       #da0c68
+ 
+! green
+*.color2:       #0e9999
+*.color10:      #19c2c2
+ 
+! yellow
+*.color3:       #3b3bab
+*.color11:      #5959e7
+ 
+! blue
+*.color4:       #105bad
+*.color12:      #227cdf
+ 
+! magenta
+*.color5:       #582fa6
+*.color13:      #6737c2
+ 
+! cyan
+*.color6:       #266da2
+*.color14:      #6096bf
+ 
+! white
+*.color7:       #899ca1
+*.color15:      #c0c0c0
+! !}}} /colors
+! !}}} /urxvt
+ 
+!{{{ Rofi config
+rofi.color-enabled: true
+rofi.color-window: #101010, #3991f1, #3991f1
+rofi.color-normal: #101010, #ffffff, #181818, #6833ff, #ffffff
+rofi.color-active: #101010, #6833ff, #181818, #6833ff, #ffffff
+rofi.color-urgent: #101010, #f3843d, #181818, #6833ff, #ffc39c
+rofi.separator-style:solid
+rofi.font:xos4 Terminess Powerline 8
+rofi.bw: 2
+rofi.width: -80
+rofi.scroll-method: 1
+rofi.fixed-num-lines: false
+!rofi.lines: 10
+!}}}
+ 
+ 
+
+
