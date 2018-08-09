@@ -46,5 +46,5 @@ shell vim ForcaBruta.java
 open_with 1
 open_with subl3
 
-delete
 open_with
+delete
