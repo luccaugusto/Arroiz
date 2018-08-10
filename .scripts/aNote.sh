@@ -10,7 +10,22 @@
 
 add_note()
 {
-	echo "This function adds a note"
+	if [ ! -f .notes ]; then
+		touch .notes
+	fi
+	read NOTE_NUMBER<<<$(awk 'END{print $1}' .notes)
+	NOTE_NUMBER=$((NOTE_NUMBER+1))
+	DATE=`date +%Y-%m-%d`
+	NOTE=$1
+	shift
+	if [ ! -z "$2"];then
+		TAG=$2
+		shift
+	else
+		TAG=""
+	fi
+	echo "$NOTE_NUMBER $DATE '$NOTE' $TAG">>.notes
+	
 }
 
 list_notes()
@@ -34,6 +49,7 @@ show_help()
 	echo "						aNote -l: List all Notes"
 	echo "						aNote -f [WORD]: Search for notes with that word"
 	echo "						aNote -u [1/2/3] [SOME NOTE] [SOME TAG]: specifies urgency to SOME NOTE in SOME TAG, 1 being the highest"
+	echo "						aNote -r [NUMBER OF NOTE]: remove note"
 }
 
 case $1 in
@@ -43,6 +59,6 @@ case $1 in
 		;;
 	-h) show_help
 		;;
-	*) add_note
+	*) add_note "$1" "$2"
 		;;
 esac
