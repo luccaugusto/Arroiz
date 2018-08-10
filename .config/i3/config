@@ -6,7 +6,7 @@
 # ====================================
 
 set $mod Mod4
-set $term st
+set $term urxvt
 
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 exec_always --no-startup-id feh --bg-scale ~/.config/wall.jpg
