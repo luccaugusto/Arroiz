@@ -12,7 +12,7 @@ height = 25
 tray-position = right
 tray-detached = false
 
-background = #00000000
+background = #00000001
 foreground = #ccffffff
 
 line-color = ${bar/top.background}
@@ -23,13 +23,15 @@ padding-right = 5
 module-margin = 2
 
 font-0 = NotoSans-Regular:size=8;-1
-font-1 = MaterialIcons:size=10;0
-font-2 = Termsynu:size=8:antialias=false;-2
-font-3 = FontAwesome:size=10;0
+font-1 = FontAwesome 5 Free Regular:style=Regular:size=10;0
+font-2 = FontAwesome 5 Brands Regular:style=Regular:size=10;0
+font-3 = FontAwesome 5 Free Solid:style=Solid:size=10;0
+font-4 = MaterialIcons:size=10;0
+font-5 = Termsynu:size=8:antialias=false;-2
 
 modules-left = i3 volume backlight menu-apps
 modules-center = xwindow
-modules-right = mpd xkeyboard wireless-network battery date
+modules-right = xkeyboard battery date wireless-network
 
 [bar/bottom]
 monitor = eDP-1
@@ -64,7 +66,7 @@ type = internal/backlight
 card = radeon_bl0
 format = <label>
 
-label =  %percentage%%
+label =  %percentage%%
 
 
 ;bar-width = 10

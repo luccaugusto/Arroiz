@@ -50,7 +50,7 @@ font-size = 2
 
 modules-left = i3 volume
 modules-center = xwindow
-modules-right = xkeyboard wlan battery date powermenu
+modules-right = xkeyboard battery date powermenu
 
 tray-position = right
 tray-padding = 2

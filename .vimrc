@@ -1,11 +1,11 @@
-"maintainer:	Lucca Augusto	
-" Last change:	2017 Jun 18
+"maintainer:	Lucca Augusto
 "
 " File copied from vimtutor and modified
-" 
+"
 "
 
-"execute pathogen#infect()
+execute pathogen#infect()
+execute pathogen#helptags()
 filetype plugin indent on
 set tabstop=4
 set shiftwidth=4
@@ -14,6 +14,9 @@ set smartindent
 set breakindent
 set list
 set listchars=tab:\.\ 
+
+set splitbelow
+set splitright
 
 
 syntax on
@@ -36,7 +39,7 @@ set nobackup          "do not save a backup file
 nnoremap j gj
 nnoremap k gk
 nnoremap <leader><space> :nohlsearch<CR>
-nnoremap Y y$ 
+nnoremap Y y$
 inoremap <Space><Space> <Esc>/<++><Enter>"_c4l
 inoremap { {<++>}<++><Esc>hhh?<++><Enter>xxxxi
 inoremap {<Enter> {<Enter><++><Enter>}<++><Esc>hhhh?<++><Enter>xxxxa
