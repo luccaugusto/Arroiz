@@ -1,0 +1,4 @@
+#!/bin/bash
+
+NOTES=$($HOME/.scripts/aNote -l)
+notify-send "Your Notes" "$NOTES"

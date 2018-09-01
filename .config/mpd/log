@@ -1,0 +1,6 @@
+Aug 12 15:43 : exception: Failed to access /home/lucca/Music: No such file or directory
+Aug 12 15:43 : exception: Failed to open /home/lucca/.config/mpd/state: No such file or directory
+Aug 12 15:43 : exception: OutputThread could not get realtime scheduling, continuing anyway: sched_setscheduler failed: Operation not permitted
+Aug 12 15:43 : client: [0] opened from 127.0.0.1:57172
+Aug 12 15:43 : client: [0] closed
+Aug 12 15:43 : client: [1] opened from 127.0.0.1:57176
