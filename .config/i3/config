@@ -69,7 +69,7 @@ bindsym $mod+r exec $term -e ranger
 bindsym $mod+b exec lockscreen
 bindsym $mod+g gaps inner current set 0; gaps outer current set 0
 bindsym $mod+Shift+g gaps inner current set 15; gaps outer current set 10
-bindsym $mod+Shift+s exec gnome-screenshot
+bindsym $mod+Shift+s exec "i3-nagbar -t warning -m 'The computer will be shutdown. Are you sure?' -b 'Yes, shutdown' 'shutdown now'"
 bindsym $mod+n exec ~/.scripts/shownotes
 bindsym $mod+p exec pcmanfm
 

@@ -11,3 +11,4 @@ fi
 
 PS1='[\u@\h \W]\$ '
 
+fortune | ponysay -b linux-vt
