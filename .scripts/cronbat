@@ -3,6 +3,6 @@
 # You can set this to run via cron.
 #exports DBUS SESSION to work in cron
 PERCENT=$(cat /sys/class/power_supply/BAT0/capacity)
-[ $PERCENT -lt 20 ] && [$(cat /sys/class/power_supply/BAT0/status) == 'Discharging'] &&
+[ $PERCENT -lt 20 ] &&
 	export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus &&
 	notify-send -u critical "Battery low" "Battery at $PERCENT"
