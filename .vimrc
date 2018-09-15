@@ -45,6 +45,7 @@ set foldenable        "allows code folding when zf is pressed. zd to unfold
 set undodir=/tmp/     "Save undo files in tmp directory
 "set nobackup         "do not save a backup file
 set backupdir=/tmp/   "Save backup files in tmp directory
+set hlsearch
 
 "Remap j and k so i can navigate on lines that break
 nnoremap j gj
