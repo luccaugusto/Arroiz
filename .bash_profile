@@ -4,10 +4,9 @@
 
 export PATH="$PATH:$HOME/.scripts"
 export EDITOR="vim"
-export TERMINAL="st"
+export TERMINAL="urxvt"
 export BROWSER="firefox"
 export READER="zathura"
-export BIB="$HOME/Documents/LaTeX/uni.bib"
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 

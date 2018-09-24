@@ -50,6 +50,12 @@ set hlsearch
 "Remap j and k so i can navigate on lines that break
 nnoremap j gj
 nnoremap k gk
+vnoremap j gj
+vnoremap k gk
+
+"Mappings to make things quicker
+map <C-s> :w<CR>
+nmap <C-s> :w<CR>
 
 "Snippets
 nnoremap <leader><space> :nohlsearch<CR>
