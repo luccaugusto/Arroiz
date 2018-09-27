@@ -57,6 +57,19 @@ vnoremap k gk
 map <C-s> :w<CR>
 nmap <C-s> :w<CR>
 
+"Allow to copy and paste from the system register
+vnoremap <C-y> "*y let @+ = "*<CR>
+nnoremap <C-p> "+P
+
+"Save a key press on changing windows
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+"Move faster between tabs
+nnoremap <leader>j :tabNext<CR>
+
 "Snippets
 nnoremap <leader><space> :nohlsearch<CR>
 nnoremap Y y$
