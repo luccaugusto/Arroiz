@@ -28,8 +28,8 @@ set shiftwidth=4
 "set expandtab
 
 "Get trailing characters on tab to view indents more easily
-set list
-set listchars=tab:\.\ 
+"set list
+"set listchars=tab:\.\ 
 
 "Some more personal settings
 "set relativenumber    "sets the line numbers relative to the current line
@@ -58,7 +58,7 @@ map <C-s> :w<CR>
 nmap <C-s> :w<CR>
 
 "Allow to copy and paste from the system register
-vnoremap <C-y> "*y let @+ = "*<CR>
+vnoremap <C-y> "*y let @+="*<CR>
 nnoremap <C-p> "+P
 
 "Save a key press on changing windows
