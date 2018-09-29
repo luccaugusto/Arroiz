@@ -6,6 +6,19 @@ My Arch linux ricing.
 + .Xresources
 + .Xauthority
 + .scripts/
+	* aNote
+	* backup
+	* cronbat
+	* crontog
+	* datelog
+	* extract
+	* i3batwarn
+	* linkhandler
+	* lockscreen
+	* shownotes
+	* syncgit
+	* synchome
+	* toggletouchpad
 + .bashrc
 + .bash\_aliases
 + .bash\_profile
