@@ -3,9 +3,6 @@
 #Notes CRUD
 #script for taking simple notes in the terminal
 
-#TODO
-#remove function
-
 NOTES_PATH="/home/lucca/.scripts/"
 
 add_note()
@@ -49,16 +46,22 @@ show_help()
 	echo "						aNote 	 [SOME NOTE] [SOME TAG]: Adds a note to a specific Tag"
 	echo "						aNote -l : List all Notes"
 	echo "						aNote -f [WORD/DATE]: Search for notes with that word, tag or date"
-	echo "						aNote -r [NUMBER OF NOTE]: remove note"
+	echo "						aNote -r [NUMBER OF NOTE/Blank for all notes]: remove note"
 }
 
 remove_note()
 {
 	if test -f $NOTES_PATH.notes; then
-		sed -i '/~'"$1"'/d' $NOTES_PATH.notes
-		read ALL_NOTES<<<$(cat $NOTES_PATH.notes)
-		if [ -s "$ALL_NOTES" ]; then
+		if [[ $1 == "" ]]; then
+			echo "Specify a note [-a for all]"
+		elif [[ $1 == "-a" ]]; then
 			rm $NOTES_PATH.notes
+		else
+			sed -i '/~'"$1"'/d' $NOTES_PATH.notes
+			read ALL_NOTES<<<$(cat $NOTES_PATH.notes)
+			if [ -s "$ALL_NOTES" ]; then
+				rm $NOTES_PATH.notes
+			fi
 		fi
 	else
 		echo 'No Notes'

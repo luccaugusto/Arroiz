@@ -30,7 +30,6 @@ rename MadMax-2-TheRoadWarrior-1981.srt
 open_with less
 rename IPI.pdf
 l
-open_with vim
 open_with 3
 open_with evince
 open_with 2
@@ -48,3 +47,4 @@ open_with subl3
 
 open_with
 delete
+open_with vim
