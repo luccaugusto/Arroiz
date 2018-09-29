@@ -1,1 +1,5 @@
 *.un~
+.config/transmission
+.config/spotify
+.config/google-chrome
+.config/pulse

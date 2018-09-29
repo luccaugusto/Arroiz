@@ -46,5 +46,5 @@ open_with 1
 open_with subl3
 
 open_with
-delete
 open_with vim
+delete
