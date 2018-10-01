@@ -4,6 +4,8 @@
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
+# If tmux is not started, start it
+[[ -z "$TMUX" ]] && exec tmux
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
