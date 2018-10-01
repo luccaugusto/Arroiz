@@ -39,12 +39,12 @@ set autoindent        "auto indentation when enter is pressed
 set showmode          "shows vim current mode
 set wildmenu          "auto completion when ctrl+n is pressed
 set incsearch         "searches as you type each letter
-set lazyredraw        "only redraws the screen when really needed
+"set lazyredraw        "only redraws the screen when really needed
 set foldenable        "allows code folding when zf is pressed. zd to unfold
 "set noundofile       "do not save an undo file
-set undodir=/tmp/     "Save undo files in tmp directory
+set undodir=/tmp      "Save undo files in tmp directory
 "set nobackup         "do not save a backup file
-set backupdir=/tmp/   "Save backup files in tmp directory
+set backupdir=/tmp    "Save backup files in tmp directory
 set hlsearch
 
 "Remap j and k so i can navigate on lines that break
@@ -70,16 +70,19 @@ nnoremap <C-l> <C-w>l
 "Move faster between tabs
 nnoremap <leader>j :tabNext<CR>
 
+"insert tags like this <++> for faster navigation
+"when inserting brackets, etc.
 "Snippets
 nnoremap <leader><space> :nohlsearch<CR>
 nnoremap Y y$
-inoremap <Space><Space> <Esc>/<++><Enter>"_c4l
-inoremap { {<++>}<++><Esc>3h?<++><Enter>4xi
-inoremap {<Enter> {<Enter><++><Enter>}<++><Esc>4h?<++><Enter>4xa
-inoremap ( (<++>)<++><Esc>3h?<++><Enter>4xi
-inoremap [ [<++>]<++><Esc>3h?<++><Enter>4xi
-inoremap " "<++>"<++><Esc>3h?<++><Enter>4xi
-inoremap ' '<++>'<++><Esc>3h?<++><Enter>4xi
+inoremap <Space><Space> <Esc>/<++><CR>"_c4l
+inoremap { {<++>}<++><Esc>3h?<++><CR>4xi
+inoremap {<CR> {<CR><++><CR>}<++><Esc>4h?<++><CR>4xa
+inoremap ( (<++>)<++><Esc>3h?<++><CR>4xi
+inoremap () ()
+inoremap [ [<++>]<++><Esc>3h?<++><CR>4xi
+inoremap " "<++>"<++><Esc>3h?<++><CR>4xi
+inoremap ' '<++>'<++><Esc>3h?<++><CR>4xi
 
 "Some compile commands for these file types
 au FileType tex map <buffer> <F10> :w<CR>:!pdflatex<Space>%<CR>

@@ -1,0 +1,23 @@
+#!/bin/bash
+
+total(){
+	fulltime=0
+	for day in $(ls $HOME/.time); do
+		fulltime=$(($fulltime+$(cat $HOME/.time/$day)))
+	done
+	hours=$(($fulltime/60))
+	minutes=$(($fulltime%60))
+	notify-send "$hours hours and $minutes minutes"
+}
+
+begin(){
+	notify-send "Counting since $(ls -tr $HOME/.time/ | head -n 1)"
+}
+
+case $1 in
+	-b) begin
+		;;
+	*) total
+		;;
+esac
+
