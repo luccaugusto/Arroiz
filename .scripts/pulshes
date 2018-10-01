@@ -1,0 +1,11 @@
+#!/bin/bash
+
+REPOS=$HOME/Repos
+
+#pull all repos
+cd $REPOS/ST/
+git pull
+cd $REPOS/Wallpapers
+git pull
+cd $REPOS/RICE
+git pull

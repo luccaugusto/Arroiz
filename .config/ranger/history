@@ -1,4 +1,3 @@
-rename Django1966.srt
 open_with 
 rename ItHappenedOneNight.mp4
 rename Django.1966.1080p.BluRay.x264.DTS-SARTRE-eng.srt
@@ -47,4 +46,5 @@ open_with subl3
 
 open_with
 open_with vim
+open_with vlc
 delete

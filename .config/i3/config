@@ -10,7 +10,8 @@ set $term --no-startup-id $TERMINAL
 set $netrefresh --no-startup-id sudo -A systemctl restart NetworkManager
 
 exec_always --no-startup-id ~/.config/polybar/launch.sh
-exec_always --no-startup-id wal -i ~/.config/wall.jpg
+#exec_always --no-startup-id wal -i ~/.config/wall.jpg
+exec_always --no-startup-id feh --bg-scale ~/.config/wall.jpg
 exec --no-startup-id setxkbmap -layout us,br
 exec --no-startup-id setxkbmap -option grp:alt_shift_toggle
 exec --no-startup-id dunst

@@ -58,8 +58,8 @@ map <C-s> :w<CR>
 nmap <C-s> :w<CR>
 
 "Allow to copy and paste from the system register
-vnoremap <C-y> "*y let @+="*<CR>
-nnoremap <C-p> "+P
+vnoremap <C-y> "*y :let @+=@*<CR>
+nnoremap <C-v> "+P
 
 "Save a key press on changing windows
 nnoremap <C-h> <C-w>h
