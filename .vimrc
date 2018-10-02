@@ -42,8 +42,10 @@ set incsearch         "searches as you type each letter
 "set lazyredraw        "only redraws the screen when really needed
 set foldenable        "allows code folding when zf is pressed. zd to unfold
 "set noundofile       "do not save an undo file
+set undo
 set undodir=/tmp      "Save undo files in tmp directory
 "set nobackup         "do not save a backup file
+set backup
 set backupdir=/tmp    "Save backup files in tmp directory
 set hlsearch
 
@@ -56,6 +58,8 @@ vnoremap k gk
 "Mappings to make things quicker
 map <C-s> :w<CR>
 nmap <C-s> :w<CR>
+nmap <Leader>q :q<CR>
+nmap <Leader>w :wq<CR>
 
 "Allow to copy and paste from the system register
 vnoremap <C-y> "*y :let @+=@*<CR>

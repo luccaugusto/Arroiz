@@ -16,3 +16,4 @@ if [[ "$(tty)" = "/dev/tty1" ]]; then
 fi
 
 . pulshes
+notify-send "$(anote -l)"
