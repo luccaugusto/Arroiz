@@ -42,7 +42,7 @@ set incsearch         "searches as you type each letter
 "set lazyredraw        "only redraws the screen when really needed
 set foldenable        "allows code folding when zf is pressed. zd to unfold
 "set noundofile       "do not save an undo file
-set undo
+set undofile
 set undodir=/tmp      "Save undo files in tmp directory
 "set nobackup         "do not save a backup file
 set backup
