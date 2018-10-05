@@ -57,6 +57,8 @@
 	vnoremap j gj
 	vnoremap k gk
 
+	nnoremap Y y$
+
 "===============================
 "Mappings to make things quicker
 "===============================
@@ -64,9 +66,10 @@
 	nmap <C-s> :w<CR>
 	nmap <leader>w :wq<CR>
 	nnoremap <leader>c :close<CR>
-	nnoremap <leader>o :q!<CR>
-	nnoremap <leader>v :vsplit
-	nnoremap <leader>s :split
+	nnoremap <leader>o :q<CR>
+	nnoremap <leader>O :q!<CR>
+	nnoremap <leader>v :vsplit 
+	nnoremap <leader>s :split 
 	"Move faster between tabs
 	nnoremap <leader>j :tabNext<CR>
 	
@@ -88,7 +91,6 @@
 	"when inserting brackets, etc.
 	"Snippets
 	nnoremap <leader><space> :nohlsearch<CR>
-	nnoremap Y y$
 	inoremap <Space><Space> <Esc>/<++><CR>"_c4l
 	inoremap { {<++>}<++><Esc>3h?<++><CR>4xi
 	inoremap {<CR> {<CR><++><CR>}<++><Esc>4h?<++><CR>4xa
@@ -102,3 +104,17 @@
 	au FileType tex map <buffer> <F10> :w<CR>:!pdflatex<Space>%<CR>
 	au FileType java map <buffer> <F10> :w<CR>:!javac<Space>%<CR>
 	au FileType java map <buffer> <F7> :!java<Space>'%:t:r'<CR>
+	au FileType c map <buffer> <F10> :w<CR>:!gcc<Space>-o<Space>expand('%:t:r').out<Space>expand('%:t')<CR>
+
+	"Some scripts to make things quicker when creating specific files
+	au FileType c map <buffer> <F9> :Bc<CR>
+
+	command! Bc call BeginC()
+	function! BeginC()
+		normal! i#include <stdlib.h>
+		normal! o#include <stdio.h>
+		normal! o
+		normal! oint main(){
+		normal! o
+		normal! o}
+	endfunction
