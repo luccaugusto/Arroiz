@@ -322,12 +322,8 @@ menu-1-2-exec = menu-open-0
 
 menu-2-0 =  Spotify
 menu-2-0-exec = spotify &
-menu-2-1 = Krita
-menu-2-1-exec = krita &
-menu-2-2 = Don`t Panic!
-menu-2-2-exec = dontpanic &
-menu-2-3 =  Back
-menu-2-3-exec = menu-open-0
+menu-2-1 =  Back
+menu-2-1-exec = menu-open-0
 
 
 menu-3-0 = Terminate WM
