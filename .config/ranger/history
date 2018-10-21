@@ -1,16 +1,3 @@
-open_with 
-rename ItHappenedOneNight.mp4
-rename Django.1966.1080p.BluRay.x264.DTS-SARTRE-eng.srt
-rename Django1966-ita.srt
-rename Brazil1985.mp4
-rename Brazil1985.srt
-rename ItHappenedOneNight.srt
-mkdir It Happened One Night
-rename ThreeColorsRed.srt
-rename ThreeColors-Red.srt
-shell unrar e three.colors.blue.\(1993\).pob.1cd.\(6207498\).zip
-rename Three.Colors.Blue.A.Fraternidade.é.Azul.1993.PROPER.1080p.BluRay.x264-CiNEFiLE.sBr.srt
-rename ThreeColorsBlue.srt
 rename ThreeColors-Blue.srt_
 rename ThreeColors-Blue.srt
 rename ThreeColorsWhite1.srt
@@ -43,8 +30,21 @@ shell vim senhas.txt
 shell vim ForcaBruta.java
 open_with 1
 open_with subl3
-
 open_with
 open_with vim
 open_with vlc
+shell sudo mount /dev/sdb /mnt
+mkdir Rurouni Kenshin
+shell unzip Attachments-fotos.zip
+search boot
+search java
+search intelli
+shell unzip android-studio-ide-181.5014246-linux.zip
+search inte
 delete
+shell git status
+open_with 
+
+shell git commit -a
+shell git push
+shell git pull

@@ -2,11 +2,13 @@
 
 # Profile file. Runs on login.
 
-export PATH="$PATH:$HOME/.scripts"
 export EDITOR="vim"
 export TERMINAL="st"
 export BROWSER="firefox"
 export READER="zathura"
+export JAVA_HOME=/usr/lib/jvm/java-10-openjdk
+export PATH="$PATH:$HOME/.scripts"
+export PATH="$PATH:$JAVA_HOME/bin"
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
@@ -16,4 +18,3 @@ if [[ "$(tty)" = "/dev/tty1" ]]; then
 fi
 
 . pulshes
-notify-send "$(anote -l)"
