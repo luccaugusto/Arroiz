@@ -25,6 +25,7 @@ set $netrefresh --no-startup-id sudo -A systemctl restart NetworkManager
 
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 #exec_always --no-startup-id wal -i ~/.config/wall.jpg
+exec_always --no-startup-id wal -n -i ~/Repos/Wallpapers/SynthGirl.jpg
 exec_always --no-startup-id feh --bg-scale ~/.config/wall.jpg
 exec_always --no-startup-id . $HOME/.scripts/shownotes
 exec_always --no-startup-id . $HOME/.scripts/keyboard_layout
@@ -38,7 +39,8 @@ exec --no-startup-id unclutter #make mouse invisible after a while
 for_window [class="^.*"] border pixel 1
 gaps inner 15
 gaps outer 10
-smart_gaps on
+#smart_gaps set gaps off when only one window is open
+#smart_gaps on
 
 #assign of windows to desktops
 assign [class="Firefox"] 2

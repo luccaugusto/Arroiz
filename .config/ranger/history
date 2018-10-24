@@ -1,4 +1,3 @@
-rename ThreeColors-Blue.srt_
 rename ThreeColors-Blue.srt
 rename ThreeColorsWhite1.srt
 rename ThreeColorsWhite.srt
@@ -41,10 +40,11 @@ search java
 search intelli
 shell unzip android-studio-ide-181.5014246-linux.zip
 search inte
-delete
 shell git status
 open_with 
 
 shell git commit -a
 shell git push
 shell git pull
+shell unrar P0L.404.x264.megaddl.co.rar
+delete

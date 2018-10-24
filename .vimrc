@@ -51,7 +51,7 @@
 	"set nobackup         "do not save a backup file
 	set backup
 	set backupdir=/tmp    "Save backup files in tmp directory
-	set hlsearch
+	"set hlsearch
 	
 	"Remap j and k so i can navigate on lines that break
 	nnoremap j gj

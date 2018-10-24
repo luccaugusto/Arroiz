@@ -9,3 +9,4 @@ cd $REPOS/Wallpapers
 git pull
 cd $REPOS/RICE
 git pull
+cd
