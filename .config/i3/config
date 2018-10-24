@@ -5,12 +5,27 @@
 #
 # ====================================
 
+#                   __              ___           ___           ___           ___                     ___     
+#      ___         /  /\           /  /\         /  /\         /__/\         /  /\      ___          /  /\    
+#     /  /\       /  /::\         /  /:/        /  /::\        \  \:\       /  /:/_    /  /\        /  /:/_   
+#    /  /:/      /  /:/\:\       /  /:/        /  /:/\:\        \  \:\     /  /:/ /\  /  /:/       /  /:/ /\  
+#   /__/::\     /__/:/\ \:\     /  /:/  ___   /  /:/  \:\   _____\__\:\   /  /:/ /:/ /__/::\      /  /:/_/::\ 
+#   \__\/\:\__  \__\/  ) ):\   /__/:/  /  /\ /__/:/ \__\:\ /__/::::::::\ /__/:/ /:/  \__\/\:\__  /__/:/__\/\:\
+#      \  \:\/\       / /:_:\  \  \:\ /  /:/ \  \:\ /  /:/ \  \:\~~\~~\/ \  \:\/:/      \  \:\/\ \  \:\ /~~/:/
+#       \__\::/      / /:/ \:\  \  \:\  /:/   \  \:\  /:/   \  \:\  ~~~   \  \::/        \__\::/  \  \:\  /:/ 
+#       /__/:/      /_/:// /:/   \  \:\/:/     \  \:\/:/     \  \:\        \  \:\        /__/:/    \  \:\/:/  
+#       \__\/       \_\// /:/     \  \::/       \  \::/       \  \:\        \  \:\       \__\/      \  \::/   
+#                      /_/:/       \__\/         \__\/         \__\/         \__\/                   \__\/    
+#                      \_\/                      
+#
+
 set $mod Mod4
 set $term --no-startup-id $TERMINAL
 set $netrefresh --no-startup-id sudo -A systemctl restart NetworkManager
 
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 #exec_always --no-startup-id wal -i ~/.config/wall.jpg
+exec_always --no-startup-id wal -n -i ~/Repos/Wallpapers/SynthGirl.jpg
 exec_always --no-startup-id feh --bg-scale ~/.config/wall.jpg
 exec_always --no-startup-id . $HOME/.scripts/shownotes
 exec_always --no-startup-id . $HOME/.scripts/keyboard_layout
@@ -24,12 +39,15 @@ exec --no-startup-id unclutter #make mouse invisible after a while
 for_window [class="^.*"] border pixel 1
 gaps inner 15
 gaps outer 10
-smart_gaps on
+#smart_gaps set gaps off when only one window is open
+#smart_gaps on
 
 #assign of windows to desktops
 assign [class="Firefox"] 2
-assign [class="Spotify"] 10
+assign [class="qutebrowser"] 2
+assign [class="^spotify$"] 10
 assign [class="Transmission-gtk"] 3
+for_window [class="St" instance="floating-term"] floating enable
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -51,6 +69,8 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec $term
+# start a terminal floating
+bindsym $mod+Shift+Return exec $term -n floating-term
 
 # kill focused window
 bindsym $mod+Shift+q kill

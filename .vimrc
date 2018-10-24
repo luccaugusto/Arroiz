@@ -1,13 +1,15 @@
-" _____     _______   _____  _______      _______   _________        _________
-"/\   \    /*/   /  /*|   | /*|    \     /*/    |  /|   __   \      /        |
-"\*\   \  /*/   /   |*|   | |*|     \   /*/     | |*|  | *|   |    /    _____|
-" \*\   \/*/   /    |*|   | |*|  |\  \ /*/  /|  | |*|  | *|   |  *|    /
-"  \*\   \/   /     |*|   | |*|  |*\  \*/  /*|  | |*|  |__|  /   *|   |
-"   \*\      /      |*|   | |*|  |\*\     /|*|  | |*|   __  |    *|    \_____
-"    \*\    /       |*|   | |*|  | \*\   / |*|  | |*|  |\*\  \   \*\         |
-"     \*\__/        |*|___| |*|__|  \*\_/  |*|__| |*|__| \*\__\   \*\________|
-"      
-"
+"                              ___           ___           ___     
+"     ___        ___          /__/\         /  /\         /  /\    
+"    /__/\      /  /\        |  |::\       /  /::\       /  /:/    
+"    \  \:\    /  /:/        |  |:|:\     /  /:/\:\     /  /:/     
+"     \  \:\  /__/::\      __|__|:|\:\   /  /:/~/:/    /  /:/  ___ 
+" ___  \__\:\ \__\/\:\__  /__/::::| \:\ /__/:/ /:/___ /__/:/  /  /\
+"/__/\ |  |:|    \  \:\/\ \  \:\~~\__\/ \  \:\/:::::/ \  \:\ /  /:/
+"\  \:\|  |:|     \__\::/  \  \:\        \  \::/~~~~   \  \:\  /:/ 
+" \  \:\__|:|     /__/:/    \  \:\        \  \:\        \  \:\/:/  
+"  \__\::::/      \__\/      \  \:\        \  \:\        \  \::/   
+"      ~~~~                   \__\/         \__\/         \__\/    
+"                                                        
 "maintainer:	Lucca Augusto
 
 "============================
@@ -49,7 +51,7 @@
 	"set nobackup         "do not save a backup file
 	set backup
 	set backupdir=/tmp    "Save backup files in tmp directory
-	set hlsearch
+	"set hlsearch
 	
 	"Remap j and k so i can navigate on lines that break
 	nnoremap j gj
@@ -108,6 +110,7 @@
 
 	"Some scripts to make things quicker when creating specific files
 	au FileType c map <buffer> <F9> :Bc<CR>
+	au FileType java map <buffer> <F9> :Bj<CR>
 
 	command! Bc call BeginC()
 	function! BeginC()
@@ -118,3 +121,14 @@
 		normal! o
 		normal! o}
 	endfunction
+
+	command! Bj call BeginJ()
+	function! BeginJ()
+		normal! ipublic class <++>{
+		normal! opublic static void main(String[] args){<CR>
+		normal! o
+		normal! o}
+		normal! o}
+	endfunction
+
+
