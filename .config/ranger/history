@@ -1,14 +1,3 @@
-rename ThreeColors-Blue.srt
-rename ThreeColorsWhite1.srt
-rename ThreeColorsWhite.srt
-rename ThreeColors-Whit.srt
-rename ThreeColors-White.srt
-shell unrar e Mad\ Max\ Trilogy\ 1979\ to\ 1985\ 720p\ BluRay.x265\ HEVC\ SUJAIDR.rar
-rename MadMax1979.mkv
-rename MadMax-1979.srt
-rename MadMax-1979.mkv
-rename MadMax-BeyondThunderdome-1985.mkv
-rename MadMax-BeyondThunderdome-1985.srt
 rename MadMax-2-TheRoadWarrior-1981.mkv
 rename MadMax-2-TheRoadWarrior.srt
 rename MadMax-2-TheRoadWarrior-1981.srt
@@ -31,7 +20,6 @@ open_with 1
 open_with subl3
 open_with
 open_with vim
-open_with vlc
 shell sudo mount /dev/sdb /mnt
 mkdir Rurouni Kenshin
 shell unzip Attachments-fotos.zip
@@ -42,9 +30,21 @@ shell unzip android-studio-ide-181.5014246-linux.zip
 search inte
 shell git status
 open_with 
-
 shell git commit -a
 shell git push
 shell git pull
 shell unrar P0L.404.x264.megaddl.co.rar
+open_with transmission-cli
+rename Masters Of Horror Season 1-2q
+rename S01E08 8. Cigarrete Burn.avi
+rename S01E08 8. Cigarrete Burns.avi
+edi
+edit 
+ 
+rename Masters.of.Horror.S01E01.720p.BluRay.x264-DON.srt
+
+bulkrename
+open_with chrome
+open_with google-chrome-stable
+open_with vlc
 delete

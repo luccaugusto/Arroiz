@@ -24,6 +24,7 @@ fi
 #Let ctrl+s and ctrl+q free for use
 stty stop ''; stty start '';
 stty -ixon
+shopt -s autocd
 
 set -o vi
 
