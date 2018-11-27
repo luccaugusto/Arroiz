@@ -1,25 +1,5 @@
-rename MadMax-2-TheRoadWarrior-1981.mkv
-rename MadMax-2-TheRoadWarrior.srt
-rename MadMax-2-TheRoadWarrior-1981.srt
-open_with less
-rename IPI.pdf
-l
-open_with 3
-open_with evince
-open_with 2
-rename bibtex.bib
-open_with gedit
-mkdir ipi
-rename IPI
-mkdir johnTheRipper
-mkdir homemade
-rename Homemade
-shell vim senhas.txt
 shell vim ForcaBruta.java
-open_with 1
 open_with subl3
-open_with
-open_with vim
 shell sudo mount /dev/sdb /mnt
 mkdir Rurouni Kenshin
 shell unzip Attachments-fotos.zip
@@ -29,9 +9,6 @@ search intelli
 shell unzip android-studio-ide-181.5014246-linux.zip
 search inte
 shell git status
-open_with 
-shell git commit -a
-shell git push
 shell git pull
 shell unrar P0L.404.x264.megaddl.co.rar
 open_with transmission-cli
@@ -47,4 +24,27 @@ bulkrename
 open_with chrome
 open_with google-chrome-stable
 open_with vlc
+rename OqBfnxa-lovecraft-wallpapers.jpg
+rename Lovecraft-House.jpg
+rename Lovecraft-EvenDeathMayDie.jpg
+rename Lovecraft-cthulhu.jpg
+rename Lovecraft-Innsman.jpg
+open_with vim
+shell git add .
+shell git commit -a
+shell git push
+open_with
+rename gnome-size.png
+shell sed -i "s/jpg/png/g" TerminalsRule.md
+shell git add .; git commit -a; git push
+rename trappist1f_spitzer_453
+rename NasaThing.jpg
+open_with 1
+shell unzip SummertimeSaga-0161-pc.zip
+shell unrar favorites.zip
+shell unzip favorites.zip
 delete
+find d
+open_with gtk-transmission
+open_with 
+open_with transmission-gtk

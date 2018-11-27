@@ -45,7 +45,7 @@ gaps outer 10
 #assign of windows to desktops
 assign [class="Firefox"] 2
 assign [class="qutebrowser"] 2
-assign [class="^spotify$"] 10
+assign [class="Spotify"] 10
 assign [class="Transmission-gtk"] 3
 for_window [class="St" instance="floating-term"] floating enable
 
