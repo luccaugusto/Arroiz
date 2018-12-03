@@ -52,6 +52,7 @@
 	set backup
 	set backupdir=/tmp    "Save backup files in tmp directory
 	"set hlsearch
+	set wildmode=longest,list,full
 	
 	"Remap j and k so i can navigate on lines that break
 	nnoremap j gj

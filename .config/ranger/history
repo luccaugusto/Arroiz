@@ -1,5 +1,3 @@
-shell vim ForcaBruta.java
-open_with subl3
 shell sudo mount /dev/sdb /mnt
 mkdir Rurouni Kenshin
 shell unzip Attachments-fotos.zip
@@ -43,8 +41,10 @@ open_with 1
 shell unzip SummertimeSaga-0161-pc.zip
 shell unrar favorites.zip
 shell unzip favorites.zip
-delete
 find d
 open_with gtk-transmission
 open_with 
 open_with transmission-gtk
+shell unzip SummertimeSaga-0-17-1-pc.zip
+shell unzip tp2\ \(1\).zip
+delete
