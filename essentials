@@ -1,11 +1,13 @@
-polybar
-compton
-qutebrowser
-monaco
-network-manager-applet
-wireless_tools
-ttf-font-awesome
-nodejs-material-design-icons
-brightnessctl
-pywal
-cronie
+# Not in the oficial repository:
+
+## Fonts
+- ttf-font-awesome
+- otf-font-awesome-5-free
+- ttf-sazanami
+- ttf-liberation
+- monaco
+## Programs
+- polybar
+- pywal
+- nodejs-material-design-icons
+- brightnessctl
