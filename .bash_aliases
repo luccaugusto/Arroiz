@@ -1,4 +1,5 @@
 alias autoremove="pacman -Rns $(pacman -Qtdq)"
+alias update="sudo pacman -Syyud; packer -Syu"
 alias ls='ls --color=auto'
 alias ll='ls -laFo'
 alias updaterice=". /home/lucca/.scripts/syncgit"

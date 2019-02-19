@@ -3,7 +3,8 @@
 total(){
 	fulltime=0
 	for day in $(ls $HOME/.time); do
-		fulltime=$(($fulltime+$(cat $HOME/.time/$day)))
+		aux=$(cat $HOME/.time/$day)
+		fulltime=$((fulltime+aux))
 	done
 	hours=$(($fulltime/60))
 	minutes=$(($fulltime%60))

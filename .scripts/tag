@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if test -z "$1" || test -z "$2" || test -z "$3" || test -z "$4";then
+	echo "syntax is tag [ARTIST] [ALBUM] [GENRE] [EXTENSION]. This will set all files in folder id3v2 tags corresponding to the artist album and genre specified"
+	exit
+fi
+
+ARTIST="$1"
+ALBUM="$2"
+GENRE="$3"
+EXT="$4"
+NUMBER=1
+
+for FILE in *"$EXT"; do
+	id3v2 -a "$ARTIST" -A "$ALBUM" -t "${FILE::-4}" -T $NUMBER "$FILE"
+	NUMBER=$((NUMBER+1))
+done

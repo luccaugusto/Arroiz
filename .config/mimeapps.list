@@ -11,6 +11,7 @@ application/xhtml+xml=firefox.desktop
 application/x-extension-xhtml=firefox.desktop
 application/x-extension-xht=firefox.desktop
 application/pdf=mupdf.desktop
+x-scheme-handler/tg=telegramdesktop.desktop
 
 [Added Associations]
 x-scheme-handler/http=userapp-Firefox-L5HJ0Y.desktop;firefox.desktop;

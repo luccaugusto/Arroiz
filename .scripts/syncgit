@@ -13,6 +13,7 @@ cp /home/lucca/.bash_aliases $REPO
 cp /home/lucca/.bash_profile $REPO
 cp /home/lucca/.bashrc  $REPO
 cp /home/lucca/.Xresources $REPO
+cp /home/lucca/.xinitrc $REPO
 
 cd $REPO
 #update programs list

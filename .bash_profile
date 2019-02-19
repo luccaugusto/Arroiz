@@ -9,7 +9,7 @@ export READER="zathura"
 export JAVA_HOME=/usr/lib/jvm/java-10-openjdk
 export PATH="$PATH:$HOME/.scripts"
 export PATH="$PATH:$JAVA_HOME/bin"
-. pulshes
+export NOTES_PATH="/home/lucca/.scripts/"
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 

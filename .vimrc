@@ -36,8 +36,8 @@
 	"set listchars=tab:\.\ 
 	
 	"Some more personal settings
-	"set relativenumber    "sets the line numbers relative to the current line
 	set number
+	set relativenumber    "sets the line numbers relative to the current line
 	set nocompatible
 	set autoindent        "auto indentation when enter is pressed
 	set showmode          "shows vim current mode
@@ -60,7 +60,6 @@
 	vnoremap j gj
 	vnoremap k gk
 
-	nnoremap Y y$
 
 "===============================
 "Mappings to make things quicker

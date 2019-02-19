@@ -10,13 +10,13 @@
 #     /  /\       /  /::\         /  /:/        /  /::\        \  \:\       /  /:/_    /  /\        /  /:/_   
 #    /  /:/      /  /:/\:\       /  /:/        /  /:/\:\        \  \:\     /  /:/ /\  /  /:/       /  /:/ /\  
 #   /__/::\     /__/:/\ \:\     /  /:/  ___   /  /:/  \:\   _____\__\:\   /  /:/ /:/ /__/::\      /  /:/_/::\ 
-#   \__\/\:\__  \__\/  ) ):\   /__/:/  /  /\ /__/:/ \__\:\ /__/::::::::\ /__/:/ /:/  \__\/\:\__  /__/:/__\/\:\
-#      \  \:\/\       / /:_:\  \  \:\ /  /:/ \  \:\ /  /:/ \  \:\~~\~~\/ \  \:\/:/      \  \:\/\ \  \:\ /~~/:/
-#       \__\::/      / /:/ \:\  \  \:\  /:/   \  \:\  /:/   \  \:\  ~~~   \  \::/        \__\::/  \  \:\  /:/ 
-#       /__/:/      /_/:// /:/   \  \:\/:/     \  \:\/:/     \  \:\        \  \:\        /__/:/    \  \:\/:/  
-#       \__\/       \_\// /:/     \  \::/       \  \::/       \  \:\        \  \:\       \__\/      \  \::/   
-#                      /_/:/       \__\/         \__\/         \__\/         \__\/                   \__\/    
-#                      \_\/                      
+#   \__\/\:\    \__\/  ) ):\   /__/:/  /  /\ /__/:/ \__\:\ /__/::::::::\ /__/:/ /:/  \__\/\:\__  /__/:/__\/\:\
+#      \  \:\         / /:_:\  \  \:\ /  /:/ \  \:\ /  /:/ \  \:\~~\~~\/ \  \:\/:/      \  \:\/\ \  \:\ /~~/:/
+#       \  \:\__     / /:/ \:\  \  \:\  /:/   \  \:\  /:/   \  \:\  ~~~   \  \::/        \__\::/  \  \:\  /:/ 
+#        \  \:\/\   /_/:// /:/   \  \:\/:/     \  \:\/:/     \  \:\        \  \:\        /__/:/    \  \:\/:/  
+#         \__\::/   \_\// /:/     \  \::/       \  \::/       \  \:\        \  \:\       \__\/      \  \::/   
+#         /__/:/       /_/:/       \__\/         \__\/         \__\/         \__\/                   \__\/    
+#         \__\/        \_\/                      
 #
 
 set $mod Mod4
@@ -45,8 +45,11 @@ gaps outer 10
 #assign of windows to desktops
 assign [class="Firefox"] 2
 assign [class="qutebrowser"] 2
-assign [class="Spotify"] 10
+assign [class="^Spotify"] 10
+assign [class="^spotify"] 10
 assign [class="Transmission-gtk"] 3
+assign [class="GitKraken"] 3
+assign [class="Telegram"] 4
 for_window [class="St" instance="floating-term"] floating enable
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -84,10 +87,12 @@ bindsym $mod+d exec dmenu_run
 
 #custom commands
 exec_always --no-startup-id exec xset -dpms s off
+bindsym $mod+m exec spotify
 bindsym $mod+q exec qutebrowser
 bindsym $mod+f exec firefox
 bindsym $mod+r exec $term -e ranger
 bindsym $mod+b exec lockscreen
+bindsym $mod+F1 exec gitkraken
 bindsym $mod+g gaps inner current set 0; gaps outer current set 0
 bindsym $mod+Shift+g gaps inner current set 15; gaps outer current set 10
 bindsym $mod+Shift+s exec "i3-nagbar -t warning -m 'The computer will be shutdown. Are you sure?' -b 'Yes, shutdown' 'shutdown now'"
@@ -116,10 +121,10 @@ bindsym $mod+p exec pcmanfm
     #bindsym XF86AudioPrev exec playerctl previous
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -128,10 +133,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move left
+bindsym $mod+Shift+h move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -140,8 +145,8 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split v
-bindsym $mod+Shift+h split v exec $term
+bindsym $mod+semicolon split v
+bindsym $mod+Shift+semicolon split v exec $term
 
 # split in vertical orientation
 bindsym $mod+v split h
