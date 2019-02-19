@@ -1,0 +1,66 @@
+00:00:00.000432 main     VirtualBox XPCOM Server 6.0.2 r127994 linux.amd64 (Jan 15 2019 20:58:16) release log
+00:00:00.000437 main     Log opened 2019-01-27T11:14:49.690275000Z
+00:00:00.000438 main     Build Type: release
+00:00:00.000443 main     OS Product: Linux
+00:00:00.000445 main     OS Release: 4.20.1-arch1-1-ARCH
+00:00:00.000447 main     OS Version: #1 SMP PREEMPT Wed Jan 9 20:25:43 UTC 2019
+00:00:00.000489 main     DMI Product Name: Inspiron 3541
+00:00:00.000509 main     DMI Product Version: Not Specified
+00:00:00.000581 main     Host RAM: 3369MB (3.2GB) total, 1881MB available
+00:00:00.000586 main     Executable: /usr/lib/virtualbox/VBoxSVC
+00:00:00.000587 main     Process ID: 6833
+00:00:00.000588 main     Package type: LINUX_64BITS_GENERIC (OSE)
+00:00:00.004537 main     IPC socket path: /tmp/.vbox-lucca-ipc/ipcd
+00:00:00.117610 nspr-2   VirtualBox: object creation starts
+00:00:00.117832 nspr-2   Home directory: '/home/lucca/.config/VirtualBox'
+00:00:00.118320 nspr-2   Loading settings file "/home/lucca/.config/VirtualBox/VirtualBox.xml" with version "1.12-linux"
+00:00:00.160328 nspr-2   NetIfAdpCtlOut: VBoxNetAdpCtl: Error while retrieving link speed for wlp3s0: VBoxNetAdpCtl: ioctl failed: Operation not supported
+00:00:00.161914 nspr-2   NAT: resolv.conf: nameserver 201.17.128.247
+00:00:00.161939 nspr-2   NAT: resolv.conf: nameserver 201.17.128.239
+00:00:00.161960 nspr-2   HostDnsMonitor::updateInfo
+00:00:00.161985 nspr-2   HostDnsMonitor: old information
+00:00:00.161995 nspr-2     no server entries
+00:00:00.162004 nspr-2     no domain set
+00:00:00.162012 nspr-2     no search string entries
+00:00:00.162020 nspr-2   HostDnsMonitor: new information
+00:00:00.162028 nspr-2     server 1: 201.17.128.247
+00:00:00.162037 nspr-2     server 2: 201.17.128.239
+00:00:00.162046 nspr-2     no domain set
+00:00:00.162053 nspr-2     no search string entries
+00:00:00.167891 nspr-2   Failed to open "/dev/vboxdrvu", errno=2, rc=VERR_VM_DRIVER_NOT_INSTALLED
+00:00:00.168539 nspr-2   VD: VDInit finished with VINF_SUCCESS
+00:00:00.168791 nspr-2   ERROR [COM]: aRC=NS_ERROR_FAILURE (0x80004005) aIID={d55176e5-6730-4e9e-fc1f-a59b1f44f78f} aComponent={SystemPropertiesWrap} aText={Cannot determine default Guest Additions ISO location. Most likely they are not available}, preserve=false aResultDetail=0
+00:00:00.170102 nspr-2   VirtualBox: object created
+00:00:32.001069 nspr-2   Failed to open "/dev/vboxdrvu", errno=2, rc=VERR_VM_DRIVER_NOT_INSTALLED
+00:00:32.003216 nspr-2   Failed to open "/dev/vboxdrvu", errno=2, rc=VERR_VM_DRIVER_NOT_INSTALLED
+00:01:29.806988 createBase Saving settings file "/home/lucca/.config/VirtualBox/VirtualBox.xml" with version "1.12-linux"
+00:01:30.450379 nspr-4   Saving settings file "/home/lucca/Vbox/android/android.vbox" with version "1.15-linux"
+00:01:30.547379 nspr-3   WARNING [COM]: aRC=NS_ERROR_FAILURE (0x80004005) aIID={dbe11e5f-7f10-46e7-94c4-1e95bf4b6627} aComponent={HostWrap} aText={Could not load the Host USB Proxy service: VERR_NOT_FOUND}, preserve=true  aResultDetail=0
+00:01:30.560065 nspr-3   Saving settings file "/home/lucca/Vbox/android/android.vbox" with version "1.15-linux"
+00:01:30.627810 nspr-3   Saving settings file "/home/lucca/.config/VirtualBox/VirtualBox.xml" with version "1.12-linux"
+00:01:30.704177 nspr-3   Saving settings file "/home/lucca/.config/VirtualBox/VirtualBox.xml" with version "1.12-linux"
+00:01:30.777640 nspr-2   Saving settings file "/home/lucca/Vbox/android/android.vbox" with version "1.15-linux"
+00:01:30.890478 nspr-3   ERROR [COM]: aRC=NS_ERROR_FAILURE (0x80004005) aIID={5047460a-265d-4538-b23e-ddba5fb84976} aComponent={MachineWrap} aText={This machine does not have any snapshots}, preserve=false aResultDetail=0
+00:01:31.297254 nspr-3   WARNING [COM]: aRC=NS_ERROR_FAILURE (0x80004005) aIID={dbe11e5f-7f10-46e7-94c4-1e95bf4b6627} aComponent={HostWrap} aText={Could not load the Host USB Proxy service: VERR_NOT_FOUND}, preserve=true  aResultDetail=0
+00:01:31.367503 nspr-3   Failed to open "/dev/vboxdrvu", errno=2, rc=VERR_VM_DRIVER_NOT_INSTALLED
+00:01:31.556920 nspr-2   WARNING [COM]: aRC=NS_ERROR_FAILURE (0x80004005) aIID={dbe11e5f-7f10-46e7-94c4-1e95bf4b6627} aComponent={HostWrap} aText={Could not load the Host USB Proxy service: VERR_NOT_FOUND}, preserve=true  aResultDetail=0
+00:01:31.559671 nspr-2   WARNING [COM]: aRC=NS_ERROR_FAILURE (0x80004005) aIID={dbe11e5f-7f10-46e7-94c4-1e95bf4b6627} aComponent={HostWrap} aText={Could not load the Host USB Proxy service: VERR_NOT_FOUND}, preserve=true  aResultDetail=0
+00:01:36.502649 nspr-3   Failed to open "/dev/vboxdrvu", errno=2, rc=VERR_VM_DRIVER_NOT_INSTALLED
+00:01:36.549851 nspr-3   WARNING [COM]: aRC=NS_ERROR_FAILURE (0x80004005) aIID={dbe11e5f-7f10-46e7-94c4-1e95bf4b6627} aComponent={HostWrap} aText={Could not load the Host USB Proxy service: VERR_NOT_FOUND}, preserve=true  aResultDetail=0
+00:01:36.553664 nspr-3   WARNING [COM]: aRC=NS_ERROR_FAILURE (0x80004005) aIID={dbe11e5f-7f10-46e7-94c4-1e95bf4b6627} aComponent={HostWrap} aText={Could not load the Host USB Proxy service: VERR_NOT_FOUND}, preserve=true  aResultDetail=0
+00:01:36.922437 Watcher  ERROR [COM]: aRC=NS_ERROR_FAILURE (0x80004005) aIID={5047460a-265d-4538-b23e-ddba5fb84976} aComponent={MachineWrap} aText={The virtual machine 'android' has terminated unexpectedly during startup with exit code 1 (0x1)}, preserve=false aResultDetail=0
+00:01:37.526341 nspr-2   Failed to open "/dev/vboxdrvu", errno=2, rc=VERR_VM_DRIVER_NOT_INSTALLED
+00:01:37.563079 nspr-5   WARNING [COM]: aRC=NS_ERROR_FAILURE (0x80004005) aIID={dbe11e5f-7f10-46e7-94c4-1e95bf4b6627} aComponent={HostWrap} aText={Could not load the Host USB Proxy service: VERR_NOT_FOUND}, preserve=true  aResultDetail=0
+00:01:37.566420 nspr-3   WARNING [COM]: aRC=NS_ERROR_FAILURE (0x80004005) aIID={dbe11e5f-7f10-46e7-94c4-1e95bf4b6627} aComponent={HostWrap} aText={Could not load the Host USB Proxy service: VERR_NOT_FOUND}, preserve=true  aResultDetail=0
+00:01:46.913155 nspr-5   Failed to open "/dev/vboxdrvu", errno=2, rc=VERR_VM_DRIVER_NOT_INSTALLED
+00:01:46.913868 nspr-5   Failed to open "/dev/vboxdrvu", errno=2, rc=VERR_VM_DRIVER_NOT_INSTALLED
+00:01:47.192098 nspr-4   NetIfAdpCtlOut: VBoxNetAdpCtl: Error while retrieving link speed for wlp3s0: VBoxNetAdpCtl: ioctl failed: Operation not supported
+00:02:06.781163 nspr-2   Saving settings file "/home/lucca/.config/VirtualBox/VirtualBox.xml" with version "1.12-linux"
+00:02:07.379874 nspr-2   ERROR [COM]: aRC=E_ACCESSDENIED (0x80070005) aIID={ad47ad09-787b-44ab-b343-a082a3f2dfb1} aComponent={MediumWrap} aText={The object is not ready}, preserve=false aResultDetail=0
+00:02:07.483844 nspr-4   Failed to open "/dev/vboxdrvu", errno=2, rc=VERR_VM_DRIVER_NOT_INSTALLED
+00:02:07.509473 nspr-2   WARNING [COM]: aRC=NS_ERROR_FAILURE (0x80004005) aIID={dbe11e5f-7f10-46e7-94c4-1e95bf4b6627} aComponent={HostWrap} aText={Could not load the Host USB Proxy service: VERR_NOT_FOUND}, preserve=true  aResultDetail=0
+00:02:07.512277 nspr-4   WARNING [COM]: aRC=NS_ERROR_FAILURE (0x80004005) aIID={dbe11e5f-7f10-46e7-94c4-1e95bf4b6627} aComponent={HostWrap} aText={Could not load the Host USB Proxy service: VERR_NOT_FOUND}, preserve=true  aResultDetail=0
+00:02:14.131274 main     VirtualBox: object deletion starts
+00:02:14.435723 Watcher  ERROR [COM]: aRC=E_ACCESSDENIED (0x80070005) aIID={d0a0163f-e254-4e5b-a1f2-011cf991c38d} aComponent={VirtualBoxWrap} aText={The object is not ready}, preserve=false aResultDetail=0
+00:02:19.132163 main     {00007f2448017ba0} HostPowerServiceLinux::~HostPowerServiceLinux: RTThreadWait() for 5000 ms failed with VERR_TIMEOUT
+00:02:19.132719 main     VirtualBox: object deleted

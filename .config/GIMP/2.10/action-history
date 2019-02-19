@@ -1,0 +1,15 @@
+# GIMP action-history
+
+(history-item "file-export-as" 3)
+(history-item "file-quit" 4)
+(history-item "layers-new" 2)
+(history-item "edit-cut" 2)
+(history-item "edit-paste" 4)
+(history-item "layers-edit-attributes" 0)
+(history-item "layers-delete" 2)
+(history-item "image-new" 0)
+(history-item "vectors-selection-from-vectors" 0)
+(history-item "image-crop-to-selection" 0)
+(history-item "file-save" 1)
+
+# end of action-history

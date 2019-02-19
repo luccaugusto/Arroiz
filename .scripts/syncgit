@@ -20,7 +20,7 @@ cd $REPO
 LIST=$(pacman -Sl); for ARG in $(pacman -Qq); do echo "$LIST" | grep " $ARG "; done | awk '{print $2}' > progs.txt
  
 #add new scripts
-cd .scripts
+cd $REPO
 git add .
 git commit -a
 git push
