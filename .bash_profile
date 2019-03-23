@@ -6,10 +6,9 @@ export EDITOR="vim"
 export TERMINAL="st"
 export BROWSER="firefox"
 export READER="zathura"
-export JAVA_HOME=/usr/lib/jvm/java-10-openjdk
 export PATH="$PATH:$HOME/.scripts"
-export PATH="$PATH:$JAVA_HOME/bin"
-export NOTES_PATH="/home/lucca/.scripts/"
+export PATH="$PATH:$HOME/.gem/ruby/2.6.0/bin"
+export GROFF_ENCODING=UTF-8
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 

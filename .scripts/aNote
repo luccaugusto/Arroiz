@@ -3,28 +3,44 @@
 #Notes CRUD
 #script for taking simple notes in the terminal
 
-NOTES_PATH="/home/lucca/.scripts/"
+if [ ! $NOTES_PATH ];then
+	NOTES_PATH="$HOME/.scripts/"
+fi
 
 add_note()
 {
-	if [ ! -f $NOTES_PATH.notes ]; then
-		touch $NOTES_PATH.notes
-	fi
-	read NOTE_NUMBER<<<$(awk 'END{print $1}' $NOTES_PATH.notes | sed s/~//g)
-	NOTE_NUMBER=$((NOTE_NUMBER+1))
-	DATE=`date +%Y-%m-%d`
 	NOTE=$1
 	shift
-	TAG=$1
-	shift
-	echo "~$NOTE_NUMBER	$DATE	'$NOTE'	'$TAG'">>$NOTES_PATH.notes
-	
+	if [ $1 ]; then
+		TAG=$1
+		shift
+	else
+		TAG=""
+	fi
+
+	if [ ! -f $NOTES_PATH.notes$TAG ]; then
+		touch $NOTES_PATH.notes$TAG
+	fi
+	read NOTE_NUMBER<<<$(awk 'END{print $1}' $NOTES_PATH.notes$TAG | sed s/~//g)
+	NOTE_NUMBER=$((NOTE_NUMBER+1))
+	DATE=`date +%Y-%m-%d`
+	echo "~$NOTE_NUMBER	$DATE	'$NOTE'">>$NOTES_PATH.notes$TAG
 }
 
 list_notes()
 {
-	if test -f $NOTES_PATH.notes; then
-		awk -F"\t" '{print $1". " $3}' $NOTES_PATH.notes
+	if [ $1 ]; then
+		if [ $1 == -d ]; then
+			WHICH_NOTES=".notes";shift
+		else
+			WHICH_NOTES=".notes$1"; shift
+		fi
+	else
+		WHICH_NOTES=$(ls -a $NOTES_PATH | grep ^.notes | dmenu -l 10)
+	fi
+
+	if test -f $NOTES_PATH$WHICH_NOTES; then
+		awk -F "\t" '{print $1". " $3}' $NOTES_PATH$WHICH_NOTES
 	else
 		echo 'No Notes'
 	fi
@@ -32,9 +48,18 @@ list_notes()
 
 filter_notes()
 {
-	if test -f $NOTES_PATH.notes; then
-		echo "Notes with $1:"
-		cat $NOTES_PATH.notes | grep "$1" | awk -F"\t" '{print $1. "\033[34m "$3"\033[0m"}'
+	if [ $1 ]; then
+		if [ $1 == -d ]; then
+			WHICH_NOTES=".notes";shift
+		else
+			WHICH_NOTES=".notes$1"; shift
+		fi
+	else
+		WHICH_NOTES=$(ls -a $NOTES_PATH | grep ^.notes | dmenu -l 10)
+	fi
+
+	if test -f $NOTES_PATH$WHICH_NOTES; then
+		cat $NOTES_PATH$WHICH_NOTES | grep "$1" | awk -F "\t" '{print $1. "\033[34m "$3"\033[0m"}'
 		shift
 	else
 		echo 'No Notes'
@@ -43,25 +68,31 @@ filter_notes()
 
 show_help()
 {
-	echo "						aNote 	 [SOME NOTE] [SOME TAG]: Adds a note to a specific Tag"
-	echo "						aNote -l : List all Notes"
-	echo "						aNote -f [WORD/DATE]: Search for notes with that word, tag or date"
-	echo "						aNote -r [NUMBER OF NOTE/Blank for all notes]: remove note"
+	echo 'aNote [SOME NOTE] [SOME TAG]: Adds a note to a specific Tag. If no tag is informed adds to general notes'
+	echo 'aNote -l [SOME TAG]:Prompts with a dmenu to select notes file to list notes from
+					-d flag to list general notes'
+	echo 'aNote -f [WORD/DATE]: Search for notes with that word, tag or date'
+	echo 'aNote -r [TAG]: prompts with a dmenu to select note to delete. if no tag is informed dmenu prompts with tag and then 			notes'
 }
 
 remove_note()
 {
-	if test -f $NOTES_PATH.notes; then
-		if [[ $1 == "" ]]; then
-			echo "Specify a note [-a for all]"
-		elif [[ $1 == "-a" ]]; then
-			rm $NOTES_PATH.notes
+	if [ $1 ]; then
+		if [ $1 == -d ]; then
+			WHICH_NOTES=".notes";shift
 		else
-			sed -i '/~'"$1"'/d' $NOTES_PATH.notes
-			read ALL_NOTES<<<$(cat $NOTES_PATH.notes)
-			if [ -s "$ALL_NOTES" ]; then
-				rm $NOTES_PATH.notes
-			fi
+			WHICH_NOTES=".notes$1"; shift
+		fi
+	else
+		WHICH_NOTES=$(ls -a $NOTES_PATH | grep ^.notes | dmenu -l 10)
+	fi
+
+	if test -f "$NOTES_PATH$WHICH_NOTES"; then
+		NOTE=$(cat $NOTES_PATH$WHICH_NOTES | dmenu -l 10 | awk -F "\t" '{print $1}')
+		sed -i '/'"$NOTE"'/d' $NOTES_PATH$WHICH_NOTES
+		ALL_NOTES=$(cat $NOTES_PATH$WHICH_NOTES)
+		if [ ! "$ALL_NOTES" ]; then
+			rm $NOTES_PATH$WHICH_NOTES
 		fi
 	else
 		echo 'No Notes'
@@ -69,7 +100,7 @@ remove_note()
 }
 
 case $1 in
-	-l) list_notes
+	-l) shift; list_notes "$1"
 		;;
 	-f) shift; filter_notes "$1"
 		;;

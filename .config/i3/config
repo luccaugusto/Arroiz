@@ -25,7 +25,7 @@ set $netrefresh --no-startup-id sudo -A systemctl restart NetworkManager
 
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 #exec_always --no-startup-id wal -i ~/.config/wall.jpg
-exec_always --no-startup-id wal -n -i ~/Repos/Wallpapers/SynthGirl.jpg
+#exec_always --no-startup-id wal -n -i ~/Repos/Wallpapers/SynthGirl.jpg
 exec_always --no-startup-id feh --bg-scale ~/.config/wall.jpg
 exec_always --no-startup-id . $HOME/.scripts/shownotes
 exec_always --no-startup-id . $HOME/.scripts/keyboard_layout
@@ -45,11 +45,12 @@ gaps outer 10
 #assign of windows to desktops
 assign [class="Firefox"] 2
 assign [class="qutebrowser"] 2
+assign [class="Gimp"] 3
+assign [class="Transmission-gtk"] 6
+assign [class="GitKraken"] 6
+assign [class="Telegram"] 4
 assign [class="^Spotify"] 10
 assign [class="^spotify"] 10
-assign [class="Transmission-gtk"] 3
-assign [class="GitKraken"] 3
-assign [class="Telegram"] 4
 for_window [class="St" instance="floating-term"] floating enable
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -135,8 +136,8 @@ bindsym $mod+Right focus right
 # move focused window
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move left
-bindsym $mod+Shift+h move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left

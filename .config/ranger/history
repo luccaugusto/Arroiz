@@ -1,50 +1,50 @@
-rename .[PornHub.com] Xxxdindin
-rename .480P_600K_12604681.mp4
-mkdir paramore
-shell unzip *
-shell unzip 5be092bb7672c-2008-The-Final-Riot.zip
-shell unzip 5be092bbb08f7-2009-Brand-New-Eyes-Deluxe-Edition.zip 
+shell vim 2019-03-08-favorite-songs.md
+rename BeaultifulCamp.jpg_
+rename BeaultifulCamp.jpg
+rename Carro.jpg
+rename ChurrosBanzai1.jpg
+rename ChurrosBanzai2.jpg
+rename SilvaAnoNovo.jpg
+rename SkolFelipe.jpg
+rename UdonTopzera1.jpg
+rename UdonTopzera2.jpg
 open_with 
-open_with
-shell tar -xf tsetup.1.5.8.tar.xz
-shell . Updater
-shell ./Tele
-open_with qutebrowser
-mkdir Dagon
-mkdir ExMachina
-shell tar -xf slock-1.4.tar.gz
-rename Paramore
-rename photo_2019-02-09_13-17-17.jpg
-shell sudo mount /d
-open_with 0
-open_with vlc
-rename background.jpg
-
-mkdir images
-shell git pull
-open_with firefox
-shell convert -transparent white btn.png btn.png
-open_with gimp &&
-shell git add btn.png
+rename skate.yml
+rename skate
+rename fotos-skate
+shell . uploadarquivos.sh
+shell  . uploadarquivos.sh
+open_with ivm
+rename GoodVibersOnly.png
+shell unzip 125112017015659-8513.zip 
+touch songs
+search fonts
+shell convert -trim misc.png misc.png
+shell touch time.html
+open_wit
+touch movie-window.html
+touch library-window.html
+touch download-window.html
+open_with vmi
+open_with v
 open_with vim
-shell magick -rotate 90 P_20190127_081339.jpg
-shell convert -rotate 90 P_20190127_081339.jpg P_20190127_081339.jpg
-shell unzip splitter-r592.zip
-mkdir map
-open_with gimp
-shell convert -transparent white btn*
-shell convert -transparent white 90% btn*
-shell convert -transparent 90% white btn*
-shell convert -transparent 90 white btn*
-shell convert -transparent white btn_large_1.png
-shell convert -transparent white btn_large_1.png btn_large_1.png
-shell convert -transparent white btn_large_2.png btn_large_2.png
-shell convert -transparent white btn_large_3.png btn_large_3.png
-shell convert -transparent white btn_small_1.png btn_small_1.png
-shell convert -transparent white btn_small_2.png btn_small_2.png
-shell convert -transparent white btn_small_3.png btn_small_3.png
-delete
-shell convert -transparent white logo_assinatura.png logo_assinatura.png
+rename aNote
+search .scripts
+shell unzip Pierr
+open_with
+
+f
+find go
+find good
+flat 4
+find 
+search good
+rename .notessongs
+shell extract Dscrd-ArmyfM-SGN.zip
+shell extract Dscrd-Tchrspt-SGN.zip
+shell 
+shell extract Dscrd-UndrwtrLv-SGN.zip
+shell extract Edn-ThSlpvr-SGN.zip
+shell farbfeld *
 open_with 2
-shell git commit -a
-shell git push
+delete

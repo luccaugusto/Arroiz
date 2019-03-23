@@ -3,7 +3,26 @@
 CONFIG_DIR="/home/lucca/.config"
 REPO="/home/lucca/Repos/RICE"
 echo "Copying .config folders"
-cp -r $CONFIG_DIR/* $REPO/.config
+cp -r $CONFIG_DIR/compton.conf $REPO/.config
+cp -r $CONFIG_DIR/dconf $REPO/.config
+cp -r $CONFIG_DIR/dunst $REPO/.config
+cp -r $CONFIG_DIR/feh $REPO/.config
+cp -r $CONFIG_DIR/fontconfig $REPO/.config
+cp -r $CONFIG_DIR/gconf $REPO/.config
+cp -r $CONFIG_DIR/i3 $REPO/.config
+cp -r $CONFIG_DIR/neofetch $REPO/.config
+cp -r $CONFIG_DIR/newsboat $REPO/.config
+cp -r $CONFIG_DIR/pcmanfm $REPO/.config
+cp -r $CONFIG_DIR/polybar $REPO/.config
+cp -r $CONFIG_DIR/QtProject.conf $REPO/.config
+cp -r $CONFIG_DIR/qutebrowser $REPO/.config
+cp -r $CONFIG_DIR/ranger $REPO/.config
+cp -r $CONFIG_DIR/spotify $REPO/.config
+cp -r $CONFIG_DIR/transmission $REPO/.config
+cp -r $CONFIG_DIR/vlc $REPO/.config
+cp -r $CONFIG_DIR/wal $REPO/.config
+cp -r $CONFIG_DIR/wall.jpg $REPO/.config
+cp -r $CONFIG_DIR/zathura $REPO/.config
 echo "Copying vim, urxvt,scripts and bash files"
 cp -r /home/lucca/.scripts/* $REPO/.scripts
 cp -r /home/lucca/.vim $REPO
@@ -25,3 +44,5 @@ git add .
 git commit -a
 git push
 cd /home/lucca/
+
+

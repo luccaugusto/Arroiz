@@ -1,0 +1,3 @@
+#!/bin/bash
+
+i3 'exec spotify -n Spotify-player'
