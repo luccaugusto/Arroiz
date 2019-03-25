@@ -1,10 +1,4 @@
 #vim: filetype=i3
-# ===========TODO=====================
-#
-#
-#
-# ====================================
-
 #                   __              ___           ___           ___           ___                     ___     
 #      ___         /  /\           /  /\         /  /\         /__/\         /  /\      ___          /  /\    
 #     /  /\       /  /::\         /  /:/        /  /::\        \  \:\       /  /:/_    /  /\        /  /:/_   
@@ -37,7 +31,7 @@ exec --no-startup-id unclutter #make mouse invisible after a while
 
 #allow gaps
 for_window [class="^.*"] border pixel 1
-gaps inner 15
+gaps inner 7
 gaps outer 10
 #smart_gaps set gaps off when only one window is open
 #smart_gaps on
@@ -49,8 +43,8 @@ assign [class="Gimp"] 3
 assign [class="Transmission-gtk"] 6
 assign [class="GitKraken"] 6
 assign [class="Telegram"] 4
-assign [class="^Spotify"] 10
-assign [class="^spotify"] 10
+assign [class="^Spotify*"] 10
+assign [class="^spotify*"] 10
 for_window [class="St" instance="floating-term"] floating enable
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -232,15 +226,18 @@ mode "resize" {
 
 bindsym $mod+c mode "resize"
 
-mode "tree-save"{
-	#mode to save and load workspaces configurations
-	bindsym $mod+l exec --no-startup-id i3-msg workspace 1; append_layout ~/.config/i3/workspace-1.json;
-	#i3-save-tree --workspace 1 > ~/.config/i3/workspace-1.
-	# back to normal: Enter or Escape
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
-
-}
-
-bindsym $mod+Shift+a mode "tree-save"
-
+#bar {
+#	i3bar_command  
+#	position top
+#	tray_output primary
+#	separator_symbol "	"
+#	strip_workspace_numbers yes
+#
+#	colors {
+#		background #00000000
+#		statusline #ffffff
+#		focused_workspace #00fff9
+#		inactive_workspace #b4b4b4
+#		urgent_workspace #f02a2a
+#	}
+#}

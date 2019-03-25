@@ -1,9 +1,3 @@
-shell vim 2019-03-08-favorite-songs.md
-rename BeaultifulCamp.jpg_
-rename BeaultifulCamp.jpg
-rename Carro.jpg
-rename ChurrosBanzai1.jpg
-rename ChurrosBanzai2.jpg
 rename SilvaAnoNovo.jpg
 rename SkolFelipe.jpg
 rename UdonTopzera1.jpg
@@ -46,5 +40,11 @@ shell
 shell extract Dscrd-UndrwtrLv-SGN.zip
 shell extract Edn-ThSlpvr-SGN.zip
 shell farbfeld *
+open_with gimp
+shell git add .
+shell git commit -a
+shell git push
+shell sxiv *
 open_with 2
+mkdir Grafos
 delete

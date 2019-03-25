@@ -88,7 +88,7 @@ remove_note()
 	fi
 
 	if test -f "$NOTES_PATH$WHICH_NOTES"; then
-		NOTE=$(cat $NOTES_PATH$WHICH_NOTES | dmenu -l 10 | awk -F "\t" '{print $1}')
+		NOTE=$(cat $NOTES_PATH$WHICH_NOTES | sed "s/	/ /g" | dmenu -l 10 | awk -F " " '{print $1}')
 		sed -i '/'"$NOTE"'/d' $NOTES_PATH$WHICH_NOTES
 		ALL_NOTES=$(cat $NOTES_PATH$WHICH_NOTES)
 		if [ ! "$ALL_NOTES" ]; then
