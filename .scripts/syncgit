@@ -24,7 +24,7 @@ cp -r $CONFIG_DIR/wal $REPO/.config
 cp -r $CONFIG_DIR/wall.jpg $REPO/.config
 cp -r $CONFIG_DIR/zathura $REPO/.config
 echo "Copying vim, urxvt,scripts and bash files"
-cp -r /home/lucca/.scripts/* $REPO/.scripts
+cp -r /home/lucca/.scripts $REPO
 cp -r /home/lucca/.vim $REPO
 cp -r /home/lucca/.time $REPO
 cp /home/lucca/.vimrc $REPO
