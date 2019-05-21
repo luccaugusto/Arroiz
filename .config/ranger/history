@@ -1,50 +1,50 @@
-rename SilvaAnoNovo.jpg
-rename SkolFelipe.jpg
-rename UdonTopzera1.jpg
-rename UdonTopzera2.jpg
-open_with 
-rename skate.yml
-rename skate
-rename fotos-skate
-shell . uploadarquivos.sh
-shell  . uploadarquivos.sh
-open_with ivm
-rename GoodVibersOnly.png
-shell unzip 125112017015659-8513.zip 
-touch songs
-search fonts
-shell convert -trim misc.png misc.png
-shell touch time.html
-open_wit
-touch movie-window.html
-touch library-window.html
-touch download-window.html
-open_with vmi
-open_with v
+shell touch definirLinhaProdRota.ms
+shell touch separarPedido.ms
+shell touch definirMotorista.ms
+shell touch acompanharPedido.ms
+shell touch controlePagamento.ms
+shell touch emitirNF.ms
+shell touch avaliarEEncontrar.ms
+shell touch delivery.ms
 open_with vim
-rename aNote
-search .scripts
-shell unzip Pierr
-open_with
-
-f
-find go
-find good
-flat 4
-find 
-search good
-rename .notessongs
-shell extract Dscrd-ArmyfM-SGN.zip
-shell extract Dscrd-Tchrspt-SGN.zip
+shell groff -ms -T pdf acompanharPedido.ms > acompanharPedido.pdf
+shell cat acompanharPedido.ms > avaliarEEncontrar.ms
 shell 
-shell extract Dscrd-UndrwtrLv-SGN.zip
-shell extract Edn-ThSlpvr-SGN.zip
-shell farbfeld *
-open_with gimp
-shell git add .
-shell git commit -a
-shell git push
+shell groff -ms -T pdf acompanharPedido.ms | zathura -
+shell groff -ms -T pdf acompanharPedido.ms | zathura - &
+rename acompanharPedido.ms_
+shell for a in *;do;cat ../acompanharPedido.ms_ > $a;done;
+shell groff -ms -T pdf crudFuncionarios.ms | zathura -
+shell groff -ms -T pdf definirLinhaProdRota.ms | zathura - &
+shell groff -ms -T pdf contratacaoPlano.ms | zathura - &
+shell gr
+shell touch PI.ms
+shell groff -ms -T pdf PI.ms > I.pdf
 shell sxiv *
-open_with 2
-mkdir Grafos
+shell sxiv *.jpg
+rename TPFinalPT1.pdf
+rename avaliar.ms
+shell vim controlePagamento.ms
+shell vim consultarEntrega.ms
+shell  %s
+shell groff -ms -T pdf 
+shell groff -ms -T pdf *.ms > c.pdf
+shell convert -trim troll.png troll.png
+rename 500 Days Of Summer
+rename ScottPilgrimVsTheWorld
+rename Túmulo dos Vagalumes (1988)
+shell exctract syncthing-linux-amd64-v1.1.3.tar.gz
+shell tar -xf syncthing-linux-amd64-v1.1.3.tar.gz
+open_with 
+shell ./syncthing
+rename syncthing
+mkdir tp
+vim q1.cpp
+shell vim q1.cpp
+
+shell vim q1.in
+rename Synthchina.png
 delete
+shell vim q2.cpp
+shell vim q2.in
+shell touch q4.cpp

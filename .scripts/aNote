@@ -15,7 +15,7 @@ add_note()
 		TAG=$1
 		shift
 	else
-		TAG=""
+		TAG="geral"
 	fi
 
 	if [ ! -f $NOTES_PATH.notes$TAG ]; then
@@ -31,12 +31,12 @@ list_notes()
 {
 	if [ $1 ]; then
 		if [ $1 == -d ]; then
-			WHICH_NOTES=".notes";shift
+			WHICH_NOTES=".notesgeral";shift
 		else
 			WHICH_NOTES=".notes$1"; shift
 		fi
 	else
-		WHICH_NOTES=$(ls -a $NOTES_PATH | grep ^.notes | dmenu -l 10)
+		WHICH_NOTES=.notes$(ls -a $NOTES_PATH | grep ^.notes | awk -F " " '{print substr($1,7)}'| dmenu -l 10)
 	fi
 
 	if test -f $NOTES_PATH$WHICH_NOTES; then
@@ -50,12 +50,12 @@ filter_notes()
 {
 	if [ $1 ]; then
 		if [ $1 == -d ]; then
-			WHICH_NOTES=".notes";shift
+			WHICH_NOTES=".notesgeral";shift
 		else
 			WHICH_NOTES=".notes$1"; shift
 		fi
 	else
-		WHICH_NOTES=$(ls -a $NOTES_PATH | grep ^.notes | dmenu -l 10)
+		WHICH_NOTES=.notes$(ls -a $NOTES_PATH | grep ^.notes | awk -f " " '{print substr($1,7)}'| dmenu -l 10)
 	fi
 
 	if test -f $NOTES_PATH$WHICH_NOTES; then
@@ -79,12 +79,12 @@ remove_note()
 {
 	if [ $1 ]; then
 		if [ $1 == -d ]; then
-			WHICH_NOTES=".notes";shift
+			WHICH_NOTES=".notesgeral";shift
 		else
 			WHICH_NOTES=".notes$1"; shift
 		fi
 	else
-		WHICH_NOTES=$(ls -a $NOTES_PATH | grep ^.notes | dmenu -l 10)
+		WHICH_NOTES=.notes$(ls -a $NOTES_PATH | grep ^.notes | awk -F " " '{print substr($1,7)}'| dmenu -l 10)
 	fi
 
 	if test -f "$NOTES_PATH$WHICH_NOTES"; then

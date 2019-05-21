@@ -34,17 +34,17 @@ for_window [class="^.*"] border pixel 1
 gaps inner 7
 gaps outer 10
 #smart_gaps set gaps off when only one window is open
-#smart_gaps on
+smart_gaps on
 
 #assign of windows to desktops
 assign [class="Firefox"] 2
 assign [class="qutebrowser"] 2
 assign [class="Gimp"] 3
+assign [class="Krita"] 3
+assign [class="Telegram"] 4
 assign [class="Transmission-gtk"] 6
 assign [class="GitKraken"] 6
-assign [class="Telegram"] 4
-assign [class="^Spotify*"] 10
-assign [class="^spotify*"] 10
+for_window [class="Spotify"] move to workspace 10
 for_window [class="St" instance="floating-term"] floating enable
 
 # Font for window titles. Will also be used by the bar unless a different font
