@@ -1,0 +1,11 @@
+#!/bin/bash
+
+cmd=$(printf "cancel\nshutdown\nreboot" | dmenu -l 3)
+
+if [ ! $cmd == "cancel" ]; then
+	if [ $cmd == "shutdown" ]; then
+		shutdown now
+	else
+		reboot
+	fi
+fi

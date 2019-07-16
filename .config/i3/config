@@ -4,7 +4,7 @@
 #     /  /\       /  /::\         /  /:/        /  /::\        \  \:\       /  /:/_    /  /\        /  /:/_   
 #    /  /:/      /  /:/\:\       /  /:/        /  /:/\:\        \  \:\     /  /:/ /\  /  /:/       /  /:/ /\  
 #   /__/::\     /__/:/\ \:\     /  /:/  ___   /  /:/  \:\   _____\__\:\   /  /:/ /:/ /__/::\      /  /:/_/::\ 
-#   \__\/\:\    \__\/  ) ):\   /__/:/  /  /\ /__/:/ \__\:\ /__/::::::::\ /__/:/ /:/  \__\/\:\__  /__/:/__\/\:\
+#   \__\/\:\    \__\/  | |:\   /__/:/  /  /\ /__/:/ \__\:\ /__/::::::::\ /__/:/ /:/  \__\/\:\__  /__/:/__\/\:\
 #      \  \:\         / /:_:\  \  \:\ /  /:/ \  \:\ /  /:/ \  \:\~~\~~\/ \  \:\/:/      \  \:\/\ \  \:\ /~~/:/
 #       \  \:\__     / /:/ \:\  \  \:\  /:/   \  \:\  /:/   \  \:\  ~~~   \  \::/        \__\::/  \  \:\  /:/ 
 #        \  \:\/\   /_/:// /:/   \  \:\/:/     \  \:\/:/     \  \:\        \  \:\        /__/:/    \  \:\/:/  
@@ -90,7 +90,7 @@ bindsym $mod+b exec lockscreen
 bindsym $mod+F1 exec gitkraken
 bindsym $mod+g gaps inner current set 0; gaps outer current set 0
 bindsym $mod+Shift+g gaps inner current set 15; gaps outer current set 10
-bindsym $mod+Shift+s exec "i3-nagbar -t warning -m 'The computer will be shutdown. Are you sure?' -b 'Yes, shutdown' 'shutdown now'"
+bindsym $mod+Shift+s exec powermenu
 bindsym $mod+n exec ~/.scripts/shownotes
 bindsym $mod+p exec pcmanfm
 

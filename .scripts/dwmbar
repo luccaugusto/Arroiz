@@ -1,0 +1,72 @@
+#!/bin/bash
+
+
+bar()
+{
+	separator='|'
+
+	#keyboard layout
+	layout=$(xset -q | grep LED | awk '{ print $10 }')
+	case "$layout" in
+		"00000000" | "00000001" | "00000002") layout="us";;
+		"00001000" | "00001001" | "00001002") layout="br";;
+	esac
+	echo "$layout $separator"
+
+	#battery
+	bat=$(cat /sys/class/power_supply/BAT0/capacity)
+	status=$(cat /sys/class/power_supply/BAT0/status)
+	if [ $status == 'Charging' ]; then
+		bat=" $bat"
+	elif [ $bat -lt 10 ];then
+		bat=" $bat"
+	elif [ $bat -lt 30 ];then
+		bat=" $bat"
+	elif [ $bat -lt 50 ];then
+		bat=" $bat"
+	elif [ $bat -lt 70 ];then
+		bat=" $bat"
+	else
+		bat=" $bat"
+	fi
+
+	echo "$bat% $separator"
+
+	#calculates the brightness in percent
+	brightness=$(cat /sys/class/backlight/radeon_bl0/brightness)
+	max=$(cat /sys/class/backlight/radeon_bl0/max_brightness)
+	#uses python3 to get decimals
+	l=$(echo "print($brightness/$max*100)" | python3)
+	light=" ${l%.*}"
+	echo "$light% $separator"
+
+	
+	#volume
+	vol="$(pamixer --get-volume-human)"
+	if [ "$vol" == "muted" ];then
+		vol=" $vol"
+	else
+		vol=" $vol"
+	fi
+	echo "$vol $separator"
+
+
+	date '+%Y %b %d %I:%M%p'
+	
+	echo "$separator"
+
+	#wifi
+	wifi=$(nmcli | grep ' connected' | awk '{for(i=2; i<= NF; i++) printf $i" "}')
+	if [ -z "$wifi" ];then
+		echo "Disconnected"
+	else
+		echo $(echo "$wifi" | sed 's/connected to//' )
+	fi
+
+}
+
+while :; do
+	xsetroot -name "$(bar | tr '\n' ' ')"
+
+	sleep 1m
+done

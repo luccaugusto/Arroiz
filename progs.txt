@@ -25,15 +25,18 @@ automake
 avahi
 babl
 bash
+bc
 binutils
 bison
 blas
 blender
 blosc
 bluez-libs
+boost
 boost-libs
 brotli
 btrfs-progs
+bubblewrap
 bzip2
 c-ares
 ca-certificates
@@ -55,6 +58,8 @@ coreutils
 cracklib
 cronie
 cryptsetup
+cups
+cups-filters
 curl
 db
 dbus
@@ -92,6 +97,7 @@ flex
 fluidsynth
 fontconfig
 fontforge
+freeglut
 freetype2
 fribidi
 fuse-common
@@ -100,6 +106,7 @@ fzf
 gawk
 gc
 gcc
+gcc-fortran
 gcc-libs
 gconf
 gcr
@@ -112,6 +119,7 @@ giflib
 gimp
 girara
 git
+git-lfs
 glew
 glib-networking
 glib-perl
@@ -121,6 +129,7 @@ glslang
 glu
 gmime
 gmp
+gnome-desktop
 gnome-keyring
 gnu-free-fonts
 gnupg
@@ -147,6 +156,7 @@ gtk2
 gtk2-perl
 gtk3
 guile
+gvfs
 gvim
 gzip
 harfbuzz
@@ -165,6 +175,7 @@ iana-etc
 icu
 id3lib
 id3v2
+ijs
 ilmbase
 imagemagick
 imlib2
@@ -186,6 +197,7 @@ jfsutils
 jre-openjdk
 jre-openjdk-headless
 js52
+js60
 jshon
 json-c
 json-glib
@@ -316,6 +328,7 @@ libjpeg-turbo
 libksba
 liblangtag
 libldap
+liblouis
 liblqr
 libmad
 libmatroska
@@ -355,6 +368,7 @@ libogg
 libomxil-bellagio
 liborcus
 libpagemaker
+libpaper
 libpcap
 libpciaccess
 libpgm
@@ -474,6 +488,7 @@ mailcap
 make
 man-db
 man-pages
+mariadb-libs
 mdadm
 media-player-info
 mediainfo
@@ -539,6 +554,7 @@ pacman
 pacman-mirrorlist
 pam
 pambase
+pamixer
 pango
 pango-perl
 parted
@@ -584,6 +600,7 @@ poppler
 poppler-data
 popt
 portaudio
+postgresql-libs
 potrace
 procps-ng
 protobuf
@@ -645,6 +662,7 @@ python2-packaging
 python2-pyparsing
 python2-setuptools
 python2-six
+qpdf
 qt5-base
 qt5-declarative
 qt5-graphicaleffects
@@ -656,10 +674,12 @@ qt5-script
 qt5-sensors
 qt5-speech
 qt5-svg
+qt5-tools
 qt5-webchannel
 qt5-webengine
 qt5-webkit
 qt5-x11extras
+quazip
 qutebrowser
 ranger
 raptor
@@ -699,6 +719,7 @@ startup-notification
 stfl
 sudo
 suitesparse
+sxhkd
 sxiv
 sysfsutils
 systemd
@@ -707,6 +728,7 @@ systemd-sysvcompat
 taglib
 talloc
 tar
+tcsh
 tdb
 tesseract
 tesseract-data-ell
@@ -728,6 +750,7 @@ twolame
 tzdata
 uchardet
 udisks2
+unixodbc
 unrar
 unzip
 upower
@@ -795,6 +818,7 @@ xorg-xprop
 xorg-xrandr
 xorg-xrdb
 xorg-xset
+xorg-xsetroot
 xorg-xwininfo
 xorgproto
 xssstate
@@ -807,6 +831,7 @@ youtube-viewer
 zathura
 zathura-djvu
 zathura-pdf-mupdf
+zenity
 zeromq
 zita-alsa-pcmi
 zita-resampler

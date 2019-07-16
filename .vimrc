@@ -85,6 +85,9 @@
 	nnoremap <C-k> <C-w>k
 	nnoremap <C-l> <C-w>l
 
+"update bindings when sxhkd config is updated
+	autocmd BufWritePost sxhkdrc killall sxhkd; setsid sxhkd &
+
 "===============================
 "SNIPPETS
 "===============================

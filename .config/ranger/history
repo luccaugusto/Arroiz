@@ -1,50 +1,50 @@
-shell touch definirLinhaProdRota.ms
-shell touch separarPedido.ms
-shell touch definirMotorista.ms
-shell touch acompanharPedido.ms
-shell touch controlePagamento.ms
-shell touch emitirNF.ms
-shell touch avaliarEEncontrar.ms
-shell touch delivery.ms
-open_with vim
-shell groff -ms -T pdf acompanharPedido.ms > acompanharPedido.pdf
-shell cat acompanharPedido.ms > avaliarEEncontrar.ms
-shell 
-shell groff -ms -T pdf acompanharPedido.ms | zathura -
-shell groff -ms -T pdf acompanharPedido.ms | zathura - &
-rename acompanharPedido.ms_
-shell for a in *;do;cat ../acompanharPedido.ms_ > $a;done;
-shell groff -ms -T pdf crudFuncionarios.ms | zathura -
-shell groff -ms -T pdf definirLinhaProdRota.ms | zathura - &
-shell groff -ms -T pdf contratacaoPlano.ms | zathura - &
-shell gr
-shell touch PI.ms
-shell groff -ms -T pdf PI.ms > I.pdf
-shell sxiv *
-shell sxiv *.jpg
-rename TPFinalPT1.pdf
-rename avaliar.ms
-shell vim controlePagamento.ms
-shell vim consultarEntrega.ms
-shell  %s
-shell groff -ms -T pdf 
-shell groff -ms -T pdf *.ms > c.pdf
-shell convert -trim troll.png troll.png
-rename 500 Days Of Summer
-rename ScottPilgrimVsTheWorld
-rename Túmulo dos Vagalumes (1988)
-shell exctract syncthing-linux-amd64-v1.1.3.tar.gz
-shell tar -xf syncthing-linux-amd64-v1.1.3.tar.gz
-open_with 
-shell ./syncthing
-rename syncthing
-mkdir tp
-vim q1.cpp
-shell vim q1.cpp
-
-shell vim q1.in
-rename Synthchina.png
-delete
-shell vim q2.cpp
-shell vim q2.in
 shell touch q4.cpp
+shell sxiv caveira.png
+open_with2
+open_with 2
+rename deathwaswaymorefun.png
+touch q5.cpp
+shell vim q5.in
+open_with vim
+shell convert -trim assinatura-real.png assinatura-real.png
+mkdir
+mkdri BD
+mkdir BD
+shell convert -trim troll.png troll.png
+rename lemure-des.png
+rename ES_final.pdf
+shell unzip Attachments-TP\ Engenharia\ Richard.zip
+rename DiagramaclasseFinal.pdf
+mkdir tpfinal
+shell unzip a_charming_font.zip
+mkdir a-charmin-font
+shell sudo mkdir a-charmin-font
+shell groff -ms -T pdf > cv.pdf
+shell groff -ms -T pdf curriculum.ms > cv.pdf
+open_with 
+shell sudo rm *
+shell convert -rotate 90 P_20190419_072146.jpg
+shell convert -rotate 180 P_20190419_072146.jpg P_20190419_072146.jpg
+shell convert -rotate 90 P_20190419_072146.jpg P_20190419_072146.jpg
+close!
+quit
+rename IMG_20190529_060403.jpg
+bulkrename 
+
+search cdrom
+open_with vlc
+shell git commit -a
+shell git add . && git commit -a
+shell git push
+shell
+search 
+find 
+shell sxiv *
+shell vim systray
+shell extract dwm-6.2.tar.gz
+rename Adventure Time S06E11-S06E12 Little.Brother + Ocarina (1920x1080) [Phr0stY].mkv
+open_with
+open_with3
+open_with 3
+open_with mpd
+delete
