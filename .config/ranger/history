@@ -1,13 +1,3 @@
-shell touch q4.cpp
-shell sxiv caveira.png
-open_with2
-open_with 2
-rename deathwaswaymorefun.png
-touch q5.cpp
-shell vim q5.in
-open_with vim
-shell convert -trim assinatura-real.png assinatura-real.png
-mkdir
 mkdri BD
 mkdir BD
 shell convert -trim troll.png troll.png
@@ -29,7 +19,6 @@ shell convert -rotate 90 P_20190419_072146.jpg P_20190419_072146.jpg
 close!
 quit
 rename IMG_20190529_060403.jpg
-bulkrename 
 
 search cdrom
 open_with vlc
@@ -39,7 +28,6 @@ shell git push
 shell
 search 
 find 
-shell sxiv *
 shell vim systray
 shell extract dwm-6.2.tar.gz
 rename Adventure Time S06E11-S06E12 Little.Brother + Ocarina (1920x1080) [Phr0stY].mkv
@@ -47,4 +35,16 @@ open_with
 open_with3
 open_with 3
 open_with mpd
+rename Temp 02 - Epi 24 - Assinatura de Calor.mkv
+rename Temp 02 - Epi 25 - Folia Mortal.mkv
+rename Temp 02 - Epi 26 - Recuo Mortal.mkv
+rename 
+rename Hora de Aventura 6ª Temporada
+bulkrename 
+rename AdventureTimeSeason-9
+touch 
+shell extract 4shared_1563720546839.zip 
+shell extract d\&d4ed_cartas_de_poderes_coloridas.zip 
+shell extract the.thing.\(1982\).pob.1cd.\(7789234\).zip 
+shell sxiv *
 delete

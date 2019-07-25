@@ -17,16 +17,9 @@ set $mod Mod4
 set $term --no-startup-id $TERMINAL
 set $netrefresh --no-startup-id sudo -A systemctl restart NetworkManager
 
-exec_always --no-startup-id ~/.config/polybar/launch.sh
+#exec_always --no-startup-id ~/.config/polybar/launch.sh
 #exec_always --no-startup-id wal -i ~/.config/wall.jpg
 #exec_always --no-startup-id wal -n -i ~/Repos/Wallpapers/SynthGirl.jpg
-exec_always --no-startup-id feh --bg-scale ~/.config/wall.jpg
-exec_always --no-startup-id . $HOME/.scripts/shownotes
-exec_always --no-startup-id . $HOME/.scripts/keyboard_layout
-exec --no-startup-id dunst
-exec --no-startup-id compton
-exec --no-startup-id nm-applet
-exec --no-startup-id unclutter #make mouse invisible after a while
 
 
 #allow gaps
@@ -226,18 +219,20 @@ mode "resize" {
 
 bindsym $mod+c mode "resize"
 
-#bar {
-#	i3bar_command  
-#	position top
-#	tray_output primary
-#	separator_symbol "	"
-#	strip_workspace_numbers yes
-#
-#	colors {
-#		background #00000000
-#		statusline #ffffff
-#		focused_workspace #00fff9
-#		inactive_workspace #b4b4b4
-#		urgent_workspace #f02a2a
-#	}
-#}
+bar {
+
+	#i3bar_command  
+	position top
+	tray_output primary
+	separator_symbol "|"
+	strip_workspace_numbers yes
+	binding_mode_indicator yes
+
+	colors {
+		background #00000000
+		statusline #ffffff
+		#focused_workspace #00fff9 
+		#inactive_workspace #b4b4b4
+		#urgent_workspace #f02a2a
+	}
+}

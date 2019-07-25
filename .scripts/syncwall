@@ -1,0 +1,8 @@
+#!/bin/bash
+
+#updates wallpapers
+WALL="/home/lucca/Repos/Wallpapers"
+cd $WALL
+git add .
+git commit -a -m "updating wallpapers"
+git push

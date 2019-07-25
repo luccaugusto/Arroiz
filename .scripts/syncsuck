@@ -1,0 +1,26 @@
+#!/bin/bash
+
+#updates the Suckless repository
+SUCK=/home/lucca/Repos/Suckless/
+cd $SUCK
+#Looks for modified files to make a diff of that file and save it under the folder 'patches' of each folder
+changed=$(git status | grep modified | awk '{print $2}')
+for arq in $changed
+do
+	IFS='/'
+	names=($arq)
+	unset IFS
+	DIR=${names[0]}
+	dir=$(echo $DIR | tr '[:upper:]' '[:lower:]')
+	#only create the diff if the file is not the executable file
+	#which has the same name as the directory
+	if [ ! "$dir" == "${names[1]}" ]
+	then
+		git diff $arq > $DIR/patches/$(date '+%Y%m%d').diff
+	fi
+done
+#adds new files, commits and pushes everything
+git add .
+git commit -a -m "updating everything"
+git push
+cd ..

@@ -1,7 +1,9 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_cnt =7
 let g:netrw_dirhist_1='/home/lucca/Repos/Site/_data'
 let g:netrw_dirhist_2='/home/lucca/Repos/Site/_layouts'
 let g:netrw_dirhist_3='/home/lucca/.scripts/aNote'
 let g:netrw_dirhist_4='/home/lucca/.scripts'
 let g:netrw_dirhist_5='/home/lucca/Repos/Suckless/Dwm'
+let g:netrw_dirhist_6='/home/lucca/.config/ranger'
+let g:netrw_dirhist_7='/home/lucca/.scripts'
