@@ -1,5 +1,3 @@
-mkdri BD
-mkdir BD
 shell convert -trim troll.png troll.png
 rename lemure-des.png
 rename ES_final.pdf
@@ -48,3 +46,5 @@ shell extract d\&d4ed_cartas_de_poderes_coloridas.zip
 shell extract the.thing.\(1982\).pob.1cd.\(7789234\).zip 
 shell sxiv *
 delete
+rename Marceline.jpg
+rename Marceline-Room.png

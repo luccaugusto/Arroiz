@@ -1,4 +1,5 @@
 a52dec
+abuse
 acl
 adobe-source-code-pro-fonts
 adwaita-icon-theme
@@ -6,6 +7,7 @@ aegisub
 alembic
 alsa-lib
 alsa-plugins
+angband
 aom
 arandr
 archlinux-keyring
@@ -37,6 +39,7 @@ boost-libs
 brotli
 btrfs-progs
 bubblewrap
+bullet
 bzip2
 c-ares
 ca-certificates
@@ -97,9 +100,11 @@ flex
 fluidsynth
 fontconfig
 fontforge
+freedroid
 freeglut
 freetype2
 fribidi
+ftgl
 fuse-common
 fuse2
 fzf
@@ -217,6 +222,7 @@ kcoreaddons
 kcrash
 kdbusaddons
 kdeclarative
+kdnssd
 keyutils
 kglobalaccel
 kguiaddons
@@ -228,6 +234,8 @@ kitemmodels
 kitemviews
 kjobwidgets
 kmod
+knetwalk
+knewstuff
 knotifications
 kpackage
 krb5
@@ -285,6 +293,7 @@ libdca
 libde265
 libdrm
 libdvbpsi
+libdvdcss
 libdvdnav
 libdvdread
 libe-book
@@ -324,8 +333,10 @@ libidn2
 libiec61883
 libimobiledevice
 libinput
+libircclient
 libixion
 libjpeg-turbo
+libkdegames
 libksba
 liblangtag
 libldap
@@ -436,6 +447,7 @@ libwpg
 libwps
 libx11
 libxau
+libxaw
 libxcb
 libxcomposite
 libxcursor
@@ -462,6 +474,7 @@ libxss
 libxt
 libxtst
 libxv
+libxvmc
 libxxf86vm
 libyaml
 libzen
@@ -476,8 +489,10 @@ lm_sensors
 lmdb
 log4cplus
 logrotate
+love
 lpsolve
 lua
+lua51
 lua52
 luajit
 lvm2
@@ -489,13 +504,16 @@ mailcap
 make
 man-db
 man-pages
+mari0
 mariadb-libs
 mdadm
 media-player-info
 mediainfo
+megaglest-data
 menu-cache
 mesa
 metis
+miniupnpc
 minizip
 mkinitcpio
 mkinitcpio-busybox
@@ -507,6 +525,7 @@ mpfr
 mpg123
 mpv
 mtdev
+mygui
 mypaint-brushes
 nano
 ncmpcpp
@@ -518,6 +537,7 @@ netctl
 nettle
 network-manager-applet
 networkmanager
+networkmanager-openvpn
 newsboat
 nm-connection-editor
 nodejs
@@ -529,6 +549,7 @@ npth
 nspr
 nss
 ntfs-3g
+ois
 openal
 opencollada
 opencolorio
@@ -538,6 +559,7 @@ openimageio
 openjpeg
 openjpeg2
 openresolv
+openscenegraph34
 openshadinglanguage
 openssh
 openssl
@@ -607,6 +629,7 @@ procps-ng
 protobuf
 psmisc
 ptex
+pth
 pulseaudio
 pulseaudio-alsa
 pulsemixer
@@ -701,12 +724,17 @@ s-nail
 scrot
 sdl
 sdl2
+sdl2_image
+sdl_image
+sdl_mixer
+sdl_ttf
 sed
 shaderc
 shadow
 shared-mime-info
 slang
 smbclient
+smpeg
 snappy
 solid
 sonnet
@@ -718,8 +746,10 @@ spirv-tools
 sqlite
 startup-notification
 stfl
+stone-soup
 sudo
 suitesparse
+supertuxkart
 sxhkd
 sxiv
 sysfsutils
@@ -742,6 +772,7 @@ tinyxml
 tmux
 transmission-gtk
 tslib
+ttf-dejavu
 ttf-font-awesome
 ttf-inconsolata
 ttf-joypixels
@@ -754,6 +785,7 @@ uchardet
 udisks2
 unixodbc
 unrar
+unshield
 unzip
 upower
 urlscan
@@ -799,20 +831,25 @@ xclip
 xcompmgr
 xdg-utils
 xdotool
+xerces-c
 xf86-input-libinput
 xf86-input-wacom
 xfsprogs
+xine-lib
 xkeyboard-config
 xmlsec
 xorg-bdftopcf
 xorg-font-util
 xorg-font-utils
+xorg-fonts-alias
 xorg-fonts-encodings
+xorg-fonts-misc
 xorg-mkfontscale
 xorg-server
 xorg-server-common
 xorg-setxkbmap
 xorg-xauth
+xorg-xfontsel
 xorg-xinit
 xorg-xkbcomp
 xorg-xmodmap

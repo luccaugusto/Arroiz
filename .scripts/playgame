@@ -1,0 +1,3 @@
+#!/bin/bash
+cat .scripts/.notesgames | awk '{print $3}' | sed "s/'//g" | dmenu -l 5 | bash
+

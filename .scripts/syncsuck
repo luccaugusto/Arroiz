@@ -21,6 +21,6 @@ do
 done
 #adds new files, commits and pushes everything
 git add .
-git commit -a -m "updating everything"
+git commit -a 
 git push
 cd ..
