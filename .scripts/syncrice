@@ -23,6 +23,7 @@ cp -r $CONFIG_DIR/vlc $REPO/.config
 cp -r $CONFIG_DIR/wal $REPO/.config
 cp -r $CONFIG_DIR/wall.jpg $REPO/.config
 cp -r $CONFIG_DIR/zathura $REPO/.config
+cp -r $CONFIG_DIR/sxhkd $REPO/.config
 echo "Copying vim, urxvt,scripts and bash files"
 cp -r /home/lucca/.scripts $REPO
 cp -r /home/lucca/.vim $REPO

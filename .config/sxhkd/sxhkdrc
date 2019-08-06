@@ -1,0 +1,49 @@
+#Sound commands
+#increase sound volume
+XF86AudioRaiseVolume
+	pactl set-sink-volume 0 +5%; reloadbar
+
+#decrease sound volume
+XF86AudioLowerVolume 
+	pactl set-sink-volume 0 -5%; reloadbar
+
+# mute sound
+XF86AudioMute 
+	pactl set-sink-mute 0 toggle; reloadbar
+
+
+#Screen Brightness controls
+# increase screen brightness
+XF86MonBrightnessUp 
+	brightnessctl s 5+; reloadbar
+
+# decrease screen brightness
+XF86MonBrightnessDown 
+	brightnessctl s 5-; reloadbar
+
+# Media player controls
+# Supports spotify
+XF86AudioPlay 
+	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+
+XF86AudioNext 
+	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
+XF86AudioPrev 
+	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
+
+
+#Custom bindings
+#super + s
+	#spotify
+super + q
+	qutebrowser
+super + f
+	firefox
+super + r
+	$TERMINAL -e ranger
+super + n
+	shownotes
+super + b
+	lockscreen
+super + shift + s
+	powermenu
