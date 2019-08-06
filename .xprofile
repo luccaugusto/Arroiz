@@ -1,0 +1,13 @@
+#!/bin/bash
+
+#runs when a DM logs me in a graphical session
+
+dunst &
+compton &
+nm-applet &
+unclutter &
+keyboard_layout &
+dwmbar &
+sxhkd &
+feh --bg-scale ~/.config/wall.jpg 
+shownotes

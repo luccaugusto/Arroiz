@@ -34,6 +34,7 @@ cp /home/lucca/.bash_profile $REPO
 cp /home/lucca/.bashrc  $REPO
 cp /home/lucca/.Xresources $REPO
 cp /home/lucca/.xinitrc $REPO
+cp /home/lucca/.xprofile $REPO
 
 cd $REPO
 #update programs list
