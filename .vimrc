@@ -74,6 +74,7 @@
 	nnoremap <leader>s :split 
 	"Move faster between tabs
 	nnoremap <leader>j :tabNext<CR>
+	nnoremap <leader>f :filetype detect<CR>
 	
 	"Allow to copy and paste from the system register
 	vnoremap <C-y> "*y :let @+=@*<CR>

@@ -8,7 +8,10 @@ export BROWSER="firefox"
 export READER="zathura"
 export PATH="$PATH:$HOME/.scripts"
 export PATH="$PATH:$HOME/.gem/ruby/2.6.0/bin"
+export PATH="$PATH:$HOME/.local/bin"
 export GROFF_ENCODING=UTF-8
+export PYTHONPATH="$PYTHONPATH:$HOME/Repos/S_Admin/meteflix/apps"
+export BEEP="/usr/share/sounds/freedesktop/stereo/complete.oga"
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 

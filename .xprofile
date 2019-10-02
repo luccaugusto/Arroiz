@@ -9,5 +9,7 @@ unclutter &
 keyboard_layout &
 dwmbar &
 sxhkd &
+transmission-gtk &
+batwarn &
 feh --bg-scale ~/.config/wall.jpg 
 shownotes

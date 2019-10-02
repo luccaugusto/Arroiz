@@ -1,50 +1,50 @@
-shell convert -trim troll.png troll.png
-rename lemure-des.png
-rename ES_final.pdf
-shell unzip Attachments-TP\ Engenharia\ Richard.zip
-rename DiagramaclasseFinal.pdf
-mkdir tpfinal
-shell unzip a_charming_font.zip
-mkdir a-charmin-font
-shell sudo mkdir a-charmin-font
-shell groff -ms -T pdf > cv.pdf
-shell groff -ms -T pdf curriculum.ms > cv.pdf
-open_with 
-shell sudo rm *
-shell convert -rotate 90 P_20190419_072146.jpg
-shell convert -rotate 180 P_20190419_072146.jpg P_20190419_072146.jpg
-shell convert -rotate 90 P_20190419_072146.jpg P_20190419_072146.jpg
-close!
-quit
-rename IMG_20190529_060403.jpg
-
-search cdrom
-open_with vlc
-shell git commit -a
-shell git add . && git commit -a
-shell git push
-shell
-search 
-find 
-shell vim systray
-shell extract dwm-6.2.tar.gz
-rename Adventure Time S06E11-S06E12 Little.Brother + Ocarina (1920x1080) [Phr0stY].mkv
-open_with
-open_with3
-open_with 3
-open_with mpd
-rename Temp 02 - Epi 24 - Assinatura de Calor.mkv
-rename Temp 02 - Epi 25 - Folia Mortal.mkv
-rename Temp 02 - Epi 26 - Recuo Mortal.mkv
-rename 
-rename Hora de Aventura 6ª Temporada
-bulkrename 
-rename AdventureTimeSeason-9
-touch 
-shell extract 4shared_1563720546839.zip 
-shell extract d\&d4ed_cartas_de_poderes_coloridas.zip 
-shell extract the.thing.\(1982\).pob.1cd.\(7789234\).zip 
+shell unzip Attachments-django.zip 
+mkdir requirements
+rename base.py
+mkdir settings
+touch __init__.py
+shell vim urls.py
+touch admin.py
+shell vim validators.py
 shell sxiv *
+find d
+search sounds
+rename batwarn
+search x11
+search key
+shell chmod +x displays
+rename monitors
+mkdir 
+shell vim q3.in
+mkdir LP
+shell vim q3.c
+shell unzip syncthing
+shell unzip sf_movie_poster.zip
+search fonts
+search mine
+search shiginima
+j
+shell sudo rm /mnt/IMG_2270.JPG
+
+shell vim TTPc.txt
+shell sent TTPc.txt
+shell sent -i TTPc.txt
+shell gcc ir_vir.cpp
+shell unzip TLauncher-2.66.zip
+shell sudo java -jar TLauncher-2.66.jar
+shell extract 220971_trans.rar
+mkdir FTC
+shell extract ilovepdf_converted.zip
+shell unzip land.of.the.lost.\(2009\).pob.1cd.\(5113284\).zip 
+rename Land of the Lost 2009 BRRip 720p x264-MgB-por.txt
+rename Land of the Lost 2009 BRRip 720p x264-MgB-por.srt
+rename Land.of.the.Lost.2009.1080p.BrRip.x264.YIFYpt.srt
+rename Land.of.the.Lost.2009.1080p.BrRip.x264.YIFYen.srt
+rename Land.of.the.Lost.2009.1080p.BrRip.x264.YIFY.srt
+open_with vim
+shell unzip TPPC-LP.zip 
+rename main.zip
+rename main.gz
+rename main.tex.gz
+mkdir A
 delete
-rename Marceline.jpg
-rename Marceline-Room.png

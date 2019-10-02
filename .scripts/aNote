@@ -9,22 +9,26 @@ fi
 
 add_note()
 {
-	NOTE=$1
-	shift
-	if [ $1 ]; then
-		TAG=$1
+	if ! [ "$1" = '' ]; then
+		NOTE=$1
 		shift
+		if [ $1 ]; then
+			TAG=$1
+			shift
+		else
+			TAG="geral"
+		fi
+	
+		if [ ! -f $NOTES_PATH.notes$TAG ]; then
+			touch $NOTES_PATH.notes$TAG
+		fi
+		read NOTE_NUMBER<<<$(awk 'END{print $1}' $NOTES_PATH.notes$TAG | sed s/~//g)
+		NOTE_NUMBER=$((NOTE_NUMBER+1))
+		DATE=`date +%Y-%m-%d`
+		echo "~$NOTE_NUMBER	$DATE	'$NOTE'">>$NOTES_PATH.notes$TAG
 	else
-		TAG="geral"
+		echo "No empty notes"
 	fi
-
-	if [ ! -f $NOTES_PATH.notes$TAG ]; then
-		touch $NOTES_PATH.notes$TAG
-	fi
-	read NOTE_NUMBER<<<$(awk 'END{print $1}' $NOTES_PATH.notes$TAG | sed s/~//g)
-	NOTE_NUMBER=$((NOTE_NUMBER+1))
-	DATE=`date +%Y-%m-%d`
-	echo "~$NOTE_NUMBER	$DATE	'$NOTE'">>$NOTES_PATH.notes$TAG
 }
 
 list_notes()
@@ -48,22 +52,25 @@ list_notes()
 
 filter_notes()
 {
-	if [ $1 ]; then
-		if [ $1 == -d ]; then
+	if [ $2 ]; then
+		if [ $2 == -d ]; then
 			WHICH_NOTES=".notesgeral";shift
 		else
-			WHICH_NOTES=".notes$1"; shift
+			WHICH_NOTES=".notes$2"; shift
+			if test -f $NOTES_PATH$WHICH_NOTES; then
+				cat $NOTES_PATH$WHICH_NOTES | grep "$1" | awk -F "\t" '{print $1. "\033[34m "$3"\033[0m"}'
+				shift
+			else
+				echo 'No Notes'
+			fi
 		fi
 	else
-		WHICH_NOTES=.notes$(ls -a $NOTES_PATH | grep ^.notes | awk -f " " '{print substr($1,7)}'| dmenu -l 10)
+		for list in $(ls -a $NOTES_PATH | grep .notes); do
+			cat $NOTES_PATH$WHICH_NOTES | grep "$1" | awk -F "\t" '{print $1. "\033[34m "$3"\033[0m"}'
+			shift
+		done
 	fi
 
-	if test -f $NOTES_PATH$WHICH_NOTES; then
-		cat $NOTES_PATH$WHICH_NOTES | grep "$1" | awk -F "\t" '{print $1. "\033[34m "$3"\033[0m"}'
-		shift
-	else
-		echo 'No Notes'
-	fi
 }
 
 show_help()
@@ -89,10 +96,12 @@ remove_note()
 
 	if test -f "$NOTES_PATH$WHICH_NOTES"; then
 		NOTE=$(cat $NOTES_PATH$WHICH_NOTES | sed "s/	/ /g" | dmenu -l 10 | awk -F " " '{print $1}')
-		sed -i '/'"$NOTE"'/d' $NOTES_PATH$WHICH_NOTES
-		ALL_NOTES=$(cat $NOTES_PATH$WHICH_NOTES)
-		if [ ! "$ALL_NOTES" ]; then
-			rm $NOTES_PATH$WHICH_NOTES
+		if [ ! "$NOTE" = "" ];then
+			sed -i '/'"$NOTE"'/d' $NOTES_PATH$WHICH_NOTES
+			ALL_NOTES=$(cat $NOTES_PATH$WHICH_NOTES)
+			if [ ! "$ALL_NOTES" ]; then
+				rm $NOTES_PATH$WHICH_NOTES
+			fi
 		fi
 	else
 		echo 'No Notes'
@@ -102,7 +111,7 @@ remove_note()
 case $1 in
 	-l) shift; list_notes "$1"
 		;;
-	-f) shift; filter_notes "$1"
+	-f) shift; filter_notes "$1" "$2"
 		;;
 	-h) show_help
 		;;

@@ -1,4 +1,4 @@
 #!/bin/bash
 
-man -k . | dmenu -l 30 | awk '{print $1}' | xargs -r man -Tpdf| zathura -
+pacman -Q | awk '{print $1}' | dmenu -l 30 | xargs -r man -Tpdf| zathura -
 
