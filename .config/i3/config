@@ -30,15 +30,15 @@ gaps outer 10
 smart_gaps on
 
 #assign of windows to desktops
-assign [class="Firefox"] 2
+assign [class="firefox"] 2
 assign [class="qutebrowser"] 2
 assign [class="Gimp"] 3
 assign [class="Krita"] 3
 assign [class="Telegram"] 4
-assign [class="Transmission-gtk"] 6
+assign [class="Transmission-gtk"] 5
 assign [class="GitKraken"] 6
 for_window [class="Spotify"] move to workspace 10
-for_window [class="St" instance="floating-term"] floating enable
+for_window [class="St" instance="floating-term"] move scratchpad
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -58,16 +58,17 @@ font pango:Noto Sans Mono 8
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+# Key bindings handled in sxhkd
 # start a terminal
-bindsym $mod+Return exec $term
+#bindsym $mod+Return exec $term
 # start a terminal floating
-bindsym $mod+Shift+Return exec $term -n floating-term
+bindsym $mod+Shift+Return scratchpad show
 
 # kill focused window
-bindsym $mod+Shift+q kill
+bindsym $mod+Shift+c kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+bindsym $mod+p exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -75,35 +76,36 @@ bindsym $mod+d exec dmenu_run
 
 #custom commands
 exec_always --no-startup-id exec xset -dpms s off
-bindsym $mod+m exec spotify
-bindsym $mod+q exec qutebrowser
-bindsym $mod+f exec firefox
-bindsym $mod+r exec $term -e ranger
-bindsym $mod+b exec lockscreen
-bindsym $mod+F1 exec gitkraken
+#bindsym $mod+m exec spotify
+#bindsym $mod+q exec qutebrowser
+#bindsym $mod+f exec firefox
+#bindsym $mod+r exec $term -e ranger
+#bindsym $mod+b exec lockscreen
+#bindsym $mod+F1 exec gitkraken
+bindsym $mod+u exec $term -n floating-term
 bindsym $mod+g gaps inner current set 0; gaps outer current set 0
 bindsym $mod+Shift+g gaps inner current set 15; gaps outer current set 10
-bindsym $mod+Shift+s exec powermenu
-bindsym $mod+n exec ~/.scripts/shownotes
-bindsym $mod+p exec pcmanfm
+#bindsym $mod+Shift+s exec powermenu
+#bindsym $mod+n exec ~/.scripts/shownotes
+#bindsym $mod+p exec pcmanfm
 
     # Pulse Audio controls
-    bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
-    bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
-    bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+    #bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+    #bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+    #bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 
 
 
     # Sreen brightness controls
-    bindsym XF86MonBrightnessUp exec brightnessctl s 5+ # increase screen brightness
-    bindsym XF86MonBrightnessDown exec brightnessctl s 5- # decrease screen brightness
-
+    #bindsym XF86MonBrightnessUp exec brightnessctl s 5+ # increase screen brightness
+    #bindsym XF86MonBrightnessDown exec brightnessctl s 5- # decrease screen brightness
+#
 
     # Media player controls
 	# Supports spotify
-	bindsym XF86AudioPlay exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
-	bindsym XF86AudioNext exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
-	bindsym XF86AudioPrev exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
+	#bindsym XF86AudioPlay exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+	#bindsym XF86AudioNext exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
+	#bindsym XF86AudioPrev exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
     #bindsym XF86AudioPlay exec playerctl play-pause
     #bindsym XF86AudioNext exec playerctl next
     #bindsym XF86AudioPrev exec playerctl previous
@@ -185,11 +187,11 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 # reload the configuration file
-bindsym $mod+Shift+c reload
+bindsym $mod+Shift+q reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "i3-msg exit"
 
 bindsym XF86WLAN exec $netrefresh
 
@@ -221,18 +223,20 @@ bindsym $mod+c mode "resize"
 
 bar {
 
+	status_command i3status --config ~/.config/i3status/config
+
 	#i3bar_command  
 	position top
-	tray_output primary
-	separator_symbol "|"
-	strip_workspace_numbers yes
-	binding_mode_indicator yes
+	#tray_output primary
+	#separator_symbol "|"
+	#strip_workspace_numbers yes
+	#binding_mode_indicator yes
 
-	colors {
-		background #00000000
-		statusline #ffffff
+	#colors {
+		#background #00000000
+		#statusline #ffffff
 		#focused_workspace #00fff9 
 		#inactive_workspace #b4b4b4
 		#urgent_workspace #f02a2a
-	}
+	#}
 }

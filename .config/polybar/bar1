@@ -48,7 +48,7 @@ font-2 = "DejaVu Sans:size=10;0"
 font-3 = "Wuncon Siji:pixelsize=7;1"
 font-size = 2
 
-modules-left = i3 volume
+modules-left = bspwm volume
 modules-center = xwindow
 modules-right = xkeyboard battery date powermenu
 
@@ -57,7 +57,7 @@ tray-padding = 2
 ;tray-transparent = true
 ;tray-background = #0063ff
 
-;wm-restack = bspwm
+wm-restack = bspwm
 ;wm-restack = i3
 
 ;override-redirect = true
@@ -132,6 +132,12 @@ label-empty-padding = 2
 
 [module/i3]
 type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+
+[module/bspwm]
+type = internal/bspwm
 format = <label-state> <label-mode>
 index-sort = true
 wrapping-scroll = false

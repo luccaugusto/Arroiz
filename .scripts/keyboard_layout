@@ -1,3 +1,12 @@
 #!/bin/bash
-setxkbmap -layout us,br
+
+CONNECTED=$(ls /dev/input/by-id | grep kbd)
+
+if [ "$CONNECTED" ]
+then
+	setxkbmap -layout br,us
+else
+	setxkbmap -layout us,br
+fi
+
 setxkbmap -option grp:alt_shift_toggle

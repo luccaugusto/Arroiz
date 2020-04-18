@@ -1,3 +1,4 @@
+alias please="sudo"
 alias autoremove="pacman -Rns $(pacman -Qtdq)"
 alias update="sudo pacman -Syyud; packer -Syu"
 alias ls='ls --color=auto'
@@ -12,6 +13,7 @@ alias updatehome=". /home/lucca/.scripts/synchome"
 alias databackup=". /home/lucca/.scripts/backup"
 alias anote=". /home/lucca/.scripts/aNote"
 alias P="sudo pacman"
+alias p="pacman"
 alias v="vim"
 alias bat="cat /sys/class/power_supply/BAT0/capacity"
 alias q="exit"
@@ -22,4 +24,5 @@ alias pms="python manage.py shell"
 alias pmr="python manage.py runserver"
 alias migrate="python manage.py makemigrations; python manage.py migrate"
 alias beep='paplay $BEEP'
-alias please='sudo'
+alias gmspdf='groff -ms -Tpdf'
+alias umount_phone='fusermount -u'

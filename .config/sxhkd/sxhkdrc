@@ -1,3 +1,7 @@
+#------------------------------------------------
+#-- WM INDEPENDENT HOTKEYS:
+#------------------------------------------------
+
 #Sound commands
 #increase sound volume
 XF86AudioRaiseVolume
@@ -32,11 +36,12 @@ XF86AudioPrev
 	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
 
 
-#Custom bindings
-#super + s
-	#spotify
-super + q
-	qutebrowser
+super + s
+	spotify
+super + Escape
+	pkill -USR1 -x sxhkd
+super + Return
+	$TERMINAL
 super + f
 	firefox
 super + r
@@ -47,3 +52,143 @@ super + b
 	lockscreen
 super + shift + s
 	powermenu
+super + p
+	dmenu_run
+
+###------------------------------------------------
+###-- BSPWM HOTKEYS:
+###------------------------------------------------
+###-- CLOSE AND KILL WINDOW:
+###------------------------------------------------
+#
+#super + shift + c
+#	bspc node -k
+#
+##------------------------------------------------
+##-- CYCLE LAYOUT:
+##------------------------------------------------
+#
+#super + m
+#	bspc desktop -l next
+#
+##------------------------------------------------
+##-- BALANCE WINDOWS - SAME AREA:
+##------------------------------------------------
+#
+#super + shift + b
+#	bspc desktop -B
+#
+##------------------------------------------------
+##-- SET WINDOW FLAGS:
+##------------------------------------------------
+#
+#super + {t,shift + t,s,f}
+#	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+#
+##scratchpad
+#super + u
+#        scratchpad.sh dropdown
+#
+##------------------------------------------------
+##-- SWAP DESKTOPS WITH LAST:
+##------------------------------------------------
+#
+#super + apostrophe
+#	bspc window -s last
+#
+#super + {o,i}
+#	bspc wm -h off; \
+#	bspc node {older,newer} -f; \
+#	bspc wm -h on
+#
+#super + {grave,Tab}
+#	bspc {window,desktop} -f last
+#
+#super + y
+#	bspc window -w last.manual
+#
+# #focus or send to the given desktop
+#super + {_,shift + }{1-9,0}
+#	bspc {desktop -f,node -d} '^{1-9,10}'
+#
+##-------------------------------------------------
+##-- SWAP CURRENT WINDOW WITH THE BIGGEST ON SCREEN:
+##-------------------------------------------------
+#
+#super + n
+#	bspc node -s biggest
+#
+## focus the node in the given direction
+#super + {_,shift + }{h,j,k,l}
+#	bspc node -{f,s} {west,south,north,east}
+#
+## focus the next/previous node in the current desktop
+#super + {_,shift + }c
+#	bspc node -f {next,prev}.local
+#
+#
+##------------------------------------------------
+##-- ROTATE TREE:
+##------------------------------------------------
+#
+#super + shift + r  
+#	bspc desktop -R 90
+#
+##------------------------------------------------
+##-- CYCLE WINDOW FORWARD OR BACKWARD:
+##------------------------------------------------
+#
+#super + {_,shift + }c
+#        bspc node -f {next,prev}.local
+#
+#super + {a,d}
+#	bspc desktop -f {prev,next}
+#
+##------------------------------------------------
+##-- SELECT WHERE TO SPLIT:
+##------------------------------------------------
+#
+#super + ctrl + {Left,Down,Up,Right}
+#	bspc window -p {left,down,up,right}
+#
+##------------------------------------------------
+##-- CANCEL PRESELECT SPLIT:
+##------------------------------------------------
+#
+#super + {Left,Down,Up,Right}
+#	bspc node -v {-20 0,0 20,0 -20,20 0}
+#
+#
+##------------------------------------------------
+##-- SEND WINDOW TO DESKTOP:
+##------------------------------------------------
+#
+#super + {_,shift + }{1-9,0}
+#	bspc {desktop -f,node -d} '^{1-9,10}'
+#
+#
+##------------------------------------------------
+##-- MOVER E REDIMENSIONAR JANELAS COM O MOUSE:
+##------------------------------------------------
+#
+#~button1
+#	bspc pointer -g focus
+#
+#super + button{1-3}
+#	bspc pointer -g {move,resize_side,resize_corner}
+#
+#super + !button{1-3}
+#	bspc pointer -t %i %i
+#
+#super + @button{1-3}
+#	bspc pointer -u
+#
+## move floating window
+#super + {_,shift + }{j,k,i,l}
+#	bspc window -{f,s} {left,down,up,right}
+##------------------------------------------------
+##-- Quit bspwm:
+##------------------------------------------------
+#super + alt + {q,r}
+#	bspc {quit,wm -r}
+#

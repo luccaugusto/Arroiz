@@ -53,6 +53,8 @@
 	set backupdir=/tmp    "Save backup files in tmp directory
 	"set hlsearch
 	set wildmode=longest,list,full
+	set ignorecase "search is case insensitive
+	set smartcase "case sensitive search in case the is an uppercase character in search
 	
 	"Remap j and k so i can navigate on lines that break
 	nnoremap j gj
@@ -115,6 +117,7 @@
 	au FileType java map <buffer> <F10> :w<CR>:!javac<Space>%<CR>
 	au FileType java map <buffer> <F7> :!java<Space>'%:t:r'<CR>
 	au FileType c map <buffer> <F10> :w<CR>:!gcc<Space>-o<Space>expand('%:t:r').out<Space>expand('%:t')<CR>
+	au FileType sh inoremap [ [ <++> ]<++><Esc>3h?<++><CR>4xi
 
 	"Some scripts to make things quicker when creating specific files
 	au FileType c map <buffer> <F9> :Bc<CR>
@@ -126,7 +129,7 @@
 		normal! o#include <stdio.h>
 		normal! o
 		normal! oint main(){
-		normal! o
+		normal! oreturn 0;
 		normal! o}
 	endfunction
 

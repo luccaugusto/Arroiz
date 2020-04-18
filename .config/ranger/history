@@ -1,50 +1,50 @@
-shell unzip Attachments-django.zip 
-mkdir requirements
-rename base.py
-mkdir settings
-touch __init__.py
-shell vim urls.py
-touch admin.py
-shell vim validators.py
+rename About.Time.2013.720p.BluRay.x264.YIFY.srt
 shell sxiv *
-find d
-search sounds
-rename batwarn
-search x11
-search key
-shell chmod +x displays
-rename monitors
-mkdir 
-shell vim q3.in
-mkdir LP
-shell vim q3.c
-shell unzip syncthing
-shell unzip sf_movie_poster.zip
-search fonts
-search mine
-search shiginima
-j
-shell sudo rm /mnt/IMG_2270.JPG
-
-shell vim TTPc.txt
-shell sent TTPc.txt
-shell sent -i TTPc.txt
-shell gcc ir_vir.cpp
-shell unzip TLauncher-2.66.zip
-shell sudo java -jar TLauncher-2.66.jar
-shell extract 220971_trans.rar
-mkdir FTC
-shell extract ilovepdf_converted.zip
-shell unzip land.of.the.lost.\(2009\).pob.1cd.\(5113284\).zip 
-rename Land of the Lost 2009 BRRip 720p x264-MgB-por.txt
-rename Land of the Lost 2009 BRRip 720p x264-MgB-por.srt
-rename Land.of.the.Lost.2009.1080p.BrRip.x264.YIFYpt.srt
-rename Land.of.the.Lost.2009.1080p.BrRip.x264.YIFYen.srt
-rename Land.of.the.Lost.2009.1080p.BrRip.x264.YIFY.srt
+shell virtualenv ven
+open_with vim&
+mkdir scr
+touch cria_bd.py
 open_with vim
-shell unzip TPPC-LP.zip 
-rename main.zip
-rename main.gz
-rename main.tex.gz
-mkdir A
+mkdir erased
+shell unzip *
+shell unzip Archive-1ed9.zip
+shell unzip Archive-2b2b.zip
+shell unzip Archive-65c2.zip
+shell unzip Archive-82a7.zip
+shell unzip Archive-99f1.zip
+shell unzip Archive-601f.zip
+shell unzip Archive-5326.zip
+shell unzip Archive-a8c8.zip
+shell git pull
+open_with j
+rename LiberaRego.kra
+shell unzip the.house.that.jack.built.\(2018\).pob.1cd.\(7582416\).zip
+open_with 0
+rename PendulumGuy2.kra
+rename PendulumGuy.kra
+rename PendulumGuy.kra~
+find mal
+rename Mor-tovivo.png
+rename Downloads
+search lista
+mkdir 587488
+shell zip 587488
+open_with 
+shell ziptool 
+shell java Start &
+shell git commit -a; git push
+rename nostradamus.avi
+rename nostradamus.gif
+rename nostradamus.mp4
+rename nostradamus.srt
+search kra
+search Pool
+rename The.Lobster.2015.1080p.BluRay.x264-[YTS.AG].mp4.part
+rename The.Lobster.2015.1080p.BluRay.x264-[YTS.AG].m.part
+rename The.Lobster.2015.srt
+rename TheLobster2015.srt
+rename The.Lobster.2015.1080p.BluRay.x264-[YTS.AG].srt
 delete
+open_with krita
+open_with klq
+shell setsid 

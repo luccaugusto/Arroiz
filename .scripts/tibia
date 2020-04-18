@@ -1,4 +1,0 @@
-#!/bin/bash
-TIBIA='/home/lucca/Downloads/Tibia/'
-cd $TIBIA
-./start-tibia-launcher.sh

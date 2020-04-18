@@ -2,4 +2,8 @@
 
 [ -f ~/.xprofile ] && . ~/.xprofile
 
-exec dwm
+#turn numlock on
+numlockx
+
+#exec bspwm -c ~/.config/bspwm/bspwmrc
+exec i3

@@ -1,3 +1,0 @@
-#!/bin/bash
-cd $HOME/Downloads/SummertimeSaga-0-17-5-pc/
-./SummertimeSaga.sh

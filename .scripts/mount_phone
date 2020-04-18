@@ -1,0 +1,15 @@
+#!/bin/bash
+
+dev=$(simple-mtpfs -l | dmenu -l 3)
+dev=${dev:0:1}
+
+if [ ! $dev ]
+then
+	echo "No devices to mount"
+	exit 1
+elif [ ! "$(ls cell)" ]
+then
+	simple-mtpfs -o default_permissions --device "$dev" $HOME/cell/
+else
+	echo "cell already mounted"
+fi

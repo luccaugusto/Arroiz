@@ -7,9 +7,8 @@ compton &
 nm-applet &
 unclutter &
 keyboard_layout &
-dwmbar &
 sxhkd &
 transmission-gtk &
-batwarn &
+dwmbar &
 feh --bg-scale ~/.config/wall.jpg 
 shownotes

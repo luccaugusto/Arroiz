@@ -1,0 +1,106 @@
+#!/bin/bash 
+
+
+#!/bin/bash
+
+
+#soma hora 'h1' na hora 'h2'
+soma_hora()
+{
+    h1="$1";shift
+    h2="$1";shift
+    min1=${h1:3:2}
+    min2=${h2:3:2}
+    h1=${h1:0:2}
+    h2=${h2:0:2}
+
+    mins=$((min1 + min2))
+    hs=$((h1+h2))
+
+    if [ "$mins" -gt 59 ]
+    then
+        hs=$(( hs + 1 ))
+        mins=$(( mins % 60 ))
+    fi
+
+    if [ $mins -lt 10 ]
+    then
+        mins="0$mins"
+    fi
+    if [ $hs -lt 10 ]
+    then
+        hs="0$hs"
+    fi
+
+    echo "$hs:$mins"
+}
+
+
+if [ "$1" ] && [ "$2" ]; then
+soma_hora "$1" "$2"
+else
+echo "Comando: subtrai_data data1 data2\n"
+fi
+
+
+
+min2hor()
+{
+	if [ "$1" ]; then
+    	T="$1";shift
+    	H=$((T / 60))
+    	M=$((T % 60))
+
+    	echo "$H:$M"
+	else
+		show_help
+	fi
+}
+
+#subtrai data $2 da data $1
+subtrai_data() 
+{
+	if [ "$1" ] && [ "$2" ]; then
+		d1=$1; shift
+		d2=$1; shift
+		min2=${d2:3:2}
+		hor2=${d2:0:2}
+		min1=${d1:3:2}
+		hor1=${d1:0:2}
+
+		if [ $min2 -gt $min1 ]; then
+			hor1=$((hor1 - 1))
+			min1=$((min1 + 60))
+		fi
+
+		mins=$((min1 - min2))
+		hs=$((hor1 - hor2))
+
+		total=$((hs*60 + mins))
+
+		echo $total
+	else
+		show_help
+	fi
+}
+
+show_help()
+{
+	echo "data_hora option [values]"
+	echo "-s H1:M1 H2:M2: subtrai H1:M1 de H2:M2"
+	echo "-m min: converter min para HH:MM"
+	echo "-a  H1:M1 H2:M2: adiciona H1:M1 em H2:M2"
+}
+
+
+
+case $1 in
+	-s) shift; subtrai_data "$1" "$2"
+		;;
+	-m) shift; min2hor "$1"
+		;;
+	-a) shift; soma_hora "$1" "$2"
+		;;
+	*) show_help
+		;;
+esac

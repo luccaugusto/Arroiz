@@ -1,0 +1,36 @@
+#!/bin/bash
+
+if [ ! -z /tmp/.login_time ]; then
+	touch /tmp/.login_time
+fi
+if [ ! -z /tmp/faltam ]; then
+	touch /tmp/faltam
+fi
+
+login=$(date +%H:%M) 
+echo "$login" > /tmp/.login_time
+
+agr=$(date +%H:%M)
+T=240 #tempo em minutos até a saída
+
+while [ $T -gt 0 ]
+do
+	if [ $T -gt 15 ]; then
+		sleep 15m
+	else
+		notify-send "Faltam $T minutos para cumprir o expediente"
+		sleep "$T"m
+	fi
+	ocioso="$(cat /tmp/ocioso)"
+	T=$((T - 15 + ocioso))
+	echo 0 > /tmp/ocioso #ja contabilizou o tempo ocioso, reseta para 0
+    echo $T >/tmp/faltam
+	agr=$(date +%H:%M)
+    RUSH_HOUR="17:30"
+    # alerta quando falta pouco pro transito ficar ruim
+	if [ $(data_hora -s $RUSH_HOUR $agr) < 30 ]; then
+        notify-send "Ta quase na hora do RUSH, cuidado"
+    fi
+done
+notify-send "Tá liberado parceiro"
+

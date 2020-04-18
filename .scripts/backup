@@ -4,7 +4,7 @@
 #Takes a directory as parameter to back files up to
 
 #define the files to be backed up
-FILES_LOCATION=("/home/lucca/Documents/" "/home/lucca/Downloads/" "/home/lucca/Pictures/" "/home/lucca/Music/")
+FILES_LOCATION=("/home/lucca/Documents/" "/home/lucca/Downloads/" "/home/lucca/Pictures/" "/home/lucca/music/")
 
 if test -z "$1";then
 	echo "Inform the directory to back files up to."
@@ -29,5 +29,7 @@ else
 		tar -cpzPvf $HD/backup-$DATE.tar.gz "${FILES_LOCATION[@]}"
 	else
 		echo "Not enough free space on disk, backup failed."
+		echo "Folder size: $folder_size"
+		echo "Free space: $hd_space"
 	fi
 fi

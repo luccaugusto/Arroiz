@@ -1,6 +1,0 @@
-#!/bin/bash
-
-#runs all sync scripts
-syncrice
-syncwall
-syncsuck

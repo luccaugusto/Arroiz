@@ -1,0 +1,20 @@
+#!/bin/bash
+
+min_a=10
+min_b=10
+[ $1 ] && min_a=$1
+[ $2 ] && min_b=$2
+
+a_b=0
+
+t_a=$((min_a * 60))
+t_b=$((min_b * 60))
+
+notify-send "Inicio"
+while true; do
+	[ $a_b ] && sleep "$t_a" && notify-send "Passaram $min_a minutos"
+	[ ! $a_b ] && sleep "$t_b" && notify-send "Passaram $min_b minutos"
+	#beep
+	a_b=!$a_b
+done
+

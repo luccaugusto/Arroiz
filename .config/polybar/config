@@ -29,7 +29,7 @@ font-3 = FontAwesome 5 Free Solid:style=Solid:size=10;0
 font-4 = MaterialIcons:size=10;0
 font-5 = Termsynu:size=8:antialias=false;-2
 
-modules-left = i3 volume backlight menu-apps
+modules-left = bspwm volume backlight menu-apps
 modules-center = xwindow
 modules-right = xkeyboard battery date wireless-network
 
@@ -136,6 +136,55 @@ password = mysecretpassword
 ; Seconds to sleep between progressbar/song timer sync
 ; Default: 1
 ;interval = 2
+
+[module/bspwm]
+type = internal/i3
+
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+ws-icon-4 = 5;5
+ws-icon-5 = 6;6
+ws-icon-6 = 7;7
+ws-icon-7 = 8;8
+ws-icon-8 = 9;9
+ws-icon-9 = 10;
+ws-icon-default = 
+
+format = <label-state> <label-mode>
+
+label-dimmed-underline = ${BAR.background}
+
+label-mode = %mode%
+label-mode-padding = 3
+
+label-focused = %icon%
+label-focused-foreground = #0099FF
+label-focused-background = #000000
+;label-focused-underline = #c9665e
+;label-focused-font = 7
+label-focused-padding = 2
+
+label-occupied = %icon%
+label-occupied-foreground = #dd
+;label-occupied-underline = #666
+label-occupied-font = 4
+label-occupied-padding = 2
+
+label-urgent = %icon%
+label-urgent-foreground = #000000
+label-urgent-background = #bd2c40
+;label-urgent-underline = #9b0a20
+label-urgent-font = 4
+label-urgent-padding = 2
+
+label-unfocused = %icon%
+label-unfocused-foreground = #55
+label-unfocused-font = 4
+label-unfocused-padding = 2
+
+
 
 [module/i3]
 type = internal/i3

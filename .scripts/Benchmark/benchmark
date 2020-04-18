@@ -1,0 +1,56 @@
+#!/bin/bash
+
+dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+echo $dir
+
+echo "Matrix multiplication test"
+[ ! -f "$dir/mm" ] && echo "Compiling matrix mutiplication test" && gcc -o "$dir/mm" $dir/mm.c
+[ ! -f "$dir/mm_p" ] && echo "Compiling parallel matrix mutiplication test" && gcc -o "$dir/mm_p" $dir/mm.c -fopenmp
+[ ! -f "$dir/mm_g" ] && echo "Compiling GPU matrix mutiplication test" && gcc -o "$dir/mm_g" $dir/mm_g.c -fopenmp
+echo "Non-Parallel"
+time $dir/mm
+echo ""
+echo "Parallel"
+time $dir/mm_p
+echo ""
+echo "GPU"
+time $dir/mm_g
+
+echo ""
+echo "Floating point calculation performance test"
+echo "Sum 0 to 0x7fffff on 0.1 steps"
+[ ! -f "$dir/fp_test" ] && echo "Compiling float test..." && gcc -o "$dir/fp_test" $dir/fp_test.c -fopenmp
+echo "Running..."
+time $dir/fp_test
+
+echo ""
+echo "HD Write Test"
+dd bs=16k count=102400 oflag=direct if=/dev/zero of=test_data
+
+echo ""
+echo "HD Read test"
+dd bs=16K count=102400 iflag=direct if=test_data of=/dev/null
+
+echo ""
+echo "Remove test_data"
+rm $dir/test_data
+echo ""
+echo "RAM speed test"
+
+mkdir $dir/RAM_test
+
+sudo mount tmpfs -t tmpfs $dir/RAM_test/  # mount the tmpfs filesystem
+
+cd $dir/RAM_test
+
+echo ""
+echo "Write test"
+dd if=/dev/zero of=data_tmp bs=1M count=512  # write to RAM test
+
+echo ""
+echo "Read test"
+dd if=data_tmp of=/dev/null bs=1M count=512
+
+cd $dir
+sudo umount $dir/RAM_test
+rm -rf RAM_test
