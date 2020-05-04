@@ -5,39 +5,44 @@
 #Sound commands
 #increase sound volume
 XF86AudioRaiseVolume
-	pactl set-sink-volume 0 +5%; reloadbar
+	pactl set-sink-volume 0 +5%; #reloadbar
 
 #decrease sound volume
 XF86AudioLowerVolume 
-	pactl set-sink-volume 0 -5%; reloadbar
+	pactl set-sink-volume 0 -5%; #reloadbar
 
 # mute sound
-XF86AudioMute 
-	pactl set-sink-mute 0 toggle; reloadbar
+XF86AudioMute
+	pactl set-sink-mute 0 toggle; #reloadbar
 
 
 #Screen Brightness controls
 # increase screen brightness
 XF86MonBrightnessUp 
-	brightnessctl s 5+; reloadbar
+	brightnessctl s 5%+;  #reloadbar
 
 # decrease screen brightness
 XF86MonBrightnessDown 
-	brightnessctl s 5-; reloadbar
+	brightnessctl s 5%-; # reloadbar
 
 # Media player controls
 # Supports spotify
 XF86AudioPlay 
 	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
-
 XF86AudioNext 
 	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
 XF86AudioPrev 
 	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
 
+## t440s does not have XF86 keys for audio control so these are the replace bindings
+super + ctrl + p 
+	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+super + ctrl + ] 
+	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
+super + ctrl + [ 
+	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
 
-super + s
-	spotify
+#reload sxhkd
 super + Escape
 	pkill -USR1 -x sxhkd
 super + Return
@@ -46,149 +51,134 @@ super + f
 	firefox
 super + r
 	$TERMINAL -e ranger
-super + n
+super + shift + n
 	shownotes
 super + b
 	lockscreen
 super + shift + s
 	powermenu
 super + p
-	dmenu_run
+	dmen
 
-###------------------------------------------------
-###-- BSPWM HOTKEYS:
-###------------------------------------------------
-###-- CLOSE AND KILL WINDOW:
-###------------------------------------------------
-#
-#super + shift + c
-#	bspc node -k
-#
 ##------------------------------------------------
-##-- CYCLE LAYOUT:
+##-- BSPWM HOTKEYS:
 ##------------------------------------------------
-#
-#super + m
-#	bspc desktop -l next
-#
+##-- CLOSE AND KILL WINDOW:
 ##------------------------------------------------
-##-- BALANCE WINDOWS - SAME AREA:
-##------------------------------------------------
-#
-#super + shift + b
-#	bspc desktop -B
-#
-##------------------------------------------------
-##-- SET WINDOW FLAGS:
-##------------------------------------------------
-#
-#super + {t,shift + t,s,f}
-#	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
-#
-##scratchpad
-#super + u
-#        scratchpad.sh dropdown
-#
-##------------------------------------------------
-##-- SWAP DESKTOPS WITH LAST:
-##------------------------------------------------
-#
-#super + apostrophe
-#	bspc window -s last
-#
-#super + {o,i}
-#	bspc wm -h off; \
-#	bspc node {older,newer} -f; \
-#	bspc wm -h on
-#
-#super + {grave,Tab}
-#	bspc {window,desktop} -f last
-#
-#super + y
-#	bspc window -w last.manual
-#
-# #focus or send to the given desktop
-#super + {_,shift + }{1-9,0}
-#	bspc {desktop -f,node -d} '^{1-9,10}'
-#
-##-------------------------------------------------
-##-- SWAP CURRENT WINDOW WITH THE BIGGEST ON SCREEN:
-##-------------------------------------------------
-#
-#super + n
-#	bspc node -s biggest
-#
-## focus the node in the given direction
-#super + {_,shift + }{h,j,k,l}
-#	bspc node -{f,s} {west,south,north,east}
-#
-## focus the next/previous node in the current desktop
-#super + {_,shift + }c
-#	bspc node -f {next,prev}.local
-#
-#
-##------------------------------------------------
-##-- ROTATE TREE:
-##------------------------------------------------
-#
-#super + shift + r  
-#	bspc desktop -R 90
-#
-##------------------------------------------------
-##-- CYCLE WINDOW FORWARD OR BACKWARD:
-##------------------------------------------------
-#
-#super + {_,shift + }c
-#        bspc node -f {next,prev}.local
-#
-#super + {a,d}
-#	bspc desktop -f {prev,next}
-#
-##------------------------------------------------
-##-- SELECT WHERE TO SPLIT:
-##------------------------------------------------
-#
-#super + ctrl + {Left,Down,Up,Right}
-#	bspc window -p {left,down,up,right}
-#
-##------------------------------------------------
-##-- CANCEL PRESELECT SPLIT:
-##------------------------------------------------
-#
-#super + {Left,Down,Up,Right}
-#	bspc node -v {-20 0,0 20,0 -20,20 0}
-#
-#
-##------------------------------------------------
-##-- SEND WINDOW TO DESKTOP:
-##------------------------------------------------
-#
-#super + {_,shift + }{1-9,0}
-#	bspc {desktop -f,node -d} '^{1-9,10}'
-#
-#
-##------------------------------------------------
-##-- MOVER E REDIMENSIONAR JANELAS COM O MOUSE:
-##------------------------------------------------
-#
-#~button1
-#	bspc pointer -g focus
-#
+
+super + shift + c
+	bspc node -c
+
+#------------------------------------------------
+#-- CYCLE LAYOUT:
+#------------------------------------------------
+
+super + m
+	bspc desktop -l next
+
+#------------------------------------------------
+#-- BALANCE WINDOWS - SAME AREA:
+#------------------------------------------------
+
+super + shift + b
+	bspc node any -B
+
+#------------------------------------------------
+#-- SET WINDOW FLAGS:
+#------------------------------------------------
+
+super + {t,shift + t,s,shift + f}
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+#scratchpad
+super + u
+    scratchpad dropdown
+
+#------------------------------------------------
+#-- SWAP DESKTOPS WITH LAST:
+#------------------------------------------------
+
+super + apostrophe
+	bspc window -s last
+
+super + {o,i}
+	bspc wm -h off; \
+	bspc node {older,newer} -f; \
+	bspc wm -h on
+
+super + {grave,Tab}
+	bspc {window,desktop} -f last
+
+#-------------------------------------------------
+#-- SWAP CURRENT WINDOW WITH THE BIGGEST ON SCREEN:
+#-------------------------------------------------
+
+super + n
+	bspc node -s biggest
+
+# focus the node in the given direction
+super + {_,shift + }{h,j,k,l}
+	bspc node -{f,s} {west,south,north,east}
+	
+#------------------------------------------------
+#-- ROTATE TREE:
+#------------------------------------------------
+
+super + shift + r  
+	bspc node last -R 90
+
+#------------------------------------------------
+#-- CYCLE WINDOW FORWARD OR BACKWARD:
+#------------------------------------------------
+
+super + {_,ctrl + }c
+        bspc node -f {next,prev}.local
+
+#------------------------------------------------
+#-- SELECT WHERE TO SPLIT:
+#------------------------------------------------
+
+super + ctrl + {h,j,k,l}
+	bspc node focused -p {west,south,north,east}
+
+#------------------------------------------------
+#-- CANCEL PRESELECT SPLIT:
+#------------------------------------------------
+
+super + {Left,Down,Up,Right}
+	bspc node focused -p {~west,~south,~north,~east}
+
+
+#------------------------------------------------
+#-- SEND WINDOW TO DESKTOP:
+#------------------------------------------------
+
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
+
+
+#------------------------------------------------
+#-- MOVER E REDIMENSIONAR JANELAS COM O MOUSE:
+#------------------------------------------------
+
+~button1
+	bspc pointer -g focus
+
 #super + button{1-3}
-#	bspc pointer -g {move,resize_side,resize_corner}
-#
+	#bspc pointer -g {move,resize_side,resize_corner}
+
 #super + !button{1-3}
-#	bspc pointer -t %i %i
-#
+	#bspc pointer -t %i %i
+
 #super + @button{1-3}
-#	bspc pointer -u
-#
-## move floating window
-#super + {_,shift + }{j,k,i,l}
-#	bspc window -{f,s} {left,down,up,right}
-##------------------------------------------------
-##-- Quit bspwm:
-##------------------------------------------------
-#super + alt + {q,r}
-#	bspc {quit,wm -r}
-#
+	#bspc pointer -u
+
+# move floating window
+super + {_,shift + }{j,k,i,l}
+	bspc window -{f,s} {left,down,up,right}
+#------------------------------------------------
+#-- Quit bspwm:
+#------------------------------------------------
+super + alt + {q,r}
+	bspc {quit,wm -r}
+

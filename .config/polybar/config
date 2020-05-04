@@ -6,7 +6,7 @@
 
 
 [bar/top]
-monitor = eDP-1
+monitor = eDP1
 width = 100%
 height = 25
 tray-position = right
@@ -16,22 +16,22 @@ background = #0000000
 foreground = #ccffff
 
 line-color = ${bar/top.background}
-line-size = 16
+line-size = 14
 
-spacing = 2
-padding-right = 5
-module-margin = 2
+spacing = 1
+padding-right = 1
+module-margin = 1
 
-font-0 = NotoSans-Regular:size=8;-1
+font-0 = Monaco:size=13;-1
 font-1 = FontAwesome 5 Free Regular:style=Regular:size=10;0
 font-2 = FontAwesome 5 Brands Regular:style=Regular:size=10;0
 font-3 = FontAwesome 5 Free Solid:style=Solid:size=10;0
 font-4 = MaterialIcons:size=10;0
-font-5 = Termsynu:size=8:antialias=false;-2
+font-5 = Termsynu:size=10:antialias=false;-2
 
-modules-left = bspwm volume backlight menu-apps
+modules-left = bspwm volume backlight memory
 modules-center = xwindow
-modules-right = xkeyboard battery date wireless-network
+modules-right = xkeyboard battery battery2 date wireless-network
 
 [bar/bottom]
 monitor = eDP-1
@@ -63,7 +63,7 @@ label = %title:0:30:...%
 
 [module/backlight]
 type = internal/backlight
-card = radeon_bl0
+card = intel_backlight
 format = <label>
 
 label =  %percentage%%
@@ -91,10 +91,47 @@ label =  %percentage%%
 ;bar-empty-font = 3
 ;bar-empty-foreground = #44
 
+[module/battery2]
+type = internal/battery
+full-at = 99
+
+battery = BAT1
+
+label-charging =  %percentage%%
+
+format-charging = <animation-charging> <label-charging>
+format-discharging = <ramp-capacity> <label-discharging>
+format-full = <ramp-capacity> <label-full>
+
+ramp-capacity-0 = 
+ramp-capacity-0-foreground = #f53c3c
+ramp-capacity-1 = 
+ramp-capacity-1-foreground = #ffa900
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+;bar-capacity-width = 10
+;bar-capacity-format = %{+u}%{+o}%fill%%empty%%{-u}%{-o}
+;bar-capacity-fill = █
+;bar-capacity-fill-foreground = #ddffffff
+;bar-capacity-fill-font = 3
+;bar-capacity-empty = █
+;bar-capacity-empty-font = 3
+;bar-capacity-empty-foreground = #44ffffff
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-framerate = 750
 
 [module/battery]
 type = internal/battery
 full-at = 99
+
+battery = BAT0
 
 label-charging =  %percentage%%
 
@@ -138,52 +175,113 @@ password = mysecretpassword
 ;interval = 2
 
 [module/bspwm]
-type = internal/i3
+type = internal/bspwm
 
-ws-icon-0 = 1;
-ws-icon-1 = 2;
-ws-icon-2 = 3;
-ws-icon-3 = 4;
-ws-icon-4 = 5;5
-ws-icon-5 = 6;6
-ws-icon-6 = 7;7
-ws-icon-7 = 8;8
-ws-icon-8 = 9;9
-ws-icon-9 = 10;
-ws-icon-default = 
+pin-workspaces = true
 
-format = <label-state> <label-mode>
+; Create click handler used to focus workspace
+; Default: true
+enable-click = true
 
-label-dimmed-underline = ${BAR.background}
+; Create scroll handlers used to cycle workspaces
+; Default: true
+enable-scroll = false
 
-label-mode = %mode%
-label-mode-padding = 3
+; Use fuzzy (partial) matching on labels when assigning 
+; icons to workspaces
+; Example: code;♚ will apply the icon to all workspaces 
+; containing 'code' in the label
+; Default: false
+fuzzy-match = false
 
-label-focused = %icon%
-label-focused-foreground = #0099FF
-label-focused-background = #000000
-;label-focused-underline = #c9665e
-;label-focused-font = 7
-label-focused-padding = 2
+; ws-icon-[0-9]+ = <label>;<icon>
+; Note that the <label> needs to correspond with the bspwm workspace name
+; Neither <label> nor <icon> can contain a semicolon (;)
 
-label-occupied = %icon%
-label-occupied-foreground = #dd
-;label-occupied-underline = #666
-label-occupied-font = 4
-label-occupied-padding = 2
+;ws-icon-0 = 1;1
+;ws-icon-1 = 2;2
+;ws-icon-2 = 3;3
+;ws-icon-3 = 4;4
+;ws-icon-4 = 5;5
+;ws-icon-5 = 6;6
+;ws-icon-6 = 7;7
+;ws-icon-7 = 8;8
+;ws-icon-8 = 9;9
+;ws-icon-9 = 10;10
+;ws-icon-default = 
 
-label-urgent = %icon%
+; Available tags:
+;   <label-monitor>
+;   <label-state> - gets replaced with <label-(focused|urgent|occupied|empty)>
+;   <label-mode> - gets replaced with <label-(monocle|tiled|fullscreen|floating|locked|sticky|private)>
+; Default: <label-state>
+format = <label-state>
+
+; Available tokens:
+;   %name%
+; Default: %name%
+label-monitor = %name%
+
+label-font = 4
+label-padding = 1
+label-margin = 0
+
+; If any values for label-dimmed-N are defined, the workspace/mode
+; colors will get overridden with those values if the monitor is out of focus
+; To only override workspaces in a specific state, use:
+;   label-dimmed-focused
+;   label-dimmed-occupied
+;   label-dimmed-urgent
+;   label-dimmed-empty
+label-dimmed-foreground = #555
+;label-dimmed-underline = ${bar/top.background}
+label-dimmed-focused-background = #f00
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+; Default: %icon%  %name%
+label-focused = %name%
+label-focused-foreground = #ff71ce
+;label-focused-background = #ff71ce
+;label-focused-underline = #fba922
+
+label-occupied = %name%
+label-accupied-foregound = #04cc80
+;label-occupied-underline = #555555
+
+; Default: %icon%  %name%
+label-urgent = %name%
 label-urgent-foreground = #000000
 label-urgent-background = #bd2c40
 ;label-urgent-underline = #9b0a20
-label-urgent-font = 4
-label-urgent-padding = 2
 
-label-unfocused = %icon%
-label-unfocused-foreground = #55
-label-unfocused-font = 4
-label-unfocused-padding = 2
+; Default: %icon%  %name%
+label-empty = %name%
+label-empty-foreground = #609fae 
 
+; The following labels will be used to indicate the layout/mode
+; for the focused workspace. Requires <label-mode>
+;
+; Available tokens:
+;   None
+;label-monocle = 
+;label-tiled = 
+;label-fullscreen = 
+;label-floating = 
+;label-pseudotiled = P
+;label-locked = 
+;label-locked-foreground = #bd2c40
+;label-sticky = 
+;label-sticky-foreground = #fba922
+;label-private = 
+;label-private-foreground = #bd2c40
+;label-marked = M
+
+; Separator in between workspaces
+label-separator = |
+label-separator-foreground = #ff71ce
 
 
 [module/i3]
@@ -203,7 +301,7 @@ ws-icon-default = 
 
 format = <label-state> <label-mode>
 
-label-dimmed-underline = ${BAR.background}
+label-dimmed-underline = ${root.background}
 
 label-mode = %mode%
 label-mode-padding = 3
@@ -274,7 +372,7 @@ type = internal/memory
 format = <label> <bar-used>
 label = RAM
 
-bar-used-width = 30
+bar-used-width = 15
 bar-used-foreground-0 = #aaff77
 bar-used-foreground-1 = #aaff77
 bar-used-foreground-2 = #fba922
@@ -286,7 +384,7 @@ bar-used-fill = ─
 bar-used-fill-font = 6
 bar-used-empty = ─
 bar-used-empty-font = 6
-bar-used-empty-foreground = #444444
+bar-used-empty-foreground = #a09fa3
 
 [module/wireless-network]
 type = internal/network
@@ -333,7 +431,7 @@ label-indicator-margin = 1
 label-indicator-background = #000000000
 
 [module/volume]
-type = internal/volume
+type = internal/alsa
 headphone-id = 9
 
 format-volume = <ramp-volume><label-volume>

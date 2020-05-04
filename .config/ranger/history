@@ -1,25 +1,3 @@
-rename About.Time.2013.720p.BluRay.x264.YIFY.srt
-shell sxiv *
-shell virtualenv ven
-open_with vim&
-mkdir scr
-touch cria_bd.py
-open_with vim
-mkdir erased
-shell unzip *
-shell unzip Archive-1ed9.zip
-shell unzip Archive-2b2b.zip
-shell unzip Archive-65c2.zip
-shell unzip Archive-82a7.zip
-shell unzip Archive-99f1.zip
-shell unzip Archive-601f.zip
-shell unzip Archive-5326.zip
-shell unzip Archive-a8c8.zip
-shell git pull
-open_with j
-rename LiberaRego.kra
-shell unzip the.house.that.jack.built.\(2018\).pob.1cd.\(7582416\).zip
-open_with 0
 rename PendulumGuy2.kra
 rename PendulumGuy.kra
 rename PendulumGuy.kra~
@@ -29,7 +7,6 @@ rename Downloads
 search lista
 mkdir 587488
 shell zip 587488
-open_with 
 shell ziptool 
 shell java Start &
 shell git commit -a; git push
@@ -44,7 +21,30 @@ rename The.Lobster.2015.1080p.BluRay.x264-[YTS.AG].m.part
 rename The.Lobster.2015.srt
 rename TheLobster2015.srt
 rename The.Lobster.2015.1080p.BluRay.x264-[YTS.AG].srt
-delete
-open_with krita
 open_with klq
 shell setsid 
+open_with 0
+open_with 
+shell zathura Lista\ 03\ -\ Recorte.pdf
+shell unzip COMPUTA-O-GR-FICA---Ci-ncia-da-Computa-o---CAMPUS-CORA-O-EUCAR-STICO---PMG---MANH---2020-1-2020-Apr-25_17-29-20.zip
+mkdir prova1
+shell unzip 1706695_trab.zip
+open_with krita
+rename couronaVAIRUS.jpg
+rename coronaVAIRUS
+burocrativo
+mkdir burocratico
+mkdir livros
+search pitada
+rename pos_raspagem.jpeg
+rename WhatsApp Image 2020-04-28 at 19.02.01.jpeg
+rename pre_raspagem.jpeg
+rename aula22-04.mp4
+rename Music
+rename music
+mkdir redes
+trabalhos
+mkdir trabalhos
+
+open_with gimp
+delete

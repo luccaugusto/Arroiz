@@ -135,7 +135,7 @@ dir_node_exact_matches = {
     'Documents'                        : '',
     'Downloads'                        : '',
     'Dropbox'                          : '',
-    'Music'                            : '',
+    'music'                            : '',
     'Pictures'                         : '',
     'Public'                           : '',
     'Templates'                        : '',

@@ -1,9 +1,6 @@
 #!/bin/bash
 
 [ -f ~/.xprofile ] && . ~/.xprofile
+[ -f ~/.Xresources ] && xrdb .Xresources
 
-#turn numlock on
-numlockx
-
-#exec bspwm -c ~/.config/bspwm/bspwmrc
-exec i3
+exec bspwm

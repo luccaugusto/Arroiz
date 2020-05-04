@@ -12,6 +12,7 @@ export PATH="$PATH:$HOME/.local/bin"
 export GROFF_ENCODING=UTF-8
 export PYTHONPATH="$PYTHONPATH:$HOME/Repos/S_Admin/meteflix/apps"
 export BEEP="/usr/share/sounds/freedesktop/stereo/complete.oga"
+export mygit='https://github.com/lrr68/'
 
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
@@ -20,4 +21,5 @@ export BEEP="/usr/share/sounds/freedesktop/stereo/complete.oga"
 # Start graphical server if bspwm not already running.
 if [[ "$(tty)" = "/dev/tty1" ]]; then
 	pgrep -x bspwm || exec startx
+	wal -n -i ~/repos/wallpapers/SynthGirl.jpg
 fi

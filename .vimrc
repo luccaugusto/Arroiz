@@ -21,6 +21,8 @@
 	syntax on
 	set smartindent
 	set breakindent
+
+	colorscheme wal
 	
 	"Split pannels in a more natural way
 	set splitbelow

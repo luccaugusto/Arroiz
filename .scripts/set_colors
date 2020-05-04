@@ -1,0 +1,6 @@
+#!/bin/bash
+
+FOTO="$HOME/repos/wallpapers/SynthGirl.jpg"
+[ $1 ] && FOTO="$1"
+
+wal -n -i "$FOTO"

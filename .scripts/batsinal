@@ -3,9 +3,23 @@
 #export DBUS_SESSION_BUS_ADDRESS eh da versao antiga que rodava no cron
 
 PERCENT=$(cat /sys/class/power_supply/BAT0/capacity)
+PERCENT1=$(cat /sys/class/power_supply/BAT1/capacity)
 STATUS=$(cat /sys/class/power_supply/BAT0/status)
-if [ $PERCENT -lt 5 ] && [ $STATUS == 'Discharging' ]; then
-	beep
-	export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus &&
-	notify-send -u critical "Battery low" "Battery at $PERCENT"
+STATUS1=$(cat /sys/class/power_supply/BAT1/status)
+
+
+FINAL_STATUS=''
+if [  $STATUS == 'Discharging' ] || [ $STATUS1 == 'Discharging' ]; then
+	FINAL_STATUS='Discharging'
+fi
+
+TOTAL=$((PERCENT + PERCENT1))
+TOTAL=$((TOTAL/2))
+
+
+if [ $TOTAL -lt 10 ] && [ "$FINAL_STATUS" == 'Discharging' ]; then
+	#beep
+	export DISPLAY=:0.0 &&	
+	notify-send -u critical "Battery low" "Battery at $TOTAL%"
+	#export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus &&
 fi
