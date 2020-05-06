@@ -46,7 +46,6 @@ bspc rule -a feh 					floating=on center=true follow=off
 
 # scratchpad
 bspc rule -a dropdown sticky=on state=floating hidden=on
-$TERMINAL -c dropdown &
 
 set_colors
 pgrep -x polybar || polybar top

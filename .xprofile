@@ -9,7 +9,7 @@ unclutter &
 keyboard_layout &
 sxhkd &
 transmission-gtk &
-redshift -c ~/.config/redshift/config &
 #dwmbar &
 feh --bg-scale ~/.config/wall.jpg 
 shownotes
+redshift -c ~/.config/redshift/config &

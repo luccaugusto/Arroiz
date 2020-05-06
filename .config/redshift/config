@@ -1,5 +1,8 @@
  [redshift]
  location-provider=manual
+ temp-night=3600
+ fade=1
+ 
 
  [manual]
  lat=-19.88

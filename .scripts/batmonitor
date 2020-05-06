@@ -1,0 +1,14 @@
+#!/bin/bash
+
+#Conta quanto tempo a bateria esta durando, por dia, de acordo com o tempo que ela esta descarregando
+STATUS=$(cat /sys/class/power_supply/BAT0/status)
+STATUS1=$(cat /sys/class/power_supply/BAT1/status)
+
+date=`date '+%y-%m-%d'`
+
+FINAL_STATUS=''
+if [  $STATUS == 'Discharging' ] || [ $STATUS1 == 'Discharging' ]; then
+	FINAL_STATUS='Discharging'
+fi
+
+[ $FINAL_STATUS == 'Discharging' ] && echo $((`cat ~/.battime/"$date"`+1)) > ~/.battime/"$date"

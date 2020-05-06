@@ -21,5 +21,4 @@ export mygit='https://github.com/lrr68/'
 # Start graphical server if bspwm not already running.
 if [[ "$(tty)" = "/dev/tty1" ]]; then
 	pgrep -x bspwm || exec startx
-	wal -n -i ~/repos/wallpapers/SynthGirl.jpg
 fi

@@ -49,6 +49,8 @@ super + Return
 	$TERMINAL
 super + f
 	firefox
+super + v
+	vivaldi-stable
 super + r
 	$TERMINAL -e ranger
 super + shift + n
@@ -59,6 +61,10 @@ super + shift + s
 	powermenu
 super + p
 	dmen
+super + alt + v
+	toggle-redshift
+super+f12
+	cheatsheet
 
 ##------------------------------------------------
 ##-- BSPWM HOTKEYS:
@@ -72,7 +78,6 @@ super + shift + c
 #------------------------------------------------
 #-- CYCLE LAYOUT:
 #------------------------------------------------
-
 super + m
 	bspc desktop -l next
 
@@ -125,7 +130,7 @@ super + {_,shift + }{h,j,k,l}
 #------------------------------------------------
 
 super + shift + r  
-	bspc node last -R 90
+	bspc node @/ -R 90
 
 #------------------------------------------------
 #-- CYCLE WINDOW FORWARD OR BACKWARD:

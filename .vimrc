@@ -130,9 +130,12 @@
 		normal! i#include <stdlib.h>
 		normal! o#include <stdio.h>
 		normal! o
-		normal! oint main(){
+		normal! oint main()
+		normal! o{
+		normal! o
 		normal! oreturn 0;
 		normal! o}
+		normal! 2k
 	endfunction
 
 	command! Bj call BeginJ()

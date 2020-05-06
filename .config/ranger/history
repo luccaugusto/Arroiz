@@ -1,10 +1,3 @@
-rename PendulumGuy2.kra
-rename PendulumGuy.kra
-rename PendulumGuy.kra~
-find mal
-rename Mor-tovivo.png
-rename Downloads
-search lista
 mkdir 587488
 shell zip 587488
 shell ziptool 
@@ -24,7 +17,6 @@ rename The.Lobster.2015.1080p.BluRay.x264-[YTS.AG].srt
 open_with klq
 shell setsid 
 open_with 0
-open_with 
 shell zathura Lista\ 03\ -\ Recorte.pdf
 shell unzip COMPUTA-O-GR-FICA---Ci-ncia-da-Computa-o---CAMPUS-CORA-O-EUCAR-STICO---PMG---MANH---2020-1-2020-Apr-25_17-29-20.zip
 mkdir prova1
@@ -47,4 +39,12 @@ trabalhos
 mkdir trabalhos
 
 open_with gimp
+touch posicao.txt
+touch server.c
+rename batalha-naval
+touch client.c
+rename posicaoB.txt
+rename posicaoA.txt
+rename posicao.txt
+open_with 
 delete

@@ -1,0 +1,78 @@
+.rS14
+.TH CheatSheet "Bindings CheatSheet"
+Bindings CheatSheet
+.SH
+WM Independent Bindings
+.SS
+Media Control
+.SY super+ctrl+p
+Play Pause Spotify
+.YS
+.SY super+ctrl+]
+Next song Spotify
+.YS
+.SY super+ctrl+[
+Previous song Spotify
+.YS
+.SS
+Programs
+.SY super+Return
+Terminal ($TERMINAL)
+.YS
+.SY super+v
+Vivaldi
+.YS
+.SY super+r
+Ranger (on $TERMINAL)
+.YS
+.SY super+shift+n
+shownotes
+.YS
+.SY super+b
+lockscreen
+.YS
+.SY super+shift+s
+powermenu (dmenu)
+.YS
+.SY super+p
+dmenu_run
+.YS
+.SY super+alt+v
+toggle redshift
+.YS
+.SH
+BSPWM Hotkeys
+.SS
+Basic
+.SY super+shift+c
+Close and kill window
+.YS
+.SY super+m
+Cycle layout
+.YS
+.SY super+shift+b
+Balance windows (Same Area)
+.YS
+.SY super+
+.OP t,shift+t,s,shift+s
+Set node flag 
+tiled, pseudo_tiled, floating, fullscreen
+.YS
+.SY super+u
+Show scratchpad
+.YS
+.SS
+Advanced
+.SY super+ctrl
+.OP hjkl
+Select where to split window.
+west, south, north, east
+.YS
+.SY super+
+.OP arrow
+Cancel preselected split
+.YS
+.SY super+alt+
+.OP q r
+Quit/Reload bspwm
+.YS
