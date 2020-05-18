@@ -42,6 +42,7 @@ networkmanager
 os-prober
 otf-font-awesome
 polybar
+powertop
 pulseaudio
 ranger
 redshift
@@ -51,6 +52,7 @@ sudo
 syncthing
 sxhkd
 sxiv
+tlp
 transmission-gtk
 ttf-font-awesome
 ttf-monaco
