@@ -1,0 +1,11 @@
+#!/bin/bash
+
+#Turns redshift on and off
+
+
+if [ $(pgrep -x redshift) ]
+then
+	pkill redshift
+else
+	redshift -c ~/.config/redshift/config &
+fi

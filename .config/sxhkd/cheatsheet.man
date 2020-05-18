@@ -1,10 +1,12 @@
-.rS14
+.rS12
 .TH CheatSheet "Bindings CheatSheet"
 Bindings CheatSheet
 .SH
 WM Independent Bindings
 .SS
-Media Control
+Media Controls
+.PP
+The super + control (ctrl) combination is reserved for controling volume, brightness and music playback (in case then current keyboard does not have f86 keys)
 .SY super+ctrl+p
 Play Pause Spotify
 .YS
@@ -13,6 +15,21 @@ Next song Spotify
 .YS
 .SY super+ctrl+[
 Previous song Spotify
+.YS
+.SY super+ctrl+-
+Lower brightness
+.YS
+.SY super+ctrl++
+Increase brightness
+.YS
+.SY super+ctrl+u
+Volume up 5%
+.YS
+.SY super+ctrl+d
+Volume down 5%
+.YS
+.SY super+ctrl+m
+Mute/Unmute audio
 .YS
 .SS
 Programs
@@ -76,3 +93,7 @@ Cancel preselected split
 .OP q r
 Quit/Reload bspwm
 .YS
+.SH
+General Info
+.PP
+Mouse acceleration file: /etc/X11/xorg.conf.d/99-libinput-custom-config.conf 

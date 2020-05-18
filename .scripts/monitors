@@ -1,0 +1,18 @@
+#!/bin/bash
+
+list_mon()
+{
+	xrandr -q | grep " connected" | awk '{print $1}' | tail -n +2
+}
+
+list_opt()
+{
+	printf "%s\n%s\n%s\n%s\n%s\n" "--right-of" "--left-of" "--above" "--below" "--same-as"
+}
+
+OUT=$(list_mon | dmenu -l 5)
+OPT=$(list_opt | dmenu -l 5)
+
+xrandr --output $OUT --auto $OPT eDP1
+
+#launch_polybar.sh

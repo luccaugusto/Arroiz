@@ -1,0 +1,63 @@
+#!/bin/bash
+
+#BAT0 external
+#BAT1 internal
+
+
+PERCENT=$(cat /sys/class/power_supply/BAT0/capacity)
+PERCENT1=$(cat /sys/class/power_supply/BAT1/capacity)
+STATUS=$(cat /sys/class/power_supply/BAT0/status)
+STATUS1=$(cat /sys/class/power_supply/BAT1/status)
+
+TOTAL=$((PERCENT + PERCENT1))
+TOTAL=$((TOTAL/2))
+
+if [ $STATUS == 'Discharging' ]
+then
+	ICON=" "
+	if [ $PERCENT -lt 10 ]; then
+		ICON=" "
+	elif [ $PERCENT -lt 30 ]; then
+		ICON=" "
+	elif [ $PERCENT -lt 50 ]; then
+		ICON=" "
+	elif [ $PERCENT -lt 80 ]; then
+		ICON=" "
+	fi
+#elif [ $STATUS == 'Unknown' ]; then
+	#ICON=" "
+else
+	ICON=" "
+fi
+
+if [ $STATUS1 == 'Discharging' ]
+then
+	ICON1=" "
+	if [ $PERCENT1 -lt 10 ]; then
+		ICON1=" "
+	elif [ $PERCENT1 -lt 30 ]; then
+		ICON1=" "
+	elif [ $PERCENT1 -lt 50 ]; then
+		ICON1=" "
+	elif [ $PERCENT1 -lt 80 ]; then
+		ICON1=" "
+	fi
+#elif [ $STATUS1 == 'Unknown' ]; then
+	#ICON1=" "
+else
+	ICON1=" "
+fi
+
+if [ "$1" == 'util' ]; then
+	ORIGINAL=$(cat /sys/class/power_supply/BAT0/energy_full_design)
+	AGORA=$(cat /sys/class/power_supply/BAT0/energy_full)
+	ORIGINAL1=$(cat /sys/class/power_supply/BAT1/energy_full_design)
+	AGORA1=$(cat /sys/class/power_supply/BAT1/energy_full)
+	python -c "print('Bat 0:',round($AGORA/$ORIGINAL,2)*100,'%')"
+	python -c "print('Bat 1:',round($AGORA1/$ORIGINAL1,2)*100,'%')"
+
+	
+else
+	[ $STATUS == 'Discharging' ] && [ $STATUS1 == 'Discharging' ] && [ $TOTAL -lt 10 ] && echo "!!!!!!!!!!!!!!!! BATERIA BAIXA !!!!!!!!!!!!!!!!!!!!!"
+	echo "$ICON $PERCENT% $ICON1 $PERCENT1%"
+fi

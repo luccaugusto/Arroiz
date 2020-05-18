@@ -1,14 +1,3 @@
-mkdir 587488
-shell zip 587488
-shell ziptool 
-shell java Start &
-shell git commit -a; git push
-rename nostradamus.avi
-rename nostradamus.gif
-rename nostradamus.mp4
-rename nostradamus.srt
-search kra
-search Pool
 rename The.Lobster.2015.1080p.BluRay.x264-[YTS.AG].mp4.part
 rename The.Lobster.2015.1080p.BluRay.x264-[YTS.AG].m.part
 rename The.Lobster.2015.srt
@@ -26,7 +15,6 @@ rename couronaVAIRUS.jpg
 rename coronaVAIRUS
 burocrativo
 mkdir burocratico
-mkdir livros
 search pitada
 rename pos_raspagem.jpeg
 rename WhatsApp Image 2020-04-28 at 19.02.01.jpeg
@@ -37,7 +25,6 @@ rename music
 mkdir redes
 trabalhos
 mkdir trabalhos
-
 open_with gimp
 touch posicao.txt
 touch server.c
@@ -46,5 +33,18 @@ touch client.c
 rename posicaoB.txt
 rename posicaoA.txt
 rename posicao.txt
+rename DemonSucks.png~
+rename DemonSucks.png
+mkdir Imagens
+rename img
+mkdir avn
+mkdir livros
+mkdir 5.0
+rename scrot1-sistema-precos.png
+rename scrot2-sistema-precos.png
 open_with 
+rename scrot_batnaval.png
+
+shell vim resumo_art.md
+shell 
 delete

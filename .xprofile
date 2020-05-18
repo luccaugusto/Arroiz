@@ -1,15 +1,8 @@
 #!/bin/bash
 
 #runs when a DM logs me in a graphical session
-
+sxhkd &
 dunst &
 compton &
-nm-applet &
-unclutter &
 keyboard_layout &
-sxhkd &
-transmission-gtk &
-#dwmbar &
 feh --bg-scale ~/.config/wall.jpg 
-shownotes
-redshift -c ~/.config/redshift/config &

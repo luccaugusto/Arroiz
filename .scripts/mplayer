@@ -1,18 +1,5 @@
 #!/bin/bash
 
-if [ $(pgrep ncmpcpp) ]; then
-	exit
-fi
-(st -c "mplayer" -e ncmpcpp -s media_library &) 
-(st -c "mplayer_v" -e ncmpcpp -s visualizer &) 
-sleep 0.1s
-NODES=$(bspc query -N)
-
-P_ID=$(echo $NODES | tail -n 2 | head -1)
-V_ID=$(echo $NODES | tail -n 1)
-
-bspc node mplayer -v -450 -200
-bspc node mplayer -z bottom 0 -100
-
-bspc node mplayer_v -v -450 200
-bspc node mplayer_v -z top 0 200
+[ ! $(pgrep mpd) ] && mpd > /dev/null &
+[ "$1" == 'e' ] && st -c "mplayer" -e 'tmux -c "ncmpcpp -s media_library"' &
+[ ! $1 ] && ncmpcpp -s media_library

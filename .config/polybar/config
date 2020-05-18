@@ -6,13 +6,13 @@
 
 
 [bar/top]
-monitor = eDP1
+monitor = ${env:MONITOR:}
 width = 100%
 height = 25
 tray-position = right
 tray-detached = false
 
-background = #0000000
+background = #AF242424
 foreground = #ccffff
 
 line-color = ${bar/top.background}
@@ -27,7 +27,7 @@ font-1 = FontAwesome 5 Free Regular:style=Regular:size=10;0
 font-2 = FontAwesome 5 Brands Regular:style=Regular:size=10;0
 font-3 = FontAwesome 5 Free Solid:style=Solid:size=10;0
 font-4 = MaterialIcons:size=10;0
-font-5 = Termsynu:size=10:antialias=false;-2
+font-5 = Sazanami Gothic:size=12:style=Solid;-2
 
 modules-left = bspwm volume backlight memory
 modules-center = xwindow
@@ -198,16 +198,17 @@ fuzzy-match = false
 ; Note that the <label> needs to correspond with the bspwm workspace name
 ; Neither <label> nor <icon> can contain a semicolon (;)
 
-;ws-icon-0 = 1;1
-;ws-icon-1 = 2;2
-;ws-icon-2 = 3;3
-;ws-icon-3 = 4;4
-;ws-icon-4 = 5;5
-;ws-icon-5 = 6;6
-;ws-icon-6 = 7;7
-;ws-icon-7 = 8;8
-;ws-icon-8 = 9;9
-;ws-icon-9 = 10;10
+         
+ws-icon-0 = 1;一
+ws-icon-1 = 2;二
+ws-icon-2 = 3;三
+ws-icon-3 = 4;四
+ws-icon-4 = 5;五
+ws-icon-5 = 6;六
+ws-icon-6 = 7;七
+ws-icon-7 = 8;八
+ws-icon-8 = 9;九
+ws-icon-9 = 0;十
 ;ws-icon-default = 
 
 ; Available tags:
@@ -242,23 +243,23 @@ label-dimmed-focused-background = #f00
 ;   %icon%
 ;   %index%
 ; Default: %icon%  %name%
-label-focused = %name%
+label-focused = %icon%
 label-focused-foreground = #ff71ce
 ;label-focused-background = #ff71ce
 ;label-focused-underline = #fba922
 
-label-occupied = %name%
+label-occupied = %icon%
 label-accupied-foregound = #04cc80
 ;label-occupied-underline = #555555
 
 ; Default: %icon%  %name%
-label-urgent = %name%
+label-urgent = %icon%
 label-urgent-foreground = #000000
 label-urgent-background = #bd2c40
 ;label-urgent-underline = #9b0a20
 
 ; Default: %icon%  %name%
-label-empty = %name%
+label-empty = %icon%
 label-empty-foreground = #609fae 
 
 ; The following labels will be used to indicate the layout/mode

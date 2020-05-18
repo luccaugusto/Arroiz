@@ -11,4 +11,14 @@ if [  $STATUS == 'Discharging' ] || [ $STATUS1 == 'Discharging' ]; then
 	FINAL_STATUS='Discharging'
 fi
 
-[ $FINAL_STATUS == 'Discharging' ] && echo $((`cat ~/.battime/"$date"`+1)) > ~/.battime/"$date"
+if [ $FINAL_STATUS == 'Discharging' ]
+then
+	if [ -e ~/.battime/"$date"_1 ]; then
+		echo $((`cat ~/.battime/"$date"_1`+1)) > ~/.battime/"$date"
+	else
+		echo $((`cat ~/.battime/"$date"`+1)) > ~/.battime/"$date"
+	fi
+else
+	echo 1 > ~/.battime/"$date"_1
+fi
+

@@ -28,19 +28,40 @@ XF86MonBrightnessDown
 # Media player controls
 # Supports spotify
 XF86AudioPlay 
-	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause; [ $(pgrep -x mpc) ] && mpc toggle
 XF86AudioNext 
-	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
+	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next; [ $(pgrep -x mpc) ] && mpc next
 XF86AudioPrev 
-	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
+	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous; [ $(pgrep -x mpc) ] && mpc prev
 
-## t440s does not have XF86 keys for audio control so these are the replace bindings
+## in case keyboard does not have XF86 keys for audio/brightness controls, these are the alternative bindings
 super + ctrl + p 
-	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause; [ $(pgrep -x mpc) ] && mpc toggle
 super + ctrl + ] 
-	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
+	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next; [ $(pgrep -x mpc) ] && mpc next
 super + ctrl + [ 
-	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
+	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous; [ $(pgrep -x mpc) ] && mpc prev
+#Brightness
+super + ctrl + -
+	brightnessctl s 5%-; # reloadbar
+super + ctrl + +
+	brightnessctl s 5%+;  #reloadbar
+#Volume
+#volume up
+super + ctrl + u
+	pactl set-sink-volume 0 +5%; #reloadbar
+#volume down
+super + ctrl + d
+	pactl set-sink-volume 0 -5%; #reloadbar
+# mute/unmute sound
+super + ctrl + m
+	pactl set-sink-mute 0 toggle; #reloadbar
+
+#Gaps
+super + ctrl + =
+	 export GAPS=$((GAPS+2)); bspc config window_gap $GAPS
+super + ctrl + -
+	 export GAPS=$((GAPS-2)); bspc config window_gap $GAPS
 
 #reload sxhkd
 super + Escape
@@ -62,7 +83,7 @@ super + shift + s
 super + p
 	dmen
 super + alt + v
-	toggle-redshift
+	toggle_redshift
 super+f12
 	cheatsheet
 
