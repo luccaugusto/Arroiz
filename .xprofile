@@ -1,8 +1,0 @@
-#!/bin/bash
-
-#runs when a DM logs me in a graphical session
-sxhkd &
-dunst &
-compton &
-keyboard_layout &
-feh --bg-scale ~/.config/wall.jpg 

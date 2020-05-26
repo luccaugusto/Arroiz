@@ -1,2 +1,3 @@
 !! Set a default font and font size as below:
 *font:	Monaco:pixelsize=20:antialias=true:autohint=true;
+urxvt.font:	Monaco:pixelsize=20:antialias=true:autohint=true;

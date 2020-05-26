@@ -7,12 +7,23 @@ list_mon()
 
 list_opt()
 {
-	printf "%s\n%s\n%s\n%s\n%s\n" "--right-of" "--left-of" "--above" "--below" "--same-as"
+	printf "%s\n%s\n%s\n%s\n%s\n%s\n" \
+		"--right-of"\
+		"--left-of" \
+		"--above"   \
+		"--below"   \
+		"--same-as" \
+		"--off"
 }
 
 OUT=$(list_mon | dmenu -l 5)
 OPT=$(list_opt | dmenu -l 5)
 
-xrandr --output $OUT --auto $OPT eDP1
+if [ "$OPT" == "--off" ]
+then
+	xrandr --output $OUT $OPT
+else
+	xrandr --output $OUT --auto $OPT eDP1
+fi
 
 #launch_polybar.sh

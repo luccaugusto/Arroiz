@@ -60,7 +60,7 @@ floating_modifier $mod
 
 # Key bindings handled in sxhkd
 # start a terminal
-#bindsym $mod+Return exec $term
+bindsym $mod+Return exec $term
 # start a terminal floating
 bindsym $mod+Shift+Return scratchpad show
 
@@ -68,7 +68,7 @@ bindsym $mod+Shift+Return scratchpad show
 bindsym $mod+Shift+c kill
 
 # start dmenu (a program launcher)
-bindsym $mod+p exec dmenu_run
+bindsym $mod+p exec dmen
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.

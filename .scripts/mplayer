@@ -1,5 +1,5 @@
 #!/bin/bash
 
-[ ! $(pgrep mpd) ] && mpd > /dev/null &
+[ ! $(pgrep mpd) ] && mpd > /dev/null 2&>1
 [ "$1" == 'e' ] && st -c "mplayer" -e 'tmux -c "ncmpcpp -s media_library"' &
 [ ! $1 ] && ncmpcpp -s media_library

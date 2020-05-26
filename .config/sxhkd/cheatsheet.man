@@ -6,7 +6,7 @@ WM Independent Bindings
 .SS
 Media Controls
 .PP
-The super + control (ctrl) combination is reserved for controling volume, brightness and music playback (in case then current keyboard does not have f86 keys)
+The super + control (ctrl) combination is reserved for controling volume, brightness, music playback and overall system apearance (gaps, etc)
 .SY super+ctrl+p
 Play Pause Spotify
 .YS
@@ -30,6 +30,12 @@ Volume down 5%
 .YS
 .SY super+ctrl+m
 Mute/Unmute audio
+.YS
+.SY super+ctrl+g
+Increase gaps between windows
+.YS
+.SY super+ctrl+h
+Decrease gaps between windows
 .YS
 .SS
 Programs
@@ -97,3 +103,5 @@ Quit/Reload bspwm
 General Info
 .PP
 Mouse acceleration file: /etc/X11/xorg.conf.d/99-libinput-custom-config.conf 
+.PP
+Bluetooth Module: pactl load-module module-bluetooth-discover

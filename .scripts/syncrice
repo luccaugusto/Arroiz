@@ -2,6 +2,10 @@
 
 RICE=$HOME/repos/rice
 CONFIG=$HOME/.config
+AQUI=$PWD
+
+echo "Cleaning Repository to delete old files. (Dotfiles only)"
+rm $RICE/.* > /dev/null 2>&1
 
 echo "copying home files"
 cp $HOME/.bash_aliases $RICE
@@ -11,6 +15,7 @@ cp $HOME/.vimrc $RICE
 cp $HOME/.xinitrc $RICE
 cp $HOME/.xprofile $RICE
 cp $HOME/.Xresources $RICE
+cp $HOME/.tmux.conf $RICE
 
 echo "copying home directories"
 cp -r $HOME/.vim $RICE
@@ -35,3 +40,12 @@ cp -r $CONFIG/transmission $RICE/.config
 cp -r $CONFIG/wal $RICE/.config
 cp -r $CONFIG/mpd $RICE/.config
 cp -r $CONFIG/ncmpcpp $RICE/.config
+
+cd $RICE
+echo "Adding new files to repo"
+git add .
+[ "$1" ] && 
+echo "Comitting changes" &&
+git commit -m "$1" &&
+echo "Pushing changes" && 
+git push

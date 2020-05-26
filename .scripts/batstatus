@@ -12,7 +12,7 @@ STATUS1=$(cat /sys/class/power_supply/BAT1/status)
 TOTAL=$((PERCENT + PERCENT1))
 TOTAL=$((TOTAL/2))
 
-if [ $STATUS == 'Discharging' ]
+if [ $STATUS != 'Discharging' ]
 then
 	ICON=" "
 	if [ $PERCENT -lt 10 ]; then

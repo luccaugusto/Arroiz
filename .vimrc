@@ -93,9 +93,9 @@
 "update bindings when sxhkd config is updated
 	autocmd BufWritePost sxhkdrc killall sxhkd; setsid sxhkd &
 "recompile suckless programs after editing
-	autocmd BufWritePost dwm.c !sudo make clean; sudo make install
-	autocmd BufWritePost config.def.h !sudo make clean; sudo make install
-	autocmd BufWritePost st.c !sudo make clean; sudo make install
+	autocmd BufWritePost dwm.c !sudo make clean; sudo make; sudo make install
+	autocmd BufWritePost config.def.h !sudo make clean;sudo make; sudo make install
+	autocmd BufWritePost st.c !sudo make clean; sudo make; sudo make install
 
 "===============================
 "SNIPPETS

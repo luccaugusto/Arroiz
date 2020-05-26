@@ -7,7 +7,6 @@ export TERMINAL="st"
 export BROWSER="vivaldi-stable"
 #xdg-settings set default-web-browser $BROWSER.desktop
 export READER="zathura"
-export GAPS=5
 export JAVA_HOME='/usr/lib/jvm/java-11-openjdk'
 export PATH="$PATH:$HOME/.scripts"
 export PATH="$PATH:$HOME/.local/bin"

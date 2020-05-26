@@ -14,7 +14,7 @@ notify-send "Inicio"
 while true; do
 	[ $a_b ] && sleep "$t_a" && notify-send "Passaram $min_a minutos"
 	[ ! $a_b ] && sleep "$t_b" && notify-send "Passaram $min_b minutos"
-	#beep
+	beep
 	a_b=!$a_b
 done
 

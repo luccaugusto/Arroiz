@@ -82,8 +82,8 @@ visualizer_sync_interval = 30
 ##
 visualizer_type = spectrum
 #
-#visualizer_look = ●▮
-visualizer_look =l. 
+visualizer_look = ●▮
+#visualizer_look =l. 
 #
 #visualizer_color = blue, cyan, green, yellow, magenta, red
 #

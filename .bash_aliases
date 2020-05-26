@@ -1,6 +1,6 @@
 alias please="sudo"
 alias autoremove="pacman -Rns $(pacman -Qtdq)"
-alias update="sudo pacman -Syyud; packer -Syu"
+alias update="sudo pacman -Syyud; yay -Syu"
 alias ls='ls --color=auto'
 alias ll='ls -laFo'
 alias cler="clear"
@@ -8,10 +8,6 @@ alias claer="clear"
 alias clera="clear"
 alias celar="clear"
 alias clean="clear"
-alias updaterice=". /home/lucca/.scripts/syncgit"
-alias updatehome=". /home/lucca/.scripts/synchome"
-alias databackup=". /home/lucca/.scripts/backup"
-alias anote=". /home/lucca/.scripts/aNote"
 alias P="sudo pacman"
 alias p="pacman"
 alias v="vim"
@@ -22,6 +18,6 @@ alias pm="python manage.py"
 alias pms="python manage.py shell"
 alias pmr="python manage.py runserver"
 alias migrate="python manage.py makemigrations; python manage.py migrate"
-alias beep='paplay $BEEP'
 alias gmspdf='groff -ms -Tpdf'
 alias umount_phone='fusermount -u'
+alias eclipse='cd Downloads/ide/eclipse;./eclipse &'

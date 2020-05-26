@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =1
+let g:netrw_dirhistcnt =2
+let g:netrw_dirhist_2='/home/lucca/.config/ncmpcpp'
 let g:netrw_dirhist_1='/home/lucca/repos/rice/.scripts'
 let g:netrw_dirhist_0='/home/lucca/repos/rice'
 let g:netrw_dirhist_9='/home/lucca/.config/sxhkd'
@@ -9,4 +10,3 @@ let g:netrw_dirhist_6='/home/lucca/.config/sxhkd'
 let g:netrw_dirhist_5='/home/lucca/.config/zathura'
 let g:netrw_dirhist_4='/home/lucca/.vim/bundle/wal.vim/colors'
 let g:netrw_dirhist_3='/home/lucca/.vim/bundle/wal.vim'
-let g:netrw_dirhist_2='/home/lucca/.config/sxhkd'

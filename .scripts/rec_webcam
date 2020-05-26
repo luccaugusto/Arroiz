@@ -1,0 +1,3 @@
+#!/bin/bash
+
+ffmpeg -i /dev/video0 webcam.mkv

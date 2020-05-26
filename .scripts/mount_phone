@@ -10,6 +10,7 @@ then
 elif [ ! "$(ls cell)" ]
 then
 	simple-mtpfs -o default_permissions --device "$dev" $HOME/cell/
+	notify-send "Device mounted on $HOME/cell"
 else
 	echo "cell already mounted"
 fi

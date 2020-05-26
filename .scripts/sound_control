@@ -1,0 +1,24 @@
+#!/bin/bash
+
+[ ! $1 ] && echo "sound_control [u/d/m]" && echo " [u]p [d]own [m]ute toggle" && exit
+
+opt="$1"; shift
+
+SINK1=$(pactl list sinks | grep "Sink #1")
+
+if [ $opt == 'u' ]
+then
+	pactl set-sink-volume 0 +5%
+	[ "$SINK1" ] && pactl set-sink-volume 1 +5%
+	[ $(pgrep dwm) ] && reloadbar
+elif [ $opt == 'd' ]
+then
+	pactl set-sink-volume 0 -5%
+	[ "$SINK1" ] &&  pactl set-sink-volume 1 -5%
+	[ $(pgrep dwm) ] && reloadbar
+elif [ $opt == 'm' ]
+then
+	pactl set-sink-mute 0 toggle
+	[ "$SINK1" ] && pactl set-sink-mute 1 toggle
+	[ $(pgrep dwm) ] && reloadbar
+fi

@@ -1,50 +1,50 @@
-rename The.Lobster.2015.1080p.BluRay.x264-[YTS.AG].mp4.part
-rename The.Lobster.2015.1080p.BluRay.x264-[YTS.AG].m.part
-rename The.Lobster.2015.srt
-rename TheLobster2015.srt
-rename The.Lobster.2015.1080p.BluRay.x264-[YTS.AG].srt
-open_with klq
-shell setsid 
-open_with 0
-shell zathura Lista\ 03\ -\ Recorte.pdf
-shell unzip COMPUTA-O-GR-FICA---Ci-ncia-da-Computa-o---CAMPUS-CORA-O-EUCAR-STICO---PMG---MANH---2020-1-2020-Apr-25_17-29-20.zip
-mkdir prova1
-shell unzip 1706695_trab.zip
-open_with krita
-rename couronaVAIRUS.jpg
-rename coronaVAIRUS
-burocrativo
-mkdir burocratico
-search pitada
-rename pos_raspagem.jpeg
-rename WhatsApp Image 2020-04-28 at 19.02.01.jpeg
-rename pre_raspagem.jpeg
-rename aula22-04.mp4
-rename Music
-rename music
-mkdir redes
-trabalhos
-mkdir trabalhos
-open_with gimp
-touch posicao.txt
-touch server.c
-rename batalha-naval
-touch client.c
-rename posicaoB.txt
-rename posicaoA.txt
-rename posicao.txt
-rename DemonSucks.png~
-rename DemonSucks.png
-mkdir Imagens
-rename img
-mkdir avn
-mkdir livros
-mkdir 5.0
-rename scrot1-sistema-precos.png
-rename scrot2-sistema-precos.png
+rename aula04-29-completa.mp4
+rename aula04-11-completa.mp4
+rename aula04-22-completa.mp4
+rename aula04-27-completa.mp4
+rename aula05-06.mp4
+rename aula05-06-audio.mp4
+rename aula05-13-audio.mp4
+rename aula05-13.mp4
+shell zathura resumo_art.md
+rename resumo_art.md
+rename resumo_art.ms
+shell  %s
+shell groff -ms -T pdf resumo_art.ms | zathura -
+shell groff -ms -T pdf resumo_art.ms | zathura - &
+shell unzip TL-WR941ND_V5_150311.zip
+mkdir tplink
+shell unzip TL-WR941ND_V5_150311.zip 
+open_with q
+open_with sxiv
+mkdir ep2
+shell unzip 185591813.flac.zip
+open_with mplayer
 open_with 
-rename scrot_batnaval.png
+rename luccaugusto.mp3
+rename aula05-11-completa.mp4
+rename 730330_introducao.pdf
+rename 1_introducao.pdf
+rename 2_modalidades.pdf
+rename 3_percepcao.pdf
+rename 4_segmentacao.pdf
+rename 5_descricao.pdf
+rename 3_reconhecimento.pdf
+rename 6_reconhecimento.pdf
+rename 568023_lista1.pdf
+rename lista1.pdf
+rename lista2.pdf
+shell unzip ilovepdf_converted.zip
 
-shell vim resumo_art.md
-shell 
+rename 7_Fourier.pdf
+rename 8_filtros.pdf
+rename 9_realce1.pdf
+rename 10_realce2.pdf
+rename 11_Compressao.pdf
+shell xrdb .Xresources
+shell unzip opencv-3.4.10.zip
+mkdir build
+search opencv
+rename startup_progs
 delete
+rename launch_polybar

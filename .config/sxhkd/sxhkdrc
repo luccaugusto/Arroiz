@@ -5,15 +5,15 @@
 #Sound commands
 #increase sound volume
 XF86AudioRaiseVolume
-	pactl set-sink-volume 0 +5%; #reloadbar
+	sound_control u
 
 #decrease sound volume
 XF86AudioLowerVolume 
-	pactl set-sink-volume 0 -5%; #reloadbar
+	sound_control d
 
 # mute sound
 XF86AudioMute
-	pactl set-sink-mute 0 toggle; #reloadbar
+	sound_control m
 
 
 #Screen Brightness controls
@@ -49,19 +49,20 @@ super + ctrl + +
 #Volume
 #volume up
 super + ctrl + u
-	pactl set-sink-volume 0 +5%; #reloadbar
+	sound_control u
 #volume down
 super + ctrl + d
-	pactl set-sink-volume 0 -5%; #reloadbar
+	sound_control d
 # mute/unmute sound
 super + ctrl + m
-	pactl set-sink-mute 0 toggle; #reloadbar
+	sound_control m
+
 
 #Gaps
-super + ctrl + =
-	 export GAPS=$((GAPS+2)); bspc config window_gap $GAPS
-super + ctrl + -
-	 export GAPS=$((GAPS-2)); bspc config window_gap $GAPS
+super + ctrl + g
+	 GAPS=$(bspc config window_gap); bspc config window_gap $((GAPS+5))
+super + ctrl + h
+	 GAPS=$(bspc config window_gap); bspc config window_gap $((GAPS-5))
 
 #reload sxhkd
 super + Escape
@@ -74,7 +75,7 @@ super + v
 	vivaldi-stable
 super + r
 	$TERMINAL -e ranger
-super + shift + n
+super + n
 	shownotes
 super + b
 	lockscreen
@@ -84,7 +85,7 @@ super + p
 	dmen
 super + alt + v
 	toggle_redshift
-super+f12
+super+F1
 	cheatsheet
 
 ##------------------------------------------------
@@ -139,7 +140,7 @@ super + {grave,Tab}
 #-- SWAP CURRENT WINDOW WITH THE BIGGEST ON SCREEN:
 #-------------------------------------------------
 
-super + n
+super + shift + n
 	bspc node -s biggest
 
 # focus the node in the given direction

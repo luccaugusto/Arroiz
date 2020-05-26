@@ -236,7 +236,7 @@ label-margin = 0
 ;   label-dimmed-empty
 label-dimmed-foreground = #555
 ;label-dimmed-underline = ${bar/top.background}
-label-dimmed-focused-background = #f00
+label-dimmed-focused-background = #ffaaa5
 
 ; Available tokens:
 ;   %name%
