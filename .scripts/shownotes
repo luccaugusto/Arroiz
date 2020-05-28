@@ -1,5 +1,5 @@
 #!/bin/bash
 
 [ ! $NOTES_PATH ] && NOTES_PATH=$HOME/.scritps/.notesgeral
-NOTES=$(aNote -l -d)
+NOTES=$(anote -l -d)
 notify-send "Your Notes" "$NOTES"

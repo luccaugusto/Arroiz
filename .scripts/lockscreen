@@ -1,54 +1,38 @@
 #!/bin/bash
 
-LOCK=slock
-
-rm -f /tmp/locked.png
-
-# If `imagemagick` is not installed, use a blank screen.
-[[ -f /usr/bin/convert ]] &&
-scrot -m -z /tmp/base.png &&
-pgrep -x dunst && notify-send -i ~/.scripts/lock.png "Locking computer..." &&
-convert /tmp/base.png -blur 0x8 /tmp/locked.png
+# Pause music (mocp, mpd and send the pause key to all mpv videos):
 
 # Pause music (mocp, mpd and send the pause key to all mpv videos):
+dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Pause
 mocp -P &>/dev/null
 mpc pause &>/dev/null
 pauseallmpv &>/dev/null
 
-$LOCK #-e -f -c 000000 -i /tmp/locked.png
+slock &
 
 # In five seconds, turn off display unless key press in last 4 seconds.
-sleep 5 && [[ 4000 -lt $(xssstate -i) ]] &&  pgrep -x $LOCK && xset dpms force off
-
-## MY WAY
-#!/bin/bash
-
-# Pause music (mocp, mpd and send the pause key to all mpv videos):
-dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Pause
-
-i3lock -e -f -i ~/.scripts/loveEarthLiveHappy.png
-
-# In five seconds, turn off display unless key press in last 4 seconds.
-sleep 5 && [[ 4000 -lt $(xssstate -i) ]] &&  pgrep -x i3lock && xset dpms force off
+sleep 5 && [[ 4000 -lt $(xssstate -i) ]] &&  pgrep -x slock && xset dpms force off
 
 # How long screen was locked
-locked=$(date +%R)
-t=0
-while [ "$(pgrep i3lock)" ]
-do
-	sleep 1m
-	t=$((t+1))
-done
-ocioso=0
-if [ -f /tmp/ocioso ]; then
-	ocioso=$(cat /tmp/ocioso)
-	t=$((t + ocioso))
-else
-	touch /tmp/ocioso
-fi
-
-if [ "$t" -gt 10 ] && [ $1 == -s ]; then 
-    notify-send "$t"
-    echo "$((t - 10 ))" > /tmp/ocioso
+if [ $1 == -s ]
+then
+	t=0
+	while [ "$(pgrep slock)" ]
+	do
+		sleep 1m
+		t=$((t+1))
+	done
+	ocioso=0
+	if [ -f /tmp/ocioso ]; then
+		ocioso=$(cat /tmp/ocioso)
+		t=$((t + ocioso))
+	else
+		touch /tmp/ocioso
+	fi
+	
+	if [ "$t" -gt 10 ]; then 
+    	notify-send "$t"
+    	echo "$((t - 10 ))" > /tmp/ocioso
+	fi
 fi
 

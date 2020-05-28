@@ -49,3 +49,4 @@ echo "Comitting changes" &&
 git commit -m "$1" &&
 echo "Pushing changes" && 
 git push
+cd $AQUI

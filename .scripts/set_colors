@@ -1,6 +1,6 @@
 #!/bin/bash
 
-FOTO="$HOME/repos/wallpapers/RYREY.png"
-[ $1 ] && FOTO="$1"
+BG="$HOME/.config/wall.jpg"
+[ $1 ] && BG="$1"
 
-wal -n -i "$FOTO"
+wal -n -i "$BG"

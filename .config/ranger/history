@@ -1,10 +1,3 @@
-rename aula04-29-completa.mp4
-rename aula04-11-completa.mp4
-rename aula04-22-completa.mp4
-rename aula04-27-completa.mp4
-rename aula05-06.mp4
-rename aula05-06-audio.mp4
-rename aula05-13-audio.mp4
 rename aula05-13.mp4
 shell zathura resumo_art.md
 rename resumo_art.md
@@ -46,5 +39,12 @@ shell unzip opencv-3.4.10.zip
 mkdir build
 search opencv
 rename startup_progs
-delete
 rename launch_polybar
+rename Grindline The Band - Rip Ride Die.zip
+delete
+rename exame1.jpg
+rename exame2.jpg
+rename exame3.jpg
+rename exame4.jpg
+rename exame5.jpg
+rename exame6.jpg
