@@ -2,4 +2,4 @@
 
 [ ! $NOTES_PATH ] && NOTES_PATH=$HOME/.scritps/.notesgeral
 NOTES=$(anote -l -d)
-notify-send "Your Notes" "$NOTES"
+notify-send -u critical "Your Notes" "$NOTES"

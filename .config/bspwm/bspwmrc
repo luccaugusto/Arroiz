@@ -80,5 +80,5 @@ bspc rule -a feh 					floating=on center=true follow=off
 bspc rule -a dropdown sticky=on state=floating hidden=on
 
 set_colors
-launch_polybar
 startup_progs
+launch_polybar

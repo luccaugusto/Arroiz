@@ -26,5 +26,4 @@ else
 	xrandr --output $OUT --auto $OPT eDP1
 fi
 
-[ "$(pgrep bspwm) ] && bspc wm -r
-#launch_polybar.sh
+[ "$(pgrep bspwm)" ] && bspc wm -r

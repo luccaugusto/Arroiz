@@ -13,7 +13,7 @@
 "maintainer:	Lucca Augusto
 
 "============================
-"Basic Settings
+"      Basic Settings
 "============================
 	execute pathogen#infect()
 	execute pathogen#helptags()
@@ -64,6 +64,49 @@
 	vnoremap j gj
 	vnoremap k gk
 
+"==============================
+"        StatusLine
+"=============================
+"set laststatus=2
+"set statusline=
+"set statusline +=%1*\ %n\ %*            					"buffer number
+"set statusline +=%3*\ %{''.(&fenc!=''?&fenc:&enc).''}      	"Encoding
+"set statusline +=%3*\ %{(&bomb?\",BOM\":\"\")}\            	"Encoding2
+"set statusline +=%4*\ %<%F%*            					"full path
+"set statusline +=%2*%m%r%w                					"modified flag, read only
+""set statusline +=%y%=%{v:register}\ %*						"whats on copy/paste buffer
+"set statusline +=%1*%=%4v\ %*             					"virtual column number
+"
+"hi User1 ctermfg=007
+"hi User2 ctermfg=008
+"hi User3 ctermfg=008
+"hi User4 ctermfg=008
+"hi User5 ctermfg=008
+"hi User7 ctermfg=008
+"hi User8 ctermfg=008
+"hi User9 ctermfg=007
+
+set laststatus=2
+set statusline=
+set statusline+=%8*\ [%n]                 " buffernr
+set statusline+=%8*\ %<%F\ %m\ %r\ %w\ 	  " File+path
+set statusline+=%#warningmsg#
+set statusline+=%*
+set statusline+=%9*\ %=                   " Space
+set statusline+=%8*\ %y\                  " FileType
+set statusline+=%8*\ %-3(%{FileSize()}%)  " File size
+set statusline +=%1*%=%5l%*				  "current line
+set statusline +=%2*/%L%*				  "total lines
+
+hi User1 ctermfg=007 ctermbg=003
+hi User2 ctermfg=007 ctermbg=003
+hi User3 ctermfg=007 ctermbg=003
+hi User4 ctermfg=007 ctermbg=003
+hi User5 ctermfg=007 ctermbg=003
+hi User7 ctermfg=007 ctermbg=003
+hi User8 ctermfg=007 ctermbg=003
+hi User9 ctermfg=007 ctermbg=003
+
 
 "===============================
 "Mappings to make things quicker
@@ -82,8 +125,8 @@
 	"Tabs
 	nnoremap <leader>t :tabedit 
 	"Move faster between tabs
-	nnoremap <leader>j :tabNext<CR>
-	nnoremap <leader>k :tabPrev<CR>
+	nnoremap <leader>j :+tabmove<CR>
+	nnoremap <leader>k :-tabmove<CR>
 
 	nnoremap <leader>f :filetype detect<CR>
 	
@@ -132,26 +175,49 @@
 	au FileType c map <buffer> <F9> :Bc<CR>
 	au FileType java map <buffer> <F9> :Bj<CR>
 
-	command! Bc call BeginC()
-	function! BeginC()
-		normal! i#include <stdlib.h>
-		normal! o#include <stdio.h>
-		normal! o
-		normal! oint main()
-		normal! o{
-		normal! o
-		normal! oreturn 0;
-		normal! o}
-		normal! 2k
-	endfunction
+"====================================
+"			Functions
+"===================================
+command! Bc call BeginC()
+function! BeginC()
+	normal! i#include <stdlib.h>
+	normal! o#include <stdio.h>
+	normal! o
+	normal! oint main()
+	normal! o{
+	normal! o
+	normal! oreturn 0;
+	normal! o}
+	normal! 2k
+endfunction
 
-	command! Bj call BeginJ()
-	function! BeginJ()
-		normal! ipublic class <++>{
-		normal! opublic static void main(String[] args){<CR>
-		normal! o
-		normal! o}
-		normal! o}
-	endfunction
+command! Bj call BeginJ()
+function! BeginJ()
+	normal! ipublic class <++>{
+	normal! opublic static void main(String[] args){<CR>
+	normal! o
+	normal! o}
+	normal! o}
+endfunction
 
+" Find out current buffer's size and output it.
+function! FileSize()
+  let bytes = getfsize(expand('%:p'))
+  if (bytes >= 1024)
+    let kbytes = bytes / 1024
+  endif
+  if (exists('kbytes') && kbytes >= 1000)
+    let mbytes = kbytes / 1000
+  endif
+  if bytes <= 0
+    return '0'
+  endif
+  if (exists('mbytes'))
+    return mbytes . 'MB '
+  elseif (exists('kbytes'))
+    return kbytes . 'KB '
+  else
+    return bytes . 'B '
+  endif
+endfunction
 
