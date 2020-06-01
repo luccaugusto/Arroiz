@@ -74,10 +74,17 @@
 	nnoremap <leader>c :close<CR>
 	nnoremap <leader>o :q<CR>
 	nnoremap <leader>O :q!<CR>
+
+	"Splits
 	nnoremap <leader>v :vsplit 
 	nnoremap <leader>s :split 
+
+	"Tabs
+	nnoremap <leader>t :tabedit 
 	"Move faster between tabs
 	nnoremap <leader>j :tabNext<CR>
+	nnoremap <leader>k :tabPrev<CR>
+
 	nnoremap <leader>f :filetype detect<CR>
 	
 	"Allow to copy and paste from the system register

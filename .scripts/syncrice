@@ -8,7 +8,7 @@ echo "Cleaning Repository to delete old files. (Dotfiles only)"
 rm $RICE/.* > /dev/null 2>&1
 
 echo "copying home files"
-cp $HOME/.bash_aliases $RICE
+cp $HOME/.aliases $RICE
 cp $HOME/.bash_profile $RICE
 cp $HOME/.bashrc $RICE
 cp $HOME/.vimrc $RICE

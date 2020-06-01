@@ -16,27 +16,12 @@ bar()
 	echo "$layout $separator"
 
 	#battery
-	bat=$(cat /sys/class/power_supply/BAT0/capacity)
-	status=$(cat /sys/class/power_supply/BAT0/status)
-	if [ $status == 'Charging' ]; then
-		bat=" $bat"
-	elif [ $bat -lt 10 ];then
-		bat=" $bat"
-	elif [ $bat -lt 30 ];then
-		bat=" $bat"
-	elif [ $bat -lt 50 ];then
-		bat=" $bat"
-	elif [ $bat -lt 70 ];then
-		bat=" $bat"
-	else
-		bat=" $bat"
-	fi
 
-	echo "$bat% $separator"
+	echo "$(batstatus)% $separator"
 
 	#calculates the brightness in percent
-	brightness=$(cat /sys/class/backlight/radeon_bl0/brightness)
-	max=$(cat /sys/class/backlight/radeon_bl0/max_brightness)
+	brightness=$(cat /sys/class/backlight/*/brightness)
+	max=$(cat /sys/class/backlight/*/max_brightness)
 	#uses python3 to get decimals
 	l=$(echo "print($brightness/$max*100)" | python3)
 	light=" ${l%.*}"

@@ -14,11 +14,8 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-# If tmux is not started, start it
-#[[ -z "$TMUX" ]] && exec tmux
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+if [ -f ~/.aliases ]; then
+    . ~/.aliases
 fi
 
 #Let ctrl+s and ctrl+q free for use
@@ -26,6 +23,7 @@ stty stop ''; stty start '';
 stty -ixon
 shopt -s autocd
 
+#Glorious vim mode
 set -o vi
 
 #colors in ps1

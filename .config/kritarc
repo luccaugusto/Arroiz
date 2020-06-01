@@ -2,13 +2,13 @@ AlsoSaveAsKra=false
 AntialiasSelectionOutline=false
 ArtColorSel.ColorSpace=0
 ArtColorSel.InversedSaturation=false
-ArtColorSel.Light=0
+ArtColorSel.Light=0.7435178620680462
 ArtColorSel.LightPieces=11
 ArtColorSel.NumRings=7
 ArtColorSel.RingPieces=12
 ArtColorSel.SelColorH=0
 ArtColorSel.SelColorS=0
-ArtColorSel.SelColorX=0
+ArtColorSel.SelColorX=0.7435178620680462
 ArtColorSel.defaultHueSteps=12
 ArtColorSel.defaultSaturationSteps=7
 ArtColorSel.defaultValueScaleSteps=11
@@ -32,7 +32,7 @@ CreateBackupFile=true
 ExportConfiguration-ANIMATION_EXPORT=<!DOCTYPE params>\n<params>\n <param type="string" name="basename"><![CDATA[frame]]></param>\n <param type="string" name="custom_ffmpeg_options"><![CDATA[-crf 23 -preset medium -profile:v baseline -pix_fmt yuv420p]]></param>\n <param type="internal" name="delete_sequence">true</param>\n <param type="string" name="directory"><![CDATA[]]></param>\n <param type="internal" name="encode_video">true</param>\n <param type="string" name="ffmpeg_path"><![CDATA[/usr/bin/..//bin/ffmpeg]]></param>\n <param type="string" name="filename"><![CDATA[/home/lucca/Documents/Animations/AMosca.mp4]]></param>\n <param type="internal" name="first_frame">0</param>\n <param type="string" name="frame_export/ColorDepthID"><![CDATA[U8]]></param>\n <param type="string" name="frame_export/ColorModelID"><![CDATA[RGBA]]></param>\n <param type="internal" name="frame_export/ImageContainsTransparency">false</param>\n <param type="string" name="frame_export/alpha"><![CDATA[true]]></param>\n <param type="string" name="frame_export/compression"><![CDATA[9]]></param>\n <param type="string" name="frame_export/forceSRGB"><![CDATA[true]]></param>\n <param type="string" name="frame_export/indexed"><![CDATA[false]]></param>\n <param type="string" name="frame_export/interlaced"><![CDATA[false]]></param>\n <param type="internal" name="frame_export/sRGB">true</param>\n <param type="string" name="frame_export/saveAsHDR"><![CDATA[false]]></param>\n <param type="string" name="frame_export/saveSRGBProfile"><![CDATA[false]]></param>\n <param type="string" name="frame_export/storeAuthor"><![CDATA[true]]></param>\n <param type="string" name="frame_export/storeMetaData"><![CDATA[false]]></param>\n <param type="string" name="frame_export/transparencyFillcolor"><![CDATA[<!DOCTYPE color>\n<color>\n <RGB g="1" b="1" r="1" space="sRGB-elle-V2-g10.icc"/>\n</color>\n]]></param>\n <param type="string" name="frame_mimetype"><![CDATA[image/png]]></param>\n <param type="internal" name="framerate">24</param>\n <param type="internal" name="height">2048</param>\n <param type="internal" name="include_audio">true</param>\n <param type="string" name="last_document_path"><![CDATA[/home/lucca/Documents/Animations/AMosca.kra]]></param>\n <param type="internal" name="last_frame">124</param>\n <param type="internal" name="sequence_start">0</param>\n <param type="string" name="video_mimetype"><![CDATA[video/mp4]]></param>\n <param type="internal" name="width">2048</param>\n</params>\n
 ExportConfiguration-StrokeSelection=<!DOCTYPE params>\n<params>\n <param type="color" name="color"><![CDATA[<!DOCTYPE color>\n<color>\n <RGB space="sRGB-elle-V2-g10.icc" g="0" b="0" r="0"/>\n</color>\n]]></param>\n <param type="internal" name="colorFillSource">0</param>\n <param type="color" name="customColor"><![CDATA[<!DOCTYPE color>\n<color>\n <RGB space="sRGB-elle-V2-g10.icc" g="0" b="0" r="0"/>\n</color>\n]]></param>\n <param type="color" name="fillColor"><![CDATA[<!DOCTYPE color>\n<color>\n <RGB space="sRGB-elle-V2-g10.icc" g="0" b="0" r="0"/>\n</color>\n]]></param>\n <param type="internal" name="lineColorSource">1</param>\n <param type="internal" name="lineDimension">0</param>\n <param type="internal" name="lineSize">8</param>\n <param type="internal" name="useBrush">false</param>\n</params>\n
 ExportConfiguration-image/jpeg=<!DOCTYPE params>\n<params>\n <param name="baseline" type="internal">true</param>\n <param name="exif" type="internal">true</param>\n <param name="filters" type="string"><![CDATA[]]></param>\n <param name="forceSRGB" type="internal">false</param>\n <param name="iptc" type="internal">true</param>\n <param name="optimize" type="internal">true</param>\n <param name="progressive" type="internal">false</param>\n <param name="quality" type="internal">80</param>\n <param name="saveProfile" type="internal">true</param>\n <param name="smoothing" type="internal">0</param>\n <param name="storeAuthor" type="internal">false</param>\n <param name="storeMetaData" type="internal">false</param>\n <param name="subsampling" type="internal">0</param>\n <param name="transparencyFillcolor" type="color"><![CDATA[<!DOCTYPE color>\n<color>\n <RGB b="1" g="1" r="1" space="sRGB-elle-V2-g10.icc"/>\n</color>\n]]></param>\n <param name="xmp" type="internal">true</param>\n</params>\n
-ExportConfiguration-image/png=<!DOCTYPE params>\n<params>\n <param name="alpha" type="internal">true</param>\n <param name="compression" type="internal">9</param>\n <param name="forceSRGB" type="internal">true</param>\n <param name="indexed" type="internal">false</param>\n <param name="interlaced" type="internal">false</param>\n <param name="saveAsHDR" type="internal">false</param>\n <param name="saveSRGBProfile" type="internal">false</param>\n <param name="storeAuthor" type="internal">true</param>\n <param name="storeMetaData" type="internal">false</param>\n <param name="transparencyFillcolor" type="color"><![CDATA[<!DOCTYPE color>\n<color>\n <RGB r="1" g="1" b="1" space="sRGB-elle-V2-g10.icc"/>\n</color>\n]]></param>\n</params>\n
+ExportConfiguration-image/png=<!DOCTYPE params>\n<params>\n <param type="internal" name="alpha">true</param>\n <param type="internal" name="compression">9</param>\n <param type="internal" name="forceSRGB">true</param>\n <param type="internal" name="indexed">false</param>\n <param type="internal" name="interlaced">false</param>\n <param type="internal" name="saveAsHDR">false</param>\n <param type="internal" name="saveSRGBProfile">false</param>\n <param type="internal" name="storeAuthor">true</param>\n <param type="internal" name="storeMetaData">false</param>\n <param type="color" name="transparencyFillcolor"><![CDATA[<!DOCTYPE color>\n<color>\n <RGB r="1" space="sRGB-elle-V2-g10.icc" b="1" g="1"/>\n</color>\n]]></param>\n</params>\n
 FilterSelector/LastUsedFilter=gaussian blur
 GamutMasks.viewMode=0
 KineticScrollingEnabled=true
@@ -50,9 +50,9 @@ Krita/Ocio/OcioConfigPath=
 Krita/Ocio/OcioLockColorVisualRepresentation=false
 Krita/Ocio/OcioLutPath=
 Krita/Ocio/UseOcio=false
-LastBackGroundColor=<!DOCTYPE LastBackGroundColor>\n<LastBackGroundColor>\n <RGB r="1" g="1" b="1" space="sRGB-elle-V2-srgbtrc.icc"/>\n</LastBackGroundColor>\n
-LastForeGroundColor=<!DOCTYPE LastForeGroundColor>\n<LastForeGroundColor>\n <RGB r="0" g="0" b="0" space="sRGB-elle-V2-srgbtrc.icc"/>\n</LastForeGroundColor>\n
-LastPreset=c)_Pencil-1_Hard
+LastBackGroundColor=<!DOCTYPE LastBackGroundColor>\n<LastBackGroundColor>\n <RGB r="0" space="sRGB-elle-V2-srgbtrc.icc" b="0" g="0"/>\n</LastBackGroundColor>\n
+LastForeGroundColor=<!DOCTYPE LastForeGroundColor>\n<LastForeGroundColor>\n <RGB r="0.749019622802734" space="sRGB-elle-V2-srgbtrc.icc" b="0.749019622802734" g="0.749019622802734"/>\n</LastForeGroundColor>\n
+LastPreset=b)_Basic-3_Flow
 LastPreset_-1=d)_Ink-7_Brush_Rough
 LastPreset_0=d)_Ink-2_Fineliner
 LastPreset_3358664425473=d)_Ink-7_Brush_Rough
@@ -164,8 +164,8 @@ memoryPoolLimitPercent=0
 memorySoftLimitPercent=2
 monitorProfile=sRGB-elle-V2-srgbtrc.icc
 monitorProfile/OverrideX11=false
-moveToolChangedValueX=49
-moveToolChangedValueY=16
+moveToolChangedValueX=781
+moveToolChangedValueY=867
 moveToolUnit=0
 newCursorStyle=3
 newOutlineStyle=2
@@ -222,7 +222,7 @@ pixelGridColor=255,255,255
 pixelGridDrawingThreshold=24
 pngImportProfile=Compatible with Adobe RGB (1998)
 presetChooserViewMode=1
-presethistory=b)_Basic-5_Size,b)_Basic-4_Flow_Opacity,b)_Airbrush_Soft,b)_Basic-3_Flow,g)_Dry_Bristles,g)_Dry_Bristles_Eroded,f)_Bristles-3_Large_Smooth,f)_Bristles-2_Flat_Rough,c)_Pencil-2,c)_Pencil-1_Hard
+presethistory=g)_Dry_Bristles_Eroded,f)_Bristles-3_Large_Smooth,f)_Bristles-2_Flat_Rough,c)_Pencil-2,c)_Pencil-1_Hard,u)_Pixel_Art,b)_Basic-5_Size,v)_Distort_Move,b)_Airbrush_Soft,b)_Basic-3_Flow
 renderIntent=0
 saveSessionOnQuit=false
 scratchpadVisible=true
@@ -259,7 +259,7 @@ active-profile=luccaugusto
 [File Dialogs]
 DontUseNativeFileDialog=true
 OpenDocument=/home/lucca/Documents/IMG/res
-SaveAs=/home/lucca
+SaveAs=/home/lucca/pics/brain
 
 [KisShortcutsDialog Settings]
 Dialog Size=694,543
@@ -647,26 +647,23 @@ yPosition=19
 
 [RecentFiles]
 File1[$e]=$HOME/Documents/Animations/Popsicle.kra
-File10[$e]=$HOME/Documents/IMG/Tenista.kra
 File2[$e]=$HOME/Documents/IMG/MapasD&D.kra
 File3[$e]=$HOME/Documents/Animations/Calise.kra
-File4[$e]=$HOME/Downloads/AlegoriusWizard.jpg
-File5[$e]=$HOME/Documents/IMG/Callgada.kra
-File6[$e]=$HOME/Documents/IMG/res/retro-car.jpg
-File7[$e]=$HOME/repos/paint/img/apaga_tudo.png
-File8[$e]=$HOME/Documents/IMG/Uncodedworld.kra
+File4[$e]=$HOME/Documents/IMG/Callgada.kra
+File5[$e]=$HOME/Documents/IMG/res/retro-car.jpg
+File6[$e]=$HOME/repos/paint/img/apaga_tudo.png
+File7[$e]=$HOME/Documents/IMG/Uncodedworld.kra
+File8[$e]=$HOME/Documents/IMG/Tenista.kra
 File9[$e]=$HOME/Documents/IMG/GoblinMontanhaa.kra
 Name1[$e]=Popsicle.kra
-Name10[$e]=Tenista.kra
 Name2[$e]=MapasD&D.kra
 Name3[$e]=Calise.kra
-Name4[$e]=AlegoriusWizard.jpg
-Name5[$e]=Callgada.kra
-Name6[$e]=retro-car.jpg
-Name7[$e]=apaga_tudo.png
-Name8[$e]=Uncodedworld.kra
+Name4[$e]=Callgada.kra
+Name5[$e]=retro-car.jpg
+Name6[$e]=apaga_tudo.png
+Name7[$e]=Uncodedworld.kra
+Name8[$e]=Tenista.kra
 Name9[$e]=GoblinMontanhaa.kra
-maxRecentFileItems=100
 
 [SelectedTags]
 kis_paintoppresets=All

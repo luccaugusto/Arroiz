@@ -1,0 +1,24 @@
+alias please="sudo"
+alias autoremove="pacman -Rns $(pacman -Qtdq)"
+alias update="sudo pacman -Syyud; yay -Syu"
+alias ls='ls --color=auto'
+alias ll='ls -laFo'
+alias cler="clear"
+alias claer="clear"
+alias clera="clear"
+alias celar="clear"
+alias clean="clear"
+alias P="sudo pacman"
+alias p="pacman"
+alias v="vim"
+alias V="sudo vim"
+alias q="exit"
+alias site="cd $HOME/repos/site/; bundle exec jekyll serve"
+alias pm="python manage.py"
+alias pms="python manage.py shell"
+alias pmr="python manage.py runserver"
+alias migrate="python manage.py makemigrations; python manage.py migrate"
+alias gmspdf='groff -ms -Tpdf'
+alias umount_phone='fusermount -u'
+alias eclipse='cd Downloads/ide/eclipse;./eclipse &'
+alias fixbt='pactl load-module module-bluetooth-discover'

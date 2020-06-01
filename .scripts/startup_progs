@@ -4,13 +4,31 @@
 #avoids any errors that might occur if a program runs before another one
 #Example: if transmission-gtk runs before bspwm rules are set it will open on workspace 1
 
+#Wifi connection
 nm-applet &
+#Hide that damn mouse when it is idle
 unclutter &
-#dwmbar &
-toggle_redshift
-transmission-gtk &
+
+#Load specific WM configs
+if [ "$(pgrep dwm)" ]; then 
+	cat $CONFIG/sxhkd/base $CONFIG/sxhkd/dwm_keys > $CONFIG/sxhkd/sxhkdrc &&
+	dwmbar &
+elif [ "$(pgrep bspwm)" ]; then
+	cat $CONFIG/sxhkd/base $CONFIG/sxhkd/bspwm_keys > $CONFIG/sxhkd/sxhkdrc
+elif [ "$(pgrep i3)" ]; then
+	cat $CONFIG/sxhkd/base $CONFIG/sxhkd/i3_keys > $CONFIG/sxhkd/sxhkdrc
+fi
 sxhkd &
+
+#Seed torrents, like a good boy
+transmission-gtk &
+#Notifications
 dunst &
+#Utterly amazing transparent terminals
 compton &
+#Let me use pt-br and en-us keyboards
 keyboard_layout &
+#Don't burn my eyes
+toggle_redshift
+#Remind of my stuff
 shownotes

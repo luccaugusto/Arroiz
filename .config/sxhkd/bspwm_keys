@@ -1,0 +1,127 @@
+##------------------------------------------------
+##-- BSPWM HOTKEYS:
+##------------------------------------------------
+##-- CLOSE AND KILL WINDOW:
+##------------------------------------------------
+
+super + shift + c
+	bspc node -c
+
+#------------------------------------------------
+#-- CYCLE LAYOUT:
+#------------------------------------------------
+super + m
+	bspc desktop -l next
+
+#------------------------------------------------
+#-- BALANCE WINDOWS - SAME AREA:
+#------------------------------------------------
+
+super + shift + b
+	bspc node any -B
+
+#Gaps
+super + ctrl + g
+	 GAPS=$(bspc config window_gap); bspc config window_gap $((GAPS+5))
+super + ctrl + h
+	 GAPS=$(bspc config window_gap); bspc config window_gap $((GAPS-5))
+
+#------------------------------------------------
+#-- SET WINDOW FLAGS:
+#------------------------------------------------
+
+super + {t,shift + t,s,shift + f}
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+#scratchpad
+super + u
+    scratchpad dropdown
+
+#------------------------------------------------
+#-- SWAP DESKTOPS WITH LAST:
+#------------------------------------------------
+
+super + apostrophe
+	bspc window -s last
+
+super + {o,i}
+	bspc wm -h off; \
+	bspc node {older,newer} -f; \
+	bspc wm -h on
+
+super + {grave,Tab}
+	bspc {window,desktop} -f last
+
+#-------------------------------------------------
+#-- SWAP CURRENT WINDOW WITH THE BIGGEST ON SCREEN:
+#-------------------------------------------------
+
+super + shift + n
+	bspc node -s biggest
+
+# focus the node in the given direction
+super + {_,shift + }{h,j,k,l}
+	bspc node -{f,s} {west,south,north,east}
+	
+#------------------------------------------------
+#-- ROTATE TREE:
+#------------------------------------------------
+
+super + shift + r  
+	bspc node @/ -R 90
+
+#------------------------------------------------
+#-- CYCLE WINDOW FORWARD OR BACKWARD:
+#------------------------------------------------
+
+super + {_,ctrl + }c
+        bspc node -f {next,prev}.local
+
+#------------------------------------------------
+#-- SELECT WHERE TO SPLIT:
+#------------------------------------------------
+
+super + ctrl + {h,j,k,l}
+	bspc node focused -p {west,south,north,east}
+
+#------------------------------------------------
+#-- CANCEL PRESELECT SPLIT:
+#------------------------------------------------
+
+super + {Left,Down,Up,Right}
+	bspc node focused -p {~west,~south,~north,~east}
+
+
+#------------------------------------------------
+#-- SEND WINDOW TO DESKTOP:
+#------------------------------------------------
+
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
+
+
+#------------------------------------------------
+#-- MOVER E REDIMENSIONAR JANELAS COM O MOUSE:
+#------------------------------------------------
+
+~button1
+	bspc pointer -g focus
+
+#super + button{1-3}
+	#bspc pointer -g {move,resize_side,resize_corner}
+
+#super + !button{1-3}
+	#bspc pointer -t %i %i
+
+#super + @button{1-3}
+	#bspc pointer -u
+
+# move floating window
+super + {_,shift + }{j,k,i,l}
+	bspc window -{f,s} {left,down,up,right}
+#------------------------------------------------
+#-- Quit bspwm:
+#------------------------------------------------
+super + alt + {q,r}
+	bspc {quit,wm -r}
+

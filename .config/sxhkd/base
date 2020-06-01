@@ -1,0 +1,84 @@
+#------------------------------------------------
+#-- WM INDEPENDENT HOTKEYS:
+#------------------------------------------------
+
+#Sound commands
+#increase sound volume
+XF86AudioRaiseVolume
+	sound_control u
+
+#decrease sound volume
+XF86AudioLowerVolume 
+	sound_control d
+
+# mute sound
+XF86AudioMute
+	sound_control m
+
+
+#Screen Brightness controls
+# increase screen brightness
+XF86MonBrightnessUp 
+	brightnessctl s 5%+;  #reloadbar
+
+# decrease screen brightness
+XF86MonBrightnessDown 
+	brightnessctl s 5%-; # reloadbar
+
+# Media player controls
+# Supports spotify
+XF86AudioPlay 
+	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause; [ $(pgrep -x mpc) ] && mpc toggle
+XF86AudioNext 
+	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next; [ $(pgrep -x mpc) ] && mpc next
+XF86AudioPrev 
+	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous; [ $(pgrep -x mpc) ] && mpc prev
+
+## in case keyboard does not have XF86 keys for audio/brightness controls, these are the alternative bindings
+super + ctrl + p 
+	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause; [ $(pgrep -x mpc) ] && mpc toggle
+super + ctrl + ] 
+	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next; [ $(pgrep -x mpc) ] && mpc next
+super + ctrl + [ 
+	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous; [ $(pgrep -x mpc) ] && mpc prev
+#Brightness
+super + ctrl + -
+	brightnessctl s 5%-; # reloadbar
+super + ctrl + +
+	brightnessctl s 5%+;  #reloadbar
+#Volume
+#volume up
+super + ctrl + u
+	sound_control u
+#volume down
+super + ctrl + d
+	sound_control d
+# mute/unmute sound
+super + ctrl + m
+	sound_control m
+
+
+#reload sxhkd
+super + Escape
+	pkill -USR1 -x sxhkd
+super + Return
+	$TERMINAL
+super + w
+	$BROWSER
+super + r
+	$TERMINAL -e ranger
+super + n
+	shownotes
+super + b
+	lockscreen
+super + shift + s
+	powermenu
+super + p
+	dmen
+super + alt + v
+	toggle_redshift
+super + F1
+	cheatsheet
+#Monitors
+super + F12
+	monitors

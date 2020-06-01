@@ -1,10 +1,3 @@
-rename aula05-13.mp4
-shell zathura resumo_art.md
-rename resumo_art.md
-rename resumo_art.ms
-shell  %s
-shell groff -ms -T pdf resumo_art.ms | zathura -
-shell groff -ms -T pdf resumo_art.ms | zathura - &
 shell unzip TL-WR941ND_V5_150311.zip
 mkdir tplink
 shell unzip TL-WR941ND_V5_150311.zip 
@@ -41,10 +34,17 @@ search opencv
 rename startup_progs
 rename launch_polybar
 rename Grindline The Band - Rip Ride Die.zip
-delete
 rename exame1.jpg
 rename exame2.jpg
 rename exame3.jpg
 rename exame4.jpg
 rename exame5.jpg
 rename exame6.jpg
+delete
+mkdir prova2
+rename sxhkdrc_base
+rename sxhkdrc_bspwm
+rename base
+rename bspwm_keys
+rename dwm_keys
+rename i3_keys
