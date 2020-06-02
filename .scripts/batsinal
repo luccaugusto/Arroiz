@@ -2,24 +2,18 @@
 # Notifica quando a bateria estah abaixo de 5%
 #export DBUS_SESSION_BUS_ADDRESS eh da versao antiga que rodava no cron
 
-PERCENT=$(cat /sys/class/power_supply/BAT0/capacity)
-PERCENT1=$(cat /sys/class/power_supply/BAT1/capacity)
-STATUS=$(cat /sys/class/power_supply/BAT0/status)
-STATUS1=$(cat /sys/class/power_supply/BAT1/status)
+COUNT="$(ls /sys/class/power_supply/ | wc -w)"
+PERCENT="$(cat /sys/class/power_supply/*/capacity | paste -sd '+')"
+STATUS="$(cat /sys/class/power_supply/*/status)"
 
+#Count -1 to ignore AC
+TOTAL=$(( PERCENT / (COUNT-1) ))
 
-FINAL_STATUS=''
-if [  $STATUS == 'Discharging' ] || [ $STATUS1 == 'Discharging' ]; then
-	FINAL_STATUS='Discharging'
-fi
+FINAL_STATUS='Charging'
+[ "$(echo $STATUS | grep Discharging)" ] && FINAL_STATUS='Discharging'
 
-TOTAL=$((PERCENT + PERCENT1))
-TOTAL=$((TOTAL/2))
-
-
-if [ $TOTAL -lt 10 ] && [ "$FINAL_STATUS" == 'Discharging' ]; then
-	#beep
-	export DISPLAY=:0.0 &&	
-	notify-send -u critical "Battery low" "Battery at $TOTAL%"
-	#export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus &&
-fi
+[ $TOTAL -lt 10 ] && [ "$FINAL_STATUS" == 'Discharging' ] &&
+#export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus &&
+export DISPLAY=:0.0 &&	
+notify-send -u critical "Battery low" "Battery at $TOTAL%" &&
+beep

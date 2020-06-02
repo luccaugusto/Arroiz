@@ -24,7 +24,7 @@
 
 	colorscheme wal
 	
-	"Split pannels in a more natural way
+	"Split panels in a more natural way
 	set splitbelow
 	set splitright
 	
@@ -67,25 +67,6 @@
 "==============================
 "        StatusLine
 "=============================
-"set laststatus=2
-"set statusline=
-"set statusline +=%1*\ %n\ %*            					"buffer number
-"set statusline +=%3*\ %{''.(&fenc!=''?&fenc:&enc).''}      	"Encoding
-"set statusline +=%3*\ %{(&bomb?\",BOM\":\"\")}\            	"Encoding2
-"set statusline +=%4*\ %<%F%*            					"full path
-"set statusline +=%2*%m%r%w                					"modified flag, read only
-""set statusline +=%y%=%{v:register}\ %*						"whats on copy/paste buffer
-"set statusline +=%1*%=%4v\ %*             					"virtual column number
-"
-"hi User1 ctermfg=007
-"hi User2 ctermfg=008
-"hi User3 ctermfg=008
-"hi User4 ctermfg=008
-"hi User5 ctermfg=008
-"hi User7 ctermfg=008
-"hi User8 ctermfg=008
-"hi User9 ctermfg=007
-
 set laststatus=2
 set statusline=
 set statusline+=%8*\ [%n]                 " buffernr
@@ -116,7 +97,10 @@ hi User9 ctermfg=007 ctermbg=003
 	nmap <leader>w :wq<CR>
 	nnoremap <leader>c :close<CR>
 	nnoremap <leader>o :q<CR>
-	nnoremap <leader>O :q!<CR>
+
+	"Spell checking
+	nnoremap <leader>p :set spell spelllang=pt_br<CR>
+	nnoremap <leader>e :set spell spelllang=en_us<CR>
 
 	"Splits
 	nnoremap <leader>v :vsplit 
@@ -193,8 +177,9 @@ endfunction
 
 command! Bj call BeginJ()
 function! BeginJ()
-	normal! ipublic class <++>{
-	normal! opublic static void main(String[] args){<CR>
+	normal! ipublic class <++> {
+	normal! o
+	normal! opublic static void main(String[] args) {
 	normal! o
 	normal! o}
 	normal! o}

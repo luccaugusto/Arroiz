@@ -40,7 +40,6 @@ rename exame3.jpg
 rename exame4.jpg
 rename exame5.jpg
 rename exame6.jpg
-delete
 mkdir prova2
 rename sxhkdrc_base
 rename sxhkdrc_bspwm
@@ -48,3 +47,4 @@ rename base
 rename bspwm_keys
 rename dwm_keys
 rename i3_keys
+delete
