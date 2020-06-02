@@ -44,6 +44,7 @@ otf-font-awesome
 polybar
 powertop
 pulseaudio
+pulsemixer
 ranger
 redshift
 simple-mtpfs
