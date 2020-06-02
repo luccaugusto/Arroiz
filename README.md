@@ -15,7 +15,7 @@ Using pywal for all the system colors. (should i change to gruvbox?)
 ## Key Bindings
 On bspwm all key bindings are handled by sxhkd. On dwm window manager specific actions are bind in config.h and generic key bindings such as opening a program are bind in sxhkd.
 
-As it is extremelly hard to manually change the file to load or not load the bindings for bspwm or dwm on sxhkdrc the startup_progs script does it automattically. On the sxhkd directory, under the config directory, there are separate files for each wm and a common file called base. On startup the startup_progs dinamically creates sxhkdrc by running cat on the base file and the bindings file for the currently running wm.
+As it is extremelly hard to manually change the file to load or not load the bindings for bspwm or dwm on sxhkdrc the startup_progs script does it automatically. On the sxhkd directory, under the config directory, there are separate files for each wm and a common file called base. On startup the startup_progs dinamically creates sxhkdrc by running cat on the base file and the bindings file for the currently running wm.
 
 ## Colors
 On the colors subject a important thing must be said. Pywal generates a colors-wal-dwm.h file that doesn't work for dwm, causing compile time errors.
