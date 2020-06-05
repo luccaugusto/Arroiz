@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#-Locks the screen, pauses songs and videos.
+
 # Pause music (mocp, mpd and send the pause key to all mpv videos):
 
 # Pause music (mocp, mpd and send the pause key to all mpv videos):

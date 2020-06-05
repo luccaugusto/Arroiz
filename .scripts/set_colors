@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#-Set my system colors using pywal
+
 BG="$HOME/repos/wallpapers/OOORiver-normlCloud.jpg"
 [ $1 ] && BG="$1"
 

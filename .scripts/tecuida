@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#-Reminds me to take a break
+
 while : ; do
 	sleep 60m
 	notify-send -u critical "Pô cara, ajeita essa postura" "Levanta aí, dá uma volta, estica as pernas, alonga. Cuida desse corpitcho lindo seu."

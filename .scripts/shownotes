@@ -1,5 +1,7 @@
 #!/bin/bash
 
-[ ! $NOTES_PATH ] && NOTES_PATH=$HOME/.scritps/.notesgeral
+#-Show all untagged notes as a notification via notify-send
+
+[ $NOTES_PATH ] || NOTES_PATH=$HOME/.scritps/.notesgeral
 NOTES=$(anote -l -d)
 notify-send -u critical "Your Notes" "$NOTES"

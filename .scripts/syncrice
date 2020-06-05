@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#-Sync my rice repository
+#-if a string is passed as a argument uses this string as a commit message
+
 RICE=$HOME/repos/rice
 CONFIG=$HOME/.config
 AQUI=$PWD
@@ -41,7 +44,12 @@ cp -r $CONFIG/wal $RICE/.config
 cp -r $CONFIG/mpd $RICE/.config
 cp -r $CONFIG/ncmpcpp $RICE/.config
 
+#update README with scripts documentation
+script_docs
+
 cd $RICE
+#just so i know what i changed
+git status
 echo "Adding new files to repo"
 git add .
 [ "$1" ] && 

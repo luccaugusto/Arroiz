@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#-dmenu_run with pywal colors
+
 # Import the colors.
 . "${HOME}/.cache/wal/colors.sh"
 

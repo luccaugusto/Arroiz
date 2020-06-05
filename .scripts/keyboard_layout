@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#-Sets my keyboard layout to en_us and pt_br
+
 #Checks if a external keyboard is connect
 #Most likely it will be a brazilian one 
 #so it sets de default layout as br and the alternative as us

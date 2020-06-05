@@ -6,9 +6,9 @@
 export EDITOR="vim"
 export TERMINAL="st"
 export READER="zathura"
+export BROWSER="vivaldi-stable"
 #in case xdg settings doesn't use $BROWSER value
 #xdg-settings set default-web-browser $BROWSER.desktop
-export BROWSER="vivaldi-stable"
 
 # Cleaning my home
 export CONFIG="$HOME/.config"
@@ -23,12 +23,12 @@ export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.gem/ruby/2.6.0/bin"
 export PATH="$PATH:$JAVA_HOME/bin"
 #Only when using django
-#export PYTHONPATH="$PYTHONPATH:$HOME/Repos/S_Admin/meteflix/apps"
+#export PYTHONPATH="$PYTHONPATH:$HOME/repos/S_Admin/meteflix/apps"
 
 #Others
 export GROFF_ENCODING=UTF-8
-export BEEP="/usr/share/sounds/freedesktop/stereo/complete.oga"
 export mygit='https://github.com/lrr68/'
+export REPOS='$HOME/repos'
 
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc

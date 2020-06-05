@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#-Shows directories size in human readable format
+
 du -k --max-depth=1 | sort -nr | awk '
 	BEGIN {
 		split("KB,MB,GB,TB",Units, ",");

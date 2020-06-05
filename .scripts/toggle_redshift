@@ -1,4 +1,5 @@
 #!/bin/bash
 
-#Turns redshift on and off
+#-Turns redshift on and off
+
 killall redshift || redshift -c ~/.config/redshift/config &

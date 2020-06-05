@@ -1,0 +1,13 @@
+#!/bin/bash
+
+#-Grabs the doc comments of all scripts in .scripts folder and output them in MD
+#-to the README.md file in my rice repository.
+#-doc comments are lines beggining with #-
+
+README="$REPOS/rice/README.md"
+
+START='<!--startscripts-->'
+END='<!--endscripts-->'
+
+#Concatenate everything before $START tag with get_docs with everything after $END tag
+printf "%s\n%s\n%s\n%s\n" "$(sed "/$START/q" $README)" "$(get_docs)" "$END" "$(awk "f;/$END/{f=1}" $README)" > $README

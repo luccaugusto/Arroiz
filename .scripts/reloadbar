@@ -1,5 +1,5 @@
 #!/bin/bash
 
-#kills current dwmbar so it reloads
+#-kills current dwmbar so it reloads
 
 kill "$(pstree -lp | grep -- -dwmbar\([0-9] | sed "s/.*sleep(\([0-9]\+\)).*/\1/")"

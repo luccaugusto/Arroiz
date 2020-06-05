@@ -1,3 +1,5 @@
 #!/bin/bash
 
+#-Records my webcam
+
 ffmpeg -i /dev/video0 webcam.mkv

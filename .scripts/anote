@@ -1,11 +1,10 @@
 #!/bin/bash
 
-#Notes CRUD
-#script for taking simple notes in the terminal
+#-Simple script for taking notes in the terminal.
+#-Notes are saved in $NOTES_PATH directory or $HOME/.scripts if $NOTES_PATH is not set
+#-run 'anote -h' for help
 
-if [ ! $NOTES_PATH ];then
-	NOTES_PATH="$HOME/.scripts/"
-fi
+[ $NOTES_PATH ] ||  NOTES_PATH="$HOME/.scripts/"
 
 add_note()
 {

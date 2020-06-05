@@ -1,7 +1,9 @@
 #!/bin/bash
 
-#Script to backup important files to exernal HD
-#Takes a directory as parameter to back files up to
+#-Backup important directories to directory specified. 
+#-Exits if no directory was specified.
+#-Exits if the specified directory doesn't have space for backup
+#-run 'backup' for help
 
 #define the files to be backed up
 FILES_LOCATION=("/home/lucca/Documents/" "/home/lucca/Downloads/" "/home/lucca/Pictures/" "/home/lucca/music/")

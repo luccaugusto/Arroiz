@@ -1,11 +1,3 @@
-shell unzip TL-WR941ND_V5_150311.zip
-mkdir tplink
-shell unzip TL-WR941ND_V5_150311.zip 
-open_with q
-open_with sxiv
-mkdir ep2
-shell unzip 185591813.flac.zip
-open_with mplayer
 open_with 
 rename luccaugusto.mp3
 rename aula05-11-completa.mp4
@@ -47,4 +39,12 @@ rename base
 rename bspwm_keys
 rename dwm_keys
 rename i3_keys
+mkdir artigo
+rename ram-dass-portrait.png
+mkdir filosofia
+rename lucca.mp3
+shell unzip streamster.zip
+mkdir fonts
+shell tar -xf gimp-2.9.2.tar.bz2
 delete
+open_with to

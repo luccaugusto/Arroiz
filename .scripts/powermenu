@@ -1,3 +1,5 @@
 #!/bin/bash
 
+#-Shutdown or reboot via dmenu
+
 printf "cancel\nshutdown now\nreboot" | dmenu -l 3 | bash

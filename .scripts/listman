@@ -1,4 +1,5 @@
 #!/bin/bash
 
-pacman -Q | awk '{print $1}' | dmenu -l 30 | xargs -r man -Tpdf| zathura -
+#-List manuals for the installed programs
 
+pacman -Q | awk '{print $1}' | dmenu -l 30 | xargs -r man -Tpdf| zathura -

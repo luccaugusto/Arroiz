@@ -1,0 +1,15 @@
+#!/bin/bash
+
+#-Generates a MD file with all the doc comments from the files
+#-in ~/.scripts folder
+
+SCRIPTS="$HOME/.scripts"
+#DOC=".docs"
+
+for s in $(ls $SCRIPTS)
+do
+	script="$SCRIPTS/$s"
+	comments=$(grep "^#-" $script | sed "s/^#-//g" | sed "s/'/\`/g" )
+	printf "### %s\n%s\n\n" "$s" "$comments"
+done
+

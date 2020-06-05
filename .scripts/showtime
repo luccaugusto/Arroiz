@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#-Show how long i have been using the computer
+#--b argument show since when it's counting
+
 total(){
 	fulltime=0
 	for day in $(ls $HOME/.time); do

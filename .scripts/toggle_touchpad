@@ -1,5 +1,6 @@
 #!/bin/bash
-# Script to toggle the touchpad on/off
+
+#-Script to toggle the touchpad on/off
 
 # Try to find a touchpad
 DEV_NAME="$(xinput list --name-only | grep -i touchpad | head -n 1)"

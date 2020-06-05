@@ -1,5 +1,7 @@
 #!/usr/bin/bash
 
+#-Scratchpad terminal for bspwm
+
 if [ -z $1 ]; then
 	echo "Usage: $0 <name of hidden scratchpad window>"
 	exit 1

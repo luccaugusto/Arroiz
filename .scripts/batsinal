@@ -1,5 +1,10 @@
 #!/bin/sh
-# Notifica quando a bateria estah abaixo de 5%
+
+#-Notifies via notify-send when battery is bellow 10%,
+#-also beeps if $BEEP is defined and the script beep exists
+#-if there is more than 1 battery, the total percentage is the 
+#-average of the sum of the capacity of each battery
+
 #export DBUS_SESSION_BUS_ADDRESS eh da versao antiga que rodava no cron
 
 COUNT="$(ls /sys/class/power_supply/ | wc -w)"

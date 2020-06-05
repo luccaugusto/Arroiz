@@ -1,3 +1,5 @@
 #!/bin/bash
 
-paplay $BEEP
+#-Play a beep sound
+
+paplay "/usr/share/sounds/freedesktop/stereo/complete.oga"

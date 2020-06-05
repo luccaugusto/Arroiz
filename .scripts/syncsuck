@@ -1,6 +1,8 @@
 #!/bin/bash
 
-#updates the Suckless repository
+#-updates my Suckless repository
+#-Generates diff files for the changes i made automatically
+
 SUCK=/home/lucca/Repos/Suckless/
 cd $SUCK
 #Looks for modified files to make a diff of that file and save it under the folder 'patches' of each folder

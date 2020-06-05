@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#-Helper to mount android phones, works with dmenu
+
 dev=$(simple-mtpfs -l | dmenu -l 3)
 dev=${dev:0:1}
 

@@ -1,4 +1,7 @@
 #!/bin/bash
+
+#-Records my screen to a file in ~/
+
 SIZE=$(xrandr | grep eDP1 | awk '{print $4}' | sed 's/+0+0//')
 DATE=`date +%Y-%m-%d`
 

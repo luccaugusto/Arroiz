@@ -1,8 +1,6 @@
 #!/bin/bash 
 
-
-#!/bin/bash
-
+#-Operations with date and time
 
 #soma hora 'h1' na hora 'h2'
 soma_hora()

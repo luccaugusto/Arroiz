@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+#-Launches polybar. Works for multiple monitors
+
 # Terminate already running bar instances
 killall -q polybar
 

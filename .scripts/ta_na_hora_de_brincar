@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#-Counts how long i have been working and notifies me via notify-send
+#-when its almost over
+#-Also notifies me if it's getting close to the rush hour
+
 if [ ! -z /tmp/.login_time ]; then
 	touch /tmp/.login_time
 fi

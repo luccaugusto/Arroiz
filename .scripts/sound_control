@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#-Wrapper for controlling volume, makes bluetooth and computer volume the same
+
 [ ! $1 ] && echo "sound_control [u/d/m]" && echo " [u]p [d]own [m]ute toggle" && exit
 
 opt="$1"; shift

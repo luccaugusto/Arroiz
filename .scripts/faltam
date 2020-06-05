@@ -1,5 +1,6 @@
 #!/bin/bash
 
+#-Work script, notifies how long till i have worked my shift
 
 F=$(cat /tmp/faltam)
 F=$(data_hora -m $F)

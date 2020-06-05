@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#-Chess like timer
+#-$1 is how long the first timer should run
+#-$2 is how long the second timer should run
+
 min_a=10
 min_b=10
 [ $1 ] && min_a=$1
