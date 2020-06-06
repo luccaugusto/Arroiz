@@ -80,7 +80,7 @@ bspc rule -a feh 					floating=on center=true follow=off
 # scratchpad
 bspc rule -a dropdown sticky=on state=floating hidden=on
 # class for floating windows
-bspc rule -a floats sticky=on state=floating
+bspc rule -a floats state=floating
 
 set_colors
 startup_progs

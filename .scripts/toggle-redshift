@@ -1,8 +1,0 @@
-#!/bin/bash
-
-if [ $(pgrep redshift) ]
-then
-	pkill redshift
-else
-	redshift -c ~/.config/redshift/config
-fi

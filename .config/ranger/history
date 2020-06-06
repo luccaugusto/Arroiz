@@ -46,5 +46,5 @@ rename lucca.mp3
 shell unzip streamster.zip
 mkdir fonts
 shell tar -xf gimp-2.9.2.tar.bz2
-delete
 open_with to
+delete

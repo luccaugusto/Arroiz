@@ -49,9 +49,9 @@ run `anote -h` for help
 
 ### backup
 Backup important directories to directory specified. 
-Exits if no directory was specified.
-Exits if the specified directory doesn`t have space for backup
-run `backup` for help
+ Exits if no directory was specified.
+ Exits if the specified directory does not have space for backup
+ run `backup` for help
 
 ### batsinal
 Notifies via notify-send when battery is bellow 10%,
@@ -116,6 +116,9 @@ Helper to mount android phones, works with dmenu
 
 ### mplayer
 Starts mpd and opens ncmpcpp
+
+### must_update
+Warns me via notify-send when i should update (20 + packages needing update).
 
 ### powermenu
 Shutdown or reboot via dmenu

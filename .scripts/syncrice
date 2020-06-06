@@ -3,12 +3,19 @@
 #-Sync my rice repository
 #-if a string is passed as a argument uses this string as a commit message
 
-RICE=$HOME/repos/rice
+RICE=$REPOS/rice
 CONFIG=$HOME/.config
 AQUI=$PWD
+echo $RICE
 
 echo "Cleaning Repository to delete old files. (Dotfiles only)"
-rm $RICE/.* > /dev/null 2>&1
+#Bad way to do it but a haven't found a better one
+#find $RICE \! -name ".git" didn't work
+#Rename git folder so it doesn't get deleted
+mv $RICE/.git $RICE/git
+rm -rf $RICE/.* > /dev/null 2>&1
+#Rename to the original name
+mv $RICE/git $RICE/.git
 
 echo "copying home files"
 cp $HOME/.aliases $RICE
@@ -27,6 +34,7 @@ cp -r $HOME/.scripts $RICE
 cp -r $HOME/.time $RICE
 
 echo "copying .config files"
+mkdir $RICE/.config
 cp $CONFIG/kritadisplayrc $RICE/.config
 cp $CONFIG/kritarc $RICE/.config
 cp $CONFIG/kritashortcutsrc $RICE/.config
@@ -45,6 +53,7 @@ cp -r $CONFIG/mpd $RICE/.config
 cp -r $CONFIG/ncmpcpp $RICE/.config
 
 #update README with scripts documentation
+echo "Updating README"
 script_docs
 
 cd $RICE

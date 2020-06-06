@@ -32,3 +32,5 @@ keyboard_layout &
 toggle_redshift
 #Remind of my stuff
 shownotes
+#Tell me if i need to update
+must_update

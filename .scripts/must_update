@@ -1,0 +1,6 @@
+#!/bin/bash
+
+#-Warns me via notify-send when i should update (20 + packages needing update).
+
+COUNT=$(pacman -Qu | wc -l)
+[ "$COUNT" -gt 20 ] && notify-send "Yo, Update me Bro" "$COUNT packages need update"

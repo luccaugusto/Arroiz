@@ -10,6 +10,9 @@ export BROWSER="vivaldi-stable"
 #in case xdg settings doesn't use $BROWSER value
 #xdg-settings set default-web-browser $BROWSER.desktop
 
+# No history limit
+export HISTSIZE=-1
+
 # Cleaning my home
 export CONFIG="$HOME/.config"
 export XDG_CONFIG_HOME="$CONFIG"
@@ -28,7 +31,7 @@ export PATH="$PATH:$JAVA_HOME/bin"
 #Others
 export GROFF_ENCODING=UTF-8
 export mygit='https://github.com/lrr68/'
-export REPOS='$HOME/repos'
+export REPOS="$HOME/repos"
 
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
