@@ -3,20 +3,36 @@
 #-Set my system colors using pywal
 
 BG="$HOME/repos/wallpapers/OOORiver-normlCloud.jpg"
-[ $1 ] && BG="$1"
 
-wal -t -n -i "$BG"
+colors()
+{
+	#for some reason .config/wall.jpg was always getting the old one, maybe because of cache 
+	#rewrite line 5 with $1 to set default
+	#Escape / in $HOME
+	[ "$1" ] &&
+	BG="$1" &&
+	old=$(echo 'BG="$HOME/repos/wallpapers/OOORiver-normlCloud.jpg"' | sed  's/\//\\\//g') &&
+	new=$(echo 'BG="$HOME/'"$1"'"' | sed  's/\//\\\//g') &&
+	sed -i "s/$old/$new/g" $HOME/.scripts/set_colors
 
-#for some reason .config/wall.jpg was always getting the old one, maybe because of cache
-#rewrite line 5 with $1 to set default
-#Escape / in $HOME
-[ "$1" ] &&
-old=$(echo 'BG="$HOME/repos/wallpapers/OOORiver-normlCloud.jpg"' | sed  's/\//\\\//g') &&
-new=$(echo 'BG="$HOME/'"$1"'"' | sed  's/\//\\\//g') &&
-sed -i "s/$old/$new/g" $HOME/.scripts/set_colors
+	wal -n -i "$BG"
 
-#Make a file that can acctualy be used for dwm
-cp $HOME/.cache/wal/colors-wal-dwm.h $HOME/.cache/wal/colors-wal-dwm-real.h
-sed -i "s/\[SchemeNorm\] = //g" $HOME/.cache/wal/colors-wal-dwm-real.h
-sed -i "s/\[SchemeSel\]  = //g" $HOME/.cache/wal/colors-wal-dwm-real.h
-sed -i "s/\[SchemeUrg\] = //g" $HOME/.cache/wal/colors-wal-dwm-real.h
+	#Make a file that can acctualy be used for dwm
+	cp $HOME/.cache/wal/colors-wal-dwm.h $HOME/.cache/wal/colors-wal-dwm-real.h
+	sed -i "s/\[SchemeNorm\] = //g" $HOME/.cache/wal/colors-wal-dwm-real.h
+	sed -i "s/\[SchemeSel\]  = //g" $HOME/.cache/wal/colors-wal-dwm-real.h
+	sed -i "s/\[SchemeUrg\] = //g" $HOME/.cache/wal/colors-wal-dwm-real.h
+}
+
+
+wallpaper()
+{
+	xwallpaper --output all --stretch $BG
+}
+
+case $1 in
+	-w) shift; wallpaper
+		;;
+	*) colors "$1"; shift
+		;;
+esac

@@ -41,5 +41,6 @@ if [[ "$(tty)" = "/dev/tty1" ]]; then
 	pgrep -x bspwm || exec startx
 fi
 if [[ "$(tty)" = "/dev/tty2" ]]; then
+	. .cache/wal/colors-tty.sh
 	pgrep -x tmux || tmux
 fi
