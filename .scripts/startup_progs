@@ -25,7 +25,7 @@ fi
 sxhkd &
 
 #Seed torrents, like a good boy
-transmission-gtk &
+transmission-qt &
 #Notifications
 dunst &
 #Utterly amazing transparent terminals

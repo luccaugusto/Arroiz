@@ -56,10 +56,10 @@ echo "Updating README"
 script_docs
 
 cd $RICE
-#just so i know what i changed
-git status
 echo "Adding new files to repo"
 git add .
+#just so i know what i changed
+git status
 [ "$1" ] && 
 echo "Comitting changes" &&
 git commit -m "$1" &&

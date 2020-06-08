@@ -45,6 +45,6 @@ touch urls.py
 mkdir templates
 mkdir TccAdmin
 shell vim bancas.html
-open_with vim
 
 shell vim sucesso.html
+open_with vim
