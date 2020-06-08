@@ -1,9 +1,3 @@
-rename luccaugusto.mp3
-rename aula05-11-completa.mp4
-rename 730330_introducao.pdf
-rename 1_introducao.pdf
-rename 2_modalidades.pdf
-rename 3_percepcao.pdf
 rename 4_segmentacao.pdf
 rename 5_descricao.pdf
 rename 3_reconhecimento.pdf
@@ -12,7 +6,6 @@ rename 568023_lista1.pdf
 rename lista1.pdf
 rename lista2.pdf
 shell unzip ilovepdf_converted.zip
-
 rename 7_Fourier.pdf
 rename 8_filtros.pdf
 rename 9_realce1.pdf
@@ -48,3 +41,10 @@ shell tar -xf gimp-2.9.2.tar.bz2
 open_with to
 delete
 shell unzip TestMySpline_2016-04-01.zip
+touch urls.py
+mkdir templates
+mkdir TccAdmin
+shell vim bancas.html
+open_with vim
+
+shell vim sucesso.html

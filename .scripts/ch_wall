@@ -1,0 +1,11 @@
+#!/bin/bash
+
+#-Shows me all files in my wallpaper repository and i can choose one to be my new wallpaper
+
+IMGS="$REPOS/wallpapers/"
+cd $IMGS
+WALL="$(shuf -e `ls` | sxiv -t -o -i)"
+#Change colors
+set_colors "$IMGS$WALL"
+#Change wallpaper
+set_colors -w

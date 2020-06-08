@@ -71,6 +71,9 @@ Play a beep sound
 Opens a terminal with a man document showing the 
 important system bindings and some general info
 
+### ch_wall
+Shows me all files in my wallpaper repository and i can choose one to be my new wallpaper
+
 ### data_hora
 Operations with date and time
 

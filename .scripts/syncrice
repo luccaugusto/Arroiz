@@ -38,7 +38,6 @@ mkdir $RICE/.config
 cp $CONFIG/kritadisplayrc $RICE/.config
 cp $CONFIG/kritarc $RICE/.config
 cp $CONFIG/kritashortcutsrc $RICE/.config
-cp $CONFIG/wall.jpg $RICE/.config
 cp -r $CONFIG/i3 $RICE/.config
 cp -r $CONFIG/i3status $RICE/.config
 cp -r $CONFIG/bspwm $RICE/.config
