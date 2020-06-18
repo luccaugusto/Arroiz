@@ -1,5 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =0
+let g:netrw_dirhistcnt =2
+let g:netrw_dirhist_2='/home/lucca/repos/portfolio'
+let g:netrw_dirhist_1='/home/lucca/repos/portfolio/piadas'
 let g:netrw_dirhist_0='/home/lucca/.scripts'
 let g:netrw_dirhist_9='/home/lucca/.vim/luke'
 let g:netrw_dirhist_8='/home/lucca/.vim'
@@ -8,5 +10,3 @@ let g:netrw_dirhist_6='/home/lucca/.vim'
 let g:netrw_dirhist_5='/home/lucca/.vim/spell'
 let g:netrw_dirhist_4='/home/lucca/.vim'
 let g:netrw_dirhist_3='/home/lucca/repos'
-let g:netrw_dirhist_2='/home/lucca/repos/paint'
-let g:netrw_dirhist_1='/home/lucca/repos'

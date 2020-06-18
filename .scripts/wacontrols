@@ -1,0 +1,11 @@
+#!/bin/bash
+
+#-Helper for manipulating wacom devices
+#-only rotates it right now
+
+DEVS=$(xsetwacom list devices | awk '{print $7}')
+
+for d in $DEVS
+do
+	xsetwacom set $d rotate cw
+done

@@ -72,7 +72,7 @@ bspc rule -a shotcut 				desktop=^3 	follow=off
 bspc rule -a Telegram 				desktop=^4 	follow=off
 bspc rule -a discord				desktop=^6 	follow=off
 bspc rule -a mpv 					desktop=^5 	follow=off fullscreen=on 
-bspc rule -a "Transmission-qt"	 	desktop=^5  follow=off state=pseudo_tiled
+bspc rule -a "transmission"		 	desktop=^5  follow=off state=pseudo_tiled
 bspc rule -a Spotify 				desktop=^10 follow=off
 bspc rule -a feh 					floating=on center=true follow=off
 

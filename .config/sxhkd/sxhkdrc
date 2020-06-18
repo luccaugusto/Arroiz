@@ -58,13 +58,13 @@ super + ctrl + m
 
 #reload sxhkd
 super + Escape
-	pkill -USR1 -x sxhkd
+	pkill -USR1 -x sxhkd && sxhkd &
 super + Return
 	$TERMINAL
 super + w
 	$BROWSER
 super + r
-	$TERMINAL -e ranger
+	$TERMINAL ranger
 super + n
 	shownotes
 super + b
@@ -73,16 +73,20 @@ super + shift + s
 	powermenu
 super + p
 	dmen
+super + d
+	krita
 
 # FUNCTION KEYS
 super + F1
 	cheatsheet
 super + F2
 	$TERMINAL -c floats -e pulsemixer
+super + F9
+	scrot && notify-send "Scrot taken"
 super + F10
 	toggle_redshift
 super + F11
-	$TERMINAL -c floats -e gotop -l kitchensink
+	killall gotop || $TERMINAL -c floats -e gotop -l kitchensink
 super + F12
 	monitors
 ##------------------------------------------------

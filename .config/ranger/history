@@ -1,50 +1,50 @@
-rename 4_segmentacao.pdf
-rename 5_descricao.pdf
-rename 3_reconhecimento.pdf
-rename 6_reconhecimento.pdf
-rename 568023_lista1.pdf
-rename lista1.pdf
-rename lista2.pdf
-shell unzip ilovepdf_converted.zip
-rename 7_Fourier.pdf
-rename 8_filtros.pdf
-rename 9_realce1.pdf
-rename 10_realce2.pdf
-rename 11_Compressao.pdf
-shell xrdb .Xresources
-shell unzip opencv-3.4.10.zip
-mkdir build
-search opencv
-rename startup_progs
-rename launch_polybar
-rename Grindline The Band - Rip Ride Die.zip
-rename exame1.jpg
-rename exame2.jpg
-rename exame3.jpg
-rename exame4.jpg
-rename exame5.jpg
-rename exame6.jpg
-mkdir prova2
-rename sxhkdrc_base
-rename sxhkdrc_bspwm
-rename base
-rename bspwm_keys
-rename dwm_keys
-rename i3_keys
-mkdir artigo
-rename ram-dass-portrait.png
-mkdir filosofia
-rename lucca.mp3
-shell unzip streamster.zip
-mkdir fonts
-shell tar -xf gimp-2.9.2.tar.bz2
-open_with to
+rename index.html
+rename blog.html
+imagens
+mkdir images
+open_with gimp
+mkdir
+mkdir portfolio
+mkdir piadas
+rename piadas.html
+shell vim compress_img.sh
+mkdir ba
+chmod +x comp
+shell chmod +x compress_img.sh
+shell rm *.jpg
+shell . compress_img.sh && . uploadarquivos.sh
+shell rm *.png
+rename sobre.html
+shell
+shell rm *jpg
+shell rm *png
+mkdir icons
+rename styles.scss
+rename style.scc
+rename style.css
+shell file OchaNonde.cur | less
+shell file finn.cur | less
+shell convert -resize 32x32 OchaNonde.png OchaNonde2.png
+shell convert -trim OchaNonde2.png OchaNonde2.png
+rename OchaNonde.cur
+shell . cursores.sh
+shell unzip nhs-video-production-b4f5ef.zip
+mkdir talvez
+shell . uploadarquivos.sh
+shell . compress_img.sh
+mkdir js
+shell vim muda.js
+sort 
+search IMG_2020
+search IMG_202006
+mkdir timelapse-bigode
+shell umount_phone cell
+shell unzip Raw-20200616T102943Z-001.zip
+s
+shell 
+rename Gemfile.lock
 delete
-shell unzip TestMySpline_2016-04-01.zip
-touch urls.py
-mkdir templates
-mkdir TccAdmin
-shell vim bancas.html
 
-shell vim sucesso.html
-open_with vim
+shell episodios.yml
+shell vim episodios.yml
+rename lucca.jpg

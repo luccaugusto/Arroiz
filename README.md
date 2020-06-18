@@ -199,6 +199,10 @@ Script to toggle the touchpad on/off
 
 ### treesize
 Shows directories size in human readable format
+
+### wacontrols
+Helper for manipulating wacom devices
+only rotates it right now
 <!--endscripts-->
 
 

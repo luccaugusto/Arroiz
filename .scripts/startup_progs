@@ -14,18 +14,18 @@ nm-applet &
 unclutter &
 
 #Load specific WM configs
-if [ "$(pgrep dwm)" ]; then 
+if [ "$(pgrep -x bspwm)" ]; then
+	cat $CONFIG/sxhkd/base $CONFIG/sxhkd/bspwm_keys > $CONFIG/sxhkd/sxhkdrc
+elif [ "$(pgrep -x dwm)" ]; then 
 	cat $CONFIG/sxhkd/base $CONFIG/sxhkd/dwm_keys > $CONFIG/sxhkd/sxhkdrc &&
 	dwmbar &
-elif [ "$(pgrep bspwm)" ]; then
-	cat $CONFIG/sxhkd/base $CONFIG/sxhkd/bspwm_keys > $CONFIG/sxhkd/sxhkdrc
-elif [ "$(pgrep i3)" ]; then
+elif [ "$(pgrep -x i3)" ]; then
 	cat $CONFIG/sxhkd/base $CONFIG/sxhkd/i3_keys > $CONFIG/sxhkd/sxhkdrc
 fi
 sxhkd &
 
 #Seed torrents, like a good boy
-transmission-qt &
+[ ! "$(pgrep -x transmission-qt)" ] && transmission-qt &
 #Notifications
 dunst &
 #Utterly amazing transparent terminals

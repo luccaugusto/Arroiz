@@ -64,6 +64,7 @@ unclutter
 vlc
 w3m
 xdotool
+xf86-input-wacom
 xkeyboard-config
 xorg-fonts-encodings
 xorg-server

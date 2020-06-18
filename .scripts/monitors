@@ -28,4 +28,5 @@ else
 	xrandr --output $OUT --auto $OPT eDP1
 fi
 
-[ "$(pgrep bspwm)" ] && bspc wm -r
+#some time to unplug the monitor
+[ "$(pgrep bspwm)" ] && sleep 5 && bspc wm -r

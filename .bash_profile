@@ -23,7 +23,7 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export JAVA_HOME='/usr/lib/jvm/java-11-openjdk'
 export PATH="$PATH:$HOME/.scripts"
 export PATH="$PATH:$HOME/.local/bin"
-export PATH="$PATH:$HOME/.gem/ruby/2.6.0/bin"
+export PATH="$PATH:$HOME/.gem/ruby/2.7.0/bin"
 export PATH="$PATH:$JAVA_HOME/bin"
 #Only when using django
 #export PYTHONPATH="$PYTHONPATH:$HOME/repos/S_Admin/meteflix/apps"
