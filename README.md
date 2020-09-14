@@ -44,6 +44,11 @@ Personal scripts folder, useful for the whole system
 <!--startscripts-->
 ### anote
 Simple script for taking notes in the terminal.
+Notes are saved in $NOTES_PATH directory or $HOME/.notes if $NOTES_PATH is not set
+run `anote -h` for help
+
+### anote_old
+Simple script for taking notes in the terminal.
 Notes are saved in $NOTES_PATH directory or $HOME/.scripts if $NOTES_PATH is not set
 run `anote -h` for help
 
@@ -121,7 +126,7 @@ Helper to mount android phones, works with dmenu
 Starts mpd and opens ncmpcpp
 
 ### must_update
-Warns me via notify-send when i should update (20 + packages needing update).
+Warns me via notify-send when i should update (LIMIT + packages needing update).
 
 ### powermenu
 Shutdown or reboot via dmenu
@@ -196,6 +201,12 @@ Turns redshift on and off
 
 ### toggle_touchpad
 Script to toggle the touchpad on/off
+
+### trata_img
+ Trata imagens para subir pro meu portfolio
+ Comprime para jpg com $QUALIDADE de qualidade e $ESCALA do tamanho,
+ esses valores sao adequados para a resolução das minhas imagens (4096x4096 300dpi ou 2480x3508 300dpi),
+ podem não ser adequados para outras resoluções
 
 ### treesize
 Shows directories size in human readable format

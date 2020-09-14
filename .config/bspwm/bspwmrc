@@ -19,8 +19,8 @@ bsp_monitors()
 	#HDMI
 	elif [[ $(xrandr -q | grep HDMI1 | grep " connected") ]]
 	then
-		bspc monitor eDP1 -d 1 2 3 4
-		bspc monitor HDMI1 -d 5 6 7 8 9 0
+		bspc monitor eDP1 -d 7 8 9 0
+		bspc monitor HDMI1 -d 1 2 3 4 5 6
 		xrandr --output HDMI1 --auto --left-of eDP1
 	#NONE
 	else
@@ -43,7 +43,7 @@ bspc config presel_feedback_color 		"$color1"
 bspc config top_padding 				20
 bspc config bottom_padding 				0
 bspc config border_width				2
-bspc config window_gap 					3
+bspc config window_gap 					40
 bspc config split_ratio          		0.5
 bspc config borderless_monocle   		true
 bspc config gapless_monocle      		true
@@ -56,6 +56,7 @@ bspc config presel_feedback_color 		"#51c4d4"
 
 # [ Initialize monitors acording to what is plugged ]
 bsp_monitors
+#bspc monitor -d 1 2 3 4 5 6 7 8 9 0
 
 xsetroot -cursor_name left_ptr
 
@@ -70,6 +71,7 @@ bspc rule -a Gimp 					desktop=^3 	follow=off
 bspc rule -a krita 					desktop=^3 	follow=off
 bspc rule -a shotcut 				desktop=^3 	follow=off
 bspc rule -a Telegram 				desktop=^4 	follow=off
+bspc rule -a Slack 					desktop=^4 	follow=off
 bspc rule -a discord				desktop=^6 	follow=off
 bspc rule -a mpv 					desktop=^5 	follow=off fullscreen=on 
 bspc rule -a "transmission"		 	desktop=^5  follow=off state=pseudo_tiled

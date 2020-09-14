@@ -9,7 +9,7 @@ fi
     
 pids=$(xdotool search --class ${1})
 #cria o scratchpad se nao existe e espera um tempo para pegar o pid
-[ ! $pids ] && ($TERMINAL -c $1 & sleep 0.1s)
+[ ! $pids ] && ($TERMINAL -c $1 & sleep 0.2s)
 
 pids=$(xdotool search --class ${1})
 

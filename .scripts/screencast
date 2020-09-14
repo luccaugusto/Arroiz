@@ -5,8 +5,12 @@
 SIZE=$(xrandr | grep eDP1 | awk '{print $4}' | sed 's/+0+0//')
 DATE=`date +%Y-%m-%d`
 
+sleep 3 && notify-send "Gravando"
+
 ffmpeg -f x11grab \
 	-s $SIZE \
 	-i :0.0 \
-	-f alsa -i default \
-	-c:v libx264 -r 30 -c:a flac screencast-$DATE.mkv
+	-c:v libx264 -r 60 -c:a flac screencast-$DATE.mkv
+	#-f alsa -i default \
+
+notify-send "Gravação concluída"

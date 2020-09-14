@@ -1,0 +1,80 @@
+#!/bin/sh
+
+#- Trata imagens para subir pro meu portfolio
+#- Comprime para jpg com $QUALIDADE de qualidade e $ESCALA do tamanho,
+#- esses valores sao adequados para a resolução das minhas imagens (4096x4096 300dpi ou 2480x3508 300dpi),
+#- podem não ser adequados para outras resoluções
+
+MARCA='portfolio.luccaaugusto.xyz'
+QUALIDADE="50%"
+ESCALA="25%"
+
+#Compressao
+comprimir_tudo()
+{
+	DIR=$1; shift
+	for img in $(ls $DIR | grep png)
+	do
+		#remove extension
+		name=${img%.*}
+		convert -background black -alpha remove -strip -interlace Plane -gaussian-blur 0.05 -quality $QUALIDADE -scale $ESCALA $DIR/$img $DIR/$name.jpg
+	done
+}
+
+comprimir()
+{
+	img=$1
+	#remove extension
+	name=${img%.*}
+	convert -background black -alpha remove -strip -interlace Plane -gaussian-blur 0.05 -quality $QUALIDADE -scale $ESCALA $img $name.jpg
+}
+
+#marca dagua
+marca_dagua_tudo()
+{
+	DIR=$1; shift
+	for img in $(ls $DIR | grep jpg)
+	do
+		convert -size 140x80 xc:none -fill '#80808080'\
+			-gravity NorthWest -draw "text 10,10 $MARCA" \
+			-gravity SouthEast -draw "text 5,15 $MARCA" \
+			miff:- |\
+			composite -tile - $DIR/$img $DIR/aux.jpg
+		rm $DIR/$img
+		mv $DIR/aux.jpg $DIR/$img
+	done
+}
+
+marca_dagua()
+{
+	img="$1"
+	convert -size 140x80 xc:none -fill '#80808080'\
+		-gravity NorthWest -draw "text 10,10 $MARCA" \
+		-gravity SouthEast -draw "text 5,15 $MARCA" \
+		miff:- |\
+		composite -tile - $img aux.jpg
+	rm $img
+	mv aux.jpg $img
+}
+
+ajuda()
+{
+	echo "trata_img [ option ] [ arg ]"
+	echo " 			-c img: comprime imagem"
+	echo "			-m img: marca dagua na imagem"
+	echo "			-a dir: comprime todas as imagens no diretorio dir"
+	echo "			-b dir: marca dagua em todas as imagens no diretorio dir"
+}
+
+
+case $1 in
+	-c) comprimir $2
+		;;
+	-m) marca_dagua $2
+		;;
+	-a) comprimir_tudo $2
+		;;
+	-b) marca_dagua_tudo $2
+		;;
+	*) ajuda
+esac

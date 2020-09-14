@@ -3,4 +3,4 @@
 #-Launches tibia
 
 cd ~/games/Tibia
-./start-tibia-launcher.sh &
+./Tibia &

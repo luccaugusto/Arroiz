@@ -1,50 +1,50 @@
-rename index.html
-rename blog.html
-imagens
-mkdir images
-open_with gimp
-mkdir
-mkdir portfolio
-mkdir piadas
-rename piadas.html
-shell vim compress_img.sh
-mkdir ba
-chmod +x comp
-shell chmod +x compress_img.sh
-shell rm *.jpg
-shell . compress_img.sh && . uploadarquivos.sh
-shell rm *.png
-rename sobre.html
-shell
-shell rm *jpg
-shell rm *png
-mkdir icons
-rename styles.scss
-rename style.scc
-rename style.css
-shell file OchaNonde.cur | less
-shell file finn.cur | less
-shell convert -resize 32x32 OchaNonde.png OchaNonde2.png
-shell convert -trim OchaNonde2.png OchaNonde2.png
-rename OchaNonde.cur
-shell . cursores.sh
-shell unzip nhs-video-production-b4f5ef.zip
-mkdir talvez
-shell . uploadarquivos.sh
-shell . compress_img.sh
-mkdir js
-shell vim muda.js
-sort 
-search IMG_2020
-search IMG_202006
-mkdir timelapse-bigode
-shell umount_phone cell
-shell unzip Raw-20200616T102943Z-001.zip
-s
+shell mkdir videoSkate
+shell vim roteirinho
+rename 2020-09-02-S1E1.mp3
+rename 2020-09-09-S1E2.mp3
+shell unzip Sk8-20200909T213652Z-001.zip
+rename dialogo intro
+shell chmod +x build.sh
+shell chmod +x build.sh 
+shell . upload_site.sh
+rename upload.sh
+shell . b
 shell 
-rename Gemfile.lock
-delete
+shell gad
+shell  gc
+search PDS
+rename artigoNanvix.pdf
+rename fonte1.l
+rename fonte2.l
+rename fonte0.l
+rename fonte.l
+shell tar -xf 5Period.tar.gz 
+shell tar -cgf FTC
+shell tar -czvf FTC FTC.tar.gz
+rename tp1
+shell unzip Aula\ 5\ -\ VM\ e\ DNS.zip 
+VM
+mkdir vm
+shell  unzip  Aula\ 5\ -\ VM\ e\ DNS.zip 
+shell convert experienciasForaBH.png experienciasForaBH.jpg
+rename S1E2.jpg
+shell . build.sh
+shell . upload.sh
+shell unzip Lucca.rar 
 
-shell episodios.yml
-shell vim episodios.yml
-rename lucca.jpg
+shell unrar Lucca.rar
+rename makeHfcabHeel.MOV
+rename flat.MOV
+rename makeFlipNose.MOV
+rename makeFirecraker.MOV
+rename carrocarro.MOV
+rename makeOllieBsOllie.MOV
+rename MVI_8.MOV
+rename flipinho.MOV
+mkdir flat
+delete
+rename sessaoziha
+rename dialogoIntro
+rename 1dialogoIntro
+rename 2flat.MOV
+rename 3sessaoziha

@@ -109,8 +109,8 @@ hi User9 ctermfg=007 ctermbg=003
 	"Tabs
 	nnoremap <leader>t :tabedit 
 	"Move faster between tabs
-	nnoremap <leader>j :+tabmove<CR>
-	nnoremap <leader>k :-tabmove<CR>
+	nnoremap <leader>j :tabnext<CR>
+	nnoremap <leader>k :tabprevious<CR>
 
 	nnoremap <leader>f :filetype detect<CR>
 	
@@ -147,6 +147,8 @@ hi User9 ctermfg=007 ctermbg=003
 	inoremap [ [<++>]<++><Esc>3h?<++><CR>4xi
 	"inoremap " "<++>"<++><Esc>3h?<++><CR>4xi
 	"inoremap ' '<++>'<++><Esc>3h?<++><CR>4xi
+	au FileType c inoremap /* /*<++>*/<++><Esc>3h?<++><CR>4xi
+	au FileType c inoremap /*<CR> /*<CR><++><CR>*/<++><Esc>4h?<++><CR>4xa
 	
 	"Some compile commands for these file types
 	au FileType tex map <buffer> <F10> :w<CR>:!pdflatex<Space>%<CR>

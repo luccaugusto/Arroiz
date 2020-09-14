@@ -74,7 +74,7 @@ super + shift + s
 super + p
 	dmen
 super + d
-	krita
+	krita & killall redshift
 
 # FUNCTION KEYS
 super + F1

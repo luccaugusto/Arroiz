@@ -10,6 +10,8 @@ export BROWSER="vivaldi-stable"
 #in case xdg settings doesn't use $BROWSER value
 #xdg-settings set default-web-browser $BROWSER.desktop
 
+export TARGET=unix64 #nanvix
+
 # No history limit
 export HISTSIZE=-1
 
@@ -32,6 +34,7 @@ export PATH="$PATH:$JAVA_HOME/bin"
 export GROFF_ENCODING=UTF-8
 export mygit='https://github.com/lrr68/'
 export REPOS="$HOME/repos"
+export NOTES_PATH="$HOME/.scripts"
 
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc

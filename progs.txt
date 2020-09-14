@@ -48,6 +48,7 @@ pulseaudio
 pulsemixer
 ranger
 redshift
+sc-im
 simple-mtpfs
 spotify
 sudo
@@ -63,6 +64,7 @@ ttf-sazanami
 unclutter
 vlc
 w3m
+wireless_tools
 xdotool
 xf86-input-wacom
 xkeyboard-config

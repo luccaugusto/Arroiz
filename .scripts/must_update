@@ -1,6 +1,7 @@
 #!/bin/bash
 
-#-Warns me via notify-send when i should update (20 + packages needing update).
+#-Warns me via notify-send when i should update (LIMIT + packages needing update).
+LIMIT=40
 
 COUNT=$(pacman -Qu | wc -l)
-[ "$COUNT" -gt 20 ] && notify-send "Yo, Update me Bro" "$COUNT packages need update"
+[ "$COUNT" -gt $LIMIT ] && notify-send "Yo, Update me Bro" "$COUNT packages need update"
