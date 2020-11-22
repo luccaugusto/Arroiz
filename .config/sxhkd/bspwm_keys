@@ -20,6 +20,10 @@ super + m
 super + shift + b
 	bspc node any -B
 
+#------------------------------------------------
+#-- RESIZE WINDOWS:
+#------------------------------------------------
+
 #Gaps
 super + ctrl + g
 	 GAPS=$(bspc config window_gap); bspc config window_gap $((GAPS+5))

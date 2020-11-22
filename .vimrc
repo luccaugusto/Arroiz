@@ -53,7 +53,7 @@
 	"set nobackup         "do not save a backup file
 	set backup
 	set backupdir=/tmp    "Save backup files in tmp directory
-	"set hlsearch
+	set hlsearch
 	set wildmode=longest,list,full
 	set ignorecase "search is case insensitive
 	set smartcase "case sensitive search in case the is an uppercase character in search
@@ -147,8 +147,8 @@ hi User9 ctermfg=007 ctermbg=003
 	inoremap [ [<++>]<++><Esc>3h?<++><CR>4xi
 	"inoremap " "<++>"<++><Esc>3h?<++><CR>4xi
 	"inoremap ' '<++>'<++><Esc>3h?<++><CR>4xi
-	au FileType c inoremap /* /*<++>*/<++><Esc>3h?<++><CR>4xi
-	au FileType c inoremap /*<CR> /*<CR><++><CR>*/<++><Esc>4h?<++><CR>4xa
+	au FileType c inoremap /* /*<++> */<++><Esc>3h?<++><CR>4xi
+	au FileType c inoremap /*<CR> /*<CR><++><CR> */<++><Esc>4h?<++><CR>4xa
 	
 	"Some compile commands for these file types
 	au FileType tex map <buffer> <F10> :w<CR>:!pdflatex<Space>%<CR>

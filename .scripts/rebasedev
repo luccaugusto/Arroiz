@@ -1,0 +1,9 @@
+#!/bin/sh
+
+#- nanvix script so i don't mess up any branches
+
+BRANCH=$(git branch | grep '*') &&
+git checkout dev &&
+git pull &&
+git checkout ${BRANCH##* } &&
+git rebase dev

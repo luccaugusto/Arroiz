@@ -30,7 +30,7 @@ bsp_monitors()
 
 #wal colors
 # source the colors.
-. "${HOME}/.cache/wal/colors.sh"
+[ -f "${HOME}/.cache/wal/colors.sh" ] && . "${HOME}/.cache/wal/colors.sh" 
 
 # Set the border colors.
 bspc config active_border_color 		"$color1"
@@ -73,10 +73,10 @@ bspc rule -a shotcut 				desktop=^3 	follow=off
 bspc rule -a Telegram 				desktop=^4 	follow=off
 bspc rule -a Slack 					desktop=^4 	follow=off
 bspc rule -a discord				desktop=^6 	follow=off
-bspc rule -a mpv 					desktop=^5 	follow=off fullscreen=on 
 bspc rule -a "transmission"		 	desktop=^5  follow=off state=pseudo_tiled
 bspc rule -a Spotify 				desktop=^10 follow=off
 bspc rule -a feh 					floating=on center=true follow=off
+bspc rule -a "screengrab"		 	follow=off state=floating
 
 # scratchpad
 bspc rule -a dropdown sticky=on state=floating hidden=on

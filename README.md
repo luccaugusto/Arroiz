@@ -131,6 +131,9 @@ Warns me via notify-send when i should update (LIMIT + packages needing update).
 ### powermenu
 Shutdown or reboot via dmenu
 
+### rebasedev
+ nanvix script so i don`t mess up any branches
+
 ### rec_webcam
 Records my webcam
 

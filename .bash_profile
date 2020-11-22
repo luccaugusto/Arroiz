@@ -10,8 +10,6 @@ export BROWSER="vivaldi-stable"
 #in case xdg settings doesn't use $BROWSER value
 #xdg-settings set default-web-browser $BROWSER.desktop
 
-export TARGET=unix64 #nanvix
-
 # No history limit
 export HISTSIZE=-1
 

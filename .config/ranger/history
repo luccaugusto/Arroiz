@@ -1,50 +1,50 @@
-shell mkdir videoSkate
-shell vim roteirinho
-rename 2020-09-02-S1E1.mp3
-rename 2020-09-09-S1E2.mp3
-shell unzip Sk8-20200909T213652Z-001.zip
-rename dialogo intro
-shell chmod +x build.sh
-shell chmod +x build.sh 
-shell . upload_site.sh
-rename upload.sh
-shell . b
-shell 
-shell gad
-shell  gc
-search PDS
-rename artigoNanvix.pdf
-rename fonte1.l
-rename fonte2.l
-rename fonte0.l
+shell unzip WT_Silver_1.39.3-mac.zip 
+shell .WT\ Silver
+rename WitchTrainer
+mkdir linux-x86_64
+mkdir WT Silver
+shell unzip WT_Silver_1.39.3-pc.zip 
+mkdir prova2
+shell unzip DEBUGX.ZIP 
+rename exemplo3.l
+rename exemplo2.l
+search rese
+rename PC4-v4.pdf
+shell vim utils.h
+bulkrename 
+shell saida-verde11.txt
+shell vim saida-verde11.txt
+shell vim verde11.l
+shell vim verde12.l
+shell vim saida-verde12.txt
+shell vim verde13.l
+shell vim saida-verde13.txt
+shell vim saida-verde14.txt
+shell vim saida-verde15.txt
+shell vim verde14.l
+rename verde15.txt
+rename verde15.l
+shell vim verde16.l
+rename saida-verde16.txt
+search verde4
 rename fonte.l
-shell tar -xf 5Period.tar.gz 
-shell tar -cgf FTC
-shell tar -czvf FTC FTC.tar.gz
-rename tp1
-shell unzip Aula\ 5\ -\ VM\ e\ DNS.zip 
-VM
-mkdir vm
-shell  unzip  Aula\ 5\ -\ VM\ e\ DNS.zip 
-shell convert experienciasForaBH.png experienciasForaBH.jpg
-rename S1E2.jpg
+search gco
+rename 1.png
+search 40
+mkdir compiladorLPz
+open_with vlc
+search PDS
+search rip
+search png
+open_with gimp
+shell vim rip-banner.html
+rename rip-banner.html
+rename rippds-banner.html
 shell . build.sh
+shell 
 shell . upload.sh
-shell unzip Lucca.rar 
-
-shell unrar Lucca.rar
-rename makeHfcabHeel.MOV
-rename flat.MOV
-rename makeFlipNose.MOV
-rename makeFirecraker.MOV
-rename carrocarro.MOV
-rename makeOllieBsOllie.MOV
-rename MVI_8.MOV
-rename flipinho.MOV
-mkdir flat
+shell se
+set preview_images false
+set preview_images False
 delete
-rename sessaoziha
-rename dialogoIntro
-rename 1dialogoIntro
-rename 2flat.MOV
-rename 3sessaoziha
+rename forte_brumadinho_ESB

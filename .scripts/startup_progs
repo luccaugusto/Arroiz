@@ -5,7 +5,7 @@
 #-Example: if transmission-gtk runs before bspwm rules are set it will open on workspace 1
 
 #System colors and wallpaper
-set_colors -c
+set_colors
 set_colors -w
 
 #Wifi connection

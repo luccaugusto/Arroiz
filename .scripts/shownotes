@@ -3,5 +3,7 @@
 #-Show all untagged notes as a notification via notify-send
 
 [ $NOTES_PATH ] || NOTES_PATH=$HOME/.scritps/.notesgeral
-NOTES=$(anote -l -d)
-notify-send -u critical "Your Notes" "$NOTES"
+NOTES=$(anote -ld)
+[ "$NOTES" ] && notify-send -u critical "Your Notes" "$NOTES"
+
+

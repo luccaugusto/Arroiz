@@ -76,11 +76,17 @@ super + p
 super + d
 	krita & killall redshift
 
+# Print
+Print
+	screengrab
+
 # FUNCTION KEYS
 super + F1
 	cheatsheet
 super + F2
 	$TERMINAL -c floats -e pulsemixer
+super + F3
+	killall blueman-applet || (pactl load-module module-bluetooth-discover && blueman-applet && notify-send "bluetooth on") 
 super + F9
 	scrot && notify-send "Scrot taken"
 super + F10
@@ -110,6 +116,10 @@ super + m
 
 super + shift + b
 	bspc node any -B
+
+#------------------------------------------------
+#-- RESIZE WINDOWS:
+#------------------------------------------------
 
 #Gaps
 super + ctrl + g

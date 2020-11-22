@@ -6,6 +6,7 @@ IMGS="$REPOS/wallpapers/"
 cd $IMGS
 WALL="$(shuf -e `ls` | sxiv -t -o -i)"
 #Change colors
-set_colors "$IMGS$WALL"
-#Change wallpaper
-set_colors -w
+[ "$WALL" ] && 
+	set_colors "$IMGS$WALL" &&
+	#Change wallpaper
+	set_colors -w
