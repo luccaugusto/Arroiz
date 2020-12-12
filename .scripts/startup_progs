@@ -22,6 +22,8 @@ elif [ "$(pgrep -x dwm)" ]; then
 elif [ "$(pgrep -x i3)" ]; then
 	cat $CONFIG/sxhkd/base $CONFIG/sxhkd/i3_keys > $CONFIG/sxhkd/sxhkdrc
 fi
+
+#key bindings
 sxhkd &
 
 #Seed torrents, like a good boy
@@ -34,7 +36,9 @@ picom --config /dev/null &
 keyboard_layout &
 #Don't burn my eyes
 toggle_redshift
-#Remind of my stuff
+#Remind me of my stuff
 shownotes
 #Tell me if i need to update
 must_update
+#Remind me of my stuff twice
+$TERMINAL -c "calendar" calcurse &

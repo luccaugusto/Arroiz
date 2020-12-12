@@ -8,7 +8,7 @@ XF86AudioRaiseVolume
 	sound_control u
 
 #decrease sound volume
-XF86AudioLowerVolume 
+XF86AudioLowerVolume
 	sound_control d
 
 # mute sound
@@ -17,24 +17,24 @@ XF86AudioMute
 
 #Screen Brightness controls
 # increase screen brightness
-XF86MonBrightnessUp 
+XF86MonBrightnessUp
 	brightnessctl s 5%+;  #reloadbar
 
 # decrease screen brightness
-XF86MonBrightnessDown 
+XF86MonBrightnessDown
 	brightnessctl s 5%-; # reloadbar
 
 # Media player controls
 # Supports spotify
-XF86AudioPlay 
+XF86AudioPlay
 	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause; [ $(pgrep -x mpc) ] && mpc toggle
-XF86AudioNext 
+XF86AudioNext
 	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next; [ $(pgrep -x mpc) ] && mpc next
-XF86AudioPrev 
+XF86AudioPrev
 	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous; [ $(pgrep -x mpc) ] && mpc prev
 
 ## in case keyboard does not have XF86 keys for audio/brightness controls, these are the alternative bindings
-super + ctrl + p 
+super + ctrl + p
 	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause; [ $(pgrep -x mpc) ] && mpc toggle
 super + ctrl + period
 	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next; [ $(pgrep -x mpc) ] && mpc next
@@ -60,7 +60,7 @@ super + ctrl + m
 super + Escape
 	pkill -USR1 -x sxhkd && sxhkd &
 super + Return
-	$TERMINAL
+	samedir
 super + w
 	$BROWSER
 super + r
@@ -75,6 +75,8 @@ super + p
 	dmen
 super + d
 	krita & killall redshift
+super + a
+	$TERMINAL -c "calendar" calcurse
 
 # Print
 Print
@@ -86,7 +88,7 @@ super + F1
 super + F2
 	$TERMINAL -c floats -e pulsemixer
 super + F3
-	killall blueman-applet || (pactl load-module module-bluetooth-discover && blueman-applet && notify-send "bluetooth on") 
+	killall blueman-applet || (pactl load-module module-bluetooth-discover && blueman-applet && notify-send "bluetooth on")
 super + F9
 	scrot && notify-send "Scrot taken"
 super + F10

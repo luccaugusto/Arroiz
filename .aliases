@@ -36,5 +36,5 @@ alias scim="sc-im"
 alias bdnvix="make contrib-uninstall && make distclean && make contrib -j 4 && make all -j 4"
 alias nvixsu="sudo bash utils/nanvix-setup-unix.sh"
 alias nanvix="export TARGET="unix64" && cd $HOME/repos/multikernel && sudo bash utils/nanvix-setup-unix.sh"
-alias facul="cd Documents/faculdade/;"
+alias facul="cd ~/Documents/faculdade/;"
 alias upload='rsync -avz --delete-after --exclude="*.o" --exclude=".git" --exclude="*.swp" --exclude="doc" . lucas.augusto@quadro.icei.pucminas.br:~/multikernel'

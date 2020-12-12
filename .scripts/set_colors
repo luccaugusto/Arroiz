@@ -3,11 +3,11 @@
 #-Set my system colors using pywal
 
 #base directory
-BG="/home/lucca/repos/wallpapers/Pretty-mountains.jpg"
+BG="/home/lucca/repos/wallpapers/ScottPilgrimPreciouslife.jpg"
 
 colors_relative()
 {
-	old=$(echo 'BG="/home/lucca/repos/wallpapers/Pretty-mountains.jpg"' | sed  's/\//\\\//g')
+	old=$(echo 'BG="/home/lucca/repos/wallpapers/ScottPilgrimPreciouslife.jpg"' | sed  's/\//\\\//g')
 	new=$(echo 'BG="$HOME/'"$1"'"' | sed  's/\//\\\//g')
 	sed -i "s/$old/$new/g" $HOME/.scripts/set_colors
 
@@ -15,7 +15,7 @@ colors_relative()
 
 colors_absolute()
 {
-	old=$(echo 'BG="/home/lucca/repos/wallpapers/Pretty-mountains.jpg"' | sed  's/\//\\\//g')
+	old=$(echo 'BG="/home/lucca/repos/wallpapers/ScottPilgrimPreciouslife.jpg"' | sed  's/\//\\\//g')
 	new=$(echo 'BG="'"$1"'"' | sed  's/\//\\\//g')
 	sed -i "s/$old/$new/g" $HOME/.scripts/set_colors
 }

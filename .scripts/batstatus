@@ -12,11 +12,13 @@ bat_status()
 	STRING=''
 	TOTAL=0
 	COUNT=0
+	TOTAL_PERCENT=0
 	for bat in $(ls /sys/class/power_supply/)
 	do
 		if [ $bat != AC ]
 		then
 			PERCENT="$(cat /sys/class/power_supply/$bat/capacity)"
+			TOTAL_PERCENT=$((TOTAL_PERCENT + PERCENT))
 			STATUS="$(cat /sys/class/power_supply/$bat/status)"
 			COUNT=$((COUNT + 1))
 			if [ $STATUS != 'Charging' ]
@@ -39,7 +41,7 @@ bat_status()
 		fi
 	done
 
-	TOTAL=$(( PERCENT / COUNT ))
+	TOTAL=$(( TOTAL_PERCENT / COUNT ))
 
 	echo $STRING
 	[ "$TOTAL" -lt 10 ] && echo "!!!!!!!!!!!!!!BATERIA BAIXA!!!!!!!!!!!!!!!!!!"
@@ -51,8 +53,8 @@ bat_util()
 	for bat in $(ls /sys/class/power_supply/)
 	do
 		[ $bat != AC ] &&
-		ORIGINAL=$(cat /sys/class/power_supply/$bat/energy_full_design) && 
-		AGORA=$(cat /sys/class/power_supply/$bat/energy_full) && 
+		ORIGINAL=$(cat /sys/class/power_supply/$bat/energy_full_design) &&
+		AGORA=$(cat /sys/class/power_supply/$bat/energy_full) &&
 		python -c "print('$bat',round($AGORA/$ORIGINAL,2)*100,'%')"
 	done
 }

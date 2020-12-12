@@ -432,7 +432,7 @@ label-indicator-margin = 1
 label-indicator-background = #000000000
 
 [module/volume]
-type = internal/alsa
+type = internal/pulseaudio
 headphone-id = 9
 
 format-volume = <ramp-volume><label-volume>

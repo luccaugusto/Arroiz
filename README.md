@@ -128,6 +128,9 @@ Starts mpd and opens ncmpcpp
 ### must_update
 Warns me via notify-send when i should update (LIMIT + packages needing update).
 
+### notes.txt
+
+
 ### powermenu
 Shutdown or reboot via dmenu
 
@@ -139,6 +142,10 @@ Records my webcam
 
 ### reloadbar
 kills current dwmbar so it reloads
+
+### samedir
+From Luke Smith`s dotfiles
+Open a terminal window in the same directory as the currently active window.
 
 ### scratchpad
 Scratchpad terminal for bspwm

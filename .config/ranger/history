@@ -1,50 +1,50 @@
-shell unzip WT_Silver_1.39.3-mac.zip 
-shell .WT\ Silver
-rename WitchTrainer
-mkdir linux-x86_64
-mkdir WT Silver
-shell unzip WT_Silver_1.39.3-pc.zip 
-mkdir prova2
-shell unzip DEBUGX.ZIP 
-rename exemplo3.l
-rename exemplo2.l
-search rese
-rename PC4-v4.pdf
-shell vim utils.h
-bulkrename 
-shell saida-verde11.txt
-shell vim saida-verde11.txt
-shell vim verde11.l
-shell vim verde12.l
-shell vim saida-verde12.txt
-shell vim verde13.l
-shell vim saida-verde13.txt
-shell vim saida-verde14.txt
-shell vim saida-verde15.txt
-shell vim verde14.l
-rename verde15.txt
-rename verde15.l
-shell vim verde16.l
-rename saida-verde16.txt
-search verde4
-rename fonte.l
-search gco
-rename 1.png
-search 40
-mkdir compiladorLPz
-open_with vlc
-search PDS
-search rip
-search png
+rename slide8_.png
+rename slide14.png
+rename slide13.png
+rename slide12.png
+rename slide11.png
+rename slide10.png
+rename slide9.png
+rename slide8.png
 open_with gimp
-shell vim rip-banner.html
-rename rip-banner.html
-rename rippds-banner.html
-shell . build.sh
+bulkrename 
+search rese
+rename PC4-v6.pdf
+slides
+rename apresentacao-TCC.pdf
+mkdir leilao
+shell vim resolver.html
+shell vim resultados.html
+mkdir templates
+mkdir faculdade
+rename fonte.l
+rename Documentacao.pdf
+shell vim genetico.c
+rename bilhete.png
+search some
+search unplug
+search PDS
+search Mono
+open_with 
+search lista
+rename lista.c
+shell vim Makefile
+mkdir src
 shell 
+shell vim
+rename note.c
+rename note.h
+rename tag.c
+rename tag.h
+shell . build.sh
 shell . upload.sh
-shell se
-set preview_images false
-set preview_images False
+shell vim anote.h
+search hanako
+rename papodesauna-lucca-sem-ruido.mp3_
+rename problemas-lucca-sem-ruido.mp3_
+rename papodesauna-lucca-sem-ruido.mp3
+rename problemas-lucca-sem-ruido.mp3
+rename trader-lucca-sem-ruido.mp3_
+rename trader-lucca-sem-ruido.mp3
+search model
 delete
-rename forte_brumadinho_ESB

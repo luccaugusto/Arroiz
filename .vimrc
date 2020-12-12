@@ -1,15 +1,15 @@
-"                              ___           ___           ___     
-"     ___        ___          /__/\         /  /\         /  /\    
-"    /__/\      /  /\        |  |::\       /  /::\       /  /:/    
-"    \  \:\    /  /:/        |  |:|:\     /  /:/\:\     /  /:/     
-"     \  \:\  /__/::\      __|__|:|\:\   /  /:/~/:/    /  /:/  ___ 
+"                              ___           ___           ___
+"     ___        ___          /__/\         /  /\         /  /\
+"    /__/\      /  /\        |  |::\       /  /::\       /  /:/
+"    \  \:\    /  /:/        |  |:|:\     /  /:/\:\     /  /:/
+"     \  \:\  /__/::\      __|__|:|\:\   /  /:/~/:/    /  /:/  ___
 " ___  \__\:\ \__\/\:\__  /__/::::| \:\ /__/:/ /:/___ /__/:/  /  /\
 "/__/\ |  |:|    \  \:\/\ \  \:\~~\__\/ \  \:\/:::::/ \  \:\ /  /:/
-"\  \:\|  |:|     \__\::/  \  \:\        \  \::/~~~~   \  \:\  /:/ 
-" \  \:\__|:|     /__/:/    \  \:\        \  \:\        \  \:\/:/  
-"  \__\::::/      \__\/      \  \:\        \  \:\        \  \::/   
-"      ~~~~                   \__\/         \__\/         \__\/    
-"                                                        
+"\  \:\|  |:|     \__\::/  \  \:\        \  \::/~~~~   \  \:\  /:/
+" \  \:\__|:|     /__/:/    \  \:\        \  \:\        \  \:\/:/
+"  \__\::::/      \__\/      \  \:\        \  \:\        \  \::/
+"      ~~~~                   \__\/         \__\/         \__\/
+"
 "maintainer:	Lucca Augusto
 
 "============================
@@ -23,21 +23,28 @@
 	set breakindent
 
 	colorscheme wal
-	
+
+	"get rid of trailling spaces
+	autocmd BufWritePre * %s/\s\+$//e
+
 	"Split panels in a more natural way
 	set splitbelow
 	set splitright
-	
+
 	"Configure tab size
 	set tabstop=4
 	set shiftwidth=4
 	"set expandtab
-	
+
 	"Get trailing characters on tab to view indents more easily
 	"set list
-	"set listchars=tab:\.\ 
-	
+	"set listchars=tab:\.\
+
 	"Some more personal settings
+
+	"center line when entering insert mode
+	"autocmd InsertEnter * norm zz
+
 	set number
 	set relativenumber    "sets the line numbers relative to the current line
 	set nocompatible
@@ -57,7 +64,10 @@
 	set wildmode=longest,list,full
 	set ignorecase "search is case insensitive
 	set smartcase "case sensitive search in case the is an uppercase character in search
-	
+	"set cursorline
+	"set cursorcolumn
+	highlight CursorLine cterm=underline gui=underline ctermbg=none ctermfg=none
+
 	"Remap j and k so i can navigate on lines that break
 	nnoremap j gj
 	nnoremap k gk
@@ -103,26 +113,28 @@ hi User9 ctermfg=007 ctermbg=003
 	nnoremap <leader>e :set spell spelllang=en_us<CR>
 
 	"Splits
-	nnoremap <leader>v :vsplit 
-	nnoremap <leader>s :split 
+	nnoremap <leader>v :vsplit<space>
+	nnoremap <leader>s :split<space>
 
 	"Tabs
-	nnoremap <leader>t :tabedit 
+	nnoremap <leader>t :tabedit<space>
 	"Move faster between tabs
 	nnoremap <leader>j :tabnext<CR>
 	nnoremap <leader>k :tabprevious<CR>
 
 	nnoremap <leader>f :filetype detect<CR>
-	
+
 	"Allow to copy and paste from the system register
 	vnoremap <C-y> "*y :let @+=@*<CR>
 	nnoremap <C-p> "+P
-	
+
 	"Save a key press on changing windows
 	nnoremap <C-h> <C-w>h
 	nnoremap <C-j> <C-w>j
 	nnoremap <C-k> <C-w>k
 	nnoremap <C-l> <C-w>l
+
+	nnoremap <leader>S :%s///g<space>
 
 "update bindings when sxhkd config is updated
 	autocmd BufWritePost sxhkdrc killall sxhkd; setsid sxhkd &
@@ -131,6 +143,10 @@ hi User9 ctermfg=007 ctermbg=003
 	autocmd BufWritePost config.def.h !sudo make clean;sudo make; sudo make install
 	autocmd BufWritePost st.c !sudo make clean; sudo make; sudo make install
 
+"toogle hl CursorLine
+	nnoremap <leader>hl :set cursorline<CR>
+	nnoremap <leader>nhl :set nocursorline<CR>
+
 "===============================
 "SNIPPETS
 "===============================
@@ -138,8 +154,9 @@ hi User9 ctermfg=007 ctermbg=003
 	"insert tags like this <++> for faster navigation
 	"when inserting brackets, etc.
 	"Snippets
-	nnoremap <leader><space> :nohlsearch<CR>
-	inoremap <Space><Space> <Esc>/<++><CR>"_c4l
+	nnoremap <space><space> :nohlsearch<CR>
+	"inoremap <leader><Space> <Esc>/<++><CR>"_c4l
+	inoremap jf <Esc>/<++><CR>"_c4l
 	inoremap { {<++>}<++><Esc>3h?<++><CR>4xi
 	inoremap {<CR> {<CR><++><CR>}<++><Esc>4h?<++><CR>4xa
 	inoremap ( (<++>)<++><Esc>3h?<++><CR>4xi
@@ -149,7 +166,7 @@ hi User9 ctermfg=007 ctermbg=003
 	"inoremap ' '<++>'<++><Esc>3h?<++><CR>4xi
 	au FileType c inoremap /* /*<++> */<++><Esc>3h?<++><CR>4xi
 	au FileType c inoremap /*<CR> /*<CR><++><CR> */<++><Esc>4h?<++><CR>4xa
-	
+
 	"Some compile commands for these file types
 	au FileType tex map <buffer> <F10> :w<CR>:!pdflatex<Space>%<CR>
 	au FileType java map <buffer> <F10> :w<CR>:!javac<Space>%<CR>
