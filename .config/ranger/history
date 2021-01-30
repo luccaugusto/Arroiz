@@ -1,50 +1,50 @@
-rename slide8_.png
-rename slide14.png
-rename slide13.png
-rename slide12.png
-rename slide11.png
-rename slide10.png
-rename slide9.png
-rename slide8.png
-open_with gimp
-bulkrename 
-search rese
-rename PC4-v6.pdf
-slides
-rename apresentacao-TCC.pdf
-mkdir leilao
-shell vim resolver.html
-shell vim resultados.html
-mkdir templates
-mkdir faculdade
-rename fonte.l
-rename Documentacao.pdf
-shell vim genetico.c
-rename bilhete.png
-search some
-search unplug
+shell vim lexan_wrong.sc
+rename lexan_alright.cal
+rename lexan_wrong.sc
+rename lexan_wrong.cal
+search resolu
 search PDS
-search Mono
-open_with 
-search lista
-rename lista.c
-shell vim Makefile
-mkdir src
-shell 
-shell vim
-rename note.c
-rename note.h
-rename tag.c
-rename tag.h
+rename sca
+rename baca.c
+rename baca.h
+rename baca.1
+open_with vim
 shell . build.sh
+search shot
+rename VID_20210108_225224_rotated.mp4
+rename terceira_parada_cagar.mp4
+rename galera_praia1.jpg
+rename uriel_praia.jpg
+rename uriel_praia2.jpg
+rename uriel_praia3.jpg
+rename uriel_praia_4.jpg
+rename cv-old.pdf
+rename cv-2021`.pdf
+rename cv-2021.pdf
+rename galera_praia3.jpg
+rename galera_praia4.jpg
+rename galera_praia5.jpg
+search fdp
+shell vim fdp.html
 shell . upload.sh
-shell vim anote.h
-search hanako
-rename papodesauna-lucca-sem-ruido.mp3_
-rename problemas-lucca-sem-ruido.mp3_
-rename papodesauna-lucca-sem-ruido.mp3
-rename problemas-lucca-sem-ruido.mp3
-rename trader-lucca-sem-ruido.mp3_
-rename trader-lucca-sem-ruido.mp3
-search model
+shell vim IDEIAS_FUNDO.txt
+FDP
+mkdir FDP
+mkdir FREELA
+search solho
+rename SolhoLolho.kra
+rename ZombariaCeleste.kra
+search assinatura
+open_with krita
+rename bcache.h_
+rename bcache.h
+search systemd
+open_with 
+search web
+rename wp-config.php
+search install
+mkdir scripts
+rename work
+shell vim README.md
+search sync
 delete

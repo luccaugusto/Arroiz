@@ -3,8 +3,9 @@
 #-Grabs the doc comments of all scripts in .scripts folder and output them in MD
 #-to the README.md file in my rice repository.
 #-doc comments are lines beggining with #-
+#-Works with the get_docs script.
 
-README="$REPOS/rice/README.md"
+README="$HOME/.local/bin/README.md"
 
 START='<!--startscripts-->'
 END='<!--endscripts-->'

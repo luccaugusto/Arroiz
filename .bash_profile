@@ -6,9 +6,9 @@
 export EDITOR="vim"
 export TERMINAL="st"
 export READER="zathura"
-export BROWSER="vivaldi-stable"
+export BROWSER="brave"
 #in case xdg settings doesn't use $BROWSER value
-#xdg-settings set default-web-browser $BROWSER.desktop
+#xdg-settings set default-web-browser brave.desktop
 
 # No history limit
 export HISTSIZE=-1
@@ -21,25 +21,23 @@ export XDG_CACHE_HOME="$HOME/.cache"
 
 #Adding everything i need to my path
 export JAVA_HOME='/usr/lib/jvm/java-11-openjdk'
-export PATH="$PATH:$HOME/.scripts"
-export PATH="$PATH:$HOME/.local/bin"
+# Adds `~/.local/bin` and subdirectories to $PATH
+export PATH="$PATH:${$(find ~/.local/bin -type d -printf %p:)%%:}"
 export PATH="$PATH:$HOME/.gem/ruby/2.7.0/bin"
 export PATH="$PATH:$JAVA_HOME/bin"
-#Only when using django
-#export PYTHONPATH="$PYTHONPATH:$HOME/repos/S_Admin/meteflix/apps"
 
 #Others
 export GROFF_ENCODING=UTF-8
 export mygit='https://github.com/lrr68/'
 export REPOS="$HOME/repos"
-export NOTES_PATH="$HOME/.scripts"
+export NOTES_PATH="$HOME/.config/anote"
 
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
 # Start graphical server if bspwm not already running.
 if [[ "$(tty)" = "/dev/tty1" ]]; then
-	pgrep -x bspwm || exec startx
+	pgrep -x bspwm || exec startx &> .xerrors
 fi
 if [[ "$(tty)" = "/dev/tty2" ]]; then
 	. .cache/wal/colors-tty.sh

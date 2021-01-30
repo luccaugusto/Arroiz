@@ -1,8 +1,0 @@
-BEGIN:VCALENDAR
-VERSION:2.0
-PRODID:-//calcurse//NONSGML v4.7.0//EN
-BEGIN:VTODO
-PRIORITY:0
-SUMMARY:exemplificar a comunicacao cliente servidor no artigo
-END:VTODO
-END:VCALENDAR

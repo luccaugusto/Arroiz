@@ -1,9 +1,10 @@
 #!/bin/bash
 
 #-Generates a MD file with all the doc comments from the files
-#-in ~/.scripts folder
+#-in ~/.local/bin folder
+#-A doc comment is a line beggining with `#-`
 
-SCRIPTS="$HOME/.scripts"
+SCRIPTS="$HOME/.local/bin/"
 #DOC=".docs"
 
 for s in $(ls $SCRIPTS)

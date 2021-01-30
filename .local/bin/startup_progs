@@ -16,7 +16,7 @@ unclutter &
 #Load specific WM configs
 if [ "$(pgrep -x bspwm)" ]; then
 	cat $CONFIG/sxhkd/base $CONFIG/sxhkd/bspwm_keys > $CONFIG/sxhkd/sxhkdrc
-elif [ "$(pgrep -x dwm)" ]; then 
+elif [ "$(pgrep -x dwm)" ]; then
 	cat $CONFIG/sxhkd/base $CONFIG/sxhkd/dwm_keys > $CONFIG/sxhkd/sxhkdrc &&
 	dwmbar &
 elif [ "$(pgrep -x i3)" ]; then
@@ -40,5 +40,3 @@ toggle_redshift
 shownotes
 #Tell me if i need to update
 must_update
-#Remind me of my stuff twice
-$TERMINAL -c "calendar" calcurse &

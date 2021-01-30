@@ -5,5 +5,3 @@
 [ $NOTES_PATH ] || NOTES_PATH=$HOME/.scritps/.notesgeral
 NOTES=$(anote -ld)
 [ "$NOTES" ] && notify-send -u critical "Your Notes" "$NOTES"
-
-

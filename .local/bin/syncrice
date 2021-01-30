@@ -17,6 +17,10 @@ rm -rf $RICE/.* > /dev/null 2>&1
 #Rename to the original name
 mv $RICE/git $RICE/.git
 
+#update README with scripts documentation
+echo "Updating README"
+script_docs
+
 echo "copying home files"
 cp $HOME/.aliases $RICE
 cp $HOME/.bash_profile $RICE
@@ -28,10 +32,11 @@ cp $HOME/.Xresources $RICE
 cp $HOME/.tmux.conf $RICE
 
 echo "copying home directories"
+mkdir $RICE/.local/
 cp -r $HOME/.vim $RICE
 cp -r $HOME/.vimgolf $RICE
-cp -r $HOME/.scripts $RICE
 cp -r $HOME/.time $RICE
+cp -r $HOME/.local/bin $RICE/.local/
 
 echo "copying .config files"
 mkdir $RICE/.config
@@ -51,18 +56,14 @@ cp -r $CONFIG/wal $RICE/.config
 cp -r $CONFIG/mpd $RICE/.config
 cp -r $CONFIG/ncmpcpp $RICE/.config
 
-#update README with scripts documentation
-echo "Updating README"
-script_docs
-
 cd $RICE
 echo "Adding new files to repo"
 git add .
 #just so i know what i changed
 git status
-[ "$1" ] && 
+[ "$1" ] &&
 echo "Comitting changes" &&
 git commit -m "$1" &&
-echo "Pushing changes" && 
+echo "Pushing changes" &&
 git push
 cd $AQUI

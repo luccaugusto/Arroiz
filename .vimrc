@@ -107,6 +107,7 @@ hi User9 ctermfg=007 ctermbg=003
 	nmap <leader>w :wq<CR>
 	nnoremap <leader>c :close<CR>
 	nnoremap <leader>o :q<CR>
+	nnoremap <leader>L :30Lex<CR>
 
 	"Spell checking
 	nnoremap <leader>p :set spell spelllang=pt_br<CR>
@@ -134,13 +135,16 @@ hi User9 ctermfg=007 ctermbg=003
 	nnoremap <C-k> <C-w>k
 	nnoremap <C-l> <C-w>l
 
-	nnoremap <leader>S :%s///g<space>
+	"Faster resizing
+	nnoremap <leader>A 5<C-w>>
+	nnoremap <leader>S 5<C-w><
+
 
 "update bindings when sxhkd config is updated
 	autocmd BufWritePost sxhkdrc killall sxhkd; setsid sxhkd &
 "recompile suckless programs after editing
 	autocmd BufWritePost dwm.c !sudo make clean; sudo make; sudo make install
-	autocmd BufWritePost config.def.h !sudo make clean;sudo make; sudo make install
+	"autocmd BufWritePost config.def.h !sudo make clean;sudo make; sudo make install
 	autocmd BufWritePost st.c !sudo make clean; sudo make; sudo make install
 
 "toogle hl CursorLine

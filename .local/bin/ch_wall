@@ -3,10 +3,11 @@
 #-Shows me all files in my wallpaper repository and i can choose one to be my new wallpaper
 
 IMGS="$REPOS/wallpapers/"
+[ "$1" ] && IMGS="$1"
 cd $IMGS
 WALL="$(shuf -e `ls` | sxiv -t -o -i)"
 #Change colors
-[ "$WALL" ] && 
+[ "$WALL" ] &&
 	set_colors "$IMGS$WALL" &&
 	#Change wallpaper
 	set_colors -w

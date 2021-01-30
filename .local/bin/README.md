@@ -1,14 +1,18 @@
+# My usefull scripts
 
+A brief explanation of each script can be found bellow.
+
+<!--startscripts-->
 ### anote
 Simple script for taking notes in the terminal.
-Notes are saved in $NOTES_PATH directory or $HOME/.scripts if $NOTES_PATH is not set
+Notes are saved in $NOTES_PATH directory or $HOME/.notes if $NOTES_PATH is not set
 run `anote -h` for help
 
 ### backup
 Backup important directories to directory specified. 
-Exits if no directory was specified.
-Exits if the specified directory doesn`t have space for backup
-run `backup` for help
+ Exits if no directory was specified.
+ Exits if the specified directory does not have space for backup
+ run `backup` for help
 
 ### batsinal
 Notifies via notify-send when battery is bellow 10%,
@@ -27,6 +31,9 @@ Play a beep sound
 ### cheatsheet
 Opens a terminal with a man document showing the 
 important system bindings and some general info
+
+### ch_wall
+Shows me all files in my wallpaper repository and i can choose one to be my new wallpaper
 
 ### data_hora
 Operations with date and time
@@ -51,7 +58,11 @@ Work script, notifies how long till i have worked my shift
 
 ### get_docs
 Generates a MD file with all the doc comments from the files
-in ~/.scripts folder
+in ~/.local/bin folder
+A doc comment is a line beggining with `#-`
+
+### init_wp
+
 
 ### keyboard_layout
 Sets my keyboard layout to en_us and pt_br
@@ -74,14 +85,27 @@ Helper to mount android phones, works with dmenu
 ### mplayer
 Starts mpd and opens ncmpcpp
 
+### must_update
+Warns me via notify-send when i should update (LIMIT + packages needing update).
+
 ### powermenu
 Shutdown or reboot via dmenu
+
+### README.md
+
+
+### rebasedev
+ nanvix script so i don`t mess up any branches
 
 ### rec_webcam
 Records my webcam
 
 ### reloadbar
 kills current dwmbar so it reloads
+
+### samedir
+From Luke Smith`s dotfiles
+Open a terminal window in the same directory as the currently active window.
 
 ### scratchpad
 Scratchpad terminal for bspwm
@@ -93,6 +117,7 @@ Records my screen to a file in ~/
 Grabs the doc comments of all scripts in .scripts folder and output them in MD
 to the README.md file in my rice repository.
 doc comments are lines beggining with #-
+Works with the get_docs script.
 
 ### set_colors
 Set my system colors using pywal
@@ -148,6 +173,19 @@ Turns redshift on and off
 ### toggle_touchpad
 Script to toggle the touchpad on/off
 
+### trata_img
+ Trata imagens para subir pro meu portfolio
+ Comprime para jpg com $QUALIDADE de qualidade e $ESCALA do tamanho,
+ esses valores sao adequados para a resolução das minhas imagens (4096x4096 300dpi ou 2480x3508 300dpi),
+ podem não ser adequados para outras resoluções
+
 ### treesize
 Shows directories size in human readable format
+
+### wacontrols
+Helper for manipulating wacom devices
+only rotates it right now
+
+### work
+<!--endscripts-->
 

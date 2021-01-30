@@ -25,7 +25,7 @@ The new file is stored in the same directory (~/.cache/wal), be careful when cle
 
 ## progs.txt
 This file is a list of all the main programs i use, really simplifies the process of installing this rice on another system.
-I still have to manually insert a program in this list everytime i download a relevant one, but i guess that's the way since my computer won't now what programs are relevant for me. 
+I still have to manually insert a program in this list everytime i download a relevant one, but i guess that's the way since my computer won't now what programs are relevant for me.
 Keeping the full list of installed programs (pacman -Qsomethingsomething) was messy and left many undesired programs.
 
 ## ~/ config files
@@ -39,193 +39,9 @@ Keeping the full list of installed programs (pacman -Qsomethingsomething) was me
 + .vimgolf/ (folder)
 + .time/ (folder to save time spent on pc)
 
-## .scripts folder
-Personal scripts folder, useful for the whole system
-<!--startscripts-->
-### anote
-Simple script for taking notes in the terminal.
-Notes are saved in $NOTES_PATH directory or $HOME/.notes if $NOTES_PATH is not set
-run `anote -h` for help
-
-### anote_old
-Simple script for taking notes in the terminal.
-Notes are saved in $NOTES_PATH directory or $HOME/.scripts if $NOTES_PATH is not set
-run `anote -h` for help
-
-### backup
-Backup important directories to directory specified. 
- Exits if no directory was specified.
- Exits if the specified directory does not have space for backup
- run `backup` for help
-
-### batsinal
-Notifies via notify-send when battery is bellow 10%,
-also beeps if $BEEP is defined and the script beep exists
-if there is more than 1 battery, the total percentage is the 
-average of the sum of the capacity of each battery
-
-### batstatus
-Echos to stdout the current capacity of each battery.
-if util is passed as a argument, echoes the percent
-of util capacity in relation to the original capacity.
-
-### beep
-Play a beep sound
-
-### cheatsheet
-Opens a terminal with a man document showing the 
-important system bindings and some general info
-
-### ch_wall
-Shows me all files in my wallpaper repository and i can choose one to be my new wallpaper
-
-### data_hora
-Operations with date and time
-
-### datelog
-I have a cronjob run this every minute to log time spend on the computer in
-`~/.time` for each day. Gives estimate of daily NEEThood.
-
-### dmen
-dmenu_run with pywal colors
-
-### dwmbar
-Simple bar script for DWM
-
-### extract
-A general, all-purpose extraction script.
-Default behavior: Extract archive into new directory
-Behavior with `-c` option: Extract contents into current directory
-
-### faltam
-Work script, notifies how long till i have worked my shift
-
-### get_docs
-Generates a MD file with all the doc comments from the files
-in ~/.scripts folder
-
-### keyboard_layout
-Sets my keyboard layout to en_us and pt_br
-
-### launch_polybar
-Launches polybar. Works for multiple monitors
-
-### listman
-List manuals for the installed programs
-
-### lockscreen
-Locks the screen, pauses songs and videos.
-
-### monitors
-Helper for dealing with multiple monitors, works via dmenu
-
-### mount_phone
-Helper to mount android phones, works with dmenu
-
-### mplayer
-Starts mpd and opens ncmpcpp
-
-### must_update
-Warns me via notify-send when i should update (LIMIT + packages needing update).
-
-### notes.txt
-
-
-### powermenu
-Shutdown or reboot via dmenu
-
-### rebasedev
- nanvix script so i don`t mess up any branches
-
-### rec_webcam
-Records my webcam
-
-### reloadbar
-kills current dwmbar so it reloads
-
-### samedir
-From Luke Smith`s dotfiles
-Open a terminal window in the same directory as the currently active window.
-
-### scratchpad
-Scratchpad terminal for bspwm
-
-### screencast
-Records my screen to a file in ~/
-
-### script_docs
-Grabs the doc comments of all scripts in .scripts folder and output them in MD
-to the README.md file in my rice repository.
-doc comments are lines beggining with #-
-
-### set_colors
-Set my system colors using pywal
-
-### shownotes
-Show all untagged notes as a notification via notify-send
-
-### showtime
-Show how long i have been using the computer
--b argument show since when it`s counting
-
-### sound_control
-Wrapper for controlling volume, makes bluetooth and computer volume the same
-
-### startup_progs
-runs programs after wm is setup
-avoids any errors that might occur if a program runs before another one
-Example: if transmission-gtk runs before bspwm rules are set it will open on workspace 1
-
-### syncrice
-Sync my rice repository
-if a string is passed as a argument uses this string as a commit message
-
-### syncsuck
-updates my Suckless repository
-Generates diff files for the changes i made automatically
-
-### syncthing
-Runs syncthing
-
-### syncwall
-updates wallpapers
-
-### ta_na_hora_de_brincar
-Counts how long i have been working and notifies me via notify-send
-when its almost over
-Also notifies me if it`s getting close to the rush hour
-
-### tecuida
-Reminds me to take a break
-
-### tibia
-Launches tibia
-
-### timer
-Chess like timer
-$1 is how long the first timer should run
-$2 is how long the second timer should run
-
-### toggle_redshift
-Turns redshift on and off
-
-### toggle_touchpad
-Script to toggle the touchpad on/off
-
-### trata_img
- Trata imagens para subir pro meu portfolio
- Comprime para jpg com $QUALIDADE de qualidade e $ESCALA do tamanho,
- esses valores sao adequados para a resolução das minhas imagens (4096x4096 300dpi ou 2480x3508 300dpi),
- podem não ser adequados para outras resoluções
-
-### treesize
-Shows directories size in human readable format
-
-### wacontrols
-Helper for manipulating wacom devices
-only rotates it right now
-<!--endscripts-->
-
+## .local/bin folder
+Personal scripts folder, useful for the whole system.
+Documentation for these scripts can be found [here](.local/bin/README.md).
 
 ## .config folter
 the .config folder includes the following configurations
@@ -233,7 +49,7 @@ the .config folder includes the following configurations
 + kritarc $RICE/.config
 + kritashortcutsrc $RICE/.config
 + wall.jpg $RICE/.config
-+ i3 
++ i3
 + i3status
 + bspwm
 + polybar

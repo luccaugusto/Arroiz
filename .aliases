@@ -1,6 +1,26 @@
+# GENERAL STUFF
+alias q="exit"
 alias please="sudo"
+alias sdnow="shutdown now"
+alias gmspdf="groff -ms -Tpdf"
+alias umount_phone="fusermount -u"
+alias doublefont='sudo setfont -d'
+alias facul="cd ~/Documents/faculdade/;"
+alias fixbt="pactl load-module module-bluetooth-discover"
+
+# MY WEBSITE STUFF
+alias lxyz="ssh lucca@luccaaugusto.xyz"
+alias rxyz="ssh root@luccaaugusto.xyz"
+alias site="cd $HOME/repos/site/; bundle exec jekyll serve"
+alias jekser="bundle exec jekyll serve"
+
+# Pacman stuff
 alias autoremove="pacman -Rns $(pacman -Qtdq)"
 alias update="sudo pacman -Syyud; yay -Syu"
+alias P="sudo pacman"
+alias p="pacman"
+
+# Command aliases and typos
 alias ls="ls --color=auto"
 alias ll="ls -laFoh"
 alias cler="clear"
@@ -8,33 +28,27 @@ alias claer="clear"
 alias clera="clear"
 alias celar="clear"
 alias clean="clear"
-alias P="sudo pacman"
-alias p="pacman"
 alias v="vim"
 alias V="sudo vim"
-alias q="exit"
-alias site="cd $HOME/repos/site/; bundle exec jekyll serve"
+alias scim="sc-im"
+
+# Django stuff
 alias pm="python manage.py"
 alias pms="python manage.py shell"
 alias pmr="python manage.py runserver"
 alias migrate="python manage.py makemigrations; python manage.py migrate"
-alias gmspdf="groff -ms -Tpdf"
-alias umount_phone="fusermount -u"
-alias eclipse="cd Downloads/ide/eclipse;./eclipse &"
-alias fixbt="pactl load-module module-bluetooth-discover"
+
+# GIT STUFF
 alias gc="git commit"
 alias gpsh="git push"
 alias gpll="git pull"
 alias gad="git add ."
-alias sdnow="shutdown now"
-alias lxyz="ssh lucca@luccaaugusto.xyz"
-alias rxyz="ssh root@luccaaugusto.xyz"
+alias gs="git status"
+alias gita="git add"
+
+# NANVIX STUFF
 alias quadro="ssh lucas.augusto@quadro.icei.pucminas.br"
-alias enable_bt="pactl load-module module-bluetooth-discover"
-alias jekser="bundle exec jekyll serve"
-alias scim="sc-im"
 alias bdnvix="make contrib-uninstall && make distclean && make contrib -j 4 && make all -j 4"
-alias nvixsu="sudo bash utils/nanvix-setup-unix.sh"
 alias nanvix="export TARGET="unix64" && cd $HOME/repos/multikernel && sudo bash utils/nanvix-setup-unix.sh"
-alias facul="cd ~/Documents/faculdade/;"
 alias upload='rsync -avz --delete-after --exclude="*.o" --exclude=".git" --exclude="*.swp" --exclude="doc" . lucas.augusto@quadro.icei.pucminas.br:~/multikernel'
+alias kn="pkill nanvix"

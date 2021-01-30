@@ -30,7 +30,7 @@ bsp_monitors()
 
 #wal colors
 # source the colors.
-[ -f "${HOME}/.cache/wal/colors.sh" ] && . "${HOME}/.cache/wal/colors.sh" 
+[ -f "${HOME}/.cache/wal/colors.sh" ] && . "${HOME}/.cache/wal/colors.sh"
 
 # Set the border colors.
 bspc config active_border_color 		"$color1"
@@ -66,6 +66,7 @@ bspc config ignore_ewmh_focus true
 
 bspc rule -a firefox 				desktop=^2 	follow=off
 bspc rule -a "Vivaldi-stable"		desktop=^2 	follow=off
+bspc rule -a "Brave-browser"		desktop=^2 	follow=off
 bspc rule -a qutebrowser 			desktop=^2 	follow=off
 bspc rule -a Gimp 					desktop=^3 	follow=off
 bspc rule -a krita 					desktop=^3 	follow=off
@@ -73,10 +74,10 @@ bspc rule -a shotcut 				desktop=^3 	follow=off
 bspc rule -a Telegram 				desktop=^4 	follow=off
 bspc rule -a Slack 					desktop=^4 	follow=off
 bspc rule -a discord				desktop=^6 	follow=off
-bspc rule -a "transmission"		 	desktop=^5  follow=off state=pseudo_tiled
+bspc rule -a "transmission"		 	desktop=^8  follow=off state=pseudo_tiled
 bspc rule -a Spotify 				desktop=^10 follow=off
 bspc rule -a feh 					floating=on center=true follow=off
-bspc rule -a "screengrab"		 	follow=off state=floating
+bspc rule -a "screengrab"		 	floating=on center=true follow=off
 bspc rule -a calendar				desktop=^5 state=floating
 
 # scratchpad
