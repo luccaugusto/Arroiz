@@ -17,7 +17,7 @@ Backup important directories to directory specified.
 ### batsinal
 Notifies via notify-send when battery is bellow 10%,
 also beeps if $BEEP is defined and the script beep exists
-if there is more than 1 battery, the total percentage is the 
+if there is more than 1 battery, the total percentage is the
 average of the sum of the capacity of each battery
 
 ### batstatus
@@ -52,17 +52,6 @@ Simple bar script for DWM
 A general, all-purpose extraction script.
 Default behavior: Extract archive into new directory
 Behavior with `-c` option: Extract contents into current directory
-
-### faltam
-Work script, notifies how long till i have worked my shift
-
-### get_docs
-Generates a MD file with all the doc comments from the files
-in ~/.local/bin folder
-A doc comment is a line beggining with `#-`
-
-### init_wp
-
 
 ### keyboard_layout
 Sets my keyboard layout to en_us and pt_br
@@ -117,7 +106,6 @@ Records my screen to a file in ~/
 Grabs the doc comments of all scripts in .scripts folder and output them in MD
 to the README.md file in my rice repository.
 doc comments are lines beggining with #-
-Works with the get_docs script.
 
 ### set_colors
 Set my system colors using pywal
@@ -126,8 +114,8 @@ Set my system colors using pywal
 Show all untagged notes as a notification via notify-send
 
 ### showtime
-Show how long i have been using the computer
--b argument show since when it`s counting
+Show how long i have been using the computer.
+-b argument show since when its counting.
 
 ### sound_control
 Wrapper for controlling volume, makes bluetooth and computer volume the same
@@ -144,20 +132,6 @@ if a string is passed as a argument uses this string as a commit message
 ### syncsuck
 updates my Suckless repository
 Generates diff files for the changes i made automatically
-
-### syncthing
-Runs syncthing
-
-### syncwall
-updates wallpapers
-
-### ta_na_hora_de_brincar
-Counts how long i have been working and notifies me via notify-send
-when its almost over
-Also notifies me if it`s getting close to the rush hour
-
-### tecuida
-Reminds me to take a break
 
 ### tibia
 Launches tibia
@@ -186,6 +160,21 @@ Shows directories size in human readable format
 Helper for manipulating wacom devices
 only rotates it right now
 
-### work
+### work/faltam
+Work script, notifies how long till i have worked my shift
+
+### work/init_wp
+Starts services and programs for wordpress development.
+
+### work/README.md
+
+
+### work/ta_na_hora_de_brincar
+Counts how long i have been working and notifies me via notify-send
+when its almost over.
+Also notifies me if its getting close to the rush hour.
+
+### work/tecuida
+Reminds me to take a break
 <!--endscripts-->
 

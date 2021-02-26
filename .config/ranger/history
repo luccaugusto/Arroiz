@@ -1,50 +1,50 @@
-shell vim lexan_wrong.sc
-rename lexan_alright.cal
-rename lexan_wrong.sc
-rename lexan_wrong.cal
-search resolu
+shell unzip lazer84.zip 
+search Laz
+search fonts
+search /pds
+shell . uploadarquivos.sh
+shell . 
+search ca
+open_with 1
+open_with 2
+open_with libre-office
+rename resultados_pesquisa.xlsx
 search PDS
-rename sca
-rename baca.c
-rename baca.h
-rename baca.1
+shell ln -l ../RP
+calendario
+mkdir calendario
+mkdir wildboyz
+search BF
+shell unzip 2021-01-05.zip 
+mkdir old_school
+mkdir beldades
+mkdir grupo_de_3
+mkdir atletas
+rename rolezeiros
+shell vim
+search fs
+search open
+open_with q
+mkdir solteiros
+mkdir _ded
+shell ln -s _blog /home/lucca/Documents/RPG/aventuras
+rename ded.html
+rename dedlogo.png
 open_with vim
-shell . build.sh
-search shot
-rename VID_20210108_225224_rotated.mp4
-rename terceira_parada_cagar.mp4
-rename galera_praia1.jpg
-rename uriel_praia.jpg
-rename uriel_praia2.jpg
-rename uriel_praia3.jpg
-rename uriel_praia_4.jpg
-rename cv-old.pdf
-rename cv-2021`.pdf
-rename cv-2021.pdf
-rename galera_praia3.jpg
-rename galera_praia4.jpg
-rename galera_praia5.jpg
-search fdp
-shell vim fdp.html
-shell . upload.sh
-shell vim IDEIAS_FUNDO.txt
-FDP
-mkdir FDP
-mkdir FREELA
-search solho
-rename SolhoLolho.kra
-rename ZombariaCeleste.kra
-search assinatura
-open_with krita
-rename bcache.h_
-rename bcache.h
-search systemd
+rename Locais.html
+rename locais.html
+rename Irendir-pt1-cetro-da-adversidade.html
+rename irendir-pt1-cetro-da-adversidade.html
+rename personagens.html
+rename personagens.md
+rename locais.md
+rename irendir-pt1-cetro-da-adversidade.md
+search k
+search ki
+rename background-2-fullres.jpg
+open_with gimp
 open_with 
-search web
-rename wp-config.php
-search install
-mkdir scripts
-rename work
-shell vim README.md
-search sync
 delete
+shell . build.sh
+shell 
+shell . upload.sh

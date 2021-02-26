@@ -56,6 +56,10 @@ super + ctrl + d
 super + ctrl + m
 	sound_control m
 
+# ==============================
+#        COMMON BINDINGS
+# ==============================
+
 #reload sxhkd
 super + Escape
 	pkill -USR1 -x sxhkd && sxhkd &
@@ -77,6 +81,8 @@ super + d
 	krita & killall redshift
 super + a
 	$TERMINAL -c "calendar" calcurse
+super + e
+	$TERMINAL -c "email" neomutt
 
 # Print
 Print

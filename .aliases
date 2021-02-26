@@ -31,12 +31,18 @@ alias clean="clear"
 alias v="vim"
 alias V="sudo vim"
 alias scim="sc-im"
+alias rangre="ranger"
+alias rnager="ranger"
+alias rnagre="ranger"
 
 # Django stuff
 alias pm="python manage.py"
 alias pms="python manage.py shell"
 alias pmr="python manage.py runserver"
 alias migrate="python manage.py makemigrations; python manage.py migrate"
+
+# Wordpress stuff
+alias cdwp="cd /usr/share/webapps/wordpress/"
 
 # GIT STUFF
 alias gc="git commit"
@@ -45,6 +51,7 @@ alias gpll="git pull"
 alias gad="git add ."
 alias gs="git status"
 alias gita="git add"
+alias gsu="git submodule update --recursive"
 
 # NANVIX STUFF
 alias quadro="ssh lucas.augusto@quadro.icei.pucminas.br"

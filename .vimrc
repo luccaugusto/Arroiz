@@ -228,4 +228,3 @@ function! FileSize()
     return bytes . 'B '
   endif
 endfunction
-

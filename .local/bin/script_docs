@@ -3,9 +3,30 @@
 #-Grabs the doc comments of all scripts in .scripts folder and output them in MD
 #-to the README.md file in my rice repository.
 #-doc comments are lines beggining with #-
-#-Works with the get_docs script.
 
+SCRIPTS="$HOME/.local/bin"
 README="$HOME/.local/bin/README.md"
+
+get_docs()
+{
+	#DOC=".docs"
+
+	for s in $(ls $SCRIPTS)
+	do
+		if [ -d "$SCRIPTS/$s" ]; then
+			for s2 in $(ls $SCRIPTS/$s)
+			do
+				script="$SCRIPTS/$s/$s2"
+				comments=$(grep "^#-" $script | sed "s/^#-//g" | sed "s/'/\`/g" )
+				printf "### %s\n%s\n\n" "$s/$s2" "$comments"
+			done
+		else
+			script="$SCRIPTS/$s"
+			comments=$(grep "^#-" $script | sed "s/^#-//g" | sed "s/'/\`/g" )
+			printf "### %s\n%s\n\n" "$s" "$comments"
+		fi
+	done
+}
 
 START='<!--startscripts-->'
 END='<!--endscripts-->'

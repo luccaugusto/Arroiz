@@ -2,7 +2,7 @@
 
 #-Notifies via notify-send when battery is bellow 10%,
 #-also beeps if $BEEP is defined and the script beep exists
-#-if there is more than 1 battery, the total percentage is the 
+#-if there is more than 1 battery, the total percentage is the
 #-average of the sum of the capacity of each battery
 
 #export DBUS_SESSION_BUS_ADDRESS eh da versao antiga que rodava no cron
@@ -18,7 +18,7 @@ FINAL_STATUS='Charging'
 [ "$(echo $STATUS | grep Discharging)" ] && FINAL_STATUS='Discharging'
 
 [ $TOTAL -lt 10 ] && [ "$FINAL_STATUS" == 'Discharging' ] &&
-#export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus &&
-export DISPLAY=:0.0 &&	
+export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus &&
+export DISPLAY=:0.0 &&
 notify-send -u critical "Battery low" "Battery at $TOTAL%" &&
 beep

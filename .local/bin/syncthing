@@ -1,6 +1,0 @@
-#!/bin/bash
-
-#-Runs syncthing
-
-cd ~/Downloads/syncthing
-./syncthing

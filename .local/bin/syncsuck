@@ -3,7 +3,7 @@
 #-updates my Suckless repository
 #-Generates diff files for the changes i made automatically
 
-SUCK=/home/lucca/Repos/Suckless/
+SUCK=$REPOS/suckless/
 cd $SUCK
 #Looks for modified files to make a diff of that file and save it under the folder 'patches' of each folder
 changed=$(git status | grep modified | awk '{print $2}')
@@ -23,6 +23,6 @@ do
 done
 #adds new files, commits and pushes everything
 git add .
-git commit -a 
+git commit -a
 git push
 cd ..

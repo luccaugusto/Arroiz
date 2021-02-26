@@ -3,7 +3,6 @@
 #-Echos to stdout the current capacity of each battery.
 #-if util is passed as a argument, echoes the percent
 #-of util capacity in relation to the original capacity.
-
 #BAT0 external
 #BAT1 internal
 

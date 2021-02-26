@@ -3,26 +3,26 @@
 #-Set my system colors using pywal
 
 #base directory
-BG="$HOME/repos/pds/images/wallpapers/PDS_skull_flames_wallpaper.png"
+BG="/home/lucca/repos/wallpapers/hisoka.jpg"
 
 colors_relative()
 {
-	old=$(echo 'BG="$HOME/repos/pds/images/wallpapers/PDS_skull_flames_wallpaper.png"' | sed  's/\//\\\//g')
+	old=$(echo 'BG="/home/lucca/repos/wallpapers/hisoka.jpg"' | sed  's/\//\\\//g')
 	new=$(echo 'BG="$HOME/'"$1"'"' | sed  's/\//\\\//g')
-	sed -i "s/$old/$new/g" $HOME/.scripts/set_colors
+	sed -i "s/$old/$new/g" $HOME/.local/bin/set_colors
 
 }
 
 colors_absolute()
 {
-	old=$(echo 'BG="$HOME/repos/pds/images/wallpapers/PDS_skull_flames_wallpaper.png"' | sed  's/\//\\\//g')
+	old=$(echo 'BG="/home/lucca/repos/wallpapers/hisoka.jpg"' | sed  's/\//\\\//g')
 	new=$(echo 'BG="'"$1"'"' | sed  's/\//\\\//g')
-	sed -i "s/$old/$new/g" $HOME/.scripts/set_colors
+	sed -i "s/$old/$new/g" $HOME/.local/bin/set_colors
 }
 
 colors()
 {
-	#for some reason .config/wall.jpg was always getting the old one, maybe because of cache 
+	#for some reason .config/wall.jpg was always getting the old one, maybe because of cache
 	#rewrite line 5 with $1 to set default
 	if [ "$1" ]
 	then

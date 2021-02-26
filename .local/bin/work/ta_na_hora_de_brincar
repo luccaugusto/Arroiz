@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #-Counts how long i have been working and notifies me via notify-send
-#-when its almost over
-#-Also notifies me if it's getting close to the rush hour
+#-when its almost over.
+#-Also notifies me if its getting close to the rush hour.
 
 if [ ! -z /tmp/.login_time ]; then
 	touch /tmp/.login_time
@@ -11,7 +11,7 @@ if [ ! -z /tmp/faltam ]; then
 	touch /tmp/faltam
 fi
 
-login=$(date +%H:%M) 
+login=$(date +%H:%M)
 echo "$login" > /tmp/.login_time
 
 agr=$(date +%H:%M)

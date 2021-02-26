@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#-Show how long i have been using the computer
-#--b argument show since when it's counting
+#-Show how long i have been using the computer.
+#--b argument show since when its counting.
 
 total(){
 	fulltime=0

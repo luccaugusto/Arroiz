@@ -6,6 +6,7 @@ alsa-ucm-conf
 alsa-utils
 base
 blueman
+brave-bin
 brightnessctl
 brotli
 bspwm
@@ -32,12 +33,14 @@ gzip
 imagemagick
 krita
 libuv
+lynx
 man-db
 mpc
 mpd
 mesa
 ncmpcpp
 neofetch
+neomutt
 network-manager-applet
 networkmanager
 os-prober

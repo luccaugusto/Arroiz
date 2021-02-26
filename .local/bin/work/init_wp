@@ -1,4 +1,6 @@
 #!/bin/sh
 
+#-Starts services and programs for wordpress development.
+
 sudo systemctl start httpd.service
 sudo systemctl start mysql.service
