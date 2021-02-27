@@ -1,12 +1,12 @@
 #!/bin/bash
 
-#-Backup important directories to directory specified. 
+#-Backup important directories to directory specified.
 #- Exits if no directory was specified.
 #- Exits if the specified directory does not have space for backup
 #- run 'backup' for help
 
 #define the files to be backed up
-FILES_LOCATION=("/home/lucca/Documents/" "/home/lucca/Downloads/" "/home/lucca/Pictures/" "/home/lucca/music/")
+FILES_LOCATION=("/home/lucca/Documents/" "/home/lucca/Downloads/" "/home/lucca/pics/")
 
 if test -z "$1";then
 	echo "Inform the directory to back files up to."
@@ -21,10 +21,10 @@ else
 		read folder_size<<<$(du -c $FOLDER | awk 'END{print $1}')
 		TOTAL=$((TOTAL+folder_size))
 	done
-	
+
 	#read external HD size
 	read hd_space<<<$(df $HD | awk 'END{print $4}')
-	
+
 	#if HD has enough space copy all the files to folder NAME
 	if test "$hd_space" -gt "$TOTAL"; then
 		DATE=`date +%Y-%m-%d`

@@ -9,7 +9,7 @@ Notes are saved in $NOTES_PATH directory or $HOME/.notes if $NOTES_PATH is not s
 run `anote -h` for help
 
 ### backup
-Backup important directories to directory specified. 
+Backup important directories to directory specified.
  Exits if no directory was specified.
  Exits if the specified directory does not have space for backup
  run `backup` for help
@@ -155,6 +155,7 @@ Script to toggle the touchpad on/off
 
 ### treesize
 Shows directories size in human readable format
+Got it from vitor mansur, thanks
 
 ### wacontrols
 Helper for manipulating wacom devices

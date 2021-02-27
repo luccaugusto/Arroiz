@@ -1,6 +1,7 @@
 #!/bin/bash
 
 #-Shows directories size in human readable format
+#-Got it from vitor mansur, thanks
 
 du -k --max-depth=1 | sort -nr | awk '
 	BEGIN {

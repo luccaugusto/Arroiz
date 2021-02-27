@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =4
+let g:netrw_dirhistcnt =5
+let g:netrw_dirhist_5='/home/lucca/repos/multikernel/src/ubin/test/fs'
 let g:netrw_dirhist_4='/home/lucca/repos/multikernel/src/sys/fs/vfs/bcache'
 let g:netrw_dirhist_3='/home/lucca/repos/multikernel/src/sys/fs/vfs'
 let g:netrw_dirhist_2='/home/lucca/repos/multikernel/src/sys/fs'
@@ -9,4 +10,3 @@ let g:netrw_dirhist_9='/home/lucca/repos/multikernel/src/sys'
 let g:netrw_dirhist_8='/home/lucca/repos/multikernel'
 let g:netrw_dirhist_7='/home/lucca/repos/multikernel/src'
 let g:netrw_dirhist_6='/home/lucca/repos/multikernel'
-let g:netrw_dirhist_5='/home/lucca/repos/multikernel/src'

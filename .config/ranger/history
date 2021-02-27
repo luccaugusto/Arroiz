@@ -1,10 +1,3 @@
-shell unzip lazer84.zip 
-search Laz
-search fonts
-search /pds
-shell . uploadarquivos.sh
-shell . 
-search ca
 open_with 1
 open_with 2
 open_with libre-office
@@ -30,7 +23,6 @@ mkdir _ded
 shell ln -s _blog /home/lucca/Documents/RPG/aventuras
 rename ded.html
 rename dedlogo.png
-open_with vim
 rename Locais.html
 rename locais.html
 rename Irendir-pt1-cetro-da-adversidade.html
@@ -43,8 +35,16 @@ search k
 search ki
 rename background-2-fullres.jpg
 open_with gimp
-open_with 
-delete
 shell . build.sh
 shell 
 shell . upload.sh
+search brave
+open_with 
+open_with vim
+mkdir porto18LenaEGuto
+shell unzip skate\ and\ destroy\ _stupidvision.jpg 
+shell unzip passarela-alcool-2021.zip 
+mkdir foca
+shell unzip fotos_calendario.zip 
+delete
+shell .

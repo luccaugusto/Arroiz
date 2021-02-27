@@ -57,5 +57,5 @@ alias gsu="git submodule update --recursive"
 alias quadro="ssh lucas.augusto@quadro.icei.pucminas.br"
 alias bdnvix="make contrib-uninstall && make distclean && make contrib -j 4 && make all -j 4"
 alias nanvix="export TARGET="unix64" && cd $HOME/repos/multikernel && sudo bash utils/nanvix-setup-unix.sh"
-alias upload='rsync -avz --delete-after --exclude="*.o" --exclude=".git" --exclude="*.swp" --exclude="doc" . lucas.augusto@quadro.icei.pucminas.br:~/multikernel'
+alias upload='cd /home/lucca/repos/multikernel; rsync -avz --delete-after --exclude="*.o" --exclude=".git" --exclude="*.swp" --exclude="doc" . lucas.augusto@quadro.icei.pucminas.br:~/multikernel'
 alias kn="pkill nanvix"
