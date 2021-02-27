@@ -1,4 +1,4 @@
-#Lista de programas para instalar após o arch
+#List of programs to install after installing arch
 acpi_call
 alsa-lib
 alsa-topology-conf
@@ -17,7 +17,6 @@ dmenu
 dunst
 feh
 ffmpeg
-firefox
 fontconfig
 gawk
 gc
