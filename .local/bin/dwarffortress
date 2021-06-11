@@ -1,0 +1,4 @@
+#!/bin/sh
+#-launches dwarffortress
+cd $HOME/games/df_linux
+./df

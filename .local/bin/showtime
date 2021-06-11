@@ -5,7 +5,8 @@
 
 total(){
 	fulltime=0
-	for day in $(ls $HOME/.time); do
+	for day in $(ls $HOME/.time)
+	do
 		aux=$(cat $HOME/.time/$day)
 		fulltime=$((fulltime+aux))
 	done

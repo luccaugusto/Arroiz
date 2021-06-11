@@ -45,16 +45,7 @@ super + ctrl + minus
 	brightnessctl s 5%-; # reloadbar
 super + ctrl + +
 	brightnessctl s 5%+;  #reloadbar
-#Volume
-#volume up
-super + ctrl + u
-	sound_control u
-#volume down
-super + ctrl + d
-	sound_control d
-# mute/unmute sound
-super + ctrl + m
-	sound_control m
+
 
 # ==============================
 #        COMMON BINDINGS
@@ -68,7 +59,7 @@ super + Return
 super + w
 	$BROWSER
 super + r
-	$TERMINAL ranger
+	$TERMINAL -e ranger
 super + n
 	shownotes
 super + b
@@ -79,10 +70,8 @@ super + p
 	dmen
 super + d
 	krita & killall redshift
-super + a
-	$TERMINAL -c "calendar" calcurse
 super + e
-	$TERMINAL -c "email" neomutt
+	thunderbird
 
 # Print
 Print
@@ -93,8 +82,6 @@ super + F1
 	cheatsheet
 super + F2
 	$TERMINAL -c floats -e pulsemixer
-super + F3
-	killall blueman-applet || (pactl load-module module-bluetooth-discover && blueman-applet && notify-send "bluetooth on")
 super + F9
 	scrot && notify-send "Scrot taken"
 super + F10

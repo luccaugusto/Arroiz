@@ -1,18 +1,20 @@
 !! Set a default font and font size as below:
-*font:	Monaco:pixelsize=20:antialias=true:autohint=true;
-!urxvt.font:	Monaco:pixelsize=20:antialias=true:autohint=true;
+*font:	Monaco:pixelsize=25:antialias=true:autohint=true;
+sxiv.background: $E6E6E6
+urxvt.font:	Monaco:pixelsize=25:antialias=true:autohint=true;
 !URxvt.font: 9x15
-URxvt.font: xft:Deja Vu Sans Mono:pixelsize=20
-!URxvt.font: xft:Bitstream Vera Sans Mono:pixelsize=12
+!URxvt.font: xft:Deja Vu Sans Mono:pixelsize=20
+URxvt.font: xft:Bitstream Vera Sans Mono:pixelsize=20
 !URxvt.font: xft:DejaVu Sans Mono:pixelsize=10
 !URxvt.font: xft:Bitstream Vera Sans Mono:autohint=true:pixelsize=10
 !URxvt.font: xft:Terminus:10
 !URxvt.font: -misc-dejavu sans mono-medium-r-normal-*-11-*-96-96-*-*-iso8859-*
 !URxvt.font: xft:DejaVu Sans Mono:antialias=true:pixelsize=12
 ! scrollbar
-URxvt.scrollstyle: plain
-URxvt*scrollColor: #777777
-URxvt.thickness: 2
+URxvt.scrollBar: false
+!URxvt.scrollstyle: plain
+!URxvt*scrollColor: #777777
+!URxvt.thickness: 2
 
 ! fade non-focussed windows
 URxvt*fading: 33

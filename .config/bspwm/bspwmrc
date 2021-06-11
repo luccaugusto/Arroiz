@@ -73,6 +73,8 @@ bspc rule -a krita 					desktop=^3 	follow=off
 bspc rule -a shotcut 				desktop=^3 	follow=off
 bspc rule -a Telegram 				desktop=^4 	follow=off
 bspc rule -a Slack 					desktop=^4 	follow=off
+bspc rule -a Thunderbird 			desktop=^4 	follow=off
+bspc rule -a Steam 					desktop=^5 	follow=off
 bspc rule -a discord				desktop=^6 	follow=off
 bspc rule -a "transmission"		 	desktop=^8  follow=off state=pseudo_tiled
 bspc rule -a Spotify 				desktop=^10 follow=off

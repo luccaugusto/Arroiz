@@ -6,21 +6,25 @@
 
 opt="$1"; shift
 
+SINKS=$(pactl list short sinks | awk '{print $1}')
 SINK1=$(pactl list sinks | grep "Sink #1")
 
-if [ $opt == 'u' ]
-then
-	pactl set-sink-volume 0 +5%
-	[ "$SINK1" ] && pactl set-sink-volume 1 +5%
-	[ $(pgrep dwm) ] && reloadbar
-elif [ $opt == 'd' ]
-then
-	pactl set-sink-volume 0 -5%
-	[ "$SINK1" ] &&  pactl set-sink-volume 1 -5%
-	[ $(pgrep dwm) ] && reloadbar
-elif [ $opt == 'm' ]
-then
-	pactl set-sink-mute 0 toggle
-	[ "$SINK1" ] && pactl set-sink-mute 1 toggle
-	[ $(pgrep dwm) ] && reloadbar
-fi
+for S in $SINKS
+do
+	if [ $opt == 'u' ]
+	then
+		pactl set-sink-volume $S +5%
+		[ "$SINK1" ] && pactl set-sink-volume $SINK1 +5%
+		[ $(pgrep dwm) ] && reloadbar
+	elif [ $opt == 'd' ]
+	then
+		pactl set-sink-volume $S -5%
+		[ "$SINK1" ] &&  pactl set-sink-volume $SINK1 -5%
+		[ $(pgrep dwm) ] && reloadbar
+	elif [ $opt == 'm' ]
+	then
+		pactl set-sink-mute $S toggle
+		[ "$SINK1" ] && pactl set-sink-mute $SINK1 toggle
+		[ $(pgrep dwm) ] && reloadbar
+	fi
+done

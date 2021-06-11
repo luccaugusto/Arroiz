@@ -19,6 +19,7 @@ alias autoremove="pacman -Rns $(pacman -Qtdq)"
 alias update="sudo pacman -Syyud; yay -Syu"
 alias P="sudo pacman"
 alias p="pacman"
+alias pclrcache="sudo pacman -Scc"
 
 # Command aliases and typos
 alias ls="ls --color=auto"

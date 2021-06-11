@@ -2,12 +2,11 @@
 
 #-Set my system colors using pywal
 
-#base directory
-BG="/home/lucca/repos/wallpapers/hisoka.jpg"
+BG="/home/lucca/repos/wallpapers/Eruption_Sakura.jpg"
 
 colors_relative()
 {
-	old=$(echo 'BG="/home/lucca/repos/wallpapers/hisoka.jpg"' | sed  's/\//\\\//g')
+	old=$(echo 'BG="/home/lucca/repos/wallpapers/Eruption_Sakura.jpg"' | sed  's/\//\\\//g')
 	new=$(echo 'BG="$HOME/'"$1"'"' | sed  's/\//\\\//g')
 	sed -i "s/$old/$new/g" $HOME/.local/bin/set_colors
 
@@ -15,14 +14,13 @@ colors_relative()
 
 colors_absolute()
 {
-	old=$(echo 'BG="/home/lucca/repos/wallpapers/hisoka.jpg"' | sed  's/\//\\\//g')
+	old=$(echo 'BG="/home/lucca/repos/wallpapers/Eruption_Sakura.jpg"' | sed  's/\//\\\//g')
 	new=$(echo 'BG="'"$1"'"' | sed  's/\//\\\//g')
 	sed -i "s/$old/$new/g" $HOME/.local/bin/set_colors
 }
 
 colors()
 {
-	#for some reason .config/wall.jpg was always getting the old one, maybe because of cache
 	#rewrite line 5 with $1 to set default
 	if [ "$1" ]
 	then

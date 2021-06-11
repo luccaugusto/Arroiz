@@ -42,8 +42,14 @@ Operations with date and time
 I have a cronjob run this every minute to log time spend on the computer in
 `~/.time` for each day. Gives estimate of daily NEEThood.
 
+### discord
+
+
 ### dmen
 dmenu_run with pywal colors
+
+### dwarffortress
+launches dwarffortress
 
 ### dwmbar
 Simple bar script for DWM
@@ -52,6 +58,9 @@ Simple bar script for DWM
 A general, all-purpose extraction script.
 Default behavior: Extract archive into new directory
 Behavior with `-c` option: Extract contents into current directory
+
+### freepacman
+
 
 ### keyboard_layout
 Sets my keyboard layout to en_us and pt_br
@@ -160,6 +169,9 @@ Got it from vitor mansur, thanks
 ### wacontrols
 Helper for manipulating wacom devices
 only rotates it right now
+
+### work/css_inutil.sh
+lists all css rules that are not being used on current folder html files
 
 ### work/faltam
 Work script, notifies how long till i have worked my shift

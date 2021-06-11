@@ -1,50 +1,50 @@
-open_with 1
-open_with 2
-open_with libre-office
-rename resultados_pesquisa.xlsx
-search PDS
-shell ln -l ../RP
-calendario
-mkdir calendario
-mkdir wildboyz
-search BF
-shell unzip 2021-01-05.zip 
-mkdir old_school
-mkdir beldades
-mkdir grupo_de_3
-mkdir atletas
-rename rolezeiros
-shell vim
-search fs
-search open
-open_with q
-mkdir solteiros
-mkdir _ded
-shell ln -s _blog /home/lucca/Documents/RPG/aventuras
-rename ded.html
-rename dedlogo.png
-rename Locais.html
-rename locais.html
-rename Irendir-pt1-cetro-da-adversidade.html
-rename irendir-pt1-cetro-da-adversidade.html
-rename personagens.html
-rename personagens.md
-rename locais.md
-rename irendir-pt1-cetro-da-adversidade.md
-search k
-search ki
-rename background-2-fullres.jpg
-open_with gimp
+mkdir filmes
+mkdir the_zero_theorem
+shell unzip the.zero.theorem.\(2013\).pob.1cd.\(5845827\).zip 
+shell unzip Time.Bandits.1981.Bluray.x264.720.YIFY.mp4 
+shell unzip time.bandits.\(1981\).pob.1cd.\(8319940\).zip
+rename NanvixFS (1).pdf
+rename NanvixFS_revisado.pdf
+rename Dashboard_ascii.csv
+open_with brave-browser
+rename Psycho.1960.720p.BrRip.x264.YIFY.srt
+rename Psycho.1960.720p.BrRip.x264.YIFY_br.srt
+search ris
+search cv
+search happy
+mkdir blog
+
+shell vim 
+shell vim parabens.md
+rename parabens.md
 shell . build.sh
-shell 
 shell . upload.sh
-search brave
+rename apresentacaoFinal.txt
+shell Sent apresentacaoFinal.txt 
+shell sent apresentacaoFinal.txt 
+search odt
+rename apresentacao_final.pptx
+odt
+otp
+Lecture
+Lec
+Le
+open_with libreoffice
+bulkrename 
+open_with mpv
 open_with 
+search caio
+rename estampa1.png
+rename estampa2.png
+search pdf
+shell 
+rename background.png
+search html
+open_with brave
+shell unzip HandBrake-master.zip 
+search Nanv
+rename NanvixFS.pdf
+rename Viagem20-21
+mkdir artigos
 open_with vim
-mkdir porto18LenaEGuto
-shell unzip skate\ and\ destroy\ _stupidvision.jpg 
-shell unzip passarela-alcool-2021.zip 
-mkdir foca
-shell unzip fotos_calendario.zip 
 delete
-shell .

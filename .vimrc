@@ -21,6 +21,7 @@
 	syntax on
 	set smartindent
 	set breakindent
+	set encoding=utf-8
 
 	colorscheme wal
 
@@ -170,6 +171,9 @@ hi User9 ctermfg=007 ctermbg=003
 	"inoremap ' '<++>'<++><Esc>3h?<++><CR>4xi
 	au FileType c inoremap /* /*<++> */<++><Esc>3h?<++><CR>4xi
 	au FileType c inoremap /*<CR> /*<CR><++><CR> */<++><Esc>4h?<++><CR>4xa
+	au FileType h inoremap /* /*<++> */<++><Esc>3h?<++><CR>4xi
+	au FileType h inoremap /*<CR> /*<CR><++><CR> */<++><Esc>4h?<++><CR>4xa
+	au FileType tex nnoremap <leader>li o<CR>\begin{figure}[ht]<CR>\centering<CR>\includegraphics[width=.5\textwidth]{<++>}<CR>\caption{<++>}<CR>\label{<++>}<CR>\end{figure}<Esc>4k/<++><CR>"_c4l
 
 	"Some compile commands for these file types
 	au FileType tex map <buffer> <F10> :w<CR>:!pdflatex<Space>%<CR>
@@ -178,14 +182,9 @@ hi User9 ctermfg=007 ctermbg=003
 	au FileType c map <buffer> <F10> :w<CR>:!gcc<Space>-o<Space>expand('%:t:r').out<Space>expand('%:t')<CR>
 	au FileType sh inoremap [ [ <++> ]<++><Esc>3h?<++><CR>4xi
 
-	"Some scripts to make things quicker when creating specific files
-	au FileType c map <buffer> <F9> :Bc<CR>
-	au FileType java map <buffer> <F9> :Bj<CR>
-
 "====================================
 "			Functions
 "===================================
-command! Bc call BeginC()
 function! BeginC()
 	normal! i#include <stdlib.h>
 	normal! o#include <stdio.h>
@@ -198,7 +197,6 @@ function! BeginC()
 	normal! 2k
 endfunction
 
-command! Bj call BeginJ()
 function! BeginJ()
 	normal! ipublic class <++> {
 	normal! o
@@ -206,6 +204,28 @@ function! BeginJ()
 	normal! o
 	normal! o}
 	normal! o}
+endfunction
+
+function! BeginMS()
+	normal! i.TL
+	normal! o<++>
+	normal! o.AU
+	normal! oLucca Augusto (lucca@luccaaugusto.xyz)
+endfunction
+
+function! BeginTex()
+	normal! i\documentclass[12pt]{article}
+	normal! o\usepackage[utf8]{inputenc}
+	normal! o\usepackage{graphicx,url}
+	normal! o\title{<++>}
+	normal! o\author{Lucca Augusto\\(lucca@luccaaugusto.xyz)}
+	normal! o\date{} %empty date so it doesn't show
+	normal! o\begin{document}
+	normal! o\maketitle
+	normal! o
+	normal! o\end{document}
+	normal! 6k
+	normal! $ci{
 endfunction
 
 " Find out current buffer's size and output it.

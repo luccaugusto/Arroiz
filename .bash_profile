@@ -45,3 +45,4 @@ if [[ "$(tty)" = "/dev/tty2" ]]; then
 	. .cache/wal/colors-tty.sh
 	pgrep -x tmux || tmux
 fi
+source "$HOME/.cargo/env"

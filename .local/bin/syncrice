@@ -6,6 +6,7 @@
 RICE=$REPOS/rice
 CONFIG=$HOME/.config
 AQUI=$PWD
+echo $RICE
 
 echo "Cleaning Repository to delete old files. (Dotfiles only)"
 #Bad way to do it but a haven't found a better one

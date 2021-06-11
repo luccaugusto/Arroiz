@@ -28,8 +28,8 @@ sxhkd &
 
 #Seed torrents, like a good boy
 [ ! "$(pgrep -x transmission-qt)" ] && transmission-qt &
-#Sync my email account
-mbsync -a
+#open my email account
+thunderbird &
 #Notifications
 dunst &
 #Utterly amazing transparent terminals
