@@ -18,7 +18,7 @@ user_cron_jobs()
 synchome()
 {
 	SRC="$(dirname $0)"
-	CONFIG=$HOME/.config
+	CONFIG=$CONFIG/
 	echo "copying ~/ files from $SRC"
 	cp $SRC/.aliases $HOME
 	cp $SRC/.bash_profile $HOME
@@ -36,27 +36,28 @@ synchome()
 	cp -r $SRC/.local/bin $HOME/.local/
 
 	echo "copying .config files"
-	cp $SRC/.config/kritadisplayrc $HOME/.config
-	cp $SRC/.config/kritarc $HOME/.config
-	cp $SRC/.config/kritashortcutsrc $HOME/.config
-	cp -r $SRC/.config/i3 $HOME/.config
-	cp -r $SRC/.config/i3status $HOME/.config
-	cp -r $SRC/.config/bspwm $HOME/.config
-	cp -r $SRC/.config/polybar $HOME/.config
-	cp -r $SRC/.config/pulse $HOME/.config
-	cp -r $SRC/.config/ranger $HOME/.config
-	cp -r $SRC/.config/redshift $HOME/.config
-	cp -r $SRC/.config/sxhkd $HOME/.config
-	cp -r $SRC/.config/transmission $HOME/.config
-	cp -r $SRC/.config/wal $HOME/.config
-	cp -r $SRC/.config/mpd $HOME/.config
-	cp -r $SRC/.config/ncmpcpp $HOME/.config
+	mkdir $CONFIG
+	cp $SRC/.config/kritadisplayrc $CONFIG
+	cp $SRC/.config/kritarc $CONFIG
+	cp $SRC/.config/kritashortcutsrc $CONFIG
+	cp -r $SRC/.config/i3 $CONFIG
+	cp -r $SRC/.config/i3status $CONFIG
+	cp -r $SRC/.config/bspwm $CONFIG
+	cp -r $SRC/.config/polybar $CONFIG
+	cp -r $SRC/.config/pulse $CONFIG
+	cp -r $SRC/.config/ranger $CONFIG
+	cp -r $SRC/.config/redshift $CONFIG
+	cp -r $SRC/.config/sxhkd $CONFIG
+	cp -r $SRC/.config/transmission $CONFIG
+	cp -r $SRC/.config/wal $CONFIG
+	cp -r $SRC/.config/mpd $CONFIG
+	cp -r $SRC/.config/ncmpcpp $CONFIG
 }
 
 if [ "$(basename $0)" == "bash" ]; then
 	echo "Please run the script with ./deploy.sh not sh deploy.sh"
 else
-	sudo su && root_cron_jobs()
-	su $USER && user_cron_jobs()
-	synchome
+	#synchome
+	user_cron_jobs
+	sudo su && root_cron_jobs
 fi

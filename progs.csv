@@ -5,6 +5,7 @@
 ,alsa-topology-conf,
 ,alsa-ucm-conf,
 ,alsa-utils,
+,arandr,
 ,base,
 ,blueman, bluetooth thing
 ,blueman-applet, bluetooth applet
@@ -64,6 +65,7 @@
 ,tlp,
 ,tlp-rdw,
 ,transmission-qt,
+,ttf-nerd-font-symbols,
 ,ttf-font-awesome,
 ,ttf-monaco,
 ,ttf-sazanami,
@@ -74,6 +76,7 @@
 ,xdotool,
 ,xf86-input-wacom,
 ,xkeyboard-config,
+,xwallpaper,
 ,xorg-fonts-encodings,
 ,xorg-server,
 ,xorg-server-common,
