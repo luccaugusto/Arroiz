@@ -31,5 +31,6 @@ fi
  #unset f
 #fi
 
+#exec awesome
 exec bspwm
 #exec dwm

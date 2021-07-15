@@ -4,18 +4,20 @@
 #-when its almost over.
 #-Also notifies me if its getting close to the rush hour.
 
+LOGIN_TIME_FILE="/tmp/.login_time$(date +'%d-%m-%y')"
+
 if [ ! -z /tmp/.login_time ]; then
-	touch /tmp/.login_time
+	touch $LOGIN_TIME_FILE
 fi
 if [ ! -z /tmp/faltam ]; then
 	touch /tmp/faltam
 fi
 
 login=$(date +%H:%M)
-echo "$login" > /tmp/.login_time
+echo "$login" > $LOGIN_TIME_FILE
 
 agr=$(date +%H:%M)
-T=240 #tempo em minutos até a saída
+T=480 # Time in minutes till finished
 
 while [ $T -gt 0 ]
 do

@@ -32,6 +32,7 @@ alias clean="clear"
 alias v="vim"
 alias V="sudo vim"
 alias scim="sc-im"
+alias r="ranger"
 alias rangre="ranger"
 alias rnager="ranger"
 alias rnagre="ranger"
@@ -42,9 +43,6 @@ alias pms="python manage.py shell"
 alias pmr="python manage.py runserver"
 alias migrate="python manage.py makemigrations; python manage.py migrate"
 
-# Wordpress stuff
-alias cdwp="cd /usr/share/webapps/wordpress/"
-
 # GIT STUFF
 alias gc="git commit"
 alias gpsh="git push"
@@ -53,6 +51,17 @@ alias gad="git add ."
 alias gs="git status"
 alias gita="git add"
 alias gsu="git submodule update --recursive"
+alias gsu="git push --set-upstream origin"
+
+# WORK STUFF
+alias cs="cd $REPOS/cs"
+alias cdwp="cd $REPOS/cs/wordpress/wp-content"
+alias dc="docker-compose"
+alias deshwp="docker exec -it cs_wordpress_1 bash"
+alias deshdb="docker exec -it cs_db_1 bash"
+alias dedb="docker exec -it cs_db_1 mysql -u root -p"
+alias startwork="bate_ponto login"
+alias stopwork="bate_ponto logout"
 
 # NANVIX STUFF
 alias quadro="ssh lucas.augusto@quadro.icei.pucminas.br"

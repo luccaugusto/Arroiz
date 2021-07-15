@@ -1,50 +1,50 @@
-mkdir filmes
-mkdir the_zero_theorem
-shell unzip the.zero.theorem.\(2013\).pob.1cd.\(5845827\).zip 
-shell unzip Time.Bandits.1981.Bluray.x264.720.YIFY.mp4 
-shell unzip time.bandits.\(1981\).pob.1cd.\(8319940\).zip
-rename NanvixFS (1).pdf
-rename NanvixFS_revisado.pdf
-rename Dashboard_ascii.csv
-open_with brave-browser
-rename Psycho.1960.720p.BrRip.x264.YIFY.srt
-rename Psycho.1960.720p.BrRip.x264.YIFY_br.srt
-search ris
-search cv
-search happy
-mkdir blog
-
-shell vim 
-shell vim parabens.md
-rename parabens.md
-shell . build.sh
-shell . upload.sh
-rename apresentacaoFinal.txt
-shell Sent apresentacaoFinal.txt 
-shell sent apresentacaoFinal.txt 
-search odt
-rename apresentacao_final.pptx
-odt
-otp
-Lecture
-Lec
-Le
-open_with libreoffice
-bulkrename 
-open_with mpv
+rename storea.php
+rename store.php
+search Fo
+mkdir 
+shell ln -s finalizadas
+shell ln -s /home/lucca/pics/brain finalizadas
+rename Mor-tovivo-capinha.png
+rename Mor-tovivo-toalha.png
+mkdir Mor-tovivo
+mkdir Fofoca
+rename FoAFoca-almofada-bolsa-azulejo-botom.png
+rename FoAFoca-almofada-bolsa-azulejo-botomm.png
+rename FoAFoca-capinhaa.png
+rename FoAFoca-capinha.png
+rename FoAFoca-almofada-retangular.png
+search roosy
+search ri
+search ro
+search rossy
+rename rossy.png
+rename Rossy-capinha.png
 open_with 
-search caio
-rename estampa1.png
-rename estampa2.png
-search pdf
+rename colab55-icon.png
+open_with gimp
+shell . build.sh
+rename trending-on-cityshoppe.php
+search assinatura
+rename Assinatura.png
+rename new-in-city.php
+rename new-products-in-city.php
+rename new-products-by-city.css
+rename new-products-in-city.css
+search terapia
+rename back-blog.html
+rename assombracao_almofadas_bolsas_azulejos_botons_template.png
+rename ovo.jpg
+rename caixao_e_planta.jpg
+rename magos.jpg
+rename bixo.jpg
+rename cobrinha_e_mao.jpg
+rename cogumelo.jpg
+rename ovo-de-novo.jpg
+search time
+rename timelapse-perna-roxa.mp4
 shell 
-rename background.png
-search html
+shell unzip Website.zip 
 open_with brave
-shell unzip HandBrake-master.zip 
-search Nanv
-rename NanvixFS.pdf
-rename Viagem20-21
-mkdir artigos
-open_with vim
+open_with krita
 delete
+search ponto

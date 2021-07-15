@@ -5,8 +5,6 @@
 #-if there is more than 1 battery, the total percentage is the
 #-average of the sum of the capacity of each battery
 
-#export DBUS_SESSION_BUS_ADDRESS eh da versao antiga que rodava no cron
-
 COUNT="$(ls /sys/class/power_supply/ | wc -w)"
 PERCENT="$(cat /sys/class/power_supply/*/capacity | paste -sd '+')"
 STATUS="$(cat /sys/class/power_supply/*/status)"

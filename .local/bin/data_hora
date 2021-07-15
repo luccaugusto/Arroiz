@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/bash
 
 #-Operations with date and time
 
@@ -7,13 +7,19 @@ soma_hora()
 {
     h1="$1";shift
     h2="$1";shift
-    min1=${h1:3:2}
-    min2=${h2:3:2}
-    h1=${h1:0:2}
-    h2=${h2:0:2}
+	min1=${h1#[0-9]*:}
+	min2=${h2#[0-9]*:}
+	hor1=${h1%:[0-9]*}
+	hor2=${h2%:[0-9]*}
+
+	#remove beggining 0 so number is treated as decimal
+	hor1=${hor1#0}
+	hor2=${hor2#0}
+	min1=${min1#0}
+	min2=${min2#0}
 
     mins=$((min1 + min2))
-    hs=$((h1+h2))
+    hs=$((hor1+hor2))
 
     if [ "$mins" -gt 59 ]
     then
@@ -33,21 +39,15 @@ soma_hora()
     echo "$hs:$mins"
 }
 
-
-if [ "$1" ] && [ "$2" ]; then
-soma_hora "$1" "$2"
-else
-echo "Comando: subtrai_data data1 data2\n"
-fi
-
-
-
 min2hor()
 {
 	if [ "$1" ]; then
     	T="$1";shift
     	H=$((T / 60))
     	M=$((T % 60))
+
+		[ $H -lt 10 ] && H="0$H"
+		[ $M -lt 10 ] && M="0$M"
 
     	echo "$H:$M"
 	else
@@ -56,15 +56,21 @@ min2hor()
 }
 
 #subtrai data $2 da data $1
-subtrai_data() 
+subtrai_data()
 {
 	if [ "$1" ] && [ "$2" ]; then
 		d1=$1; shift
 		d2=$1; shift
-		min2=${d2:3:2}
-		hor2=${d2:0:2}
-		min1=${d1:3:2}
-		hor1=${d1:0:2}
+		min2=${d2#[0-9]*:}
+		hor2=${d2%:[0-9]*}
+		min1=${d1#[0-9]*:}
+		hor1=${d1%:[0-9]*}
+
+		#remove beggining 0 so number is treated as decimal
+		hor1=${hor1#0}
+		hor2=${hor2#0}
+		min1=${min1#0}
+		min2=${min2#0}
 
 		if [ $min2 -gt $min1 ]; then
 			hor1=$((hor1 - 1))
@@ -89,8 +95,6 @@ show_help()
 	echo "-m min: converter min para HH:MM"
 	echo "-a  H1:M1 H2:M2: adiciona H1:M1 em H2:M2"
 }
-
-
 
 case $1 in
 	-s) shift; subtrai_data "$1" "$2"

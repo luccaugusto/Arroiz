@@ -23,11 +23,11 @@ padding-right = 1
 module-margin = 1
 
 font-0 = Monaco:size=13;-1
-font-1 = FontAwesome 5 Free Regular:style=Regular:size=10;0
-font-2 = FontAwesome 5 Brands Regular:style=Regular:size=10;0
-font-3 = FontAwesome 5 Free Solid:style=Solid:size=10;0
-font-4 = MaterialIcons:size=10;0
-font-5 = Sazanami Gothic:size=12:style=Solid;-2
+font-1 = FontAwesome 5 Free Regular:style=Regular:size=13;0
+font-2 = FontAwesome 5 Brands Regular:style=Regular:size=13;0
+font-3 = FontAwesome 5 Free Solid:style=Solid:size=13;0
+font-4 = MaterialIcons:size=13;0
+font-5 = Sazanami Gothic:size=13:style=Solid;-2
 
 modules-left = bspwm volume backlight memory
 modules-center = xwindow
@@ -37,7 +37,7 @@ modules-right = xkeyboard battery battery2 date wireless-network
 monitor = eDP-1
 bottom = true
 width = 100%
-height = 10 
+height = 10
 
 background = ${bar/top.background}
 foreground = ${bar/top.foreground}
@@ -187,9 +187,9 @@ enable-click = true
 ; Default: true
 enable-scroll = false
 
-; Use fuzzy (partial) matching on labels when assigning 
+; Use fuzzy (partial) matching on labels when assigning
 ; icons to workspaces
-; Example: code;♚ will apply the icon to all workspaces 
+; Example: code;♚ will apply the icon to all workspaces
 ; containing 'code' in the label
 ; Default: false
 fuzzy-match = false
@@ -198,7 +198,7 @@ fuzzy-match = false
 ; Note that the <label> needs to correspond with the bspwm workspace name
 ; Neither <label> nor <icon> can contain a semicolon (;)
 
-         
+
 ws-icon-0 = 1;一
 ws-icon-1 = 2;二
 ws-icon-2 = 3;三
@@ -260,7 +260,7 @@ label-urgent-background = #bd2c40
 
 ; Default: %icon%  %name%
 label-empty = %icon%
-label-empty-foreground = #609fae 
+label-empty-foreground = #609fae
 
 ; The following labels will be used to indicate the layout/mode
 ; for the focused workspace. Requires <label-mode>
@@ -389,7 +389,7 @@ bar-used-empty-foreground = #a09fa3
 
 [module/wireless-network]
 type = internal/network
-interface = wlp3s0 
+interface = wlp3s0
 interval = 3.0
 ping-interval = 10
 

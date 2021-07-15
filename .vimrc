@@ -128,7 +128,7 @@ hi User9 ctermfg=007 ctermbg=003
 
 	"Allow to copy and paste from the system register
 	vnoremap <C-y> "*y :let @+=@*<CR>
-	nnoremap <C-p> "+P
+	nnoremap <C-p> "+p
 
 	"Save a key press on changing windows
 	nnoremap <C-h> <C-w>h

@@ -1,0 +1,17 @@
+#!/bin/sh
+FPS="10"
+FORMAT="png"
+OUTPUT="output.mp4"
+aux=""
+
+echo "Type the FPS: (default 10)"
+read FPS
+
+echo "Type the file format: (default png)"
+read FORMAT
+
+echo "Type the output file name: (default output.mp4)"
+read aux
+[ "$aux" ] && OUTPUT=$aux
+
+ffmpeg -r $FPS -pattern_type glob -i "*.$FORMAT" -vcodec libx264 $OUTPUT

@@ -25,11 +25,12 @@ echo "copying home files"
 cp $HOME/.aliases $RICE
 cp $HOME/.bash_profile $RICE
 cp $HOME/.bashrc $RICE
+cp $HOME/.gitconfig $RICE
 cp $HOME/.vimrc $RICE
+cp $HOME/.tmux.conf $RICE
 cp $HOME/.xinitrc $RICE
 cp $HOME/.xprofile $RICE
 cp $HOME/.Xresources $RICE
-cp $HOME/.tmux.conf $RICE
 
 echo "copying home directories"
 mkdir $RICE/.local/
@@ -43,9 +44,14 @@ mkdir $RICE/.config
 cp $CONFIG/kritadisplayrc $RICE/.config
 cp $CONFIG/kritarc $RICE/.config
 cp $CONFIG/kritashortcutsrc $RICE/.config
+cp $CONFIG/user-dirs.dirs $RICE/.config
+cp $CONFIG/user-dirs.locale $RICE/.config
+cp -r $CONFIG/awesome $RICE/.config
+cp -r $CONFIG/bspwm $RICE/.config
 cp -r $CONFIG/i3 $RICE/.config
 cp -r $CONFIG/i3status $RICE/.config
-cp -r $CONFIG/bspwm $RICE/.config
+cp -r $CONFIG/mpd $RICE/.config
+cp -r $CONFIG/ncmpcpp $RICE/.config
 cp -r $CONFIG/polybar $RICE/.config
 cp -r $CONFIG/pulse $RICE/.config
 cp -r $CONFIG/ranger $RICE/.config
@@ -53,8 +59,6 @@ cp -r $CONFIG/redshift $RICE/.config
 cp -r $CONFIG/sxhkd $RICE/.config
 cp -r $CONFIG/transmission $RICE/.config
 cp -r $CONFIG/wal $RICE/.config
-cp -r $CONFIG/mpd $RICE/.config
-cp -r $CONFIG/ncmpcpp $RICE/.config
 
 cd $RICE
 echo "Adding new files to repo"

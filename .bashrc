@@ -30,4 +30,6 @@ set -o vi
 export PS1="\[\033[38;5;14m\]\u@\[$(tput sgr0)\]\[\033[38;5;198m\]\W\[$(tput sgr0)\] \[$(tput sgr0)\]\[\033[38;5;226m\]>\[$(tput sgr0)\]"
 #no colors in ps1
 #export PS1="\u @\h >\[$(tput sgr0)\]"
-source "$HOME/.cargo/env"
+
+# Install Ruby Gems to ~/gems
+export GEM_HOME="$HOME/.local/gems"

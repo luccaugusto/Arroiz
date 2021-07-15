@@ -63,7 +63,7 @@ super + r
 super + n
 	shownotes
 super + b
-	lockscreen
+	lockscreen -s
 super + shift + s
 	powermenu
 super + p

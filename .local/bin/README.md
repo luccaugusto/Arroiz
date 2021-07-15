@@ -3,6 +3,9 @@
 A brief explanation of each script can be found bellow.
 
 <!--startscripts-->
+### README.md
+
+
 ### anote
 Simple script for taking notes in the terminal.
 Notes are saved in $NOTES_PATH directory or $HOME/.notes if $NOTES_PATH is not set
@@ -28,12 +31,12 @@ of util capacity in relation to the original capacity.
 ### beep
 Play a beep sound
 
-### cheatsheet
-Opens a terminal with a man document showing the 
-important system bindings and some general info
-
 ### ch_wall
 Shows me all files in my wallpaper repository and i can choose one to be my new wallpaper
+
+### cheatsheet
+Opens a terminal with a man document showing the
+important system bindings and some general info
 
 ### data_hora
 Operations with date and time
@@ -42,7 +45,7 @@ Operations with date and time
 I have a cronjob run this every minute to log time spend on the computer in
 `~/.time` for each day. Gives estimate of daily NEEThood.
 
-### discord
+### discord_old
 
 
 ### dmen
@@ -62,6 +65,9 @@ Behavior with `-c` option: Extract contents into current directory
 ### freepacman
 
 
+### gcheckout
+
+
 ### keyboard_layout
 Sets my keyboard layout to en_us and pt_br
 
@@ -73,6 +79,9 @@ List manuals for the installed programs
 
 ### lockscreen
 Locks the screen, pauses songs and videos.
+
+### mktimelapse
+
 
 ### monitors
 Helper for dealing with multiple monitors, works via dmenu
@@ -86,11 +95,11 @@ Starts mpd and opens ncmpcpp
 ### must_update
 Warns me via notify-send when i should update (LIMIT + packages needing update).
 
+### newbranch
+Basically an alias for creating a new branch on git always from develop
+
 ### powermenu
 Shutdown or reboot via dmenu
-
-### README.md
-
 
 ### rebasedev
  nanvix script so i don`t mess up any branches
@@ -170,6 +179,13 @@ Got it from vitor mansur, thanks
 Helper for manipulating wacom devices
 only rotates it right now
 
+### work/README.md
+
+
+### work/bate_ponto
+Keeps track of the time i have been working.
+Uses the -i sed GNU extension
+
 ### work/css_inutil.sh
 lists all css rules that are not being used on current folder html files
 
@@ -178,9 +194,6 @@ Work script, notifies how long till i have worked my shift
 
 ### work/init_wp
 Starts services and programs for wordpress development.
-
-### work/README.md
-
 
 ### work/ta_na_hora_de_brincar
 Counts how long i have been working and notifies me via notify-send

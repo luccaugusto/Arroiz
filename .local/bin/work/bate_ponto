@@ -1,0 +1,113 @@
+#!/bin/sh
+
+#-Keeps track of the time i have been working.
+#-Uses the -i sed GNU extension
+
+TIMEFILE="$HOME/.time/ponto.csv"
+HEADER="dia, hora entrada, pausas (em minutos), hora saida"
+DATE=$(date +%Y-%m-%d)
+
+loglogin()
+{
+	if [ ! $(grep -r "^$DATE" $TIMEFILE) ]
+	then
+		TIME=$(date +%H:%M)
+		echo "$DATE, $TIME, 0," >> $TIMEFILE
+		echo "TRUE" > $HOME/.working
+	fi
+}
+
+takebreak()
+{
+	echo "$(date +%H:%M)" > $HOME/.working
+}
+
+resumework()
+{
+	STOPPED=$(cat $HOME/.working)
+	NOW=$(date +%H:%M)
+
+	logpause $(data_hora -s $NOW $STOPPED)
+	echo TRUE > $HOME/.working
+}
+
+logpause()
+{
+	DOWNTIME="$1"
+	if [ "$DOWNTIME" ]
+	then
+		TODAY=$(grep -r "^$DATE" $TIMEFILE)
+		TODAYPAUSE=$(echo $TODAY | awk '{print $3}')
+		TODAYPAUSE=${TODAYPAUSE%,}
+		TOTALDOWNTIME=$((TODAYPAUSE + DOWNTIME))
+
+		NEWLINE=$(echo $TODAY | awk '{print $1" " $2" " '$TOTALDOWNTIME'","}') &&
+		sed -i "s/$TODAY/$NEWLINE/g" $TIMEFILE
+	else
+		echo "ERROR: To log a pause inform pause time"
+	fi
+}
+
+loglogout()
+{
+	if [ ! -a $HOME/.working ]
+	then
+		TIME=$(date +%H:%M)
+		TODAY=$(grep -r "^$DATE" $TIMEFILE)
+		NEWLINE="$TODAY $TIME"
+		sed -i "s/$TODAY/$NEWLINE/g" $TIMEFILE
+		rm $HOME/.working
+	else
+		echo "You must be logged in to logout"
+	fi
+}
+
+timetilexit()
+{
+	TIME=$(date +%H:%M)
+	TODAY=$(grep -r "^$DATE" $TIMEFILE)
+	LOGINTIME=$(echo $TODAY | awk '{print $2}')
+	LOGINTIME=${LOGINTIME%,}
+	TIMEWORKED=$(data_hora -s $TIME $LOGINTIME)
+	TIMELEFT=$(( 8*60 - $TIMEWORKED))
+	TIMELEFT=$(data_hora -m $TIMELEFT)
+	MSG="$TIMELEFT left"
+	case "$1" in
+		notify)
+			notify-send "$MSG"
+			;;
+		*)
+			echo $MSG
+			;;
+	esac
+}
+
+# RUNNING
+[ -a "$TIMEFILE" ] ||
+	echo "$HEADER" > $TIMEFILE
+
+case "$1" in
+	login)
+		loglogin
+		;;
+	break)
+		takebreak
+		;;
+	resume)
+		resumework
+		;;
+	pause)
+		shift
+		logpause "$1"
+		;;
+	logout)
+		loglogout
+		;;
+	left)
+		shift
+		timetilexit "$1"
+		;;
+	*)
+		echo "usage: bate_ponto [login/pause/logout]"
+		;;
+esac

@@ -1,0 +1,4 @@
+#!/bin/sh
+
+#-Basically an alias for creating a new branch on git always from develop
+[ "$1" ] && git checkout develop && git pull && git checkout -b "$1"

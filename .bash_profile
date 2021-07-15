@@ -23,8 +23,10 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export JAVA_HOME='/usr/lib/jvm/java-11-openjdk'
 # Adds `~/.local/bin` and subdirectories to $PATH
 export PATH="$PATH:$(find ~/.local/bin -type d -printf %p:)"
-export PATH="$PATH:$HOME/.gem/ruby/2.7.0/bin"
+export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin"
 export PATH="$PATH:$JAVA_HOME/bin"
+export PATH="$PATH:$HOME/.local/share/gem/ruby"
+export PATH="$PATH:$HOME/.local/gems/bin"
 
 #Others
 export GROFF_ENCODING=UTF-8
@@ -33,6 +35,8 @@ export REPOS="$HOME/repos"
 export NOTES_PATH="$HOME/.config/anote"
 export EMAIL='lucca@luccaaugusto.xyz'
 
+#Kill all running docker containers in case i forgot to do it before shutting down
+docker kill $(docker ps | awk 'NR>1{ print $1}')
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
@@ -45,4 +49,3 @@ if [[ "$(tty)" = "/dev/tty2" ]]; then
 	. .cache/wal/colors-tty.sh
 	pgrep -x tmux || tmux
 fi
-source "$HOME/.cargo/env"

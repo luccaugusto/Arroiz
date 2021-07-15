@@ -21,6 +21,8 @@ elif [ "$(pgrep -x dwm)" ]; then
 	dwmbar &
 elif [ "$(pgrep -x i3)" ]; then
 	cat $CONFIG/sxhkd/base $CONFIG/sxhkd/i3_keys > $CONFIG/sxhkd/sxhkdrc
+else
+	cp $CONFIG/sxhkd/base $CONFIG/sxhkd/sxhkdrc
 fi
 
 #key bindings
@@ -42,3 +44,5 @@ toggle_redshift
 shownotes
 #Tell me if i need to update
 must_update
+#Open slack so i get ready for work
+slack &

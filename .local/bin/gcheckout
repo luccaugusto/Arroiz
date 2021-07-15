@@ -1,0 +1,8 @@
+#!/bin/sh
+
+BRANCH="$1"
+
+[ "$BRANCH" ] || BRANCH=$(git branch | dmenu -l 10)
+
+git checkout $BRANCH &&
+git pull

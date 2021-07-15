@@ -2,19 +2,35 @@
 
 #-Set my system colors using pywal
 
-BG="/home/lucca/repos/wallpapers/Eruption_Sakura.jpg"
+BG="/home/lucca/repos/wallpapers/District-89.jpg"
+COLORS="$HOME/repos/wallpapers/OOORiver-normlCloud.jpg"
 
 colors_relative()
 {
-	old=$(echo 'BG="/home/lucca/repos/wallpapers/Eruption_Sakura.jpg"' | sed  's/\//\\\//g')
-	new=$(echo 'BG="$HOME/'"$1"'"' | sed  's/\//\\\//g')
+	old=$(echo 'COLORS="$HOME/repos/wallpapers/OOORiver-normlCloud.jpg"' | sed  's/\//\\\//g')
+	new=$(echo 'COLORS="$HOME/'"$1"'"' | sed  's/\//\\\//g')
 	sed -i "s/$old/$new/g" $HOME/.local/bin/set_colors
 
 }
 
 colors_absolute()
 {
-	old=$(echo 'BG="/home/lucca/repos/wallpapers/Eruption_Sakura.jpg"' | sed  's/\//\\\//g')
+	old=$(echo 'COLORS="$HOME/repos/wallpapers/OOORiver-normlCloud.jpg"' | sed  's/\//\\\//g')
+	new=$(echo 'COLORS="'"$1"'"' | sed  's/\//\\\//g')
+	sed -i "s/$old/$new/g" $HOME/.local/bin/set_colors
+}
+
+bg_relative()
+{
+	old=$(echo 'BG="/home/lucca/repos/wallpapers/District-89.jpg"' | sed  's/\//\\\//g')
+	new=$(echo 'BG="$HOME/'"$1"'"' | sed  's/\//\\\//g')
+	sed -i "s/$old/$new/g" $HOME/.local/bin/set_colors
+
+}
+
+bg_absolute()
+{
+	old=$(echo 'BG="/home/lucca/repos/wallpapers/District-89.jpg"' | sed  's/\//\\\//g')
 	new=$(echo 'BG="'"$1"'"' | sed  's/\//\\\//g')
 	sed -i "s/$old/$new/g" $HOME/.local/bin/set_colors
 }
@@ -24,11 +40,11 @@ colors()
 	#rewrite line 5 with $1 to set default
 	if [ "$1" ]
 	then
-		BG="$1"
+		COLORS="$1"
 
 		[ "${1:0:1}" == '/' ] && colors_absolute $1 || colors_relative $1
 
-		wal -n -i "$BG"
+		wal -n -i "$COLORS"
 
 		#Make a wal file that can acctualy be used for dwm
 		#The default one causes errors
@@ -37,18 +53,26 @@ colors()
 		sed -i "s/\[SchemeSel\]  = //g" $HOME/.cache/wal/colors-wal-dwm-real.h
 		sed -i "s/\[SchemeUrg\] = //g" $HOME/.cache/wal/colors-wal-dwm-real.h
 	else
-		wal -n -i "$BG"
+		wal -n -i "$COLORS"
 	fi
 }
 
 
 wallpaper()
 {
+	#rewrite line 6 with $1 to set default
+	if [ "$1" ]
+	then
+		BG="$1"
+
+		[ "${1:0:1}" == '/' ] && bg_absolute $1 || bg_relative $1
+	fi
+
 	xwallpaper --output all --stretch $BG
 }
 
 case $1 in
-	-w) shift; wallpaper
+	-w) shift; wallpaper "$1"
 		;;
 	*) colors "$1"; shift
 		;;

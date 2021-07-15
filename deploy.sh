@@ -54,10 +54,35 @@ synchome()
 	cp -r $SRC/.config/ncmpcpp $CONFIG
 }
 
+install_suckless()
+{
+	cd ~/repos
+	git clone git@github.com:lrr68/Suckless.git suckless
+	cd suckless
+	for dir in $(ls -d .)
+	do
+		make config.h
+		make &&
+		sudo make install
+	done
+}
+
+setup_hosts()
+{
+	echo "# Static table lookup for hostnames." >> /etc/hosts
+	echo "# See hosts(5) for details." >> /etc/hosts
+	echo "127.0.0.1	localhost" >> /etc/hosts
+	echo "::1		localhost" >> /etc/hosts
+	echo "127.0.1.1	main.localdomain	main" >> /etc/hosts
+	echo "138.68.42.117	mail.luccaaugusto.xyz" >> /etc/hosts
+	echo "2604:a880:2:d0::54:a001	mail.luccaaugusto.xyz" >> /etc/hosts
+}
+
 if [ "$(basename $0)" == "bash" ]; then
 	echo "Please run the script with ./deploy.sh not sh deploy.sh"
 else
 	#synchome
 	user_cron_jobs
+	sudo systemctl enable tlp.service
 	sudo su && root_cron_jobs
 fi
