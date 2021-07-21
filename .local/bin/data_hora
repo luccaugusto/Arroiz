@@ -2,8 +2,7 @@
 
 #-Operations with date and time
 
-#soma hora 'h1' na hora 'h2'
-soma_hora()
+sum_hours()
 {
     h1="$1";shift
     h2="$1";shift
@@ -39,7 +38,7 @@ soma_hora()
     echo "$hs:$mins"
 }
 
-min2hor()
+min2hour()
 {
 	if [ "$1" ]; then
     	T="$1";shift
@@ -55,8 +54,7 @@ min2hor()
 	fi
 }
 
-#subtrai data $2 da data $1
-subtrai_data()
+subtract_time()
 {
 	if [ "$1" ] && [ "$2" ]; then
 		d1=$1; shift
@@ -90,18 +88,18 @@ subtrai_data()
 
 show_help()
 {
-	echo "data_hora option [values]"
-	echo "-s H1:M1 H2:M2: subtrai H1:M1 de H2:M2"
-	echo "-m min: converter min para HH:MM"
-	echo "-a  H1:M1 H2:M2: adiciona H1:M1 em H2:M2"
+	echo "${0##*/} option [values]"
+	echo "	-s (H1:M1) (H2:M2): subtracts H1:M1 from H2:M2"
+	echo "	-m (minutes): converts from minutes to HH:MM"
+	echo "	-a  (H1:M1) (H2:M2): adds H1:M1 to H2:M2"
 }
 
 case $1 in
-	-s) shift; subtrai_data "$1" "$2"
+	-s) shift; subtract_time "$1" "$2"
 		;;
-	-m) shift; min2hor "$1"
+	-m) shift; min2hour "$1"
 		;;
-	-a) shift; soma_hora "$1" "$2"
+	-a) shift; sum_hours "$1" "$2"
 		;;
 	*) show_help
 		;;

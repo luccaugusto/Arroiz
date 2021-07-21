@@ -28,5 +28,5 @@ then
 	[ "$t" -gt 10 ] &&
     	notify-send "$t" &&
 		[ "$(cat $HOME/.working)" = "TRUE" ] &&
-		bate_ponto pause $t
+		bate_ponto logpause $t
 fi

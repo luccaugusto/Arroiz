@@ -2,12 +2,12 @@
 
 #-Set my system colors using pywal
 
-BG="/home/lucca/repos/wallpapers/District-89.jpg"
-COLORS="$HOME/repos/wallpapers/OOORiver-normlCloud.jpg"
+BG="/home/lucca/repos/wallpapers/PDS_skull_flames_wallpaper.png"
+COLORS="/home/lucca/repos/wallpapers/RYREY.png"
 
 colors_relative()
 {
-	old=$(echo 'COLORS="$HOME/repos/wallpapers/OOORiver-normlCloud.jpg"' | sed  's/\//\\\//g')
+	old=$(echo 'COLORS="/home/lucca/repos/wallpapers/RYREY.png"' | sed  's/\//\\\//g')
 	new=$(echo 'COLORS="$HOME/'"$1"'"' | sed  's/\//\\\//g')
 	sed -i "s/$old/$new/g" $HOME/.local/bin/set_colors
 
@@ -15,14 +15,14 @@ colors_relative()
 
 colors_absolute()
 {
-	old=$(echo 'COLORS="$HOME/repos/wallpapers/OOORiver-normlCloud.jpg"' | sed  's/\//\\\//g')
+	old=$(echo 'COLORS="/home/lucca/repos/wallpapers/RYREY.png"' | sed  's/\//\\\//g')
 	new=$(echo 'COLORS="'"$1"'"' | sed  's/\//\\\//g')
 	sed -i "s/$old/$new/g" $HOME/.local/bin/set_colors
 }
 
 bg_relative()
 {
-	old=$(echo 'BG="/home/lucca/repos/wallpapers/District-89.jpg"' | sed  's/\//\\\//g')
+	old=$(echo 'BG="/home/lucca/repos/wallpapers/PDS_skull_flames_wallpaper.png"' | sed  's/\//\\\//g')
 	new=$(echo 'BG="$HOME/'"$1"'"' | sed  's/\//\\\//g')
 	sed -i "s/$old/$new/g" $HOME/.local/bin/set_colors
 
@@ -30,7 +30,7 @@ bg_relative()
 
 bg_absolute()
 {
-	old=$(echo 'BG="/home/lucca/repos/wallpapers/District-89.jpg"' | sed  's/\//\\\//g')
+	old=$(echo 'BG="/home/lucca/repos/wallpapers/PDS_skull_flames_wallpaper.png"' | sed  's/\//\\\//g')
 	new=$(echo 'BG="'"$1"'"' | sed  's/\//\\\//g')
 	sed -i "s/$old/$new/g" $HOME/.local/bin/set_colors
 }

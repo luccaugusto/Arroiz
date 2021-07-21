@@ -7,7 +7,22 @@ IMGS="$REPOS/wallpapers/"
 cd $IMGS
 WALL="$(shuf -e `ls` | sxiv -t -o -i)"
 #Change colors
-[ "$WALL" ] &&
-	set_colors "$IMGS$WALL" &&
-	#Change wallpaper
-	set_colors -w
+if [ "$WALL" ]
+then
+	OPT=$(printf "Change wallpaper and color\nChange color\nChange Wallpaper" | dmenu -l 3)
+	if [ "$OPT" = "Change wallpaper and color" ]
+	then
+		#Change color
+		set_colors "$IMGS$WALL"
+		#Change wallpaper
+		set_colors -w "$IMGS$WALL"
+	elif [ "$OPT" = "Change color" ]
+	then
+		#Change color
+		set_colors "$IMGS$WALL"
+	elif [ "$OPT" = "Change Wallpaper" ]
+	then
+		#Change wallpaper
+		set_colors -w "$IMGS$WALL"
+	fi
+fi

@@ -36,7 +36,7 @@ export NOTES_PATH="$HOME/.config/anote"
 export EMAIL='lucca@luccaaugusto.xyz'
 
 #Kill all running docker containers in case i forgot to do it before shutting down
-docker kill $(docker ps | awk 'NR>1{ print $1}')
+[ "$(docker ps | awk 'NR>1{ print $1}')" ] && docker kill $(docker ps | awk 'NR>1{ print $1}')
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 

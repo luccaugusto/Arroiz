@@ -183,22 +183,12 @@ only rotates it right now
 
 
 ### work/bate_ponto
-Keeps track of the time i have been working.
-Uses the -i sed GNU extension
+ POSIX compliant shell script to keep track of the time i have been working.
+ Needs another script that can add and subtract hours (00:00) and convert minutes to HH:MM.
+ This other script is provided at https://raw.githubusercontent.com/lrr68/punch_the_clock/main/date_time.sh and https://raw.githubusercontent.com/lrr68/rice/master/.local/bin/data_hora
 
 ### work/css_inutil.sh
 lists all css rules that are not being used on current folder html files
-
-### work/faltam
-Work script, notifies how long till i have worked my shift
-
-### work/init_wp
-Starts services and programs for wordpress development.
-
-### work/ta_na_hora_de_brincar
-Counts how long i have been working and notifies me via notify-send
-when its almost over.
-Also notifies me if its getting close to the rush hour.
 
 ### work/tecuida
 Reminds me to take a break

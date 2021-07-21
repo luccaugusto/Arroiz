@@ -1,9 +1,3 @@
-rename storea.php
-rename store.php
-search Fo
-mkdir 
-shell ln -s finalizadas
-shell ln -s /home/lucca/pics/brain finalizadas
 rename Mor-tovivo-capinha.png
 rename Mor-tovivo-toalha.png
 mkdir Mor-tovivo
@@ -22,7 +16,6 @@ rename Rossy-capinha.png
 open_with 
 rename colab55-icon.png
 open_with gimp
-shell . build.sh
 rename trending-on-cityshoppe.php
 search assinatura
 rename Assinatura.png
@@ -45,6 +38,13 @@ rename timelapse-perna-roxa.mp4
 shell 
 shell unzip Website.zip 
 open_with brave
+shell . build.sh
+shell . upload.sh
+search zip
+shell unzip Playfair_Display.zip 
+search o
+search 
+search ponto
+shell vim fix-multiple-cities-by-product.php
 open_with krita
 delete
-search ponto

@@ -1,2 +1,6 @@
-dia, hora entrada, pausas (em minutos), hora saida
-2021-07-15, 08:20, 47,
+dia, hora entrada, pausas (em minutos), hora saida, horas extra, horas trabalhadas
+2021-07-15, 08:20, 185, 17:07, 00:00, 05:42
+2021-07-16, 08:30, 79, 18:08, 00:50, 09:09
+2021-07-19, 08:13, 23, 16:43, 01:45, 10:15
+2021-07-20, 08:00, 53, 15:20, 00:00, 06:20
+2021-07-21, 08:03, 0,
