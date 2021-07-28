@@ -1,26 +1,3 @@
-rename Mor-tovivo-capinha.png
-rename Mor-tovivo-toalha.png
-mkdir Mor-tovivo
-mkdir Fofoca
-rename FoAFoca-almofada-bolsa-azulejo-botom.png
-rename FoAFoca-almofada-bolsa-azulejo-botomm.png
-rename FoAFoca-capinhaa.png
-rename FoAFoca-capinha.png
-rename FoAFoca-almofada-retangular.png
-search roosy
-search ri
-search ro
-search rossy
-rename rossy.png
-rename Rossy-capinha.png
-open_with 
-rename colab55-icon.png
-open_with gimp
-rename trending-on-cityshoppe.php
-search assinatura
-rename Assinatura.png
-rename new-in-city.php
-rename new-products-in-city.php
 rename new-products-by-city.css
 rename new-products-in-city.css
 search terapia
@@ -35,16 +12,39 @@ rename cogumelo.jpg
 rename ovo-de-novo.jpg
 search time
 rename timelapse-perna-roxa.mp4
-shell 
 shell unzip Website.zip 
-open_with brave
 shell . build.sh
 shell . upload.sh
-search zip
 shell unzip Playfair_Display.zip 
 search o
-search 
 search ponto
 shell vim fix-multiple-cities-by-product.php
+search 
+search pi
+search pico
+search ryr
+search skatista
+search ry
+shell unzip  o58hjt4875hgkj548yghk5y8ghk58.zip 
+open_with brave
+rename date_time.sh
+shell 
+open_with krit
+shell convert -trim loveeverybody-go-skate-livehappy.png loveeverybody-go-skate-livehappy-trimmed.png
+search love
+rename loveeverybody-go-skate-livehappy.png
 open_with krita
+shell tar -xf calculo.tar.gz 
+open_with libreoffice
+mkdir whereismymoney
+rename punch_
+rename punch_clock.sh
+rename whereismymoney.sh
+search rela
+search zip
+shell unzip wp-fail2ban.4.3.0.9.zip 
 delete
+shell vim test.php
+rename remove_tags_from_description.php
+rename 2021-07-27
+open_with vim

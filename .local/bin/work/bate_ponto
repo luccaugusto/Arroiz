@@ -5,7 +5,7 @@
 #- This other script is provided at https://raw.githubusercontent.com/lrr68/punch_the_clock/main/date_time.sh and https://raw.githubusercontent.com/lrr68/rice/master/.local/bin/data_hora
 
 # Script capable of doing operations with date and time
-#DATEMATHICS="date_time"
+#DATEMATHICS="date_time.sh"
 DATEMATHICS="data_hora"
 #TIMEFILE="$HOME/.time/workhours.csv"
 TIMEFILE="$HOME/.time/ponto.csv"
@@ -30,7 +30,7 @@ showtimeworked()
 {
 	TIME=$(date +%H:%M)
 	WORKED=$(gettimeworked)
-	echo "$($DATEMATHICS -m $WORKED) Hours worked"
+	echo "$($DATEMATHICS -h $WORKED) Hours worked"
 }
 
 loglogin()
@@ -109,7 +109,7 @@ loglogout()
 		if [ ! "$LOGGEDOUT" ]
 		then
 			# compute work hours
-			NEWLINE="$TODAY $TIME, 00:00, $($DATEMATHICS -m$TIMEWORKED)"
+			NEWLINE="$TODAY $TIME, 00:00, $($DATEMATHICS -h $TIMEWORKED)"
 		else
 			# compute extra hours
 			[ -a $HOME/.working ] &&
@@ -120,11 +120,11 @@ loglogout()
 			EXTRAWORKED=${EXTRAWORKED%,}
 			echo EXTRAWORKED $EXTRAWORKED
 			EXTRA="$($DATEMATHICS -s $TIME $LOGIN)"
-			EXTRA="$($DATEMATHICS -m $EXTRA)"
+			EXTRA="$($DATEMATHICS -h $EXTRA)"
 			EXTRA="$($DATEMATHICS -a $EXTRA $EXTRAWORKED)"
 
 			TOTALTIME="$(gettimeworked)"
-			TOTALTIME="$($DATEMATHICS -m $TOTALTIME)"
+			TOTALTIME="$($DATEMATHICS -h $TOTALTIME)"
 			echo totaltime $TOTALTIME
 			TOTALTIME="$($DATEMATHICS -a $EXTRA $TOTALTIME)"
 
@@ -148,18 +148,85 @@ timetilexit()
 	then
 		MSG="You're already working over hours for ${TIMELEFT#-} minutes"
 	else
-		TIMELEFT=$($DATEMATHICS -m $TIMELEFT)
+		TIMELEFT=$($DATEMATHICS -h $TIMELEFT)
 		MSG="$TIMELEFT left, estimated exit: $(data_hora -a $TIME $TIMELEFT)"
 	fi
 
-	case "$1" in
-		notify)
-			notify-send "$MSG"
-			;;
-		*)
-			echo $MSG
-			;;
-	esac
+	[ "$1" = "notify" ] &&
+		notify-send "$MSG" ||
+		echo $MSG
+}
+
+getweekday()
+{
+	[ ! "$1" ] && echo "0" && return
+
+	date="${1%,}"; shift
+	day="${date##*-}"
+
+	calline="$(cal -v $date | grep " $day ")"
+
+	echo "$(echo $calline | awk '{print $1}')"
+}
+
+getexpectedhours()
+{
+	[ ! "$1" ] && echo "0" && return
+
+	EXPECTED_HOURS=0
+
+	NUMBER_OF_DAYS="$1"; shift
+
+	for line in $(tail -n $NUMBER_OF_DAYS $TIMEFILE | awk '{print $1}')
+	do
+		date="${line%%,*}"
+		weekday=$(getweekday $date)
+		if [ ! "$weekday" = "Sa" ] && [ ! "$weekday" = "Su" ]
+		then
+			EXPECTED_HOURS=$((EXPECTED_HOURS + 480))
+		fi
+	done
+
+	echo "$EXPECTED_HOURS"
+}
+
+showbalance()
+{
+	TOTAL="00:00"
+	BALANCE=0
+	MSG=""
+
+	# Do not count header
+	NUMBER_OF_DAYS=$(cat $TIMEFILE | wc -l)
+	NUMBER_OF_DAYS=$((NUMBER_OF_DAYS -1))
+
+	# Only take into account week days, worked weekends are extra hours
+	EXPECTED_N_MINUTES=$(getexpectedhours $NUMBER_OF_DAYS)
+
+	for hours in $(tail -n $NUMBER_OF_DAYS $TIMEFILE | awk '{print $6}')
+	do
+		TOTAL=$($DATEMATHICS -a $TOTAL $hours)
+	done
+
+	#convert total to minutes so it's easier to operate
+	TOTAL="$($DATEMATHICS -m $TOTAL)"
+	BALANCE=$((EXPECTED_N_MINUTES - TOTAL))
+
+	if [ $BALANCE -lt 0 ]
+	then
+		# make it positive
+		BALANCE=${BALANCE#-}
+		MSG="You have $($DATEMATHICS -h $BALANCE) extra hours"
+	else
+		MSG="You owe $($DATEMATHICS -h $BALANCE) hours"
+	fi
+
+	echo "$MSG"
+}
+
+showtimefile()
+{
+	column -s',' -t < $TIMEFILE
 }
 
 # RUNNING
@@ -190,6 +257,12 @@ case "$1" in
 	timeworked)
 		showtimeworked
 		;;
+	balance)
+		showbalance
+		;;
+	show)
+		showtimefile
+		;;
 	*)
 		echo "usage: ${0##*/} ( command )"
 		echo "commands:"
@@ -200,5 +273,7 @@ case "$1" in
 		echo "		resume: Remove the break status and register the time you have been out"
 		echo "		left [ notify ]: Informs time left for you to complete 8 hours of work"
 		echo "		timeworked: Informs time you have already worked in this session"
+		echo "		balance: Shows if you have extra hours or owe hours (40 hour weeks)"
+		echo "		show: Shows the timefile"
 		;;
 esac

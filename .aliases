@@ -54,6 +54,8 @@ alias gsu="git submodule update --recursive"
 alias gsu="git push --set-upstream origin"
 
 # WORK STUFF
+alias sshtest="ssh lucca@128.199.7.141"
+alias sshprod="ssh lucca@cityshoppe.com"
 alias cs="cd $REPOS/cs"
 alias cdwp="cd $REPOS/cs/wordpress/wp-content"
 alias dc="docker-compose"

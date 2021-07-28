@@ -3,3 +3,5 @@
 	name = lrr68
 [alias]
 	branchlog = !git log HEAD $(git branch -a | grep -v \"^*\" | grep -v \"\\->\" | sed \"s/^ /--not /\")
+[init]
+	defaultBranch = main

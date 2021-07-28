@@ -1,4 +1,19 @@
 #!/bin/sh
 
-#-Basically an alias for creating a new branch on git always from develop
-[ "$1" ] && git checkout develop && git pull && git checkout -b "$1"
+#-Cretes a new branch.
+#-Prompts with dmenu for the branch type: feature, bugfix or hotfix. If it is a hotfix branch, create it from master.
+
+TYPE=$(printf "feature\nbugfix\nhotfix" | dmenu -l 3)
+ROOTBRANCH="develop"
+
+[ "$TYPE" = "hotfix" ] && ROOTBRANCH="master"
+
+if [ "$1" ]
+then
+	git checkout $ROOTBRANCH &&
+	git pull &&
+	git checkout -b "$TYPE/$1"
+	git push -u origin "$TYPE/$1"
+else
+	echo "ERROR: usage newbranch <branch-name>"
+fi

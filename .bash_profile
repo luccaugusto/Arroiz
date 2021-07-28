@@ -38,6 +38,9 @@ export EMAIL='lucca@luccaaugusto.xyz'
 #Kill all running docker containers in case i forgot to do it before shutting down
 [ "$(docker ps | awk 'NR>1{ print $1}')" ] && docker kill $(docker ps | awk 'NR>1{ print $1}')
 
+#compress the time files into only one file
+compress_time
+
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
 # Start graphical server if bspwm not already running.

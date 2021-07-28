@@ -1,5 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =5
+let g:netrw_dirhistcnt =7
+let g:netrw_dirhist_7='/home/lucca/repos/cs/wordpress/wp-content/plugins/woocommerce/templates/loop'
+let g:netrw_dirhist_6='/home/lucca/repos/cs/wordpress/wp-content/themes/woodmart-child'
 let g:netrw_dirhist_5='/home/lucca/repos/punch_the_clock'
 let g:netrw_dirhist_4='/home/lucca/repos/cs/wordpress/wp-content/plugins/elementor-widget-cityshoppe/assets/custom/css'
 let g:netrw_dirhist_3='/home/lucca/repos/cs/wordpress/wp-content/plugins/elementor-widget-cityshoppe/assets/custom'
@@ -8,5 +10,3 @@ let g:netrw_dirhist_1='/home/lucca/repos/cs/wordpress/wp-content/plugins/element
 let g:netrw_dirhist_0='/home/lucca/repos/cs/wordpress/wp-content/plugins/elementor-widget-cityshoppe/widgets'
 let g:netrw_dirhist_9='/home/lucca/repos/cs/wordpress/wp-content/plugins/elementor-widget-cityshoppe/assets/custom/css'
 let g:netrw_dirhist_8='/home/lucca/repos/cs/wordpress/wp-content/plugins/elementor-widget-cityshoppe/assets/custom'
-let g:netrw_dirhist_7='/home/lucca/repos/cs/wordpress/wp-content/plugins/elementor-widget-cityshoppe/assets'
-let g:netrw_dirhist_6='/home/lucca/repos/cs/wordpress/wp-content/plugins/elementor-widget-cityshoppe'

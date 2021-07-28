@@ -54,6 +54,23 @@ min2hour()
 	fi
 }
 
+hour2min()
+{
+	if [ "$1" ]; then
+    	T="$1";shift
+		hor=${T%:[0-9]*}
+		min=${T#[0-9]*:}
+
+		#remove beggining 0 so number is treated as decimal
+		hor=${hor#0}
+		min=${min#0}
+
+		echo "$((hor * 60 + min))"
+	else
+		show_help
+	fi
+}
+
 subtract_time()
 {
 	if [ "$1" ] && [ "$2" ]; then
@@ -91,15 +108,18 @@ show_help()
 	echo "${0##*/} option [values]"
 	echo "	-s (H1:M1) (H2:M2): subtracts H1:M1 from H2:M2"
 	echo "	-m (minutes): converts from minutes to HH:MM"
+	echo "	-h (HH:MM): converts from HH:MM to minutes"
 	echo "	-a  (H1:M1) (H2:M2): adds H1:M1 to H2:M2"
 }
 
 case $1 in
 	-s) shift; subtract_time "$1" "$2"
 		;;
-	-m) shift; min2hour "$1"
+	-h) shift; min2hour "$1"
 		;;
 	-a) shift; sum_hours "$1" "$2"
+		;;
+	-m) shift; hour2min "$1"
 		;;
 	*) show_help
 		;;

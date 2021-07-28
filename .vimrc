@@ -35,7 +35,11 @@
 	"Configure tab size
 	set tabstop=4
 	set shiftwidth=4
-	"set expandtab
+	"set expandtab "indent with spaces
+
+	"Custom indentation rules
+	autocmd FileType html setlocal shiftwidth=4 tabstop=4 expandtab
+	autocmd FileType php setlocal shiftwidth=4 tabstop=4 expandtab
 
 	"Get trailing characters on tab to view indents more easily
 	"set list
@@ -48,10 +52,11 @@
 
 	set number
 	set relativenumber    "sets the line numbers relative to the current line
-	set nocompatible
+	set nocompatible	  "no behaving like vi
 	set autoindent        "auto indentation when enter is pressed
 	set showmode          "shows vim current mode
 	set wildmenu          "auto completion when ctrl+n is pressed
+	set wildmode=longest,list,full
 	set incsearch         "searches as you type each letter
 	"set lazyredraw        "only redraws the screen when really needed
 	set foldenable        "allows code folding when zf is pressed. zd to unfold
@@ -62,7 +67,6 @@
 	set backup
 	set backupdir=/tmp    "Save backup files in tmp directory
 	set hlsearch
-	set wildmode=longest,list,full
 	set ignorecase "search is case insensitive
 	set smartcase "case sensitive search in case the is an uppercase character in search
 	"set cursorline
@@ -169,6 +173,7 @@ hi User9 ctermfg=007 ctermbg=003
 	inoremap [ [<++>]<++><Esc>3h?<++><CR>4xi
 	"inoremap " "<++>"<++><Esc>3h?<++><CR>4xi
 	"inoremap ' '<++>'<++><Esc>3h?<++><CR>4xi
+	au FileType sh inoremap [ [ <++> ]<++><Esc>3h?<++><CR>4xi
 	au FileType c inoremap /* /*<++> */<++><Esc>3h?<++><CR>4xi
 	au FileType c inoremap /*<CR> /*<CR><++><CR> */<++><Esc>4h?<++><CR>4xa
 	au FileType h inoremap /* /*<++> */<++><Esc>3h?<++><CR>4xi
@@ -180,7 +185,6 @@ hi User9 ctermfg=007 ctermbg=003
 	au FileType java map <buffer> <F10> :w<CR>:!javac<Space>%<CR>
 	au FileType java map <buffer> <F7> :!java<Space>'%:t:r'<CR>
 	au FileType c map <buffer> <F10> :w<CR>:!gcc<Space>-o<Space>expand('%:t:r').out<Space>expand('%:t')<CR>
-	au FileType sh inoremap [ [ <++> ]<++><Esc>3h?<++><CR>4xi
 
 "====================================
 "			Functions

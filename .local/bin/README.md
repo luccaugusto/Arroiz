@@ -31,12 +31,21 @@ of util capacity in relation to the original capacity.
 ### beep
 Play a beep sound
 
+### cademeudinheiro
+Script to deal with personal finances.
+Keeps track of how much money you have by logging how much you spent and received.
+Money spent is saved as a negative value, while money received is saved as a positive value.
+
 ### ch_wall
 Shows me all files in my wallpaper repository and i can choose one to be my new wallpaper
 
 ### cheatsheet
 Opens a terminal with a man document showing the
 important system bindings and some general info
+
+### compress_time
+Convert all the date files in my .time directory to a single csv file.
+Drastically reduce the number of files in that folder
 
 ### data_hora
 Operations with date and time
@@ -96,7 +105,8 @@ Starts mpd and opens ncmpcpp
 Warns me via notify-send when i should update (LIMIT + packages needing update).
 
 ### newbranch
-Basically an alias for creating a new branch on git always from develop
+Cretes a new branch.
+Prompts with dmenu for the branch type: feature, bugfix or hotfix. If it is a hotfix branch, create it from master.
 
 ### powermenu
 Shutdown or reboot via dmenu
