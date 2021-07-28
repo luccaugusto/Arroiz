@@ -1,0 +1,114 @@
+#!/bin/sh
+
+#-Script to deal with personal finances.
+#-Keeps track of how much money you have by logging how much you spent and received.
+#-Money spent is saved as a negative value, while money received is saved as a positive value.
+
+#BANKFILE="$HOME/.bank.csv"
+BANKFILE="$HOME/.banco.csv"
+#HEADER="date time,amount,transaction type"
+HEADER="dia e hora,quantia,tipo da transacao"
+#DEFAULT_EXPENSE="basic expenses"
+DEFAULT_EXPENSE="despesas basicas"
+#DEFAULT_RECEIVE="paycheck"
+DEFAULT_RECEIVE="salario"
+CURRENCY="R$"
+
+logtransaction()
+{
+	[ ! "$1" ] && echo "ERROR: Amount not informed" && return
+	[ ! "$2" ] && echo "ERROR: Transaction type not informed" && return
+
+	DATE=$(date "+%Y-%m-%d %H:%M")
+	AMOUNT="$1"; shift
+	TRANSACTION_TYPE="$1"; shift
+
+	echo "$DATE,$AMOUNT,$TRANSACTION_TYPE" >> $BANKFILE
+}
+
+logmoneyspent()
+{
+	[ ! "$1" ] && echo "ERROR: Amount not informed" && return
+
+	TRANSACTION_TYPE="$DEFAULT_EXPENSE"
+	AMOUNT="$1"; shift
+	#make sure it's a negative
+	[ "${AMOUNT:0:1}" = '-' ] || AMOUNT="-$AMOUNT"
+
+	[ "$1" ] && TRANSACTION_TYPE="$1" && shift
+
+	logtransaction "$AMOUNT" "$TRANSACTION_TYPE"
+}
+
+logmoneyreceived()
+{
+	[ ! "$1" ] && echo "ERROR: Amount not informed" && return
+
+	TRANSACTION_TYPE="$DEFAULT_RECEIVE"
+	AMOUNT="$1"; shift
+	#make sure it's a positive
+	[ "${AMOUNT:0:1}" = '-' ] && AMOUNT="${AMOUNT:1}"
+
+	[ "$1" ] && TRANSACTION_TYPE="$1" && shift
+
+	logtransaction "$AMOUNT" "$TRANSACTION_TYPE"
+}
+
+getbalanceint()
+{
+	OLDIFS=$IFS
+	IFS=$'\n'
+	for expense in $(cat $BANKFILE)
+	do
+		echo $expense
+	done
+
+	IFS=$OLDIFS
+}
+
+getbalance()
+{
+	[ "$1" = 'i' ] && getbalanceint && return
+
+	TOTAL=$(awk -F',' 'NR>1 {total+=$2;}END{print total;}' $BANKFILE)
+
+	if [ "${TOTAL%.*}" -lt 0 ]
+	then
+		echo "You have a debt of $CURRENCY$TOTAL"
+	else
+		echo "You have $CURRENCY$TOTAL"
+	fi
+}
+
+showbankfile()
+{
+	column -s',' -t < $BANKFILE
+	getbalance
+}
+
+#RUNNING
+[ -a "$BANKFILE" ] ||
+	echo "$HEADER" > $BANKFILE
+
+case "$1" in
+	balance) shift
+		getbalance "$1"
+		;;
+	spend) shift
+		logmoneyspent "$1" "$2"
+		;;
+	receive) shift
+		logmoneyreceived "$1" "$2"
+		;;
+	show) shift
+		showbankfile
+		;;
+	*)
+		echo "usage: ${0##*/} ( command )"
+		echo "commands:"
+		echo "		balance [ i ]: Get current balance. if i is passed, select which transactions to count."
+		echo "		spend (number) [ type ]: Register an expense of number and type (if informed)"
+		echo "		receive (number) [ type ]: Register you received number and type (if informed)"
+		echo "		show: Shows the bankfile"
+		;;
+esac
