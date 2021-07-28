@@ -1,0 +1,25 @@
+#!/bin/sh
+
+#-Convert all the date files in my .time directory to a single csv file.
+#-Drastically reduce the number of files in that folder
+
+DATEMATHICS="data_hora"
+HEADER="date, time spent on computer (hours), time spent on computer (minutes)"
+TIMEFOLDER="$HOME/.time"
+TIMEFILE="$TIMEFOLDER/time.csv"
+TODAY=$(date '+%Y-%m-%d')
+
+[ -a "$TIMEFILE" ] ||
+	echo "$HEADER" > $TIMEFILE
+
+for date in $(find $TIMEFOLDER ! -name "*.csv*" -type f| sort)
+do
+	#skip file from today as it is still counting
+	if [ ! "${date##*/}" = "$TODAY" ]
+	then
+		time="$(cat $date)"
+		echo "${date##*/},$($DATEMATHICS -h $time),$time" >> $TIMEFILE
+
+		rm $date
+	fi
+done
