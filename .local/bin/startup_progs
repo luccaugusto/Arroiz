@@ -1,8 +1,16 @@
 #!/bin/bash
 
-#-runs programs after wm is setup
-#-avoids any errors that might occur if a program runs before another one
-#-Example: if transmission-gtk runs before bspwm rules are set it will open on workspace 1
+#-Runs programs after wm is launched. Basically an extension for bash_profile in this setup.
+#-Also avoids any errors that might occur if a program runs before another one.
+#-Example: if transmission runs before bspwm rules are set it will open on workspace 1
+
+#Kill all running docker containers in case i forgot to do it before shutting down
+[ "$(docker ps | awk 'NR>1{ print $1}')" ] && docker kill $(docker ps | awk 'NR>1{ print $1}')
+
+#compress the time files into only one file
+compress_time
+#fetches transactions i registered by email
+cademeudinheiro fetch
 
 #System colors and wallpaper
 set_colors

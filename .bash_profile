@@ -35,20 +35,13 @@ export REPOS="$HOME/repos"
 export NOTES_PATH="$HOME/.config/anote"
 export EMAIL='lucca@luccaaugusto.xyz'
 
-#Kill all running docker containers in case i forgot to do it before shutting down
-[ "$(docker ps | awk 'NR>1{ print $1}')" ] && docker kill $(docker ps | awk 'NR>1{ print $1}')
-
-#compress the time files into only one file
-compress_time
-
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
 # Start graphical server if bspwm not already running.
 if [[ "$(tty)" = "/dev/tty1" ]]; then
 	pgrep -x bspwm || exec startx &> .xerrors
 	pgrep -x dwm && .local/bin/startup_progs
-fi
-if [[ "$(tty)" = "/dev/tty2" ]]; then
+elif [[ "$(tty)" = "/dev/tty2" ]]; then
 	. .cache/wal/colors-tty.sh
 	pgrep -x tmux || tmux
 fi

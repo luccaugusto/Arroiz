@@ -5,7 +5,6 @@
 
 RICE=$REPOS/rice
 CONFIG=$HOME/.config
-AQUI=$PWD
 echo $RICE
 
 echo "Cleaning Repository to delete old files. (Dotfiles only)"
@@ -38,6 +37,9 @@ cp -r $HOME/.vim $RICE
 cp -r $HOME/.vimgolf $RICE
 cp -r $HOME/.time $RICE
 cp -r $HOME/.local/bin $RICE/.local/
+# remove scripts that might contain personal info
+rm $RICE/.local/bin/personalspace
+rm $RICE/.local/bin/cademeudinheiro
 
 echo "copying .config files"
 mkdir $RICE/.config
@@ -46,7 +48,6 @@ cp $CONFIG/kritarc $RICE/.config
 cp $CONFIG/kritashortcutsrc $RICE/.config
 cp $CONFIG/user-dirs.dirs $RICE/.config
 cp $CONFIG/user-dirs.locale $RICE/.config
-cp -r $CONFIG/awesome $RICE/.config
 cp -r $CONFIG/bspwm $RICE/.config
 cp -r $CONFIG/i3 $RICE/.config
 cp -r $CONFIG/i3status $RICE/.config
@@ -60,7 +61,7 @@ cp -r $CONFIG/sxhkd $RICE/.config
 cp -r $CONFIG/transmission $RICE/.config
 cp -r $CONFIG/wal $RICE/.config
 
-cd $RICE
+pushd $RICE
 echo "Adding new files to repo"
 git add .
 #just so i know what i changed
@@ -70,4 +71,4 @@ echo "Comitting changes" &&
 git commit -m "$1" &&
 echo "Pushing changes" &&
 git push
-cd $AQUI
+popd

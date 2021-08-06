@@ -1,24 +1,3 @@
-rename new-products-by-city.css
-rename new-products-in-city.css
-search terapia
-rename back-blog.html
-rename assombracao_almofadas_bolsas_azulejos_botons_template.png
-rename ovo.jpg
-rename caixao_e_planta.jpg
-rename magos.jpg
-rename bixo.jpg
-rename cobrinha_e_mao.jpg
-rename cogumelo.jpg
-rename ovo-de-novo.jpg
-search time
-rename timelapse-perna-roxa.mp4
-shell unzip Website.zip 
-shell . build.sh
-shell . upload.sh
-shell unzip Playfair_Display.zip 
-search o
-search ponto
-shell vim fix-multiple-cities-by-product.php
 search 
 search pi
 search pico
@@ -28,7 +7,6 @@ search ry
 shell unzip  o58hjt4875hgkj548yghk5y8ghk58.zip 
 open_with brave
 rename date_time.sh
-shell 
 open_with krit
 shell convert -trim loveeverybody-go-skate-livehappy.png loveeverybody-go-skate-livehappy-trimmed.png
 search love
@@ -38,13 +16,35 @@ shell tar -xf calculo.tar.gz
 open_with libreoffice
 mkdir whereismymoney
 rename punch_
-rename punch_clock.sh
-rename whereismymoney.sh
 search rela
-search zip
 shell unzip wp-fail2ban.4.3.0.9.zip 
-delete
 shell vim test.php
 rename remove_tags_from_description.php
 rename 2021-07-27
+rename group_610040910dc1e.json_
+rename group_610040910dc1e.json
+open_with 
+rename curriculoUriel.pdf
+search woocomm
+rename whereismymoney.sh
+search banco
 open_with vim
+mkdir single-product
+rename aaameta.php
+rename meta.php
+rename punch_clock.sh
+rename certificate_v2.php
+shell tar -xf 6Period.tar.gz 
+shell zip redes redes 
+shell zip -r redes redes
+shell tar -xf 7Period.tar.gz 
+rename redes2
+shell zip -r redes2 redes2
+shell zip -r labRedes labRedes
+shell 
+shell unzip Nerwen\ -\ Room\ No616-hVzBP5bS.zip 
+search zip
+rename carteira_motorista.jpeg
+shell unzip landing-package.zip 
+delete
+search personal

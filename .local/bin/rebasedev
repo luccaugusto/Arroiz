@@ -1,6 +1,6 @@
 #!/bin/sh
 
-#- nanvix script so i don't mess up any branches
+#- script so i don't mess up any branches
 
 BRANCH=$(git branch | grep '*') &&
 git checkout develop &&

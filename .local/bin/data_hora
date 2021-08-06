@@ -112,14 +112,15 @@ show_help()
 	echo "	-a  (H1:M1) (H2:M2): adds H1:M1 to H2:M2"
 }
 
+#always remove the - sign
 case $1 in
-	-s) shift; subtract_time "$1" "$2"
+	-s) shift; subtract_time "${1#-}" "${2#-}"
 		;;
-	-h) shift; min2hour "$1"
+	-h) shift; min2hour "${1#-}"
 		;;
-	-a) shift; sum_hours "$1" "$2"
+	-a) shift; sum_hours "${1#-}" "${2#-}"
 		;;
-	-m) shift; hour2min "$1"
+	-m) shift; hour2min "${1#-}"
 		;;
 	*) show_help
 		;;

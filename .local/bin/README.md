@@ -54,9 +54,6 @@ Operations with date and time
 I have a cronjob run this every minute to log time spend on the computer in
 `~/.time` for each day. Gives estimate of daily NEEThood.
 
-### discord_old
-
-
 ### dmen
 dmenu_run with pywal colors
 
@@ -70,9 +67,6 @@ Simple bar script for DWM
 A general, all-purpose extraction script.
 Default behavior: Extract archive into new directory
 Behavior with `-c` option: Extract contents into current directory
-
-### freepacman
-
 
 ### gcheckout
 
@@ -108,11 +102,14 @@ Warns me via notify-send when i should update (LIMIT + packages needing update).
 Cretes a new branch.
 Prompts with dmenu for the branch type: feature, bugfix or hotfix. If it is a hotfix branch, create it from master.
 
+### personalspace
+Keeps my personal files backed up and versioned
+
 ### powermenu
 Shutdown or reboot via dmenu
 
 ### rebasedev
- nanvix script so i don`t mess up any branches
+ script so i don`t mess up any branches
 
 ### rec_webcam
 Records my webcam
@@ -149,9 +146,9 @@ Show how long i have been using the computer.
 Wrapper for controlling volume, makes bluetooth and computer volume the same
 
 ### startup_progs
-runs programs after wm is setup
-avoids any errors that might occur if a program runs before another one
-Example: if transmission-gtk runs before bspwm rules are set it will open on workspace 1
+Runs programs after wm is launched. Basically an extension for bash_profile in this setup.
+Also avoids any errors that might occur if a program runs before another one.
+Example: if transmission runs before bspwm rules are set it will open on workspace 1
 
 ### syncrice
 Sync my rice repository

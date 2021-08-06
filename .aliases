@@ -20,6 +20,7 @@ alias update="sudo pacman -Syyud; yay -Syu"
 alias P="sudo pacman"
 alias p="pacman"
 alias pclrcache="sudo pacman -Scc"
+alias freepacman="sudo rm /var/lib/pacman/db.lck"
 
 # Command aliases and typos
 alias ls="ls --color=auto"
