@@ -49,7 +49,6 @@ pipewire
 pipewire-alsa
 pipewire-pulse
 polybar
-powertop
 pulsemixer
 ranger
 redshift
@@ -61,6 +60,7 @@ syncthing
 sxhkd
 sxiv
 tlp
+tlpui
 tlp-rdw
 transmission-qt
 ttf-nerd-font-symbols
