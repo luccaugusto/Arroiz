@@ -4,8 +4,8 @@
 
 sum_hours()
 {
-    h1="$1";shift
-    h2="$1";shift
+    h1=${1% };shift
+    h2=${1% };shift
 	min1=${h1#[0-9]*:}
 	min2=${h2#[0-9]*:}
 	hor1=${h1%:[0-9]*}
@@ -74,8 +74,8 @@ hour2min()
 subtract_time()
 {
 	if [ "$1" ] && [ "$2" ]; then
-		d1=$1; shift
-		d2=$1; shift
+		d1=${1% }; shift
+		d2=${1% }; shift
 		min2=${d2#[0-9]*:}
 		hor2=${d2%:[0-9]*}
 		min1=${d1#[0-9]*:}
@@ -112,15 +112,36 @@ show_help()
 	echo "	-a  (H1:M1) (H2:M2): adds H1:M1 to H2:M2"
 }
 
+sanitize()
+{
+	[ "$1" ] || return
+
+	#remove possible leading whitespace
+	x="${1# }"
+	#make always positive
+	x="${x#-}"
+	#remove trailing whitespace
+	x="${x% }"
+
+	echo $x
+}
+
 #always remove the - sign
-case $1 in
-	-s) shift; subtract_time "${1#-}" "${2#-}"
+arg="$1"; shift
+case $arg in #remove possible leading - and whitespace
+	-s) d1="$(sanitize "$1")"; shift
+		d2="$(sanitize "$1")"; shift
+		subtract_time $d1 $d2
 		;;
-	-h) shift; min2hour "${1#-}"
+	-h) d1="$(sanitize "$1")"; shift
+		min2hour $d1
 		;;
-	-a) shift; sum_hours "${1#-}" "${2#-}"
+	-a) d1="$(sanitize "$1")"; shift
+		d2="$(sanitize "$1")"; shift
+		sum_hours $d1 $d2
 		;;
-	-m) shift; hour2min "${1#-}"
+	-m) d1="$(sanitize "$1")"; shift
+		hour2min $d1
 		;;
 	*) show_help
 		;;

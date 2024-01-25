@@ -3,12 +3,13 @@
 # Profile file. Runs on login.
 
 #Default programs
-export EDITOR="vim"
-export TERMINAL="st"
+export EDITOR="nvim"
+export TERMINAL="alacritty"
+export TERMINAL2="st"
 export READER="zathura"
-export BROWSER="brave"
+export BROWSER="brave-browser"
 #in case xdg settings doesn't use $BROWSER value
-#xdg-settings set default-web-browser brave.desktop
+#xdg-settings set default-web-browser brave-browser.desktop
 
 # No history limit
 export HISTSIZE=-1
@@ -27,13 +28,17 @@ export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin"
 export PATH="$PATH:$JAVA_HOME/bin"
 export PATH="$PATH:$HOME/.local/share/gem/ruby"
 export PATH="$PATH:$HOME/.local/gems/bin"
+export PATH="$PATH:$HOME/.cargo/bin"
 
 #Others
 export GROFF_ENCODING=UTF-8
-export mygit='https://github.com/lrr68/'
+export mygit='https://github.com/luccaugusto/'
 export REPOS="$HOME/repos"
 export NOTES_PATH="$HOME/.config/anote"
 export EMAIL='lucca@luccaaugusto.xyz'
+export MPD_HOST='127.0.0.59'
+export MPD_PORT='2002'
+export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
@@ -45,3 +50,4 @@ elif [[ "$(tty)" = "/dev/tty2" ]]; then
 	. .cache/wal/colors-tty.sh
 	pgrep -x tmux || tmux
 fi
+. "$HOME/.cargo/env"

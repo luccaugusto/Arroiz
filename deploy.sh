@@ -1,4 +1,4 @@
-#-My rice deploy script, runs after https://larbs.xyz/larbs.sh.
+#-My rice deploy script, runs after you have your programs setup
 #-Maybe i will write my own one day but now this script just sets up things specific to my setup.
 
 # Have a cronjob to check for updates every hour
@@ -23,11 +23,11 @@ synchome()
 	cp $SRC/.aliases $HOME
 	cp $SRC/.bash_profile $HOME
 	cp $SRC/.bashrc $HOME
-	cp $SRC/.vimrc $HOME
+	cp $SRC/.emacs $HOME
 	cp $SRC/.xinitrc $HOME
-	cp $SRC/.xprofile $HOME
 	cp $SRC/.Xresources $HOME
 	cp $SRC/.tmux.conf $HOME
+	cp $SRC/.gitconfig $HOME
 
 	echo "copying ~/ directories from $SRC"
 	cp -r $SRC/.vim $HOME
@@ -54,19 +54,6 @@ synchome()
 	cp -r $SRC/.config/ncmpcpp $CONFIG
 }
 
-install_suckless()
-{
-	cd ~/repos
-	git clone git@github.com:lrr68/Suckless.git suckless
-	cd suckless
-	for dir in $(ls -d .)
-	do
-		make config.h
-		make &&
-		sudo make install
-	done
-}
-
 setup_hosts()
 {
 	echo "# Static table lookup for hostnames." >> /etc/hosts
@@ -78,11 +65,43 @@ setup_hosts()
 	echo "2604:a880:2:d0::54:a001	mail.luccaaugusto.xyz" >> /etc/hosts
 }
 
+install_pkg()
+{
+	sudo pacman --noconfirm --needed -S "$1" >/dev/null 2>&1
+}
+
+aur_install()
+{
+	$aurhelper -S --noconfirm "$1" >/dev/null 2>&1
+}
+
+install_nvim()
+{
+	install_pkg "quick-lint-js"
+	aur_install "phpactor"
+	npm i -g bash-language-server
+	npm i-g typescript typescript-language-server
+	npm i -g vscode-langservers-extracted
+	pip install python-lsp-server
+	gem install rubocop
+	gem install --user-install solargraph
+	npm install -g @olrtg/emmet-language-server
+	install_pkg neovim
+}
+
+install_loop()
+{
+	install_pkg npm
+	install_pkg gem
+	install_nvim
+}
+
 if [ "$(basename $0)" == "bash" ]; then
 	echo "Please run the script with ./deploy.sh not sh deploy.sh"
 else
-	#synchome
+	synchome
 	user_cron_jobs
+	setup_hosts
 	sudo systemctl enable tlp.service
 	sudo su && root_cron_jobs
 fi

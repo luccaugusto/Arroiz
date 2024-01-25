@@ -27,19 +27,19 @@ XF86MonBrightnessDown
 # Media player controls
 # Supports spotify
 XF86AudioPlay
-	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause; [ $(pgrep -x mpc) ] && mpc toggle
+	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause; [ $(pgrep -x mpc) ] && mpc --host=$MPD_HOST --port=$MPD_PORT toggle
 XF86AudioNext
-	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next; [ $(pgrep -x mpc) ] && mpc next
+	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next; [ $(pgrep -x mpc) ] && mpc --host=$MPD_HOST --port=$MPD_PORT next
 XF86AudioPrev
-	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous; [ $(pgrep -x mpc) ] && mpc prev
+	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous; [ $(pgrep -x mpc) ] && mpc --host=$MPD_HOST --port=$MPD_PORT prev
 
 ## in case keyboard does not have XF86 keys for audio/brightness controls, these are the alternative bindings
 super + ctrl + p
-	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause; [ $(pgrep -x mpc) ] && mpc toggle
+	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause; [ $(pgrep -x mpc) ] && mpc --host=$MPD_HOST --port=$MPD_PORT toggle
 super + ctrl + period
-	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next; [ $(pgrep -x mpc) ] && mpc next
+	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next; [ $(pgrep -x mpc) ] && mpc --host=$MPD_HOST --port=$MPD_PORT next
 super + ctrl + comma
-	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous; [ $(pgrep -x mpc) ] && mpc prev
+	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous; [ $(pgrep -x mpc) ] && mpc --host=$MPD_HOST --port=$MPD_PORT prev
 #Brightness
 super + ctrl + minus
 	brightnessctl s 5%-; # reloadbar
@@ -57,7 +57,7 @@ super + Escape
 super + Return
 	samedir
 super + shift + Return
-	urxvt
+	$TERMINAL2
 super + w
 	$BROWSER
 super + r
@@ -68,11 +68,13 @@ super + b
 	lockscreen -s
 super + shift + s
 	powermenu
-super + p
-	dmen
+#super + p
+#	dmen
 super + d
 	krita & killall redshift
 super + e
+	emacs
+super + shift + e
 	thunderbird
 
 # Print
@@ -83,12 +85,10 @@ Print
 super + F1
 	cheatsheet
 super + F2
-	$TERMINAL -c floats -e pulsemixer
-super + F9
-	scrot && notify-send "Scrot taken"
+	$TERMINAL --class floats -e pulsemixer
 super + F10
 	toggle_redshift
 super + F11
-	killall gotop || $TERMINAL -c floats -e gotop -l kitchensink
+	killall gotop || $TERMINAL --class floats -e gotop -l kitchensink
 super + F12
 	monitors

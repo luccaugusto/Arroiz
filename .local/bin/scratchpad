@@ -10,7 +10,7 @@ fi
 COMMAND="$TERMINAL -c $1"
 
 if [ "$TERMINAL" = "alacritty" ]; then
-	COMMAND="$TERMINAL --class Alacritty,$1"
+	COMMAND="$TERMINAL --class $1"
 fi
 
 pids=$(xdotool search --class ${1})
@@ -20,6 +20,5 @@ pids=$(xdotool search --class ${1})
 pids=$(xdotool search --class ${1})
 
 for pid in $pids; do
-	echo "Toggle $pid"
 	bspc node $pid --flag hidden -f
 done

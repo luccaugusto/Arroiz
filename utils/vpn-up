@@ -1,0 +1,16 @@
+#!/bin/sh
+# put this file in /etc/NetworkManager/dispatcher.d with execution permission
+# to always connect to vpn when wifi connects
+VPN_NAME="lucca-br"
+
+interface=$1 status=$2
+case $status in
+	up)
+		nmcli connection up id "$VPN_NAME"
+	;;
+	#down)
+		#if nmcli connection show --active | grep "$VPN_NAME"; then
+			#nmcli connection down id "$VPN_NAME"
+		#fi
+	#;;
+esac

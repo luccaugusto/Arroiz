@@ -5,18 +5,24 @@
 #-if there is more than 1 battery, the total percentage is the
 #-average of the sum of the capacity of each battery
 
-COUNT="$(ls /sys/class/power_supply/ | wc -w)"
-PERCENT="$(cat /sys/class/power_supply/*/capacity | paste -sd '+')"
-STATUS="$(cat /sys/class/power_supply/*/status)"
+while [ "TRUE" ]
+do
+	COUNT="$(ls /sys/class/power_supply/ | wc -w)"
+	PERCENT="$(cat /sys/class/power_supply/*/capacity | paste -sd '+')"
+	STATUS="$(cat /sys/class/power_supply/*/status)"
 
-#Count -1 to ignore AC
-TOTAL=$(( PERCENT / (COUNT-1) ))
+	#Count -1 to ignore AC
+	TOTAL=$(( PERCENT / (COUNT-1) ))
 
-FINAL_STATUS='Charging'
-[ "$(echo $STATUS | grep Discharging)" ] && FINAL_STATUS='Discharging'
+	FINAL_STATUS='Charging'
+	[ "$(echo $STATUS | grep Discharging)" ] && FINAL_STATUS='Discharging'
 
-[ $TOTAL -lt 10 ] && [ "$FINAL_STATUS" == 'Discharging' ] &&
-export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus &&
-export DISPLAY=:0.0 &&
-notify-send -u critical "Battery low" "Battery at $TOTAL%" &&
-beep
+	[ $TOTAL -lt 10 ] && [ "$FINAL_STATUS" == 'Discharging' ] &&
+		#export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus" &&
+		#export DISPLAY=:0.0 &&
+		notify-send -u critical "Battery low" "Battery at $TOTAL%" &&
+		beep
+
+	sleep 2m
+done
+

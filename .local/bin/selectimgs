@@ -1,0 +1,10 @@
+#!/bin/sh
+from_directory="."
+[ $1 ] && from_directory="$1" && shift
+to_directory="/home/lucca/Documents/FDP/calendarios/calendario_2024/fotos"
+
+selected=$(ls "$from_directory" | grep 2023.*.jpg | sxiv -o -)
+for img in $selected
+do
+	mv "$from_directory/$img" "$to_directory/$img"
+done

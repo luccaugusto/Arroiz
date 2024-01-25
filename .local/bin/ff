@@ -1,0 +1,7 @@
+#!/bin/sh
+
+#-Fuzzy finds files
+
+file="$(fzf)"
+
+[ -z "$file" ] || $EDITOR "$file"

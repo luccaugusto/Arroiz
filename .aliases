@@ -5,8 +5,14 @@ alias sdnow="shutdown now"
 alias gmspdf="groff -ms -Tpdf"
 alias umount_phone="fusermount -u"
 alias doublefont='sudo setfont -d'
-alias facul="cd ~/Documents/faculdade/;"
-alias fixbt="pactl load-module module-bluetooth-discover"
+alias ..="cd .."
+alias fd='cd && cd "$(find -maxdepth 4 -type d | grep -v "\./\." | sed "s/.\///" | fzf)"'
+alias fc='$EDITOR $(find ~/.config | fzf)'
+alias fh="cat $HOME/.bash_history | fzf"
+alias e="$EDITOR"
+alias esets="$EDITOR .config/nvim/plugin/sets.vim"
+alias eremaps="$EDITOR .config/nvim/plugin/remaps.vim"
+alias ytdls="yt-dlp -f m4a"
 
 # MY WEBSITE STUFF
 alias lxyz="ssh lucca@luccaaugusto.xyz"
@@ -15,8 +21,8 @@ alias site="cd $HOME/repos/site/; bundle exec jekyll serve"
 alias jekser="bundle exec jekyll serve"
 
 # Pacman stuff
-alias autoremove="pacman -Rns $(pacman -Qtdq)"
-alias update="sudo pacman -Syyud; yay -Syu"
+alias pautoremove="sudo pacman -Rns $(pacman -Qtdq)"
+alias update="sudo pacman -Sy archlinux-keyring && sudo pacman -Syyud; yay -Syu"
 alias P="sudo pacman"
 alias p="pacman"
 alias pclrcache="sudo pacman -Scc"
@@ -30,45 +36,26 @@ alias claer="clear"
 alias clera="clear"
 alias celar="clear"
 alias clean="clear"
-alias v="vim"
-alias V="sudo vim"
+alias n="nvim ."
 alias scim="sc-im"
 alias r="ranger"
 alias rangre="ranger"
 alias rnager="ranger"
 alias rnagre="ranger"
 
-# Django stuff
-alias pm="python manage.py"
-alias pms="python manage.py shell"
-alias pmr="python manage.py runserver"
-alias migrate="python manage.py makemigrations; python manage.py migrate"
-
 # GIT STUFF
 alias gc="git commit"
+alias grs="git restore --staged"
 alias gpsh="git push"
 alias gpll="git pull"
 alias gad="git add ."
 alias gs="git status"
 alias gita="git add"
 alias gsu="git submodule update --recursive"
-alias gsu="git push --set-upstream origin"
+alias gpsu="git push --set-upstream origin"
+alias gsquash="git rebase -i HEAD~"
+alias gdelb="git branch -d"
 
 # WORK STUFF
-alias sshtest="ssh lucca@128.199.7.141"
-alias sshprod="ssh lucca@cityshoppe.com"
-alias cs="cd $REPOS/cs"
-alias cdwp="cd $REPOS/cs/wordpress/wp-content"
 alias dc="docker-compose"
-alias deshwp="docker exec -it cs_wordpress_1 bash"
-alias deshdb="docker exec -it cs_db_1 bash"
-alias dedb="docker exec -it cs_db_1 mysql -u root -p"
-alias startwork="bate_ponto login"
-alias stopwork="bate_ponto logout"
-
-# NANVIX STUFF
-alias quadro="ssh lucas.augusto@quadro.icei.pucminas.br"
-alias bdnvix="make contrib-uninstall && make distclean && make contrib -j 4 && make all -j 4"
-alias nanvix="export TARGET="unix64" && cd $HOME/repos/multikernel && sudo bash utils/nanvix-setup-unix.sh"
-alias upload='cd /home/lucca/repos/multikernel; rsync -avz --delete-after --exclude="*.o" --exclude=".git" --exclude="*.swp" --exclude="doc" . lucas.augusto@quadro.icei.pucminas.br:~/multikernel'
-alias kn="pkill nanvix"
+alias redisclear="redis-cli flushall"

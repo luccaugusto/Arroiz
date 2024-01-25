@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#-Sets my keyboard layout to en_us and pt_br
+#-Sets my keyboard layout to en_us and pt_br, also remaps Caps to Ctrl
 
 #Checks if a external keyboard is connect
 #Most likely it will be a brazilian one
@@ -16,3 +16,4 @@ else
 fi
 
 setxkbmap -option grp:alt_shift_toggle
+setxkbmap -option ctrl:nocaps

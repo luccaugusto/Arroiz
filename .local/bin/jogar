@@ -1,0 +1,12 @@
+#!/bin/sh
+
+case "$1" in
+	minecraft)
+		sudo java -jar ~/Downloads/TLauncher-*.jar
+		;;
+	*)
+		echo "qual jogo?"
+		;;
+esac
+
+exit

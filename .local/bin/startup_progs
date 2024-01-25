@@ -9,12 +9,13 @@
 
 #compress the time files into only one file
 compress_time
-#fetches transactions i registered by email
-cademeudinheiro fetch
+#low battery notifications (cronjob wasn't working)
+batsinal &
 
 #System colors and wallpaper
 set_colors
 set_colors -w
+set-alacritty-colors
 
 #Wifi connection
 nm-applet &
@@ -34,7 +35,7 @@ else
 fi
 
 #key bindings
-sxhkd &
+pgrep -x awesome || sxhkd &
 
 #Seed torrents, like a good boy
 [ ! "$(pgrep -x transmission-qt)" ] && transmission-qt &
@@ -48,9 +49,13 @@ picom --config /dev/null &
 keyboard_layout &
 #Don't burn my eyes
 toggle_redshift
-#Remind me of my stuff
-shownotes
 #Tell me if i need to update
 must_update
 #Open slack so i get ready for work
-slack &
+#[ ! "$(date +%a)" = "Sat" ] && [ ! "$(date +%a)" = "Sun" ] && slack &
+
+# NETWORK DEPENDAND STUFF
+# Sync my stuff
+personalspace 2>&1 > /dev/null &
+#fetches transactions i registered by email
+cademeudinheiro fetch &

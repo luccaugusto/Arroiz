@@ -30,37 +30,42 @@ cp $HOME/.tmux.conf $RICE
 cp $HOME/.xinitrc $RICE
 cp $HOME/.xprofile $RICE
 cp $HOME/.Xresources $RICE
+cp $HOME/.emacs $RICE
 
 echo "copying home directories"
 mkdir $RICE/.local/
 cp -r $HOME/.vim $RICE
+#remove plugins as they have their own repos
+rm -rf $RICE/.vim/plugged
+mkdir $RICE/.vim/plugged/
 cp -r $HOME/.vimgolf $RICE
 cp -r $HOME/.time $RICE
 cp -r $HOME/.local/bin $RICE/.local/
 # remove scripts that might contain personal info
-rm $RICE/.local/bin/personalspace
 rm $RICE/.local/bin/cademeudinheiro
 
 echo "copying .config files"
 mkdir $RICE/.config
-cp $CONFIG/kritadisplayrc $RICE/.config
-cp $CONFIG/kritarc $RICE/.config
-cp $CONFIG/kritashortcutsrc $RICE/.config
+cp $CONFIG/krita* $RICE/.config
 cp $CONFIG/user-dirs.dirs $RICE/.config
 cp $CONFIG/user-dirs.locale $RICE/.config
+cp -r $CONFIG/alacritty $RICE/.config
+cp -r $CONFIG/awesome $RICE/.config
 cp -r $CONFIG/bspwm $RICE/.config
 cp -r $CONFIG/i3 $RICE/.config
 cp -r $CONFIG/i3status $RICE/.config
 cp -r $CONFIG/mpd $RICE/.config
 cp -r $CONFIG/ncmpcpp $RICE/.config
 cp -r $CONFIG/polybar $RICE/.config
-cp -r $CONFIG/pulse $RICE/.config
 cp -r $CONFIG/ranger $RICE/.config
 cp -r $CONFIG/redshift $RICE/.config
 cp -r $CONFIG/sxhkd $RICE/.config
 cp -r $CONFIG/transmission $RICE/.config
 cp -r $CONFIG/wal $RICE/.config
+cp -r $CONFIG/nvim $RICE/.config
 
+# remove personal stuff
+rm -r $RICE/.config/nvim/vimwiki
 pushd $RICE
 echo "Adding new files to repo"
 git add .

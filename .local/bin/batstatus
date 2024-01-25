@@ -20,17 +20,17 @@ bat_status()
 			TOTAL_PERCENT=$((TOTAL_PERCENT + PERCENT))
 			STATUS="$(cat /sys/class/power_supply/$bat/status)"
 			COUNT=$((COUNT + 1))
-			if [ $STATUS != 'Charging' ]
+			if [ "$STATUS" != 'Charging' ]
 			then
 				TOTAL=$((TOTAL + PERCENT))
 				ICON=" "
-				if [ $PERCENT -lt 10 ]; then
+				if [ "$PERCENT" -lt 10 ]; then
 					ICON=" "
-				elif [ $PERCENT -lt 30 ]; then
+				elif [ "$PERCENT" -lt 30 ]; then
 					ICON=" "
-				elif [ $PERCENT -lt 50 ]; then
+				elif [ "$PERCENT" -lt 50 ]; then
 					ICON=" "
-				elif [ $PERCENT -lt 80 ]; then
+				elif [ "$PERCENT" -lt 80 ]; then
 					ICON=" "
 				fi
 			else

@@ -1,50 +1,50 @@
-search 
-search pi
-search pico
-search ryr
-search skatista
-search ry
-shell unzip  o58hjt4875hgkj548yghk5y8ghk58.zip 
-open_with brave
-rename date_time.sh
-open_with krit
-shell convert -trim loveeverybody-go-skate-livehappy.png loveeverybody-go-skate-livehappy-trimmed.png
-search love
-rename loveeverybody-go-skate-livehappy.png
+rename luccasantos-php-coding-interview
+rename luccasantos-php-coding-intervie
+rename routes
+rename routes.php
+search sma
+shell unzip SMAPI-3.18.6-installer.zip 
+search bare
+search _
+rename horse.xnb
+shell chmod +x horse.xnb 
+rename Router.php
+touch Client.php
+rename ClientApi.php
+rename apis
+rename api
+rename .php
+rename Client.php
+rename api.php
+mkdir api
+rename ClientAPI.php
+rename Config.php
+search PHP
+rename calendario-2021.kra
+rename calendario-2024.kra
+rename calendario-2021.kra~
+rename calendario-2022.kra~
+rename calendario-2022.kra
+mkdir 2022
+mkdir calendario-2024-pronto
+rename calendarioFDP2024.pdf
+shell zip -r calendario-2024-pronto calendario-2024-pronto 
+shell file Adesivo_10_Anos_Do_Fundo.png  |less
 open_with krita
-shell tar -xf calculo.tar.gz 
-open_with libreoffice
-mkdir whereismymoney
-rename punch_
-search rela
-shell unzip wp-fail2ban.4.3.0.9.zip 
-shell vim test.php
-rename remove_tags_from_description.php
-rename 2021-07-27
-rename group_610040910dc1e.json_
-rename group_610040910dc1e.json
+search cv
+rename resume.pdf
+rename user.py
+rename mobilePage
+rename MobilePage.tsx
+rename MobilePage.module.css
+rename mobilePageSlice.ts
 open_with 
-rename curriculoUriel.pdf
-search woocomm
-rename whereismymoney.sh
-search banco
-open_with vim
-mkdir single-product
-rename aaameta.php
-rename meta.php
-rename punch_clock.sh
-rename certificate_v2.php
-shell tar -xf 6Period.tar.gz 
-shell zip redes redes 
-shell zip -r redes redes
-shell tar -xf 7Period.tar.gz 
-rename redes2
-shell zip -r redes2 redes2
-shell zip -r labRedes labRedes
-shell 
-shell unzip Nerwen\ -\ Room\ No616-hVzBP5bS.zip 
-search zip
-rename carteira_motorista.jpeg
-shell unzip landing-package.zip 
+shell unzip calendario.zip 
+shell zip -r calendario_2021 calendario_2021 
+shell zip -r
+open_with n
+open_with nvim
+shell compress_video ViagemDoSitioProFundoDoPoco.mp4 
+rename ViagemDoSitioProFundoDoPoco.mp4
+mkdir utils
 delete
-search personal

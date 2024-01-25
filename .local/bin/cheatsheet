@@ -1,6 +1,0 @@
-#!/bin/bash
-
-#-Opens a terminal with a man document showing the
-#-important system bindings and some general info
-
-st -c floats -e man ~/.config/cheatsheet.man > /dev/null 2>&1

@@ -1,0 +1,10 @@
+#!/bin/sh
+
+newremoteurl=$(git remote -v | head -n 1 | awk '{print $1" "$2}' | sed 's/lrr68/luccaugusto/g')
+
+echo "Old remotes:"
+git remote -v
+git remote set-url $newremoteurl
+#check change
+echo "New Remotes:"
+git remote -v

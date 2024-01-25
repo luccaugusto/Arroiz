@@ -16,7 +16,7 @@ slock &
 #sleep 5 && [[ 4000 -lt $(xssstate -i) ]] &&  pgrep -x slock && xset dpms force off
 
 # Count how long screen was locked
-if [ $1 == -s ]
+if [ "$1" = '-s' ]
 then
 	t=0
 	while [ "$(pgrep slock)" ]

@@ -4,5 +4,6 @@ BRANCH="$1"
 
 [ "$BRANCH" ] || BRANCH=$(git branch | dmenu -l 10)
 
+[ "$BRANCH" ] &&
 git checkout $BRANCH &&
 git pull

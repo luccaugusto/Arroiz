@@ -1,0 +1,11 @@
+#!/bin/sh
+
+if [ "$1" ]
+then
+	file="$1"
+	filename=${file%%.*}
+	extension=${file##*.}
+	ffmpeg -i "$file" -vcodec libx264 -crf 28 "$filename-min.$extension"
+else
+	echo "missing filename"
+fi

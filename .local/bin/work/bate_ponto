@@ -5,67 +5,109 @@
 #- This other script is provided at https://raw.githubusercontent.com/lrr68/punch_the_clock/main/date_time.sh and https://raw.githubusercontent.com/lrr68/rice/master/.local/bin/data_hora
 
 # Script capable of doing operations with date and time
-#DATEMATHICS="date_time.sh"
-#TIMEFILE="$HOME/.time/workhoursmonth.csv"
-#FULLTIMEFILE="$HOME/.time/workhours.csv"
-#HEADER="day, login time, pauses (in minutes), logout time, extra hours, worked hours"
+#datemathics="date_time.sh"
+#timefile="$HOME/.time/workhoursmonth.csv"
+#fulltimefile="$HOME/.time/workhours.csv"
+#header="day,login time,pauses (in minutes),logout time,extra hours,worked hours"
 
-DATEMATHICS="data_hora"
-TIMEFILE="$HOME/.time/pontomensal.csv"
-FULLTIMEFILE="$HOME/.time/ponto.csv"
-HEADER="dia, hora entrada, pausas (em minutos), hora saida, horas extras, horas trabalhadas"
-DATE=$(date +%Y-%m-%d)
-TIME=""
+datemathics="data_hora"
+timefile="$HOME/.time/pontomensal.csv"
+fulltimefile="$HOME/.time/ponto.csv"
+header="dia,hora entrada,pausas (em minutos),hora saida,horas extras,horas trabalhadas"
+workday_in_minutes="480"
+
+cur_date=$(date +%Y-%m-%d)
+cur_time=""
 
 gettimeworked()
 {
-	TODAY=$(grep -r "^$DATE" "$TIMEFILE")
-	LOGINTIME="$(echo "$TODAY" | awk '{print $2}')"
-	LOGINTIME=${LOGINTIME%,}
-	TIMEWORKED=$($DATEMATHICS -s "$TIME" "$LOGINTIME")
-	PAUSES=$(echo "$TODAY" | awk '{print $3}')
-	PAUSES=${PAUSES%,}
+	today=$(grep -r "^$cur_date" "$timefile")
+	logintime="$(echo "$today" | awk -F',' '{print $2}')"
+	logintime=${logintime%,}
+	timeworked=$($datemathics -s "$cur_time" "$logintime")
+	pauses=$(echo "$today" | awk -F',' '{print $3}')
+	pauses=${pauses%,}
 
-	echo $((TIMEWORKED - PAUSES))
+	echo $((timeworked - pauses))
 }
 
 showtimeworked()
 {
-	TIME=$(date +%H:%M)
-	WORKED="$(gettimeworked)"
-	echo "$($DATEMATHICS -h "$WORKED") Hours worked"
+	cur_time=$(date +%H:%M)
+	worked="$(gettimeworked)"
+	echo "$($datemathics -h "$worked") Hours worked"
+}
+
+updatemonth()
+{
+	[ -e "$fulltimefile" ] ||
+		echo "$header" > "$fulltimefile"
+
+	balance="$(getbalance)"
+	balance_in_hours="$($datemathics -h "$balance")"
+
+	# remove balance on timefile to append it do fulltimefile
+	sed "/00:00,0,00:00,00:00/d" < "$timefile" > "$timefile.aux" &&
+		mv "$timefile.aux" "$timefile"
+
+	tail -n +2 "$timefile" >> "$fulltimefile"
+
+	echo "$header" > "$timefile"
+
+	# put balance as first line of the file so we dont lose it
+	if [ "$balance" -lt 0 ]
+	then
+		#extra hours
+		total="$($datemathics -a "08:00" "$balance_in_hours")"
+		echo "${yesterday%%,*},00:00,0,00:00,00:00,$total" >> "$timefile"
+	else
+		total="$balance"
+		#log time you owe as multiple days in which you did not work all the hours
+		while [ "$total" -gt 0 ]
+		do
+			if [ "$total" -gt "$workday_in_minutes" ]
+			then
+				total="$((total - workday_in_minutes))"
+				echo "${yesterday%%,*},00:00,0,00:00,00:00,00:00" >> "$timefile"
+			else
+				left="$((workday_in_minutes - total))"
+				echo "${yesterday%%,*},00:00,0,00:00,00:00,$($datemathics -h "$left")" >> "$timefile"
+				total=0
+			fi
+		done
+	fi
 }
 
 loglogin()
 {
-	TIME=$(date +%H:%M)
-	TODAY=$(grep -r "^$DATE" "$TIMEFILE")
+	cur_time=$(date +%H:%M)
+	today=$(grep -r "^$cur_date" "$timefile")
+	holliday=""
+	[ "$1" = 'h' ] && holliday=" H"
 
-	if [ ! "$TODAY" ]
+	if [ ! "$today" ]
 	then
-		YESTERDAY=$(tail -n 1 $TIMEFILE)
-		Y_MONTH=${YESTERDAY%-*}
-		Y_MONTH=${Y_MONTH#*-}
-		T_MONTH=${DATE%-*}
-		T_MONTH=${T_MONTH#*-}
-		# changed the month, append timefile to the global time file and begin a new monthly time file
-		if [ "$Y_MONTH" -lt "$T_MONTH" ]
-		then
-			[ -e "$FULLTIMEFILE" ] ||
-				echo "$HEADER" > "$FULLTIMEFILE"
+		yesterday=$(tail -n 1 "$timefile")
+		y_month=${yesterday%-*}
+		y_month=${y_month#*-}
+		t_month=${cur_date%-*}
+		t_month=${t_month#*-}
 
-			tail -n +2 "$TIMEFILE" >> "$FULLTIMEFILE"
-			echo "$HEADER" > "$TIMEFILE"
-		fi
-		echo "$DATE, $TIME, 0," >> "$TIMEFILE"
+		# changed the month,append timefile to the global time file and begin a new monthly time file
+		[ "$y_month" -lt "$t_month" ] &&
+			updatemonth "$yesterday"
+
+		echo "$cur_date$holliday,$cur_time,0," >> "$timefile"
 		echo "TRUE" > "$HOME/.working"
+		timetilexit
 	else
 		[ -e "$HOME/.working" ] && echo "Already Logged In" && return
 
-		LOGGEDOUT="$(echo "$TODAY" | awk '{print $4}')"
-		if [ "$LOGGEDOUT" ]
+		loggedout="$(echo "$today" | awk -F',' '{print $4}')"
+		if [ "$loggedout" ]
 		then
-			echo "$TIME" > "$HOME/.working"
+			echo "$cur_time" > "$HOME/.working"
+			getstatus
 		fi
 	fi
 }
@@ -73,39 +115,40 @@ loglogin()
 takebreak()
 {
 	echo "FALSE" > "$HOME/.working"
-	echo "$(date +%H:%M)" > "$HOME/.pause"
+	date '+%H:%M' > "$HOME/.pause"
 }
 
 resumework()
 {
-	STOPPED=$(cat "$HOME/.pause")
-	NOW=$(date +%H:%M)
+	[ -e "$HOME/.pause" ] || return
+	stopped=$(cat "$HOME/.pause")
+	now=$(date +%H:%M)
 
-	logpause "$($DATEMATHICS -s "$NOW" "$STOPPED")"
+	logpause "$($datemathics -s "$now" "$stopped")"
 	echo TRUE > "$HOME/.working"
 	rm "$HOME/.pause"
 }
 
 logpause()
 {
-	DOWNTIME="$1"
-	if [ "$DOWNTIME" ]
+	downtime="$1"
+	if [ "$downtime" ]
 	then
-		TODAY=$(grep -r "^$DATE" "$TIMEFILE")
-		TODAYPAUSE=$(echo "$TODAY" | awk '{print $3}')
-		TODAYPAUSE=${TODAYPAUSE%,}
-		TOTALDOWNTIME=$((TODAYPAUSE + DOWNTIME))
+		today=$(grep -r "^$cur_date" "$timefile")
+		todaypause=$(echo "$today" | awk -F',' '{print $3}')
+		todaypause=${todaypause%,}
+		totaldowntime=$((todaypause + downtime))
 
-		LOGGEDOUT="$(echo "$TODAY" | awk '{print $4}')"
-		if [ "$LOGGEDOUT" ]
+		loggedout="$(echo "$today" | awk -F',' '{print $4}')"
+		if [ "$loggedout" ]
 		then
-			NEWLINE=$(echo "$TODAY" | awk '{print $1" " $2" " '$TOTALDOWNTIME'", " $4" " $5" " $6}')
+			newline=$(echo "$today" | awk -F',' '{print $1"," $2"," '$totaldowntime'"," $4"," $5"," $6}')
 		else
-			NEWLINE=$(echo "$TODAY" | awk '{print $1" " $2" " '$TOTALDOWNTIME'","}')
+			newline=$(echo "$today" | awk -F',' '{print $1"," $2"," '$totaldowntime'","}')
 		fi
-		[ "$NEWLINE" ] &&
-			sed "s/$TODAY/$NEWLINE/g" < "$TIMEFILE" > "$TIMEFILE.aux" &&
-			mv "$TIMEFILE.aux" "$TIMEFILE"
+		[ "$newline" ] &&
+			sed "s/$today/$newline/g" < "$timefile" > "$timefile.aux" &&
+			mv "$timefile.aux" "$timefile"
 	else
 		echo "ERROR: To log a pause inform pause time"
 	fi
@@ -115,35 +158,35 @@ loglogout()
 {
 	if [ -e "$HOME/.working" ]
 	then
-		TIME=$(date +%H:%M)
-		TODAY=$(grep -r "^$DATE" "$TIMEFILE")
-		TIMEWORKED=$(gettimeworked)
+		cur_time=$(date +%H:%M)
+		today=$(grep -r "^$cur_date" "$timefile")
+		timeworked=$(gettimeworked)
 
-		LOGGEDOUT="$(echo "$TODAY" | awk '{print $4}')"
-		if [ ! "$LOGGEDOUT" ]
+		loggedout="$(echo "$today" | awk -F',' '{print $4}')"
+		if [ ! "$loggedout" ]
 		then
 			# compute work hours
-			NEWLINE="$TODAY $TIME, 00:00, $("$DATEMATHICS" -h "$TIMEWORKED")"
+			newline="$today$cur_time,00:00,$("$datemathics" -h "$timeworked")"
 		else
 			# compute extra hours
-			LOGIN="$(cat "$HOME/.working")"
+			login="$(cat "$HOME/.working")"
 
-			EXTRAWORKED="$(echo "$TODAY" | awk '{print $5}')"
-			EXTRAWORKED=${EXTRAWORKED%,}
-			EXTRA="$($DATEMATHICS -s "$TIME" "$LOGIN")"
-			EXTRA="$($DATEMATHICS -h "$EXTRA")"
-			EXTRA="$($DATEMATHICS -a "$EXTRA" "$EXTRAWORKED")"
+			extraworked=${today%,*}
+			extraworked=${extraworked##*,}
+			extra="$($datemathics -s "$cur_time" "$login")"
+			extra="$($datemathics -h "$extra")"
+			extra="$($datemathics -a "$extra" "$extraworked")"
 
-			TOTALTIME="$(gettimeworked)"
-			TOTALTIME="$($DATEMATHICS -h "$TOTALTIME")"
-			TOTALTIME="$($DATEMATHICS -a "$EXTRA" "$TOTALTIME")"
+			totaltime=${today##*,}
+			totaltime="$($datemathics -a "$extra" "$totaltime")"
 
-			NEWLINE="$(echo "$TODAY" | awk '{print $1" " $2" " $3" " $4}') $EXTRA, $TOTALTIME"
+			newline="$(echo "$today" | awk -F',' '{print $1"," $2"," $3"," $4}'),$extra,$totaltime"
 		fi
 
-		sed "s/$TODAY/$NEWLINE/g" < "$TIMEFILE" >"$TIMEFILE.aux" &&
-			mv "$TIMEFILE.aux" "$TIMEFILE"
+		sed "s/$today/$newline/g" < "$timefile" >"$timefile.aux" &&
+			mv "$timefile.aux" "$timefile"
 		rm "$HOME/.working"
+		showbalance
 	else
 		echo "You must be logged in to logout"
 	fi
@@ -151,165 +194,191 @@ loglogout()
 
 timetilexit()
 {
-	TIME=$(date +%H:%M)
-	TIMEWORKED=$(gettimeworked)
-	TIMELEFT=$(( 480 - "$TIMEWORKED"))
-	if [ "$TIMELEFT" -lt 1 ]
+	cur_time=$(date +%H:%M)
+	timeworked=$(gettimeworked)
+	timeleft=$(( "$workday_in_minutes" - "$timeworked"))
+	hoursleft=$($datemathics -h "$timeleft")
+	weekday=$(getweekday "$cur_date")
+	balance="$(getbalance)"
+	balance_in_hours="$($datemathics -h "$balance")"
+
+	if [ "$weekday" = "Sa" ] || [ "$weekday" = "Su" ]
 	then
-		MSG="You're already working over hours for ${TIMELEFT#-} minutes"
+		msg="Working extra hours.\n"
+		timeleft="0"
 	else
-		HOURSLEFT=$($DATEMATHICS -h "$TIMELEFT")
-		MSG="$HOURSLEFT left, estimated exit: $(data_hora -a "$TIME" "$HOURSLEFT")"
+		if [ "$timeleft" -lt 1 ]
+		then
+			msg="You're already working over hours for ${timeleft#-} minutes.\n"
+		else
+			msg="$hoursleft left,estimated exit: $(data_hora -a "$cur_time" "$hoursleft").\n"
+		fi
 	fi
 
-	[ "$1" = "notify" ] &&
-		notify-send "$MSG" ||
-		echo "$MSG"
-
-	balance="$(getbalance)"
-	balance_in_hours="$($DATEMATHICS -h "$balance")"
 	if [ "$balance" -lt 0 ]
 	then
-		if [ "$balance" -gt "$TIMELEFT" ]
+		if [ "$balance" -gt "$timeleft" ]
 		then
-			echo "Stop working now and use $($DATEMATHICS -s "$balance_in_hours" "$HOURSLEFT") extra hours"
+			if [ "$timeleft" -gt 0 ]
+			then
+				msg="$msg""Stop working now and use $($datemathics -s "$balance_in_hours" "$hoursleft") extra hours\n"
+			else
+				msg="$msg""Stop working now and have $($datemathics -a "$balance_in_hours" "$hoursleft") extra hours in your balance.\n"
+			fi
 		else
-			left_minus_extra_hours="$($DATEMATHICS -s "$HOURSLEFT" "$balance_in_hours")"
-			hours_left_minus_extra="$($DATEMATHICS -h "$left_minus_extra_hours")"
-			extra_use="$($DATEMATHICS -s "$HOURSLEFT" "$hours_left_minus_extra")"
-			extra_use="$($DATEMATHICS -h "$extra_use")"
-			left_used_extra="$($DATEMATHICS -s "$balance_in_hours" "$extra_use")"
-			left_used_extra="$($DATEMATHICS -h "$left_used_extra")"
+			left_minus_extra_hours="$($datemathics -s "$hoursleft" "$balance_in_hours")"
+			hours_left_minus_extra="$($datemathics -h "$left_minus_extra_hours")"
+			extra_use="$($datemathics -s "$hoursleft" "$hours_left_minus_extra")"
+			extra_use="$($datemathics -h "$extra_use")"
+			left_used_extra="$($datemathics -s "$balance_in_hours" "$extra_use")"
+			left_used_extra="$($datemathics -h "$left_used_extra")"
+
 			if [ "$left_minus_extra_hours" -lt 1 ]
 			then
-				echo "Stop working now and still have $hours_left_minus_extra extra hours."
+				msg="$msg""Stop working now and still have $hours_left_minus_extra extra hours.\n"
 			else
-				echo "Work only $($DATEMATHICS -h "$left_minus_extra_hours") and use $extra_use extra hours."
+				msg="$msg""Work only $($datemathics -h "$left_minus_extra_hours") and use $extra_use extra hours.\n"
 			fi
 		fi
 	else
-		echo "Work $($DATEMATHICS -a "$HOURSLEFT" "$balance_in_hours") and pay the $balance_in_hours hours you owe"
+		msg="$msg""Work $($datemathics -a "$hoursleft" "$balance_in_hours") and pay the $balance_in_hours hours you owe.\n"
 	fi
+
+	[ "$1" = "notify" ] &&
+		notify-send "$msg" ||
+		printf "$msg"
 }
 
 getweekday()
 {
-	[ ! "$1" ] && echo "0" && return
+	[ ! "$1" ] && return
 
 	date="${1%,}"; shift
 	day="${date##*-}"
 
-	calline="$(cal -v "$date" | grep " $day ")"
+	cal_line="$(cal -v "$date" | grep " ${day##0} ")"
 
-	echo "$calline" | awk '{print $1}'
+	echo "$cal_line" | awk '{print $1}'
 }
 
-getexpectedhours()
+getexpectedminutes()
 {
 	[ ! "$1" ] && echo "0" && return
 
-	EXPECTED_HOURS=0
+	expected_minutes=0
 
-	NUMBER_OF_DAYS="$1"; shift
+	number_of_days="$1"; shift
 
-	for line in $(tail -n "$NUMBER_OF_DAYS" "$TIMEFILE" | awk '{print $1}')
+	for date in $(tail -n "$number_of_days" "$timefile" | awk -F',' '{print $1}')
 	do
-		date="${line%%,*}"
+		# Last day computed was a holliday, subtract it
+		if [ "$date" = "H" ]
+		then
+			expected_minutes=$((expected_minutes - workday_in_minutes))
+			continue
+		fi
+
 		weekday=$(getweekday "$date")
 		if [ ! "$weekday" = "Sa" ] && [ ! "$weekday" = "Su" ]
 		then
-			EXPECTED_HOURS=$((EXPECTED_HOURS + 480))
+			expected_minutes=$((expected_minutes + workday_in_minutes))
 		fi
 	done
 
-	echo "$EXPECTED_HOURS"
+	echo "$expected_minutes"
 }
 
+#gets balance in minutes. Negative balance means extra hours
 getbalance()
 {
-	TOTAL="00:00"
-	BALANCE=0
-	MSG=""
+	total="00:00"
+	balance=0
+	msg=""
+	file="$timefile"
+	[ "$1" = "full" ] && file="$fulltimefile"
 
-	TODAY=$(grep -r "^$DATE" "$TIMEFILE")
-	LOGGEDOUT="$(echo "$TODAY" | awk '{print $4}')"
+	today=$(grep -r "^$cur_date" "$file")
+	loggedout="$(echo "$today" | awk -F',' '{print $4}')"
 
 	# Do not count header
-	NUMBER_OF_DAYS=$(wc -l < "$TIMEFILE")
-	NUMBER_OF_DAYS=$((NUMBER_OF_DAYS -1))
+	number_of_days=$(wc -l < "$file")
+	number_of_days=$((number_of_days -1))
 
-	# Only take into account week days, worked weekends are extra hours
+	# Only take into account week days,worked weekends are extra hours
 	# Do not take today into account if i have not logged out
-	if [ ! "$LOGGEDOUT" ]
+	if [ ! "$loggedout" ]
 	then
-		EXPECTED_N_MINUTES=$(getexpectedhours $((NUMBER_OF_DAYS - 1)))
-		HOURS_WORKED_LIST="$(tail -n "$NUMBER_OF_DAYS" "$TIMEFILE" | head -n -1 | awk '{print $6}')"
+		expected_n_minutes=$(getexpectedminutes $((number_of_days - 1)))
+		hours_worked_list="$(tail -n "$number_of_days" "$file" | head -n -1 | awk -F',' '{print $6}')"
 	else
-		EXPECTED_N_MINUTES=$(getexpectedhours "$NUMBER_OF_DAYS")
-		HOURS_WORKED_LIST="$(tail -n "$NUMBER_OF_DAYS" "$TIMEFILE" | awk '{print $6}')"
+		expected_n_minutes=$(getexpectedminutes "$number_of_days")
+		hours_worked_list="$(tail -n "$number_of_days" "$file" | awk -F',' '{print $6}')"
 	fi
 
-	for hours in $HOURS_WORKED_LIST
+	for hours in $hours_worked_list
 	do
-		TOTAL=$($DATEMATHICS -a "$TOTAL" "$hours")
+		total=$($datemathics -a "$total" "$hours")
 	done
 
 	#convert total to minutes so it's easier to operate
-	TOTAL="$($DATEMATHICS -m "$TOTAL")"
-	BALANCE=$((EXPECTED_N_MINUTES - TOTAL))
+	total="$($datemathics -m "$total")"
+	balance=$((expected_n_minutes - total))
 
-	echo "$BALANCE"
+	echo "$balance"
 }
 
 showbalance()
 {
-	BALANCE="$(getbalance)"
+	balance="$(getbalance)"
 
-	if [ "$BALANCE" -lt 0 ]
+	if [ "$balance" -lt 0 ]
 	then
 		# make it positive
-		BALANCE=${BALANCE#-}
-		MSG="You have $($DATEMATHICS -h "$BALANCE") extra hours"
+		balance=${balance#-}
+		msg="You have $($datemathics -h "$balance") extra hours"
 	else
-		MSG="You owe $($DATEMATHICS -h "$BALANCE") hours"
+		msg="You owe $($datemathics -h "$balance") hours"
 	fi
 
-	echo "$MSG"
+	echo "$msg"
 }
 
 showtimefile()
 {
-	column -s',' -t < "$TIMEFILE"
-	[ "$(wc -l < "$TIMEFILE")" -lt 2 ] && return
-	showbalance
+	file="$timefile"
+	[ "$1" = "full" ] && file="$fulltimefile"
+
+	column -s',' -t < "$file"
+	[ "$(wc -l < "$file")" -lt 2 ] && return
+	showbalance "$1"
 }
 
 getstatus()
 {
-	STATUS="$(cat "$HOME/.working")"
-	if [ "$STATUS" = "TRUE" ]
+	[ ! -e "$HOME/.working" ] && echo "Not working" && return
+
+	status="$(cat "$HOME/.working")"
+	if [ "$status" = "TRUE" ]
 	then
 		echo Working normal hours
-	elif [ "$STATUS" = "FALSE" ]
+	elif [ "$status" = "FALSE" ]
 	then
 		echo On a break
-	elif [ -n "$STATUS" ]
-	then
-		echo Working extra hours
 	else
-		echo Not working
+		echo Working extra hours
 	fi
 }
 
 # RUNNING
-[ -e "$TIMEFILE" ] ||
-	echo "$HEADER" > "$TIMEFILE"
+[ -e "$timefile" ] ||
+	echo "$header" > "$timefile"
 
-arg="$1"; shift
+arg=""
+[ "$1" ] && arg="$1" && shift
 
 case "$arg" in
 	login)
-		loglogin
+		loglogin "$1"
 		;;
 	break)
 		takebreak
@@ -330,7 +399,10 @@ case "$arg" in
 		showtimeworked
 		;;
 	balance)
-		showbalance
+		showbalance "$1"
+		;;
+	edit)
+		"$EDITOR" "$timefile"
 		;;
 	status)
 		getstatus
@@ -341,7 +413,7 @@ case "$arg" in
 	*)
 		echo "usage: ${0##*/} ( command )"
 		echo "commands:"
-		echo "		login: Register the login time and sets status as working"
+		echo "		login [ h ]: Register the login time and sets status as working. If h is passed, mark day as holliday"
 		echo "		logpause <time in minutes>: Register a pause of X minutes where X is the time informed"
 		echo "		logout: Register the logout time and removes the working status"
 		echo "		break: Register the time you are taking a break"
@@ -349,6 +421,7 @@ case "$arg" in
 		echo "		left [ notify ]: Informs time left for you to complete 8 hours of work"
 		echo "		timeworked: Informs time you have already worked in this session"
 		echo "		balance: Shows if you have extra hours or owe hours (40 hour weeks)"
+		echo "		edit: Opens the timefile with EDITOR"
 		echo "		show: Shows the timefile"
 		echo "		status: Shows the working status"
 		;;

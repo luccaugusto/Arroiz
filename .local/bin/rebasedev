@@ -2,8 +2,10 @@
 
 #- script so i don't mess up any branches
 
-BRANCH=$(git branch | grep '*') &&
-git checkout develop &&
+develop=$(git branch | grep 'develop')
+develop=${develop##* }
+branch=$(git branch | grep '*') &&
+git checkout $develop &&
 git pull &&
-git checkout ${BRANCH##* } &&
-git rebase develop
+git checkout ${branch##* } &&
+git rebase $develop

@@ -3,20 +3,6 @@
 A brief explanation of each script can be found bellow.
 
 <!--startscripts-->
-### README.md
-
-
-### anote
-Simple script for taking notes in the terminal.
-Notes are saved in $NOTES_PATH directory or $HOME/.notes if $NOTES_PATH is not set
-run `anote -h` for help
-
-### backup
-Backup important directories to directory specified.
- Exits if no directory was specified.
- Exits if the specified directory does not have space for backup
- run `backup` for help
-
 ### batsinal
 Notifies via notify-send when battery is bellow 10%,
 also beeps if $BEEP is defined and the script beep exists
@@ -36,16 +22,18 @@ Script to deal with personal finances.
 Keeps track of how much money you have by logging how much you spent and received.
 Money spent is saved as a negative value, while money received is saved as a positive value.
 
+### change_remote_url
+
+
 ### ch_wall
 Shows me all files in my wallpaper repository and i can choose one to be my new wallpaper
-
-### cheatsheet
-Opens a terminal with a man document showing the
-important system bindings and some general info
 
 ### compress_time
 Convert all the date files in my .time directory to a single csv file.
 Drastically reduce the number of files in that folder
+
+### compress_video
+
 
 ### data_hora
 Operations with date and time
@@ -57,9 +45,6 @@ I have a cronjob run this every minute to log time spend on the computer in
 ### dmen
 dmenu_run with pywal colors
 
-### dwarffortress
-launches dwarffortress
-
 ### dwmbar
 Simple bar script for DWM
 
@@ -68,11 +53,34 @@ A general, all-purpose extraction script.
 Default behavior: Extract archive into new directory
 Behavior with `-c` option: Extract contents into current directory
 
+### ff
+Fuzzy finds files
+
+### fonttools
+
+
 ### gcheckout
 
 
+### gcom
+Git pre commit hook, checks if there are any FIXME tags in files i`m commiting,
+if there is any, abort the commit and force me to fix it
+
+### gera_senha
+Gera senhas aleatorias e guarda de forma nada confiavel. Deve ser
+usado somente para servicos suspeitos, para contas descartaveis.
+
+### homebackup
+Backup important directories to directory specified.
+ Exits if no directory was specified.
+ Exits if the specified directory does not have space for backup
+ run `backup` for help
+
+### jogar
+
+
 ### keyboard_layout
-Sets my keyboard layout to en_us and pt_br
+Sets my keyboard layout to en_us and pt_br, also remaps Caps to Ctrl
 
 ### launch_polybar
 Launches polybar. Works for multiple monitors
@@ -82,6 +90,9 @@ List manuals for the installed programs
 
 ### lockscreen
 Locks the screen, pauses songs and videos.
+
+### mergebranch
+ script so i don`t mess up any branches
 
 ### mktimelapse
 
@@ -98,15 +109,20 @@ Starts mpd and opens ncmpcpp
 ### must_update
 Warns me via notify-send when i should update (LIMIT + packages needing update).
 
+### naoesquece
+Script that controls a calendar with emails
+New appointments can be created by sending an email with an add command
+Can notify via email your close appointments
+
 ### newbranch
 Cretes a new branch.
 Prompts with dmenu for the branch type: feature, bugfix or hotfix. If it is a hotfix branch, create it from master.
 
-### personalspace
-Keeps my personal files backed up and versioned
-
 ### powermenu
 Shutdown or reboot via dmenu
+
+### README.md
+
 
 ### rebasedev
  script so i don`t mess up any branches
@@ -132,11 +148,17 @@ Grabs the doc comments of all scripts in .scripts folder and output them in MD
 to the README.md file in my rice repository.
 doc comments are lines beggining with #-
 
+### se
+
+
+### selectimgs
+
+
+### set-alacritty-colors
+
+
 ### set_colors
 Set my system colors using pywal
-
-### shownotes
-Show all untagged notes as a notification via notify-send
 
 ### showtime
 Show how long i have been using the computer.
@@ -158,14 +180,6 @@ if a string is passed as a argument uses this string as a commit message
 updates my Suckless repository
 Generates diff files for the changes i made automatically
 
-### tibia
-Launches tibia
-
-### timer
-Chess like timer
-$1 is how long the first timer should run
-$2 is how long the second timer should run
-
 ### toggle_redshift
 Turns redshift on and off
 
@@ -186,9 +200,6 @@ Got it from vitor mansur, thanks
 Helper for manipulating wacom devices
 only rotates it right now
 
-### work/README.md
-
-
 ### work/bate_ponto
  POSIX compliant shell script to keep track of the time i have been working.
  Needs another script that can add and subtract hours (00:00) and convert minutes to HH:MM.
@@ -196,6 +207,9 @@ only rotates it right now
 
 ### work/css_inutil.sh
 lists all css rules that are not being used on current folder html files
+
+### work/README.md
+
 
 ### work/tecuida
 Reminds me to take a break

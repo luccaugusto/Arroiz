@@ -1,0 +1,36 @@
+#!/bin/sh
+
+#-Git pre commit hook, checks if there are any FIXME tags in files i'm commiting,
+#-if there is any, abort the commit and force me to fix it
+
+tag="FIXME"
+expr="$tag"
+
+can_commit="TRUE"
+# [ "$1" = "-m" ] &&
+# 	shift &&
+# 	msg="$1"
+
+for file in $(git diff --name-only --cached)
+do
+	if [ -e "$file" ] && [ "$(grep -r "$expr" $file)" ]
+	then
+		#Readme can have any tags
+		[ "${file%%.*}" = "README" ] && continue
+
+		echo "$tag tag found in $file. Resolve and add it before commiting."
+		# echo "Edit now? [y/n]"
+		# read -r answer
+		# [ "$answer" = "y" ] &&
+		# 	"$EDITOR" "$file" &&
+		# 	[ -z "$(grep -r "$expr" $file)" ] &&
+		# 	git add $file
+
+		can_commit="FALSE"
+	fi
+done
+
+if [ "$can_commit" = "FALSE" ]
+then
+	exit 1
+fi
