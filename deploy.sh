@@ -18,7 +18,7 @@ user_cron_jobs()
 synchome()
 {
 	SRC="$(dirname $0)"
-	CONFIG=$CONFIG/
+	CONFIG=~/.config/
 	echo "copying ~/ files from $SRC"
 	cp $SRC/.aliases $HOME
 	cp $SRC/.bash_profile $HOME
@@ -36,7 +36,6 @@ synchome()
 	cp -r $SRC/.local/bin $HOME/.local/
 
 	echo "copying .config files"
-	mkdir $CONFIG
 	cp $SRC/.config/kritadisplayrc $CONFIG
 	cp $SRC/.config/kritarc $CONFIG
 	cp $SRC/.config/kritashortcutsrc $CONFIG
@@ -67,12 +66,12 @@ setup_hosts()
 
 install_pkg()
 {
-	sudo pacman --noconfirm --needed -S "$1" >/dev/null 2>&1
+	pacman --noconfirm --needed -S "$1" >/dev/null 2>&1
 }
 
 aur_install()
 {
-	$aurhelper -S --noconfirm "$1" >/dev/null 2>&1
+	sudo -u "$USER" yay -S --noconfirm "$1" >/dev/null 2>&1
 }
 
 install_nvim()
@@ -89,19 +88,45 @@ install_nvim()
 	install_pkg neovim
 }
 
-install_loop()
+install_yay()
+{
+	pushd $HOME/repos
+	git clone https://aur.archlinux.org/yay.git
+	pushd yay
+	makepkg -si
+	popd
+	popd
+}
+
+install_installers()
 {
 	install_pkg npm
-	install_pkg gem
-	install_nvim
+	install_pkg ruby
+	install_pkg python-pip
+	install_yay
+}
+
+install_loop()
+{
+	echo "INSTALLING PACKAGES FROM PROGS LIST"
+	pkg_count="$(cat progs | wc -l)"
+	current_pkg=1
+
+	for pkg in $(cat progs)
+	do
+		echo "Installing $pkg [$current_pkg/$pkg_count]"
+		aur_install "$pkg"
+		current_pkg=$((current_pkg + 1))
+	done
 }
 
 if [ "$(basename $0)" == "bash" ]; then
 	echo "Please run the script with ./deploy.sh not sh deploy.sh"
 else
 	synchome
-	user_cron_jobs
 	setup_hosts
-	sudo systemctl enable tlp.service
-	sudo su && root_cron_jobs
+	install_loop
+	systemctl enable tlp.service
+	user_cron_jobs
+	sudo -u root root_cron_jobs
 fi
