@@ -1,5 +1,20 @@
+#!/bin/sh
 #-My rice deploy script, runs after you have your programs setup
 #-Maybe i will write my own one day but now this script just sets up things specific to my setup.
+
+# configure pacman
+enable_multilib()
+{
+	{
+		echo "[multilib]"
+		echo "Include = /etc/pacman.d/mirrorlist"
+	} >> "/etc/pacman.conf"
+}
+
+enable_sudo_for_wheel()
+{
+	echo '%wheel ALL=(ALL:ALL) ALL' | sudo EDITOR='tee -a' visudo
+}
 
 # Have a cronjob to check for updates every hour
 root_cron_jobs()
@@ -55,13 +70,15 @@ synchome()
 
 setup_hosts()
 {
-	echo "# Static table lookup for hostnames." >> /etc/hosts
-	echo "# See hosts(5) for details." >> /etc/hosts
-	echo "127.0.0.1	localhost" >> /etc/hosts
-	echo "::1		localhost" >> /etc/hosts
-	echo "127.0.1.1	main.localdomain	main" >> /etc/hosts
-	echo "138.68.42.117	mail.luccaaugusto.xyz" >> /etc/hosts
-	echo "2604:a880:2:d0::54:a001	mail.luccaaugusto.xyz" >> /etc/hosts
+	{
+		echo "# Static table lookup for hostnames."
+		echo "# See hosts(5) for details."
+		echo "127.0.0.1	localhost"
+		echo "::1		localhost"
+		echo "127.0.1.1	main.localdomain	main"
+		echo "138.68.42.117	mail.luccaaugusto.xyz"
+		echo "2604:a880:2:d0::54:a001	mail.luccaaugusto.xyz"
+	} >> /etc/hosts
 }
 
 install_pkg()
@@ -82,7 +99,7 @@ install_nvim()
 	npm i-g typescript typescript-language-server
 	npm i -g vscode-langservers-extracted
 	pip install python-lsp-server
-	gem install rubocop
+	gem install --user-install rubocop
 	gem install --user-install solargraph
 	npm install -g @olrtg/emmet-language-server
 	install_pkg neovim
@@ -90,12 +107,11 @@ install_nvim()
 
 install_yay()
 {
-	pushd $HOME/repos
 	git clone https://aur.archlinux.org/yay.git
 	pushd yay
-	makepkg -si
+	sudo makepkg -si
 	popd
-	popd
+	rm -rf yay
 }
 
 install_installers()
@@ -120,11 +136,12 @@ install_loop()
 	done
 }
 
-if [ "$(basename $0)" == "bash" ]; then
+if [ ! "$(basename $0)" == "deploy.sh" ]; then
 	echo "Please run the script with ./deploy.sh not sh deploy.sh"
 else
 	synchome
 	setup_hosts
+	install_installers
 	install_loop
 	systemctl enable tlp.service
 	user_cron_jobs

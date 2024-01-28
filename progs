@@ -92,6 +92,7 @@ quick-lint-js
 ranger
 redis
 redshift
+ripgrep
 rslsync
 rsync
 ruby
