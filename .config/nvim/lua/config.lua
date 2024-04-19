@@ -1,3 +1,6 @@
+vim.opt.termguicolors = true
+vim.cmd.colorscheme('melange')
+
 require('telescope').setup{
 	defaults = {
 		layout_strategy = 'vertical',
@@ -7,12 +10,63 @@ require('telescope').setup{
 				["<C-d>"] = "delete_buffer",
 			}
 		},
-		file_ignore_patterns = {'node_modules/', '^.*/node_modules/', '^.*/vendor/', '__pycache__', '^.*/__pycache__/', '^.*/*.png', '^.*/*.jpg'}
+		file_ignore_patterns = {'node_modules/', '^.*/node_modules/', '__pycache__', '^.*/__pycache__/', '^.*/*.png', '^.*/*.jpg'}
 	},
 }
 
 -- Setup comment nvim
 require('Comment').setup()
+
+-- setup nvim tree
+require("nvim-tree").setup({
+	sort = {
+		sorter = "case_sensitive",
+	},
+	view = {
+		width = 30,
+	},
+	renderer = {
+		group_empty = true,
+	},
+	filters = {
+		dotfiles = false,
+		custom = {
+			"node_modules", -- filter out node_modules directory
+		},
+		exclude = {
+			".env",
+		},
+	},
+	disable_netrw = true,
+	hijack_netrw = true,
+	renderer = {
+		highlight_git = true,
+		root_folder_modifier = ":t",
+		icons = {
+			show = {
+				file = true,
+				folder = true,
+				folder_arrow = true,
+				git = true,
+			},
+			glyphs = {
+				default = "",
+				symlink = "",
+				git = {
+					unstaged = "",
+					deleted = "D",
+				},
+				folder = {
+					default = "",
+					open = "",
+					empty = "",
+					empty_open = "",
+					symlink = "",
+				},
+			},
+		},
+	},
+})
 
 -- Setup nvim-cmp.
 local cmp = require'cmp'
@@ -117,21 +171,61 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 --
 local configs = require('lspconfig.configs')
 local lspconfig = require('lspconfig')
+-- local util = require("lspconfig.util")
+--
+-- if not configs.ruby_lsp then
+-- 	local enabled_features = {
+-- 		"documentHighlights",
+-- 		"documentSymbols",
+-- 		"foldingRanges",
+-- 		"selectionRanges",
+-- 		-- "semanticHighlighting",
+-- 		"formatting",
+-- 		"codeActions",
+-- 	}
+--
+-- 	configs.ruby_lsp = {
+-- 		default_config = {
+-- 			cmd = { "ruby-lsp" },
+-- 			filetypes = { "ruby" },
+-- 			root_dir = util.root_pattern("Gemfile", ".git"),
+-- 			init_options = {
+-- 				--enabledFeatures = enabled_features,
+-- 				formatter = "auto",
+-- 			},
+-- 		},
+-- 		commands = {
+-- 			FormatRuby = {
+-- 				function()
+-- 					vim.lsp.buf.format({
+-- 						name = "ruby_lsp",
+-- 						async = true,
+-- 					})
+-- 				end,
+-- 				description = "Format using ruby-lsp",
+-- 			},
+-- 		},
+-- 	}
+-- end
+--
+-- lspconfig.ruby_lsp.setup({ on_attach = on_attach, capabilities = capabilities })
 
 local servers = {
-	'quick_lint_js',
-	'phpactor',
 	'bashls' ,
-	'tsserver',
+	'clangd',
+	'emmet_language_server',
 	'eslint',
+	'jedi_language_server',
+	'phpactor',
 	'pylsp',
-	'rubocop',
+	'quick_lint_js',
+	--'rubocop',
+	'ruby_ls',
 	'solargraph',
-	'emmet_language_server'
+	'tsserver',
+	'yamlls',
 }
- for _, lsp in pairs(
-	 servers
-	 ) do
+ for _, lsp in pairs(servers) do
 	lspconfig[lsp].setup {
 		on_attach = on_attach,
 		capabilities = capabilities,
@@ -151,7 +245,7 @@ local sign = function(opts)
 	})
 end
 
-sign({name = 'DiagnosticSignError', text = 'x'})
+--[[ sign({name = 'DiagnosticSignError', text = 'x'})
 sign({name = 'DiagnosticSignWarn', text = '▲'})
 sign({name = 'DiagnosticSignHint', text = '⚑'})
-sign({name = 'DiagnosticSignInfo', text = '»'})
+sign({name = 'DiagnosticSignInfo', text = '»'}) ]]

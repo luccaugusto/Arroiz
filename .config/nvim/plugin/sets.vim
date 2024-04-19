@@ -4,10 +4,11 @@ set encoding=utf-8
 "no ugly | cursor, only block cursor
 set guicursor=
 set noerrorbells
-"set signcolumn=yes
+set signcolumn=yes
 set scrolloff=8
 set hidden
 set nowrap
+set updatetime=300
 
 set clipboard=unnamed,unnamedplus
 
@@ -45,6 +46,8 @@ set hlsearch
 set ignorecase "search is case insensitive
 set smartcase "case sensitive search in case the is an uppercase character in search
 set background=dark
+
+"set termguicolors
 
 "set cursorline
 "set cursorcolumn

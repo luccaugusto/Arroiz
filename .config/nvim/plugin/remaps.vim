@@ -10,9 +10,8 @@ vnoremap k gk
 
 "gp selects pasted text
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
-"Remap p for autoindenting
-nnoremap <leader>P p
-nnoremap p p`[v`]=
+"paste and autoindenting
+nnoremap <leader>P p`[v`]=
 
 "open a terminal
 nnoremap <leader>s :terminal<CR>
@@ -20,16 +19,14 @@ nnoremap <leader>ht :split<CR>:terminal<CR>
 nnoremap <leader>vt :vsplit<CR>:terminal<CR>
 nnoremap <leader>tt :tabnew<CR>:terminal<CR>
 
-nnoremap <leader>b :buffers<CR>:bd<space>
+nnoremap <leader>b :buffers<CR>:bd
 
-"Add a FIXME tag for selected lines
-noremap <leader>cf :s/^/\/*FIXME*\//<CR>:nohlsearch<CR>
-noremap <leader>crf :s/^\/\*FIXME\*\///<CR>:nohlsearch<CR>
+nnoremap <C-f> :<C-f>i
 
 map <C-s> :w<CR>
 nmap <C-s> :w<CR>
 nnoremap <leader>cc :close<CR>
-nnoremap <leader>E :Explore<CR>
+nnoremap <leader>E :NvimTreeFindFile<CR>
 nnoremap <leader>o :q<CR>
 nnoremap <leader>L :30Lex<CR>
 
@@ -91,6 +88,9 @@ inoremap <C-k> <esc>:m .-2<CR>==i
 nnoremap <leader>hl :set cursorline<CR>
 nnoremap <leader>nhl :set nocursorline<CR>
 
+"Search for selected text
+vnoremap * y/\v<C-R>"<CR>
+
 "===============================
 "DRAG VISUALS PLUGIN
 "===============================
@@ -112,7 +112,7 @@ nnoremap <c-g>g :Telescope live_grep<CR>
 "===============================
 
 "break one line functions into multiple lines
-vnoremap <leader>s :s/,/,\r/g<CR>va(:s/(/(\r/g<CR>va(:s/)/\r)/g<CR>va(=:nohlsearch<CR>
+vnoremap <leader>s :s/[,(){}]/&\r/g<CR>k:s/[)}]/\r&/g<CR>:nohlsearch<CR>
 "one line functions into only one line
 vnoremap <leader>l :s/,\n\s*/, /g<CR>va(:s/\n\s*)/)/g<CR>va(:s/(\n\s*/(/g<CR>:nohlsearch<CR>
 

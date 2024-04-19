@@ -24,6 +24,13 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
+
+	Plug 'nvim-tree/nvim-tree.lua'
+	Plug 'nvim-tree/nvim-web-devicons'
+
+	Plug 'luccaugusto/melange-nvim'
+
+	Plug 'tpope/vim-rails'
 	Plug 'tpope/vim-fugitive'
 	Plug 'neovim/nvim-lspconfig'
 	Plug 'hrsh7th/cmp-nvim-lsp'
@@ -34,8 +41,6 @@ call plug#begin('~/.vim/plugged')
 
 	Plug 'hrsh7th/cmp-vsnip'
 	Plug 'hrsh7th/vim-vsnip'
-
-	"Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 	Plug 'numToStr/Comment.nvim'
 
@@ -48,6 +53,8 @@ call plug#begin('~/.vim/plugged')
 	Plug 'junegunn/goyo.vim'
 	Plug 'vimwiki/vimwiki'
 	Plug 'tpope/vim-endwise'
+
+	"Plug 'github/copilot.vim'
 
 	" load local plugin folder
 	Plug expand('%:p:h') . 'plugin/vmath.vim'
@@ -65,19 +72,22 @@ syntax on
 autocmd BufWritePre * %s/\s\+$//e
 
 "Custom indentation rules
-autocmd Filetype html         setlocal shiftwidth=4 tabstop=4 expandtab
-autocmd Filetype php          setlocal shiftwidth=4 tabstop=4 expandtab
-autocmd Filetype rs           setlocal shiftwidth=4 tabstop=4 noexpandtab
-autocmd Filetype javascript   setlocal shiftwidth=2 tabstop=2 expandtab
-autocmd Filetype typescript   setlocal shiftwidth=2 tabstop=2 expandtab
+autocmd Filetype html              setlocal shiftwidth=4 tabstop=4 expandtab
+autocmd Filetype php               setlocal shiftwidth=4 tabstop=4 expandtab
+autocmd Filetype rs                setlocal shiftwidth=4 tabstop=4 noexpandtab
+autocmd Filetype javascript        setlocal shiftwidth=2 tabstop=2 expandtab
+autocmd Filetype typescript        setlocal shiftwidth=2 tabstop=2 expandtab
+autocmd Filetype typescriptreact   setlocal shiftwidth=2 tabstop=2 expandtab
 
 "update bindings when sxhkd config is updated
-autocmd BufWritePost sxhkdrc killall sxhkd; setsid sxhkd &
+autocmd BufWritePost sxhkdrc !killall sxhkd; setsid sxhkd &
 
 "recompile suckless programs after editing
 autocmd BufWritePost dwm.c !sudo make clean; sudo make; sudo make install
 
 "autocmd BufWritePost config.def.h !sudo make clean;sudo make; sudo make install
 autocmd BufWritePost st.c !sudo make clean; sudo make; sudo make install
+
+let loaded_netrwPlugin = 1
 
 lua require("config")
