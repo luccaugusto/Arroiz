@@ -57,7 +57,7 @@ highlight CursorLine cterm=underline gui=underline ctermbg=none ctermfg=none
 set completeopt=menu,menuone,noselect
 
 " Vimwiki settings
-let g:vimwiki_list = [{'path': '~/.config/nvim/vimwiki/'}]
+let g:vimwiki_list = [{'path': '~/Documents/personal-notes/'}]
 
 " Open md files in Goyo
 " au BufReadPost *.md Goyo | set wrap

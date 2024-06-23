@@ -32,45 +32,6 @@ user_cron_jobs()
 	(crontab -l ; echo "0 * * * * pacman -Sy >/dev/null") 2>&1 | grep -v "no crontab" | sort | uniq | crontab -
 }
 
-# Copies my scripts from the repository to my home directory
-synchome()
-{
-	src="$(dirname "$0")"
-	config=~/.config/
-	echo "copying ~/ files from $src"
-	cp "$src"/.aliases "$HOME"
-	cp "$src"/.bash_profile "$HOME"
-	cp "$src"/.bashrc "$HOME"
-	cp "$src"/.emacs "$HOME"
-	cp "$src"/.xinitrc "$HOME"
-	cp "$src"/.Xresources "$HOME"
-	cp "$src"/.tmux.conf "$HOME"
-	cp "$src"/.gitconfig "$HOME"
-
-	echo "copying ~/ directories from $src"
-	cp -r "$src"/.vim "$HOME"
-	cp -r "$src"/.vimgolf "$HOME"
-	cp -r "$src"/.time "$HOME"
-	cp -r "$src"/.local/bin "$HOME"/.local/
-
-	echo "copying .config files"
-	cp "$src"/.config/kritadisplayrc "$config"
-	cp "$src"/.config/kritarc "$config"
-	cp "$src"/.config/kritashortcutsrc "$config"
-	cp -r "$src"/.config/i3 "$config"
-	cp -r "$src"/.config/i3status "$config"
-	cp -r "$src"/.config/bspwm "$config"
-	cp -r "$src"/.config/polybar "$config"
-	cp -r "$src"/.config/pulse "$config"
-	cp -r "$src"/.config/ranger "$config"
-	cp -r "$src"/.config/redshift "$config"
-	cp -r "$src"/.config/sxhkd "$config"
-	cp -r "$src"/.config/transmission "$config"
-	cp -r "$src"/.config/wal "$config"
-	cp -r "$src"/.config/mpd "$config"
-	cp -r "$src"/.config/ncmpcpp "$config"
-}
-
 setup_hosts()
 {
 	{
@@ -156,7 +117,7 @@ install_loop()
 if [ ! "$(basename "$0")" == "deploy.sh" ]; then
 	echo "Please run the script with ./deploy.sh not sh deploy.sh"
 else
-	synchome
+	./synchome
 	setup_hosts
 	install_installers
 	install_nvim
