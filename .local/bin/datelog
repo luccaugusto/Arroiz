@@ -2,5 +2,6 @@
 #-I have a cronjob run this every minute to log time spend on the computer in
 #-`~/.time` for each day. Gives estimate of daily NEEThood.
 
-date=`date '+%Y-%m-%d'`
-echo $((`cat ~/.time/"$date"`+1)) > ~/.time/"$date"
+date=$(date '+%Y-%m-%d')
+[ -e ~/.time/"$date" ] || echo 0 > ~/.time/"$date"
+echo $(($(cat ~/.time/"$date")+1)) > ~/.time/"$date"

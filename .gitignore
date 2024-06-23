@@ -1,1 +1,4 @@
 vimwiki
+plugged
+__pycache__
+ranger/history

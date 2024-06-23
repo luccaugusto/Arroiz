@@ -273,7 +273,7 @@ local servers = {
 	'pyright',
 	'quick_lint_js',
 	--'rubocop',
-	'ruby_ls',
+	'ruby_lsp',
 	--'ruff',
 	'solargraph',
 	'tsserver',
