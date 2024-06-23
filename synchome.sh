@@ -1,27 +1,52 @@
 #!/bin/sh
 
-src="$(dirname "$0")"
+create_symlink()
+{
+	origin="$1"
+	destination_link="$2"
 
-# Symlink home directory files
-for file in "$src"/.*; do
-	[ "${file##*/}" = '.git' ] && continue
-
-	if [ "$(file "$file")" = "$file: directory" ]; then
-		case "${file##*/}" in
-			# these directories have other programs that write to them,
-			# so we create them if they don't exist
-			# and symlink only what we want
-			.config | .local)
-				[ -d "$HOME/${file##*/}" ] || mkdir "$HOME/${file##*/}"
-				for subfile in "$file"/*; do
-					ln -s "$subfile" "$HOME/${file##*/}/${subfile##*/}"
-				done
-				;;
-			*)
-				ln -s "$file" "$HOME/${file##*/}"
-				;;
-		esac
+	if [ -e "$destination_link" ]; then
+		[ -L "$destination_link" ] && echo "INFO: $destination_link already exists, skipping"
+		[ ! -L "$destination_link" ] && echo "WARNING: $destination_link exists and is not a symlink, please check it manually"
 	else
-		ln -s "$file" "$HOME/${file##*/}"
+		ln -s "$origin" "$destination_link"
 	fi
-done
+}
+
+synchome()
+{
+	# Symlink home directory files
+	for entry in "$src"/.*; do
+		if [ "${entry##*/}" = '.git' ] || [ "${entry##*/}" = '.gitignore' ]; then
+			continue
+		fi
+
+		if [ "$(file -b "$entry")" = "directory" ]; then
+			case "${entry##*/}" in
+				# these directories have other programs that write to them,
+				# so we create them if they don't exist
+				# and symlink only what we want
+				.config | .local)
+					[ -d "$HOME/${entry##*/}" ] || mkdir "$HOME/${entry##*/}"
+					for subentry in "$entry"/*; do
+						create_symlink "$subentry" "$HOME/${entry##*/}/${subentry##*/}"
+					done
+					;;
+				*)
+					create_symlink "$entry" "$HOME/${entry##*/}"
+					;;
+			esac
+		else
+			create_symlink "$entry" "$HOME/${entry##*/}"
+		fi
+	done
+}
+
+src="$(dirname "$0")"
+if [ "$src" = '.' ]; then
+	src="$PWD"
+else
+	src="$PWD/${src#*/}"
+fi
+
+synchome
