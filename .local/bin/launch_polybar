@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/bash
 
 #-Launches polybar. Works for multiple monitors
 
@@ -15,4 +15,3 @@ if type "xrandr"; then
 else
   polybar --reload top &
 fi
-

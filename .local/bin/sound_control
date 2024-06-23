@@ -2,29 +2,81 @@
 
 #-Wrapper for controlling volume, makes bluetooth and computer volume the same
 
-[ ! $1 ] && echo "sound_control [u/d/m]" && echo " [u]p [d]own [m]ute toggle" && exit
+[ ! "$1" ] && echo "sound_control [u/d/m]" && echo " [u]p [d]own [m]ute toggle" && exit
 
 opt="$1"; shift
 
-SINKS=$(pactl list short sinks | awk '{print $1}')
-SINK1=$(pactl list sinks | grep "Sink #1")
+sinks=$(pactl list short sinks | awk '{print $1}')
+sink1=$(pactl list sinks | grep "Sink #1")
 
-for S in $SINKS
-do
-	if [ $opt == 'u' ]
+volume_up()
+{
+	pactl set-sink-volume "$s" +5%
+	[ "$sink1" ] && pactl set-sink-volume "$sink1" +5%
+	[ $(pgrep dwm) ] && reloadbar
+}
+
+volume_down()
+{
+	pactl set-sink-volume "$s" -5%
+	[ "$sink1" ] &&  pactl set-sink-volume "$sink1" -5%
+	[ $(pgrep dwm) ] && reloadbar
+}
+
+mute()
+{
+	pactl set-sink-mute "$s" toggle
+	[ "$sink1" ] && pactl set-sink-mute "$sink1" toggle
+	[ $(pgrep dwm) ] && reloadbar
+}
+
+toggle_source()
+{
+	usb_out_enabled=$(pactl info | grep "Default Sink" | grep "USB")
+	sinks=$(pactl list short sinks)
+	cards=$(pactl list short cards)
+	usb_card=$(echo "$cards" | grep "AUDIO" | awk '{print $1}')
+	device_card=$(echo "$cards" | grep "00_1b" | awk '{print $1}')
+	hdmi_card=$(echo "$cards" | grep "pci-0000_00_03" | awk '{print $1}')
+	notification_header=""
+	notification_body=""
+
+	if [ "$usb_out_enabled" ]
 	then
-		pactl set-sink-volume $S +5%
-		[ "$SINK1" ] && pactl set-sink-volume $SINK1 +5%
-		[ $(pgrep dwm) ] && reloadbar
-	elif [ $opt == 'd' ]
-	then
-		pactl set-sink-volume $S -5%
-		[ "$SINK1" ] &&  pactl set-sink-volume $SINK1 -5%
-		[ $(pgrep dwm) ] && reloadbar
-	elif [ $opt == 'm' ]
-	then
-		pactl set-sink-mute $S toggle
-		[ "$SINK1" ] && pactl set-sink-mute $SINK1 toggle
-		[ $(pgrep dwm) ] && reloadbar
+		card_output=$(printf "HDMI\nDevice" | dmenu -l 3 -p "Select output")
+		device_setting="output:analog-stereo+input:analog-stereo"
+		pactl set-card-profile "$usb_card" "off"
+		case "$card_output" in
+			*HDMI*) pactl set-card-profile "$hdmi_card" "output:hdmi-stereo"
+				device_setting="input:analog-stereo"
+				;;
+			*) pactl set-card-profile "$hdmi_card" "off" ;;
+		esac
+		pactl set-card-profile "$device_card" "$device_setting"
+		notification_header="Switching to $card_output audio"
+		notification_body="Playing on $card_output's speakers and using device's microphone"
+	else
+		notification_header="Switching to USB audio"
+		notification_body="Playing on USB speakers but using device's microphone"
+		pactl set-card-profile "$usb_card" "output:analog-stereo"
+		pactl set-card-profile "$device_card" "input:analog-stereo"
+		[ "$hdmi_card" ] && pactl set-card-profile "$hdmi_card" "off"
 	fi
-done
+	notify-send "$notification_header" "$notification_body"
+}
+
+if [ "$opt" == 't' ]
+then
+	toggle_source
+else
+	for s in $sinks
+	do
+		case "$opt" in
+			u) volume_up ;;
+			d) volume_down ;;
+			m) mute ;;
+			*) echo "Invalid option" ;;
+		esac
+	done
+fi
+

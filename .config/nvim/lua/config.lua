@@ -1,13 +1,51 @@
 vim.opt.termguicolors = true
 vim.cmd.colorscheme('melange')
 
+vim.api.nvim_create_augroup("AutoFormat", {})
+
+vim.api.nvim_create_autocmd(
+    "BufWritePost",
+    {
+        pattern = "*.py",
+        group = "AutoFormat",
+        callback = function()
+            vim.cmd("silent !black -q %")
+            vim.cmd("edit")
+        end,
+    }
+)
+
+vim.keymap.set({"n", "i", "x"}, "<C-Down>", "<Cmd>MultipleCursorsAddDown<CR>")
+vim.keymap.set({"n", "i", "x"}, "<C-Up>", "<Cmd>MultipleCursorsAddUp<CR>")
+vim.keymap.set({"n", "i"}, "<C-LeftMouse>", "<Cmd>MultipleCursorsMouseAddDelete<CR>")
+vim.keymap.set({"n", "x"}, "<Leader>a", "<Cmd>MultipleCursorsAddMatches<CR>")
+
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "python", "javascript" },
+  sync_install = false,
+  auto_install = false,
+
+  ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
+  -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
+
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = false,
+  },
+  indent = {
+    enable = true,
+  },
+}
+
 require('telescope').setup{
 	defaults = {
-		layout_strategy = 'vertical',
+		layout_strategy = 'horizontal',
 		layout_config = { height = 0.95, width = 0.85 },
 		mappings = {
 			i = {
 				["<C-d>"] = "delete_buffer",
+				["<C-j>"] = "preview_scrolling_down",
+				["<C-k>"] = "preview_scrolling_up",
 			}
 		},
 		file_ignore_patterns = {'node_modules/', '^.*/node_modules/', '__pycache__', '^.*/__pycache__/', '^.*/*.png', '^.*/*.jpg'}
@@ -23,7 +61,7 @@ require("nvim-tree").setup({
 		sorter = "case_sensitive",
 	},
 	view = {
-		width = 30,
+		width = 45,
 	},
 	renderer = {
 		group_empty = true,
@@ -166,6 +204,21 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 	}
 )
 
+-- Copilot chat
+require("CopilotChat").setup {
+	debug = true,
+	context = nil,
+}
+
+vim.keymap.set({'n', 'v'}, '<Leader>cp',
+	function()
+		local input = vim.fn.input("Quick Chat: ")
+		if input ~= "" then
+			require("CopilotChat").ask(input, { selection = require("CopilotChat.select").visual })
+		end
+	end
+)
+
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
 --
@@ -211,16 +264,17 @@ local lspconfig = require('lspconfig')
 -- lspconfig.ruby_lsp.setup({ on_attach = on_attach, capabilities = capabilities })
 
 local servers = {
-	'bashls' ,
+	'bashls',
 	'clangd',
 	'emmet_language_server',
 	'eslint',
-	'jedi_language_server',
 	'phpactor',
-	'pylsp',
+	--'pylsp',
+	'pyright',
 	'quick_lint_js',
 	--'rubocop',
 	'ruby_ls',
+	--'ruff',
 	'solargraph',
 	'tsserver',
 	'yamlls',
@@ -236,6 +290,28 @@ lspconfig.intelephense.setup{
 	on_attach = on_attach,
 	cmd = { 'env', 'HOME=/tmp', 'intelephense', '--stdio' },
 }
+-- basedpyright is listed on server configurations but it's not working out of the box
+--[[ require('lspconfig.configs').basedpyright = {
+  default_config = {
+    cmd = {"basedpyright-langserver", "--stdio"},
+    filetypes = {'python'},
+    root_dir = lspconfig.util.root_pattern("pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", ".git"),
+	single_file_support = true,
+    settings = {
+	  basedpyright = {
+		python = {
+			pythonPath = ".venv/python3",
+		},
+	    analysis = {
+		  autoSearchPaths = true,
+		  diagnosticMode = "openFilesOnly",
+		  useLibraryCodeForTypes = true
+		}
+	  }
+	},
+  };
+}
+lspconfig.basedpyright.setup{} ]]
 
 local sign = function(opts)
 	vim.fn.sign_define(opts.name, {

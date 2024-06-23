@@ -17,11 +17,6 @@ of util capacity in relation to the original capacity.
 ### beep
 Play a beep sound
 
-### cademeudinheiro
-Script to deal with personal finances.
-Keeps track of how much money you have by logging how much you spent and received.
-Money spent is saved as a negative value, while money received is saved as a positive value.
-
 ### change_remote_url
 
 
@@ -35,12 +30,18 @@ Drastically reduce the number of files in that folder
 ### compress_video
 
 
+### css_inutil
+
+
 ### data_hora
 Operations with date and time
 
 ### datelog
 I have a cronjob run this every minute to log time spend on the computer in
 `~/.time` for each day. Gives estimate of daily NEEThood.
+
+### dexec
+ Allows to execute a command in a running container selecting it by name
 
 ### dmen
 dmenu_run with pywal colors
@@ -60,7 +61,7 @@ Fuzzy finds files
 
 
 ### gcheckout
-
+ git checkout wrapper so i always pull when checking out a branch
 
 ### gcom
 Git pre commit hook, checks if there are any FIXME tags in files i`m commiting,
@@ -115,8 +116,11 @@ New appointments can be created by sending an email with an add command
 Can notify via email your close appointments
 
 ### newbranch
-Cretes a new branch.
+Cretes a new branch always updated from another branch.
 Prompts with dmenu for the branch type: feature, bugfix or hotfix. If it is a hotfix branch, create it from master.
+
+### plug
+
 
 ### powermenu
 Shutdown or reboot via dmenu

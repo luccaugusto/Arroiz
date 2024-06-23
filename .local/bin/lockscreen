@@ -10,23 +10,8 @@ mocp -P &>/dev/null
 mpc pause &>/dev/null
 pauseallmpv &>/dev/null
 
-slock &
+#slock &
+i3lock -i "$HOME/Documents/cheetos-lock.jpg" -Mfu
 
 # In five seconds, turn off display unless key press in last 4 seconds.
 #sleep 5 && [[ 4000 -lt $(xssstate -i) ]] &&  pgrep -x slock && xset dpms force off
-
-# Count how long screen was locked
-if [ "$1" = '-s' ]
-then
-	t=0
-	while [ "$(pgrep slock)" ]
-	do
-		sleep 1m
-		t=$((t+1))
-	done
-
-	[ "$t" -gt 10 ] &&
-    	notify-send "$t" &&
-		[ "$(cat $HOME/.working)" = "TRUE" ] &&
-		bate_ponto logpause $t
-fi

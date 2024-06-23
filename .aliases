@@ -18,14 +18,14 @@ alias ytdls="yt-dlp -f m4a"
 alias lxyz="ssh lucca@luccaaugusto.xyz"
 alias rxyz="ssh root@luccaaugusto.xyz"
 alias site="cd $HOME/repos/site/; bundle exec jekyll serve"
-alias jekser="bundle exec jekyll serve"
+alias jekser="bundle exec jekyll serve --livereload"
 
 # Pacman stuff
 alias pautoremove="sudo pacman -Rns $(pacman -Qtdq)"
 alias update="sudo pacman -Sy archlinux-keyring && sudo pacman -Syyud; yay -Syu"
 alias P="sudo pacman"
 alias p="pacman"
-alias pclrcache="sudo pacman -Scc"
+alias pclrcache="sudo yay -Scc"
 alias freepacman="sudo rm /var/lib/pacman/db.lck"
 
 # Command aliases and typos
@@ -59,3 +59,7 @@ alias gdelb="git branch -d"
 # WORK STUFF
 alias dc="docker-compose"
 alias redisclear="redis-cli flushall"
+alias ngr="ngrok http --domain=profound-cod-verbally.ngrok-free.app"
+alias dcub="docker-compose up backend rails-db redis"
+alias stripelisten="stripe listen --forward-to localhost:4000/api/v1/stripe/webhooks"
+alias dockerinspectip="docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'"

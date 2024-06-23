@@ -60,4 +60,4 @@ set completeopt=menu,menuone,noselect
 let g:vimwiki_list = [{'path': '~/.config/nvim/vimwiki/'}]
 
 " Open md files in Goyo
-au BufReadPost *.md Goyo | set wrap
+" au BufReadPost *.md Goyo | set wrap

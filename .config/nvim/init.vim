@@ -28,6 +28,8 @@ call plug#begin('~/.vim/plugged')
 	Plug 'nvim-tree/nvim-tree.lua'
 	Plug 'nvim-tree/nvim-web-devicons'
 
+	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
 	Plug 'luccaugusto/melange-nvim'
 
 	Plug 'tpope/vim-rails'
@@ -54,7 +56,10 @@ call plug#begin('~/.vim/plugged')
 	Plug 'vimwiki/vimwiki'
 	Plug 'tpope/vim-endwise'
 
-	"Plug 'github/copilot.vim'
+	Plug 'github/copilot.vim'
+	Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'canary' }
+
+	Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
 	" load local plugin folder
 	Plug expand('%:p:h') . 'plugin/vmath.vim'

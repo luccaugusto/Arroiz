@@ -8,6 +8,14 @@ nnoremap k gk
 vnoremap j gj
 vnoremap k gk
 
+"insert mode movements
+inoremap <C-h> <Left>
+inoremap <C-l> <Right>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-b> <S-Left>
+inoremap <C-w> <S-Right>
+
 "gp selects pasted text
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 "paste and autoindenting
@@ -78,8 +86,8 @@ nnoremap J mzJ`z
 "move entire lines
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
-inoremap <C-j> <esc>:m .+1<CR>==i
-inoremap <C-k> <esc>:m .-2<CR>==i
+" inoremap <C-j> <esc>:m .+1<CR>==i
+" inoremap <C-k> <esc>:m .-2<CR>==i
 "i always use visual mode for moving lines up and down
 "nnoremap <C-j> :m .+1<CR>==
 "nnoremap <C-k> :m .-2<CR>==
@@ -90,6 +98,9 @@ nnoremap <leader>nhl :set nocursorline<CR>
 
 "Search for selected text
 vnoremap * y/\v<C-R>"<CR>
+
+nmap <c-w><c-l> :set scrollback=1 \| sleep 100m \| set scrollback=10000<cr>
+tmap <c-w><c-l> <c-\><c-n><c-w><c-l>i<c-l>
 
 "===============================
 "DRAG VISUALS PLUGIN
@@ -124,13 +135,22 @@ nnoremap <space><space> :nohlsearch<CR>
 inoremap jf <Esc>/<++><CR>"_c4l
 
 "with smart undo
-inoremap { {}<++><Esc>4hi
+" inoremap { {}<++><Esc>4hi
+" inoremap {<CR> {<CR>}<Esc>ko
+" inoremap {jf {}
+" inoremap ( ()<++><Esc>4hi
+" inoremap (jf ()
+" inoremap () ()
+" inoremap {} {}
+" inoremap [ []<++><Esc>4hi
+inoremap { {}<Esc>i
 inoremap {<CR> {<CR>}<Esc>ko
 inoremap {jf {}
-inoremap ( ()<++><Esc>4hi
+inoremap ( ()<Esc>i
 inoremap (jf ()
 inoremap () ()
-inoremap [ []<++><Esc>4hi
+inoremap {} {}
+inoremap [ []<Esc>i
 
 "smart undo at breakpoints
 inoremap , ,<c-g>u

@@ -1,6 +1,7 @@
 #!/bin/bash
 #-My rice deploy script, runs after you have your programs setup
-#-Maybe i will write my own one day but now this script just sets up things specific to my setup.
+#-Maybe i will write my own arch bootstrap script one day but
+#-for now this script just sets up things specific to my setup.
 
 # configure pacman
 enable_multilib()
@@ -98,10 +99,11 @@ install_nvim()
 	aur_install "quick-lint-js"
 	aur_install "phpactor"
 	aur_install "eslint"
+	aur_install "basedpyright"
 	npm i -g bash-language-server
 	npm i -g typescript typescript-language-server
 	npm i -g vscode-langservers-extracted
-	pip install python-lsp-server
+	aur_install python-lsp-server
 	gem install --user-install rubocop
 	gem install --user-install solargraph
 	npm install -g @olrtg/emmet-language-server

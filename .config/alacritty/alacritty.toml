@@ -1,30 +1,43 @@
-[colors.bright]
-black = "#938e9a"
-blue = "#2FA88E"
-cyan = "#01A7D2"
-green = "#4FA761"
-magenta = "#5D949A"
-red = "#238B71"
-white = "#d3ccdc"
-yellow = "#A19778"
+[font]
+size = 11.2
 
-[colors.cursor]
-cursor = "#d3ccdc"
-text = "#043A35"
-
-[colors.normal]
-black = "#043A35"
-blue = "#2FA88E"
-cyan = "#01A7D2"
-green = "#4FA761"
-magenta = "#5D949A"
-red = "#238B71"
-white = "#d3ccdc"
-yellow = "#A19778"
-
-[colors.primary]
-background = "#043A35"
-foreground = "#d3ccdc"
+[font.normal]
+family = "Monaco"
+style = "Regular"
 
 [window]
 opacity = 0.9
+
+[keyboard]
+bindings = [
+	{ key = "Return", mods = "Control|Shift", action = "SpawnNewInstance" }
+]
+
+#[colors.bright]
+#black = "#938e9a"
+#blue = "#2FA88E"
+#cyan = "#01A7D2"
+#green = "#4FA761"
+#magenta = "#5D949A"
+#red = "#238B71"
+#white = "#d3ccdc"
+#yellow = "#A19778"
+#
+#[colors.cursor]
+#cursor = "#d3ccdc"
+#text = "#043A35"
+#
+#[colors.normal]
+#black = "#043A35"
+#blue = "#2FA88E"
+#cyan = "#01A7D2"
+#green = "#4FA761"
+#magenta = "#5D949A"
+#red = "#238B71"
+#white = "#d3ccdc"
+#yellow = "#A19778"
+#
+#[colors.primary]
+#background = "#043A35"
+#foreground = "#d3ccdc"
+

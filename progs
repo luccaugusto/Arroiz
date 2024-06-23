@@ -93,6 +93,7 @@ ranger
 redis
 redshift
 ripgrep
+rofi
 rslsync
 rsync
 ruby

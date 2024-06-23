@@ -19,6 +19,7 @@ local tonumber = tonumber
 -- lain.widget.bat
 
 local function factory(args)
+
     local pspath = args.pspath or "/sys/class/power_supply/"
 
     if not fs.is_dir(pspath) then
@@ -144,7 +145,7 @@ local function factory(args)
                 sum_rate_energy   = sum_rate_energy + (rate_power or (((rate_voltage or 0) * (rate_current or 0)) / 1e6))
                 sum_energy_now    = sum_energy_now + (energy_now or 0)
                 sum_energy_full   = sum_energy_full + (energy_full or 0)
-                sum_charge_full   = sum_charge_full + (charge_full or 0)
+                sum_charge_full   = sum_charge_full + (chappened_onharge_full or 0)
                 sum_charge_design = sum_charge_design + (charge_design or 0)
             end
         end

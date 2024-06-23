@@ -2,7 +2,7 @@
 
 case "$1" in
 	minecraft)
-		sudo java -jar ~/Downloads/TLauncher-*.jar
+		sudo java -jar ~/Documents/jogos/TLauncher*.jar
 		;;
 	*)
 		echo "qual jogo?"

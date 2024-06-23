@@ -1,15 +1,20 @@
-#!/bin/sh
+#!/bin/bash
 
 #- script so i don't mess up any branches
 
-name='develop'
+current_branch=$(git branch | grep '\*' | cut -d ' ' -f2)
+if [ "$1" ]
+then
+	branch_to_merge="$1"
+else
+	echo "Select branch to merge into $current_branch"
+	select branch_to_merge in $(git branch | grep -v '\*' | grep -v master)
+	do
+	  break
+	done
+fi
 
-[ "$1" ] && name=$1
-
-branch_to_merge=$(git branch | grep "$name")
-branch_to_merge=${branch_to_merge##* }
-current_branch=$(git branch | grep '*') &&
-git checkout $branch_to_merge &&
+git checkout "$branch_to_merge" &&
 git pull &&
-git checkout ${current_branch##* } &&
-git merge $branch_to_merge
+git checkout "${current_branch##* }" &&
+git merge "$branch_to_merge"

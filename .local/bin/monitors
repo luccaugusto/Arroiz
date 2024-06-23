@@ -30,3 +30,4 @@ fi
 
 #some time to unplug the monitor
 [ "$(pgrep bspwm)" ] && sleep 5 && bspc wm -r
+[ "$(pgrep awesome)" ] && sleep 5 && echo 'awesome.restart()' | awesome-client

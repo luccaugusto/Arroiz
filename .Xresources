@@ -1,10 +1,9 @@
 !! Set a default font and font size as below:
 *font:	Monaco:pixelsize=23:antialias=true:autohint=true;
 sxiv.background: #000000
-URxvt.font:	Monaco:pixelsize=23:antialias=true:autohint=true;
+!URxvt.font:	Monaco:pixelsize=23:antialias=true:autohint=true;
 !URxvt.font: 9x15
-!URxvt.font: xft:Deja Vu Sans Mono:pixelsize=20
-URxvt.font: xft:Bitstream Vera Sans Mono:pixelsize=20
+URxvt.font: xft:Deja Vu Sans Mono:pixelsize=20
 !URxvt.font: xft:DejaVu Sans Mono:pixelsize=10
 !URxvt.font: xft:Bitstream Vera Sans Mono:autohint=true:pixelsize=10
 !URxvt.font: xft:Terminus:10

@@ -15,6 +15,17 @@ XF86AudioLowerVolume
 XF86AudioMute
 	sound_control m
 
+# toggle sound output
+XF86Launch1
+	sound_control t
+
+XF86AudioMicMute
+	sound_control t
+
+# disable fucking sleep key for gods sake
+XF86Sleep
+	sound_control t
+
 #Screen Brightness controls
 # increase screen brightness
 XF86MonBrightnessUp
@@ -62,10 +73,8 @@ super + w
 	$BROWSER
 super + r
 	$TERMINAL -e ranger
-super + n
-	shownotes
 super + b
-	lockscreen -s
+	lockscreen
 super + shift + s
 	powermenu
 #super + p
@@ -73,9 +82,9 @@ super + shift + s
 super + d
 	krita & killall redshift
 super + e
-	emacs
-super + shift + e
 	thunderbird
+super + shift + e
+	emacs
 
 # Print
 Print
@@ -83,7 +92,7 @@ Print
 
 # FUNCTION KEYS
 super + F1
-	cheatsheet
+	sound_control -t
 super + F2
 	$TERMINAL --class floats -e pulsemixer
 super + F10

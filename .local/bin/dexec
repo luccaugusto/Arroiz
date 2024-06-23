@@ -1,0 +1,8 @@
+#!/bin/bash
+#- Allows to execute a command in a running container selecting it by name
+
+select container in $(docker ps --format '{{.Names}}'); do break; done
+command="/bin/bash"
+[ "$1" ] && command="$*" && shift
+
+docker exec -it "$container" "/bin/sh" -c "$command"

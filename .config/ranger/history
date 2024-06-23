@@ -1,50 +1,50 @@
-rename luccasantos-php-coding-interview
-rename luccasantos-php-coding-intervie
-rename routes
-rename routes.php
-search sma
-shell unzip SMAPI-3.18.6-installer.zip 
-search bare
-search _
-rename horse.xnb
-shell chmod +x horse.xnb 
-rename Router.php
-touch Client.php
-rename ClientApi.php
-rename apis
-rename api
-rename .php
-rename Client.php
-rename api.php
-mkdir api
-rename ClientAPI.php
-rename Config.php
-search PHP
-rename calendario-2021.kra
-rename calendario-2024.kra
-rename calendario-2021.kra~
-rename calendario-2022.kra~
-rename calendario-2022.kra
-mkdir 2022
-mkdir calendario-2024-pronto
-rename calendarioFDP2024.pdf
-shell zip -r calendario-2024-pronto calendario-2024-pronto 
-shell file Adesivo_10_Anos_Do_Fundo.png  |less
-open_with krita
-search cv
-rename resume.pdf
-rename user.py
-rename mobilePage
-rename MobilePage.tsx
-rename MobilePage.module.css
-rename mobilePageSlice.ts
+rename INSS_03_24.pdf
+rename INSS_04_24.pdf
+rename SIMPLES_03_2024.pdf
+search new
+search backup
+mkdir fdp
+shell unzip backup-tiny-fundodopoco.zip 
 open_with 
-shell unzip calendario.zip 
-shell zip -r calendario_2021 calendario_2021 
-shell zip -r
-open_with n
+rename regular_show_background.png
+open_with brave
+open_with zathura
+shell sudo rm -rf go 
+open_with mupdf
+search python
+shell compress_video 2024-05-20\ 20-27-08.mkv 
+open_with vlc
+search media
+shell zip -r CD-LevelUp-08 CD-LevelUp-08 
+shell zip -r CD-LevelUp-16 CD-LevelUp-16 
+search loot
+search Tlayu
+search Tlau
+shell unzip TLauncher.v10.zip 
+search mine
+search tlay
+search tla
+mkdir .minecraft
+shell sudo rm -rf .minecraft 
+mkdir trabalho
+mkdir roadway
+rename eh_uma_otariaAaAaAaAa.ogg
+rename NF-2024-3-NANIEMPREENDIMENTOS-NACIFITLTDA.pdf
+rename NF-2024-4-NANIEMPREENDIMENTOS-NACIFITLTDA.pdf
+rename NF-2024-5-NANIEMPREENDIMENTOS-NACIFITLTDA.pdf
+search para
+search road
+rename codigo-stripe-2fa-idx.txt
+touch codigo-segment-roadway.txt
+shell wine grimrock.exe 
+search 5729
+rename me-boladao.JPG
+rename me-boladao.jpg
+search fire
 open_with nvim
-shell compress_video ViagemDoSitioProFundoDoPoco.mp4 
-rename ViagemDoSitioProFundoDoPoco.mp4
-mkdir utils
+search sextou
+rename INSS_05_2024.pdf
+search grim
+search legend
 delete
+search user

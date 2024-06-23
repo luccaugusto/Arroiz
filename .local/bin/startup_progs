@@ -1,61 +1,108 @@
-#!/bin/bash
+#!/bin/sh
 
 #-Runs programs after wm is launched. Basically an extension for bash_profile in this setup.
 #-Also avoids any errors that might occur if a program runs before another one.
 #-Example: if transmission runs before bspwm rules are set it will open on workspace 1
 
-#Kill all running docker containers in case i forgot to do it before shutting down
-[ "$(docker ps | awk 'NR>1{ print $1}')" ] && docker kill $(docker ps | awk 'NR>1{ print $1}')
+check_system_updates()
+{
+	# check if i need updates
+	sudo pacman -Sy
+	# Tell me if i need to update
+	must_update
+}
 
-#compress the time files into only one file
-compress_time
-#low battery notifications (cronjob wasn't working)
-batsinal &
+last_session_cleanup()
+{
+	# Kill all running docker containers in case i forgot to do it before shutting down
+	docker_pid=$(docker ps | awk 'NR>1{ print $1}')
+	[ "$docker_pid" ] && docker kill $docker_pid # i do want to glob
 
-#System colors and wallpaper
-set_colors
-set_colors -w
-set-alacritty-colors
+	# compress the time files into only one file
+	compress_time
+}
 
-#Wifi connection
-nm-applet &
-#Hide that damn mouse when it is idle
-unclutter &
+setup_workspace()
+{
+	# set up monitor layout if another monitor is present
+	other_monitors="$(xrandr -q | grep " connected")"
+	if [ "$(cat /sys/devices/platform/dock.0/docked)" = 1 ]; then
+		if [ "$(echo "$other_monitors" | wc -l)" = 2 ]; then
+			sh /home/lucca/.screenlayout/two-screens-docked.sh
+		elif [ "$(echo "$other_monitors" | wc -l)" = 3 ]; then
+			sh /home/lucca/.screenlayout/three-screens-docked.sh
+		fi
+	else
+		if [ "$(echo "$other_monitors" | wc -l)" = 3 ]; then
+			sh /home/lucca/.screenlayout/two-screens-docked.sh
+		elif [ "$(echo "$other_monitors" | wc -l)" = 4 ]; then
+			case "$other_monitors" in
+				*HDMI*) sh /home/lucca/.screenlayout/screen-stack-hdmi.sh;;
+				*DP-2*) sh /home/lucca/.screenlayout/screen-stack.sh;;
+			esac
+		fi
+	fi
 
-#Load specific WM configs
-if [ "$(pgrep -x bspwm)" ]; then
-	cat $CONFIG/sxhkd/base $CONFIG/sxhkd/bspwm_keys > $CONFIG/sxhkd/sxhkdrc
-elif [ "$(pgrep -x dwm)" ]; then
-	cat $CONFIG/sxhkd/base $CONFIG/sxhkd/dwm_keys > $CONFIG/sxhkd/sxhkdrc &&
-	dwmbar &
-elif [ "$(pgrep -x i3)" ]; then
-	cat $CONFIG/sxhkd/base $CONFIG/sxhkd/i3_keys > $CONFIG/sxhkd/sxhkdrc
-else
-	cp $CONFIG/sxhkd/base $CONFIG/sxhkd/sxhkdrc
-fi
+	# System colors and wallpaper
+	set_colors
+	set_colors -w
+	set-alacritty-colors
 
-#key bindings
-pgrep -x awesome || sxhkd &
+	# Load specific WM configs
+	if [ "$(pgrep -x bspwm)" ]; then
+		cat "$CONFIG/sxhkd/base" "$CONFIG/sxhkd/bspwm_keys" > "$CONFIG/sxhkd/sxhkdrc"
+	elif [ "$(pgrep -x dwm)" ]; then
+		cat "$CONFIG/sxhkd/base" "$CONFIG/sxhkd/dwm_keys" > "$CONFIG/sxhkd/sxhkdrc" &&
+		dwmbar &
+	elif [ "$(pgrep -x i3)" ]; then
+		cat "$CONFIG/sxhkd/base" "$CONFIG/sxhkd/i3_keys" > "$CONFIG/sxhkd/sxhkdrc"
+	else
+		cp "$CONFIG/sxhkd/base" "$CONFIG/sxhkd/sxhkdrc"
+	fi
+}
 
-#Seed torrents, like a good boy
-[ ! "$(pgrep -x transmission-qt)" ] && transmission-qt &
-#open my email account
-thunderbird &
-#Notifications
-dunst &
-#Utterly amazing transparent terminals
-picom --config /dev/null &
-#Let me use pt-br and en-us keyboards
-keyboard_layout &
-#Don't burn my eyes
-toggle_redshift
-#Tell me if i need to update
-must_update
-#Open slack so i get ready for work
-#[ ! "$(date +%a)" = "Sat" ] && [ ! "$(date +%a)" = "Sun" ] && slack &
+start_programs()
+{
+	# low battery notifications (cronjob wasn't working)
+	batsinal &
+	# Wifi connection
+	nm-applet &
+	# Hide that damn mouse when it is idle
+	unclutter &
+	# key bindings
+	# pgrep -x awesome || sxhkd &
+	sxhkd &
+	# manage external drives
+	udiskie -a -s -f pcmanfm &
 
-# NETWORK DEPENDAND STUFF
-# Sync my stuff
-personalspace 2>&1 > /dev/null &
-#fetches transactions i registered by email
-cademeudinheiro fetch &
+	# Seed torrents, like a good boy
+	[ ! "$(pgrep -x transmission-qt)" ] && transmission-qt &
+
+	# open my email account
+	thunderbird &
+
+	# Notifications
+	dunst &
+
+	# Utterly amazing transparent terminals
+	picom --config /dev/null &
+
+	# Let me use pt-br and en-us keyboards
+	keyboard_layout &
+
+	# Don't burn my eyes
+	toggle_redshift
+
+	# Open slack so i get ready for work
+	today=$(date +%a)
+	[ ! "$today" = "Sat" ] && [ ! "$today" = "Sun" ] && slack &
+}
+
+last_session_cleanup
+setup_workspace
+start_programs
+
+#  NETWORK DEPENDAND STUFF
+check_system_updates &
+# fetches transactions i registered by email
+# cademeudinheiro fetch &

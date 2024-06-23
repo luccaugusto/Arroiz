@@ -221,17 +221,18 @@ local bat = lain.widget.bat({
 local volicon = wibox.widget.imagebox(theme.widget_vol)
 theme.volume = lain.widget.alsa({
     settings = function()
-        if volume_now.status == "off" then
+		local level = volume_now.level or 0
+        if volume_now.status == "off" or not level then
             volicon:set_image(theme.widget_vol_mute)
-        elseif tonumber(volume_now.level) == 0 then
+        elseif tonumber(level) == 0 then
             volicon:set_image(theme.widget_vol_no)
-        elseif tonumber(volume_now.level) <= 50 then
+        elseif tonumber(level) <= 50 then
             volicon:set_image(theme.widget_vol_low)
         else
             volicon:set_image(theme.widget_vol)
         end
 
-        widget:set_markup(markup.font(theme.font, " " .. volume_now.level .. "% "))
+        widget:set_markup(markup.font(theme.font, " " .. level .. "% "))
     end
 })
 theme.volume.widget:buttons(awful.util.table.join(
@@ -299,7 +300,7 @@ function theme.at_screen_connect(s)
     s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons, nil, list_update)
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(18), bg = theme.bg_normal, fg = theme.fg_normal })
+    s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(25), bg = theme.bg_normal, fg = theme.fg_normal })
 
     -- Add widgets to the wibox
     s.mywibox:setup {

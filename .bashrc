@@ -31,10 +31,4 @@ export PS1="\[\033[38;5;14m\]\u@\[$(tput sgr0)\]\[\033[38;5;198m\]\W\[$(tput sgr
 #no colors in ps1
 #export PS1="\u @\h >\[$(tput sgr0)\]"
 
-# Install Ruby Gems to ~/gems
-export GEM_HOME="$HOME/.local/gems"
-. "$HOME/.cargo/env"
-
-export NVM_DIR="$HOME/.config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

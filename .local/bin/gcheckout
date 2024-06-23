@@ -1,9 +1,12 @@
 #!/bin/sh
+#- git checkout wrapper so i always pull when checking out a branch
 
-BRANCH="$1"
+branch="$1"
 
-[ "$BRANCH" ] || BRANCH=$(git branch | dmenu -l 10)
+[ "$branch" ] || branch=$(git branch | awk '{if($1 != "*") print $1}' | dmenu -l 10)
+#exclude current branch
+#[ "$branch" ] || select branch in $(git branch | awk '{if($1 != "*") print $1}'); do break; done
 
-[ "$BRANCH" ] &&
-git checkout $BRANCH &&
+[ "$branch" ] &&
+git checkout "$branch" &&
 git pull
