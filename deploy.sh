@@ -117,7 +117,7 @@ install_loop()
 if [ ! "$(basename "$0")" == "deploy.sh" ]; then
 	echo "Please run the script with ./deploy.sh not sh deploy.sh"
 else
-	./synchome
+	./deploy_dotfiles.sh
 	setup_hosts
 	install_installers
 	install_nvim
