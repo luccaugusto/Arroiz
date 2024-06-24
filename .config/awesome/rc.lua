@@ -451,6 +451,10 @@ globalkeys = mytable.join(
             os.execute("rofi -show drun -show-icons")
         end,
         {description = "show rofi", group = "launcher"}),
+    awful.key({ modkey, "Shift" }, "p", function ()
+            os.execute("rofi -show run -show-icons")
+        end,
+        {description = "run anny executable with rofi", group = "launcher"}),
     awful.key({ modkey }, "f", function ()
             os.execute("rofi -show window -show-icons")
         end,
