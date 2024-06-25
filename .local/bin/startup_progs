@@ -74,8 +74,6 @@ start_programs()
 	sxhkd &
 	# manage external drives
 	udiskie -a -s -f pcmanfm &
-	# remind me of taking breaks
-	tecuida &
 
 	# Seed torrents, like a good boy
 	[ ! "$(pgrep -x transmission-qt)" ] && transmission-qt &
@@ -84,7 +82,7 @@ start_programs()
 	thunderbird &
 
 	# Notifications
-	dunst &
+	pgrep 'awesome' || dunst &
 
 	# Utterly amazing transparent terminals
 	picom --config /dev/null &
