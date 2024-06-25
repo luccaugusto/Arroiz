@@ -43,7 +43,18 @@ toggle_source()
 
 	if [ "$usb_out_enabled" ]
 	then
-		card_output=$(printf "HDMI\nDevice" | dmenu -l 3 -p "Select output")
+		# - hdmi output if docked or hdmi cable connected
+		# - device output if not docked and no hdmi cable connected
+		# - device input always
+
+		docked="$(cat /sys/devices/platform/dock.0/docked)"
+		other_monitors="$(xrandr -q | grep " connected")"
+		card_output="device"
+		[ "$docked" == "1" ] && card_output="HDMI"
+		case "$other_monitors" in
+			"*HDMI*") card_output="HDMI" ;;
+		esac
+
 		device_setting="output:analog-stereo+input:analog-stereo"
 		pactl set-card-profile "$usb_card" "off"
 		case "$card_output" in
