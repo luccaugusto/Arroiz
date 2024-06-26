@@ -232,7 +232,14 @@ theme.volume = lain.widget.alsa({
             volicon:set_image(theme.widget_vol)
         end
 
-        widget:set_markup(markup.font(theme.font, " " .. level .. "% "))
+		local readable_sink = "Device"
+		awful.spawn.easy_async("pactl info | grep 'Default Sink'", function(out)
+			system_sink = out
+			local readable_sink = string.find(system_sink, "hdmi") and "HDMI" or string.find(system_sink, "USB") and "USB" or "Device"
+        	widget:set_markup(markup.font(theme.font, " " .. level .. "% " .. readable_sink .. " "))
+		end)
+
+        widget:set_markup(markup.font(theme.font, " " .. level .. "% " .. readable_sink))
     end
 })
 theme.volume.widget:buttons(awful.util.table.join(

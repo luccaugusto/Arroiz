@@ -21,7 +21,7 @@ vim.keymap.set({"n", "i"}, "<C-LeftMouse>", "<Cmd>MultipleCursorsMouseAddDelete<
 vim.keymap.set({"n", "x"}, "<Leader>a", "<Cmd>MultipleCursorsAddMatches<CR>")
 
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "python", "javascript" },
+  ensure_installed = { "c", "jsonc", "lua", "vim", "vimdoc", "query", "python", "javascript" },
   sync_install = false,
   auto_install = false,
 
