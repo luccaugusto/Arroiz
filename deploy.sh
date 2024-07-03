@@ -24,25 +24,50 @@ enable_no_sudo_pacman_sy()
 
 
 # Cronjobs for low battery warning and log the time i spend on computer.
-# Have a cronjob to check for package updates every hour
 user_cron_jobs()
 {
 	(crontab -l ; echo "*/2 * * * * ~/.local/bin/batsinal >/dev/null 2>&1") 2>&1 | grep -v "no crontab" | sort | uniq | crontab -
 	(crontab -l ; echo "* * * * * ~/.local/bin/datelog >/dev/null 2>&1	") 2>&1 | grep -v "no crontab" | sort | uniq | crontab -
-	(crontab -l ; echo "0 * * * * pacman -Sy >/dev/null") 2>&1 | grep -v "no crontab" | sort | uniq | crontab -
 }
 
 setup_hosts()
 {
+	hostname="$(cat /etc/hostname)"
 	{
 		echo "# Static table lookup for hostnames."
 		echo "# See hosts(5) for details."
 		echo "127.0.0.1	localhost"
 		echo "::1		localhost"
-		echo "127.0.1.1	main.localdomain	main"
+		echo "127.0.1.1	$hostname.localdomain	$hostname"
 		echo "138.68.42.117	mail.luccaaugusto.xyz"
 		echo "2604:a880:2:d0::54:a001	mail.luccaaugusto.xyz"
 	} >> /etc/hosts
+}
+
+enable_fingerprint()
+{
+	for finger in {left,right}-index-finger; do fprintd-enroll -f "$finger" "$USER"; done
+
+	{
+		sudo echo "#%PAM-1.0"
+		sudo echo ""
+		sudo echo "auth      sufficient pam_fprintd.so"
+		sudo echo "auth      include   system-login"
+		sudo echo "account   include   system-login"
+		sudo echo "password  include   system-login"
+		sudo echo "session   include   system-login"
+	} > /etc/pam.d/system-local-login
+
+	{
+		sudo echo "#%PAM-1.0"
+		sudo echo ""
+		sudo echo "auth       sufficient   pam_unix.so try_first_pass likeauth nullok"
+		sudo echo "auth       sufficient   pam_fprintd.so"
+		sudo echo "auth       include      login"
+		sudo echo "account    include      login"
+		sudo echo "password   include      login"
+		sudo echo "session    include      login"
+	} > /etc/pam.d/ly
 }
 
 install_pkg()
@@ -116,6 +141,8 @@ install_loop()
 
 if [ ! "$(basename "$0")" == "deploy.sh" ]; then
 	echo "Please run the script with ./deploy.sh not sh deploy.sh"
+elif [ "$EUID" = 0 ]; then
+	echo "Do not run as root"
 else
 	./deploy_dotfiles.sh
 	setup_hosts
@@ -124,4 +151,5 @@ else
 	install_loop
 	systemctl enable tlp.service
 	user_cron_jobs
+	enable_fingerprint
 fi
