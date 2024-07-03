@@ -84,15 +84,6 @@ autocmd Filetype javascript        setlocal shiftwidth=2 tabstop=2 expandtab
 autocmd Filetype typescript        setlocal shiftwidth=2 tabstop=2 expandtab
 autocmd Filetype typescriptreact   setlocal shiftwidth=2 tabstop=2 expandtab
 
-"update bindings when sxhkd config is updated
-autocmd BufWritePost sxhkdrc !killall sxhkd; setsid sxhkd &
-
-"recompile suckless programs after editing
-autocmd BufWritePost dwm.c !sudo make clean; sudo make; sudo make install
-
-"autocmd BufWritePost config.def.h !sudo make clean;sudo make; sudo make install
-autocmd BufWritePost st.c !sudo make clean; sudo make; sudo make install
-
 let loaded_netrwPlugin = 1
 
 lua require("config")

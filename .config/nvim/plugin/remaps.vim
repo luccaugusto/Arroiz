@@ -27,6 +27,9 @@ nnoremap <leader>ht :split<CR>:terminal<CR>
 nnoremap <leader>vt :vsplit<CR>:terminal<CR>
 nnoremap <leader>tt :tabnew<CR>:terminal<CR>
 
+"exit terminal mode
+":tnoremap <Esc> <C-\><C-n>
+
 nnoremap <leader>b :buffers<CR>:bd
 
 nnoremap <C-f> :<C-f>i
@@ -170,3 +173,5 @@ au FileType c inoremap /*<CR> /* <CR><CR> */<++><Esc>ka
 au FileType h inoremap /* /*  */<++><Esc>6hi
 au FileType h inoremap /*<CR> /* <CR><CR> */<++><Esc>ka
 au FileType tex nnoremap <leader>li o<CR>\begin{figure}[ht]<CR>\centering<CR>\includegraphics[width=.5\textwidth]{<++>}<CR>\caption{<++>}<CR>\label{<++>}<CR>\end{figure}<Esc>4k/<++><CR>"_c4l
+au FileType json nnoremap = :%! jq<CR>
+au FileType json vnoremap = :%! jq<CR>
