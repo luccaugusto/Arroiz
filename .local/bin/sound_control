@@ -30,23 +30,27 @@ mute()
 	[ $(pgrep dwm) ] && reloadbar
 }
 
+
+
 toggle_source()
 {
 	usb_out_enabled=$(pactl info | grep "Default Sink" | grep "USB")
+	bluetooth_out_enabled=$(pactl info | grep "Default Sink" | grep "bluez_output")
 	sinks=$(pactl list short sinks)
 	cards=$(pactl list short cards)
 	usb_card=$(echo "$cards" | grep "AUDIO" | awk '{print $1}')
 	device_card=$(echo "$cards" | grep "00_1b" | awk '{print $1}')
 	hdmi_card=$(echo "$cards" | grep "pci-0000_00_03" | awk '{print $1}')
+	bluetooth_card=$(echo "$cards" | grep "bluez_card" | awk '{print $1}')
 	notification_header=""
 	notification_body=""
 
-	if [ "$usb_out_enabled" ]
+	# - Bluetooth output if bt connected
+	# - hdmi output if docked or hdmi cable connected
+	# - device output if not docked and no hdmi cable connected
+	# - device input always
+	if [ "$usb_out_enabled" ] || [ "$bluetooth_out_enabled" ]
 	then
-		# - hdmi output if docked or hdmi cable connected
-		# - device output if not docked and no hdmi cable connected
-		# - device input always
-
 		docked="$(cat /sys/devices/platform/dock.0/docked)"
 		other_monitors="$(xrandr -q | grep " connected")"
 		card_output="device"
@@ -55,8 +59,10 @@ toggle_source()
 			"*HDMI*") card_output="HDMI" ;;
 		esac
 
+		[ "$usb_card" ] && pactl set-card-profile "$usb_card" "off"
+		[ "$bluetooth_card" ] && pactl set-card-profile "$bluetooth_card" "off"
+
 		device_setting="output:analog-stereo+input:analog-stereo"
-		pactl set-card-profile "$usb_card" "off"
 		case "$card_output" in
 			*HDMI*) pactl set-card-profile "$hdmi_card" "output:hdmi-stereo"
 				device_setting="input:analog-stereo"
@@ -64,14 +70,29 @@ toggle_source()
 			*) pactl set-card-profile "$hdmi_card" "off" ;;
 		esac
 		pactl set-card-profile "$device_card" "$device_setting"
+
 		notification_header="Switching to $card_output audio"
 		notification_body="Playing on $card_output's speakers and using device's microphone"
+
+	elif [ "$bluetooth_card" ]
+	then
+		pactl set-card-profile "$bluetooth_card" "a2dp-sink"
+		pactl set-card-profile "$device_card" "input:analog-stereo"
+
+		[ "$usb_card" ] && pactl set-card-profile "$usb_card" "off"
+		[ "$hdmi_card" ] && pactl set-card-profile "$hdmi_card" "off"
+
+		notification_header="Switching to BlueTooth audio"
+		notification_body="Playing on BlueTooth speakers but using device's microphone"
 	else
-		notification_header="Switching to USB audio"
-		notification_body="Playing on USB speakers but using device's microphone"
 		pactl set-card-profile "$usb_card" "output:analog-stereo"
 		pactl set-card-profile "$device_card" "input:analog-stereo"
+
 		[ "$hdmi_card" ] && pactl set-card-profile "$hdmi_card" "off"
+		[ "$bluetooth_card" ] && pactl set-card-profile "$bluetooth_card" "off"
+
+		notification_header="Switching to USB audio"
+		notification_body="Playing on USB speakers but using device's microphone"
 	fi
 	notify-send "$notification_header" "$notification_body"
 }

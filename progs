@@ -11,6 +11,7 @@ base
 base-devel
 binutils
 bison
+blueman
 brave-bin
 brightnessctl
 bspwm

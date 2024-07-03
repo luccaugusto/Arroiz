@@ -74,6 +74,8 @@ start_programs()
 	sxhkd &
 	# manage external drives
 	udiskie -a -s -f pcmanfm &
+	# bluetooth
+	blueman-applet &
 
 	# Seed torrents, like a good boy
 	[ ! "$(pgrep -x transmission-qt)" ] && transmission-qt &
