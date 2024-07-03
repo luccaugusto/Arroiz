@@ -1,0 +1,141 @@
+/**
+ *
+ * Author : Aditya Shakya (adi1090x)
+ * Github : @adi1090x
+ *
+ * Rofi Theme File
+ * Rofi Version: 1.7.3
+ **/
+
+/*****----- Configuration -----*****/
+configuration {
+    show-icons:                 false;
+}
+
+/*****----- Global Properties -----*****/
+* {
+    background:                  rgba(20,20,20,0.8);
+    background-alt:              #5E3B6E;
+    foreground:                  #819839;
+    selected:                    #8632AD;
+    active:                      #B5ED09;
+    urgent:                      #934A1C;
+}
+
+
+/*****----- Main Window -----*****/
+window {
+    location:                    center;
+    anchor:                      center;
+    fullscreen:                  false;
+    width:                       300px;
+    x-offset:                    0px;
+    y-offset:                    0px;
+
+    padding:                     0px;
+    border:                      1px solid;
+    border-radius:               24px;
+    border-color:                @selected;
+    cursor:                      "default";
+    background-color:            @background;
+}
+
+/*****----- Main Box -----*****/
+mainbox {
+    background-color:            transparent;
+    orientation:                 horizontal;
+    children:                    [ "listview" ];
+}
+
+/*****----- Imagebox -----*****/
+imagebox {
+    spacing:                     20px;
+    padding:                     20px;
+    background-color:            transparent;
+    background-image:            url("~/.config/rofi/images/d.png", height);
+    children:                    [ "inputbar", "dummy", "message" ];
+}
+
+/*****----- User -----*****/
+userimage {
+    margin:                      0px 0px;
+    border:                      10px;
+    border-radius:               10px;
+    border-color:                @background-alt;
+    background-color:            transparent;
+    background-image:            url("~/.config/rofi/images/d.png", height);
+}
+
+/*****----- Inputbar -----*****/
+inputbar {
+    padding:                     15px;
+    border-radius:               100%;
+    background-color:            @urgent;
+    text-color:                  @foreground;
+    children:                    [ "dummy", "prompt", "dummy"];
+}
+
+dummy {
+    background-color:            transparent;
+}
+
+prompt {
+    background-color:            inherit;
+    text-color:                  inherit;
+}
+
+/*****----- Message -----*****/
+message {
+    enabled:                     true;
+    margin:                      0px;
+    padding:                     15px;
+    border-radius:               100%;
+    background-color:            @background-alt;
+    text-color:                  @active;
+}
+textbox {
+    background-color:            inherit;
+    text-color:                  inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
+}
+
+/*****----- Listview -----*****/
+listview {
+    enabled:                     true;
+    columns:                     1;
+    lines:                       4;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                true;
+    fixed-columns:               true;
+
+    spacing:                     20px;
+    margin:                      20px;
+    background-color:            transparent;
+    cursor:                      "default";
+}
+
+/*****----- Elements -----*****/
+element {
+    enabled:                     true;
+    padding:                     10px 10px;
+    border-radius:               100%;
+    background-color:            @background-alt;
+    text-color:                  @foreground;
+    cursor:                      pointer;
+}
+element-text {
+    font:                        "monaco bold 16";
+    background-color:            transparent;
+    text-color:                  inherit;
+    cursor:                      inherit;
+	padding:                     0 0 0 20px;
+}
+element selected.normal {
+    background-color:            var(selected);
+    text-color:                  var(active);
+}
