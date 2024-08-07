@@ -34,8 +34,8 @@ mute()
 
 toggle_source()
 {
-	usb_out_enabled=$(pactl info | grep "Default Sink" | grep "USB")
-	bluetooth_out_enabled=$(pactl info | grep "Default Sink" | grep "bluez_output")
+	using_usb_output=$(pactl info | grep "Default Sink" | grep "USB")
+	using_bluetooth_output=$(pactl info | grep "Default Sink" | grep "bluez_output")
 	sinks=$(pactl list short sinks)
 	cards=$(pactl list short cards)
 	usb_card=$(echo "$cards" | grep "AUDIO" | awk '{print $1}')
@@ -49,15 +49,15 @@ toggle_source()
 	# - hdmi output if docked or hdmi cable connected
 	# - device output if not docked and no hdmi cable connected
 	# - device input always
-	if [ "$usb_out_enabled" ] || [ "$bluetooth_out_enabled" ]
+	if [ "$using_usb_output" ] || [ "$using_bluetooth_output" ]
 	then
 		docked="$(cat /sys/devices/platform/dock.0/docked)"
 		other_monitors="$(xrandr -q | grep " connected")"
 		card_output="device"
-		[ "$docked" == "1" ] && card_output="HDMI"
 		case "$other_monitors" in
 			"*HDMI*") card_output="HDMI" ;;
 		esac
+		[ "$docked" == "1" ] && card_output="HDMI"
 
 		[ "$usb_card" ] && pactl set-card-profile "$usb_card" "off"
 		[ "$bluetooth_card" ] && pactl set-card-profile "$bluetooth_card" "off"
@@ -111,4 +111,4 @@ else
 		esac
 	done
 fi
-
+[ "$(pgrep 'awesome')" ] && awesome-client 'awesome.emit_signal("update_volume")'
