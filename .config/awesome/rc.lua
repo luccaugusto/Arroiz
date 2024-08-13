@@ -427,11 +427,11 @@ globalkeys = mytable.join(
               {description = "copy terminal to gtk", group = "hotkeys"}),
     -- Copy clipboard to primary (gtk to terminals)
     awful.key({ modkey }, "v", function () awful.spawn.with_shell("xsel -b | xsel") end,
-              {description = "copy gtk to terminal", group = "hotkeys"}),
+              {description = "copy gtk to terminal", group = "hotkeys"})
 
     -- User programs
-    awful.key({ modkey }, "w", function () awful.spawn(browser) end,
-              {description = "run browser", group = "launcher"}),
+    -- awful.key({ modkey }, "w", function () awful.spawn(browser) end,
+    --           {description = "run browser", group = "launcher"})
 
     -- Default
     -- Menubar
@@ -447,18 +447,18 @@ globalkeys = mytable.join(
     -- alternatively use rofi, a dmenu-like application with more features
     -- check https://github.com/DaveDavenport/rofi for more details
     -- rofi
-    awful.key({ modkey }, "p", function ()
-            os.execute("rofi -show drun -show-icons")
-        end,
-        {description = "show rofi", group = "launcher"}),
-    awful.key({ modkey, "Shift" }, "p", function ()
-            os.execute("rofi -show run -show-icons")
-        end,
-        {description = "run anny executable with rofi", group = "launcher"}),
-    awful.key({ modkey }, "f", function ()
-            os.execute("rofi -show window -show-icons")
-        end,
-        {description = "find window", group = "launcher"})
+    -- awful.key({ modkey }, "p", function ()
+    --         os.execute("rofi -show drun -show-icons")
+    --     end,
+    --     {description = "show rofi", group = "launcher"}),
+    -- awful.key({ modkey, "Shift" }, "p", function ()
+    --         os.execute("rofi -show run -show-icons")
+    --     end,
+    --     {description = "run anny executable with rofi", group = "launcher"}),
+    -- awful.key({ modkey }, "f", function ()
+    --         os.execute("rofi -show window -show-icons")
+    --     end,
+    --     {description = "find window", group = "launcher"})
     -- Prompt
     -- awful.key({ modkey }, "x",
     --           function ()
@@ -510,13 +510,13 @@ clientkeys = mytable.join(
             c.maximized_vertical = not c.maximized_vertical
             c:raise()
         end ,
-        {description = "(un)maximize vertically", group = "client"}),
-    awful.key({ modkey, "Shift"   }, "m",
-        function (c)
-            c.maximized_horizontal = not c.maximized_horizontal
-            c:raise()
-        end ,
-        {description = "(un)maximize horizontally", group = "client"})
+        {description = "(un)maximize vertically", group = "client"})
+    -- awful.key({ modkey, "Shift"   }, "m",
+    --     function (c)
+    --         c.maximized_horizontal = not c.maximized_horizontal
+    --         c:raise()
+    --     end ,
+    --     {description = "(un)maximize horizontally", group = "client"})
 )
 
 -- Bind all key numbers to tags.

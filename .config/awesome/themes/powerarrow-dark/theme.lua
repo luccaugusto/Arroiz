@@ -370,32 +370,39 @@ function theme.at_screen_connect(s)
     local systray_layout = wibox.layout.fixed.vertical()
     systray_layout:add(systray_with_margins)
 
-    -- Add widgets to the wibox
+	-- empty wibox
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
-        { -- Left widgets
-            layout = wibox.layout.fixed.horizontal,
-			spr,
-            wibox.container.background(s.mytaglist, theme.bg_normal),
-        },
-        s.mytasklist, -- Middle widget
-        { -- Right widgets
-            layout = wibox.layout.fixed.horizontal,
-            -- systray_layout,
-            -- keyboardlayout,
-            -- spr,
-            -- volicon,
-            -- theme.volume.widget,
-            -- mem.widget,
-            -- tempicon,
-            -- temp.widget,
-            -- baticon,
-            -- bat.widget,
-            -- clock,
-            -- spr,
-            -- s.mylayoutbox,
-        },
+        { layout = wibox.layout.fixed.horizontal, },
+		{ layout = wibox.layout.fixed.horizontal, },
+        { layout = wibox.layout.fixed.horizontal, },
     }
+    -- Add widgets to the wibox
+   --  s.mywibox:setup {
+   --      layout = wibox.layout.align.horizontal,
+   --      { -- Left widgets
+   --          layout = wibox.layout.fixed.horizontal,
+			-- spr,
+   --          wibox.container.background(s.mytaglist, theme.bg_normal),
+   --      },
+   --      s.mytasklist, -- Middle widget
+   --      { -- Right widgets
+   --          layout = wibox.layout.fixed.horizontal,
+   --          systray_layout,
+   --          keyboardlayout,
+   --          spr,
+   --          volicon,
+   --          theme.volume.widget,
+   --          mem.widget,
+   --          tempicon,
+   --          temp.widget,
+   --          baticon,
+   --          bat.widget,
+   --          clock,
+   --          spr,
+   --          s.mylayoutbox,
+   --      },
+   --  }
 end
 
 return theme
