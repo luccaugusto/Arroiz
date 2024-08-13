@@ -97,6 +97,7 @@ redis
 redshift
 ripgrep
 rofi
+rofi-calc
 rslsync
 rsync
 ruby
