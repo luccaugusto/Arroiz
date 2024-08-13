@@ -77,8 +77,14 @@ super + b
 	lockscreen
 super + shift + s
 	powermenu
-#super + p
-#	dmen
+super + p
+	rofi -show drun -show-icons
+super + shift + p
+	rofi -show run -show-icons
+super + f
+	rofi -show window -show-icons
+super + shift + m
+	rofi -show calc -modi calc -no-show-match -no-sort -theme ~/.config/rofi/calc.rasi
 super + d
 	krita & killall redshift
 super + e
