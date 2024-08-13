@@ -1,17 +1,27 @@
 #!/bin/sh
 
-#close all eww bars
-if [ "$(pgrep -x eww)" ];then
-	eww -c ~/.config/eww/right-bar kill
-else
-	sh ~/.config/eww/right-bar/launch_bar
-fi
+toggle_eww()
+{
+	if [ "$(pgrep -x eww)" ];then
+		killall eww
+	else
+		sh ~/.config/eww/right-bar/launch_bar &
+		sh ~/.config/eww/left-bar/launch_bar &
+	fi
+}
 
-awesome-client '
-            for s in screen do
-                s.mywibox.visible = not s.mywibox.visible
-                if s.mybottomwibox then
-                    s.mybottomwibox.visible = not s.mybottomwibox.visible
-                end
-            end
-			'
+toggle_awesome()
+{
+	awesome-client '
+				for s in screen do
+					s.mywibox.visible = not s.mywibox.visible
+					if s.mybottomwibox then
+						s.mybottomwibox.visible = not s.mybottomwibox.visible
+					end
+				end
+				'
+}
+
+toggle_eww &
+toggle_awesome &
+

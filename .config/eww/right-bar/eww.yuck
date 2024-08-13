@@ -30,7 +30,7 @@
 ;; system
 (defwidget system []
 		(box :class "dockbox" :hexpand "true"
-			(box :orientation "h" :spacing 12 :valign "center" :halign "end" :space-evenly "false" :vexpand "false" :hexpand "false"
+			(box :orientation "h" :spacing 6 :valign "center" :halign "end" :space-evenly "false" :vexpand "false" :hexpand "false"
 				(systray :class "systray" :spacing 8)
 				(button :onclick "scripts/widget_apps --pow"
 					(box :orientation "h" :spacing 8 :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
@@ -64,6 +64,7 @@
            :geometry (geometry :x "-1%"
                                :y "10px"
                                :width "30%"
+							   :height "40px"
                                :anchor "top right")
            :stacking "fg"
            :reserve (struts :distance "80px" :side "top")

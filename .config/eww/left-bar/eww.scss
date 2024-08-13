@@ -3,7 +3,6 @@
 	all: unset;
 	font-family: feather;
 	font-family: "JetBrains Mono";
-	color: #FFF;
 }
 
 /** Bar ***********************************/
@@ -13,6 +12,26 @@
 	border-radius: 12px;
     padding: 0px 15px 0px 15px;
     color: #fff;
+}
+
+.workspaces {
+  margin: 5px 15px 5px 0px;
+  font-size: 18px;
+}
+
+.active {
+  border: 2px solid #777;
+  border-top: 1px solid #777;
+  border-left: 1px solid #777;
+  border-radius: 5px;
+}
+.current {
+  border: 2px solid #c792ea;
+  border-top: 1px solid #777;
+  border-left: 1px solid #777;
+  border-radius: 3px;
+}
+.empty {
 }
 
 /** Icons ***********************************/

@@ -1,0 +1,45 @@
+#!/bin/python
+
+#TODO:
+#   maybe make script to button onclick to change workspace and update the workspaces poll
+#   make function to show what windows are open in the current workspace
+
+import subprocess
+import json
+
+workspaces = subprocess.run(
+    ["wmctrl", "-d"],
+    stdout=subprocess.PIPE,
+    stderr=subprocess.STDOUT,
+).stdout.decode('utf8').strip()
+
+windows = (
+    subprocess.run(
+        ["wmctrl", "-l"],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+    )
+    .stdout.decode()
+    .strip()
+)
+
+active_windows = [int(w[10:13]) for w in windows.split("\n")]
+workspace_labels = [w.split(' ')[-1] for w in workspaces.split("\n")]
+current_workspace = int([w.split(' ')[0] for w in workspaces.split("\n") if "*" in w][0])
+
+workspaces_by_monitor = {}
+for index, label in enumerate(workspace_labels):
+    monitor = index // 10
+    if monitor not in workspaces_by_monitor:
+        workspaces_by_monitor[monitor] = []
+        #workspaces_by_monitor[monitor] = ""
+
+    class_name = "current" if index == current_workspace else "active" if index in active_windows else "empty"
+    workspaces_by_monitor[monitor].append({
+        "class": class_name,
+        "index": index,
+        "label": label
+    })
+    #workspaces_by_monitor[monitor] += f'(button :class "{class_name}" :onclick "wmctrl -s {index}" (label :text "{label}"))'
+
+print(json.dumps(workspaces_by_monitor, ensure_ascii=False))

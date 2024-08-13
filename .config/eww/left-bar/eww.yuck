@@ -1,7 +1,10 @@
 ;; ** Variables ***********************************************************************
 
+;; Workspaces
+(defpoll wm_workspace_info :interval "500ms" "scripts/workspaces")
+
 ;; Redshift
-(defpoll redshift_status :interval "3s" "./scripts/redshift_status")
+(defpoll redshift_status :interval "3s" "scripts/redshift_status")
 (defvar REDSHIFT_ON_ICON "icons/redeye.png")
 (defvar REDSHIFT_OFF_ICON "icons/blueeye.png")
 
@@ -9,14 +12,30 @@
 (defpoll keyboard_layout :interval "3s" "xkblayout-state print %s")
 (defvar KEYBOARD_ICON "icons/keyboard.png")
 
+(defvar disk "/")
+
 ;; ** Widgets *************************************************************************
 
+;; workspace
+;; (defwidget workspaces [monitor]
+;; 	(literal :content
+;; 		'(box :spacing 6 :class "workspaces" :valign "center" :hexpand false
+;; 			${wm_workspace_info?.[monitor]})'))
+(defwidget workspaces [monitor]
+	(box :spacing 6 :class "workspaces" :valign "center" :hexpand false
+		(for workspace in {wm_workspace_info?.[monitor]}
+			(button :onclick "wmctrl -s ${workspace.index}" :class "${workspace.class}"
+				(label :text {workspace.label}))
+			)))
+
+;;(label :text {workspaces[monitor]})
 ;; system
-(defwidget extrainfo []
-		(box :class "dockbox" :hexpand "true"
-			(box :orientation "h" :spacing 4 :valign "center" :halign "start" :space-evenly "false" :vexpand "false" :hexpand "false"
+(defwidget extrainfo [monitor]
+		(box :class "dockbox" :hexpand false
+			(workspaces :monitor monitor)
+			(box :orientation "h" :spacing 6 :valign "center" :halign "start" :space-evenly "false" :vexpand "false" :hexpand "false"
 				(button :onclick ""
-					(box :orientation "h" :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
+					(box :orientation "h" :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "true"
 						(box :style "background-image: url('${KEYBOARD_ICON}');" :class "trayicon")
 							(label :class "infotext" :halign "start" :valign "center" :text keyboard_layout)))
 				(button :onclick "toggle_redshift"
@@ -28,15 +47,15 @@
 ;; ** Windows *************************************************************************
 
 ;; system
-(defwindow minibar [screen]
+(defwindow leftbar [screen]
            :monitor screen
            :geometry (geometry :x "1%"
-                               :y "3.5%"
-                               :width "20%"
-							   :height "20px"
+                               :y "10px"
+                               :width "10%"
+							   :height "40px"
                                :anchor "top left")
            :stacking "fg"
            :reserve (struts :distance "80px" :side "top")
            :windowtype "dock"
            :wm-ignore true
-(extrainfo))
+(extrainfo :monitor screen))

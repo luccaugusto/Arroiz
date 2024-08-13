@@ -1,11 +1,11 @@
 #!/bin/sh
 
-eww_bar_config="$HOME/.config/eww/mini-left-bar"
+eww_bar_config="$HOME/.config/eww/left-bar"
 [ "$(pgrep -x eww)" ] && eww -c "$eww_bar_config" kill
 
 monitor_count=$(xrandr --listactivemonitors | head -n 1 | awk '{print $2}')
 
 for i in $(seq 0 "$((monitor_count - 1))"); do
-	echo "Starting eww mini left bar on monitor $i"
-	eww -c "$eww_bar_config" open minibar --id "mini-left-bar-$i" --screen "$i"
+	echo "Starting eww left bar on monitor $i"
+	eww -c "$eww_bar_config" open leftbar --id "left-bar-$i" --screen "$i" &
 done
