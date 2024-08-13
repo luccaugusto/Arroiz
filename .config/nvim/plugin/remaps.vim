@@ -20,6 +20,8 @@ inoremap <C-w> <S-Right>
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 "paste and autoindenting
 nnoremap <leader>P p`[v`]=
+"paste from register 0
+nnoremap <leader>p "0p
 
 "open a terminal
 nnoremap <leader>s :terminal<CR>
@@ -49,8 +51,8 @@ vnoremap > >gv
 vnoremap < <gv
 
 "Spell checking
-nnoremap <leader>p :set spell spelllang=pt_br<CR>
-nnoremap <leader>e :set spell spelllang=en_us<CR>
+nnoremap <leader><C-p> :set spell spelllang=pt_br<CR>
+nnoremap <leader><C-e> :set spell spelllang=en_us<CR>
 
 "Splits
 nnoremap <leader>vs :vsplit<space>
@@ -146,14 +148,14 @@ inoremap jf <Esc>/<++><CR>"_c4l
 " inoremap () ()
 " inoremap {} {}
 " inoremap [ []<++><Esc>4hi
-inoremap { {}<Esc>i
-inoremap {<CR> {<CR>}<Esc>ko
-inoremap {jf {}
-inoremap ( ()<Esc>i
-inoremap (jf ()
-inoremap () ()
-inoremap {} {}
-inoremap [ []<Esc>i
+" inoremap { {}<Esc>i
+" inoremap {<CR> {<CR>}<Esc>ko
+" inoremap {jf {}
+" inoremap ( ()<Esc>i
+" inoremap (jf ()
+" inoremap () ()
+" inoremap {} {}
+" inoremap [ []<Esc>i
 
 "smart undo at breakpoints
 inoremap , ,<c-g>u
@@ -167,11 +169,11 @@ inoremap ) )<c-g>u
 
 "inoremap " ""<++><Esc>3h?<++><CR>4xi
 "inoremap ' ''<++><Esc>3h?<++><CR>4xi
-au FileType sh inoremap [ [  ]<++><Esc>5hi
-au FileType c inoremap /* /*  */<++><Esc>6hi
-au FileType c inoremap /*<CR> /* <CR><CR> */<++><Esc>ka
-au FileType h inoremap /* /*  */<++><Esc>6hi
-au FileType h inoremap /*<CR> /* <CR><CR> */<++><Esc>ka
+" au FileType sh inoremap [ [  ]<Esc>
+" au FileType c inoremap /* /*  */<Esc>
+" au FileType c inoremap /*<CR> /* <CR><CR> */<Esc>
+" au FileType h inoremap /* /*  */<Esc>
+" au FileType h inoremap /*<CR> /* <CR><CR> */<Esc>
 au FileType tex nnoremap <leader>li o<CR>\begin{figure}[ht]<CR>\centering<CR>\includegraphics[width=.5\textwidth]{<++>}<CR>\caption{<++>}<CR>\label{<++>}<CR>\end{figure}<Esc>4k/<++><CR>"_c4l
 au FileType json nnoremap = :%! jq<CR>
 au FileType json vnoremap = :%! jq<CR>

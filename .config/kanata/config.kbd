@@ -1,0 +1,22 @@
+(defcfg
+  linux-use-trackpoint-property yes
+  linux-dev-names-exclude (
+    "ThinkPad Extra Buttons"
+	"TPPS/2 IBM TrackPoint"
+	"YICHIP 2.4G Receiver Mouse"
+  )
+  process-unmapped-keys no
+)
+
+(defsrc
+	caps
+)
+
+(deflayer base
+	ctl
+)
+
+(defalias
+	escctl (tap-hold 100 100 esc lctl)
+)
+

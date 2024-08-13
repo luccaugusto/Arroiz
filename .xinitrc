@@ -34,6 +34,6 @@ fi
 # Authentication agent
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
-exec awesome
+#exec awesome
 #exec bspwm
 #exec dwm

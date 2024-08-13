@@ -86,9 +86,13 @@ super + e
 super + shift + e
 	emacs
 
+super + shift + b
+	toggle_status_bar
+
 # Print
 Print
-	screengrab
+	flameshot gui
+	#screengrab
 
 # FUNCTION KEYS
 super + F1

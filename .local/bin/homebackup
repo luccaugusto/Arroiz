@@ -1,36 +1,92 @@
 #!/bin/bash
 
+# TODO:
+# - add option to not skip media files bigger than 10MB
+# - Add option to specify directories to backup
+
 #-Backup important directories to directory specified.
 #- Exits if no directory was specified.
 #- Exits if the specified directory does not have space for backup
 #- run 'backup' for help
 
 #define the files to be backed up
-FILES_LOCATION=("$HOME/Documents/" "$HOME/pics/" "$HOME/music/")
+default_directories_to_backup=("$HOME/Documents/" "$HOME/pics/")
+_media_directories_to_backup=("$HOME/music/" "$HOME/Downloads/")
+exclude_directories=("Media")
 
+escape_spaces()
+{
+	echo "${1// /\\ }"
+}
 
-[ "$1" ] || { echo "Inform the directory to back files up to."; exit; }
+array_contains () {
+    local array="$1[@]"
+    local seeking=$2
+    local in="NOT_IN"
+    for element in "${!array}"; do
+        if [[ $element == "$seeking" ]]; then
+            in="IN"
+            break
+        fi
+    done
+	echo "$in"
+}
 
-HD=${1%/}
-shift
+get_excluded_entries()
+{
+	excludes=""
+	for directory_to_exclude in "${exclude_directories[@]}"
+	do
+		excludes="$excludes --exclude='$(escape_spaces "$directory_to_exclude")'"
+	done
+	echo "$excludes"
+}
 
 #get size of all files to be backed up
-TOTAL=0
-for FOLDER in "${FILES_LOCATION[@]}"
-do
-	read -r folder_size <<< "$(du -c "$FOLDER" | awk 'END{print $1}')"
-	TOTAL=$((TOTAL+folder_size))
-done
+get_backup_file_size()
+{
+	total_file_size=0
+	excludes="$(get_excluded_entries)"
+	for directory_to_backup in "${default_directories_to_backup[@]}"
+	do
+		# i do want to expand excludes
+		backup_size="$(echo "$excludes" -c "$directory_to_backup" | xargs du | awk 'END{print $1}')"
+		total_file_size=$((total_file_size+backup_size))
+	done
+	echo "$total_file_size"
+}
 
-#read external HD size
-read -r hd_space <<< "$(df "$HD" | awk 'END{print $4}')"
+# run
+[ "$1" ] || { echo "usage: $0 <backup_dir>"; exit; }
 
-#if HD has enough space copy all the files to folder NAME
-if test "$hd_space" -gt "$TOTAL"; then
-	DATE="$(date +%Y-%m-%d)"
-	tar -cpzPvf "$HD/backup-$DATE.tar.gz" "${FILES_LOCATION[@]}"
-else
-	echo "Not enough free space on disk, backup failed."
-	echo "Folder size: $folder_size"
-	echo "Free space: $hd_space"
-fi
+backup_dir=${1%/}
+shift
+
+[ -d "$backup_dir" ] || { echo "ERROR: Backup directory does not exist."; exit; }
+
+excludes="$(get_excluded_entries)"
+echo "EXCLUDES: $excludes"
+total_file_size=$(get_backup_file_size)
+human_readable_file_size="$(echo "$total_file_size" | awk '{ printf "%.2fGB\n", $1/1024/1024; }')"
+space_available_in_backup_dir="$(df "$backup_dir" | awk 'END{print $4}')"
+
+[ "$space_available_in_backup_dir" -gt "$total_file_size" ] || {
+	echo "Not enough free space on disk, won't backup."
+	echo "Backup size: $backup_size"
+	echo "Free space: $space_available_in_backup_dir"
+	exit
+}
+
+backup_file_name="backup-$(date +%Y-%m-%d).tar.gz"
+backup_path="$(escape_spaces "$backup_dir/$backup_file_name")"
+
+# EXECUTE BACKUP
+echo "$excludes" "--full-time" "-cpzPvf" "$backup_path" "${default_directories_to_backup[@]}" | xargs --verbose tar
+
+human_readable_space_available_in_backup_dir="$(df -h "$backup_dir" | awk 'END{print $4}')"
+
+# Telemetry
+echo "[DONE] Backup created at $backup_path"
+echo "	Excluded directories: ${exclude_directories[*]}"
+echo "	Backup file size: $human_readable_file_size"
+echo "	Free space remaining: $human_readable_space_available_in_backup_dir"

@@ -1,0 +1,31 @@
+#!/bin/bash
+
+## Get battery info
+BATTERY="$(acpi | awk -F ' ' 'END {print $4}' | tr -d \%,)"
+CHARGE="$(acpi | awk -F ' ' 'END {print $3}' | tr -d \,)"
+
+total_charge=$(batstatus --total)
+
+main() {
+	if [[ ($CHARGE = *"Charging"*) && ($BATTERY -lt "100") ]]; then
+		echo "images/icons/battery/charge.png"
+	elif [[ $CHARGE = *"Full"* ]]; then
+		echo "images/icons/battery/full.png"
+	else
+		if [[ ($total_charge -lt 100) && (($total_charge -gt 65) || ($total_charge -eq 65)) ]]; then
+			echo "images/icons/battery/battery-3.png"
+		elif [[ ($total_charge -lt 65) && (($total_charge -gt 35) || ($total_charge -eq 35)) ]]; then
+			echo "images/icons/battery/battery-2.png"
+		elif [[ ($total_charge -lt 35) && (($total_charge -gt 10) || ($total_charge -eq 10)) ]]; then
+			echo "images/icons/battery/battery-1.png"
+		elif [[ ($total_charge -lt 10) && (($total_charge -gt 0) || ($total_charge -eq 0)) ]]; then
+			echo "images/icons/battery/low.png"
+		fi
+	fi
+}
+
+if [[ $1 == '--icon' ]]; then
+	main
+elif [[ $1 == '--perc' ]]; then
+	echo "${BATTERY}%"
+fi

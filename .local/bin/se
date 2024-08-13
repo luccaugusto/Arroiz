@@ -1,5 +1,0 @@
-#!/bin/sh
-
-file="$(du -a ~/.local/bin/ | awk '{print $2}' | fzf)"
-
-$EDITOR "$file"

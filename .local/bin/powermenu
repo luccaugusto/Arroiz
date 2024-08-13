@@ -17,12 +17,11 @@
 # 	bash "$option"
 # fi
 
-theme="$HOME/.config/rofi/powermenu-theme"
+theme="$HOME/.config/rofi/regular-powermenu.rasi"
 
-wm="$(grep "^exec" ~/.xinitrc | cut -d ' ' -f 2)"
-if [ "$wm" = "awesome" ]; then
+if [ "$(pgrep -x awesome)" ]; then
 	logout_cmd="awesome-client 'awesome.quit()'"
-elif [ "$wm" = "bspwm" ]; then
+elif [ "$(pgrep -x bspwm)" ]; then
 	logout_cmd="bspc quit"
 fi
 
@@ -30,18 +29,25 @@ uptime="$(uptime -p)"
 host=$(cat /etc/hostname)
 
 # Options
-shutdown='  shutdown'
-reboot=' reboot'
-lock='  lock'
-logout='  logout'
+# shutdown='  shutdown'
+# reboot=' reboot'
+# lock='  lock'
+# logout='  logout'
+# yes='  yes'
+# no='X  no'
+
+shutdown='   shutdown'
+reboot='  reboot'
+lock='   lock'
+logout='   logout'
 yes='  yes'
 no='X  no'
 
 rofi_cmd() {
 	rofi -dmenu \
-		-p " $USER@$host" \
-		-mesg " Uptime: ${uptime##up }" \
-		-theme "$theme.rasi"
+		-p "$USER@$host" \
+		-mesg "Uptime: ${uptime##up }" \
+		-theme "$theme"
 }
 
 confirm_cmd() {
@@ -61,7 +67,7 @@ confirm_exit() {
 }
 
 run_rofi() {
-	printf "cancel\n%s\n%s\n%s\n%s" "$shutdown" "$reboot" "$logout" "$lock" | rofi_cmd
+	printf " - cancel\n%s\n%s\n%s\n%s" "$shutdown" "$reboot" "$logout" "$lock" | rofi_cmd
 }
 
 # Actions

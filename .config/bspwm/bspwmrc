@@ -3,29 +3,29 @@
 bsp_monitors()
 {
 	#HDMI and VGA
-	if [[ $(xrandr -q | grep DP-2 | grep " connected") ]] && [[ $(xrandr -q | grep HDMI-1 | grep " connected") ]]
-	then
-		bspc monitor eDP-1 -d 1 2 3 4
-		bspc monitor DP-2 -d 5 6 7
-		bspc monitor HDMI-1 -d 8 9 0
-		xrandr --output DP-2 --auto --right-of eDP-1
-		xrandr --output HDMI-1 --auto --left-of eDP-1
-	#VGA
-	elif [[ $(xrandr -q | grep DP-2 | grep " connected") ]]
-	then
-		bspc monitor "eDP-1" -d 1 2 3 4
-		bspc monitor "DP-2" -d 5 6 7 8 9 0
-		xrandr --output "DP-2" --auto --right-of "eDP-1"
-	#HDMI
-	elif [[ $(xrandr -q | grep HDMI-1 | grep " connected") ]]
-	then
-		bspc monitor eDP-1 -d 7 8 9 0
-		bspc monitor HDMI-1 -d 1 2 3 4 5 6
-		xrandr --output HDMI-1 --auto --left-of eDP-1
-	#NONE
-	else
+	# if [[ $(xrandr -q | grep DP-2 | grep " connected") ]] && [[ $(xrandr -q | grep HDMI-1 | grep " connected") ]]
+	# then
+	# 	bspc monitor eDP-1 -d 1 2 3 4
+	# 	bspc monitor DP-2 -d 5 6 7
+	# 	bspc monitor HDMI-1 -d 8 9 0
+	# 	xrandr --output DP-2 --auto --right-of eDP-1
+	# 	xrandr --output HDMI-1 --auto --left-of eDP-1
+	# #VGA
+	# elif [[ $(xrandr -q | grep DP-2 | grep " connected") ]]
+	# then
+	# 	bspc monitor "eDP-1" -d 1 2 3 4
+	# 	bspc monitor "DP-2" -d 5 6 7 8 9 0
+	# 	xrandr --output "DP-2" --auto --right-of "eDP-1"
+	# #HDMI
+	# elif [[ $(xrandr -q | grep HDMI-1 | grep " connected") ]]
+	# then
+	# 	bspc monitor eDP-1 -d 7 8 9 0
+	# 	bspc monitor HDMI-1 -d 1 2 3 4 5 6
+	# 	xrandr --output HDMI-1 --auto --left-of eDP-1
+	# #NONE
+	# else
 		bspc monitor -d 1 2 3 4 5 6 7 8 9 0
-	fi
+	#fi
 }
 
 #wal colors
@@ -45,7 +45,7 @@ bspc config bottom_padding 				0
 bspc config border_width				2
 bspc config window_gap 					20
 bspc config split_ratio          		0.5
-bspc config borderless_monocle   		true
+bspc config borderless_monocle   		false
 bspc config gapless_monocle      		true
 bspc config single_monocle				true
 bspc config pointer_modifier 			mod1
@@ -73,6 +73,7 @@ bspc rule -a krita 					desktop=^3 	follow=off
 bspc rule -a shotcut 				desktop=^3 	follow=off
 bspc rule -a Telegram 				desktop=^4 	follow=off
 bspc rule -a thunderbird 			desktop=^4 	follow=off
+bspc rule -a "notion-calendar-electron" 			desktop=^4 	follow=off
 bspc rule -a DBeaver				desktop=^5 	follow=off
 bspc rule -a discord				desktop=^6 	follow=off
 bspc rule -a Slack 					desktop=^6 	follow=off

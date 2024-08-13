@@ -25,10 +25,13 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
+	Plug 'elkowar/yuck.vim'
 	Plug 'nvim-tree/nvim-tree.lua'
 	Plug 'nvim-tree/nvim-web-devicons'
 
 	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+	Plug 'windwp/nvim-autopairs'
 
 	Plug 'luccaugusto/melange-nvim'
 
@@ -60,6 +63,8 @@ call plug#begin('~/.vim/plugged')
 	Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'canary' }
 
 	Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+
+	Plug 'norcalli/nvim-colorizer.lua'
 
 	" load local plugin folder
 	Plug expand('%:p:h') . 'plugin/vmath.vim'

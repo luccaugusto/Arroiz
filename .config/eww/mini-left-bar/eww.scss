@@ -1,0 +1,32 @@
+/** Global *******************************************/
+*{
+	all: unset;
+	font-family: feather;
+	font-family: "JetBrains Mono";
+	color: #FFF;
+}
+
+/** Bar ***********************************/
+.dockbox {
+	background-color: #101010;
+	border: 1px solid #4f4f4f;
+	border-radius: 12px;
+    padding: 0px 15px 0px 15px;
+    color: #fff;
+}
+
+/** Icons ***********************************/
+.trayicon {
+    background-repeat: no-repeat;
+	background-size: 24px;
+	min-height: 24px;
+	min-width: 24px;
+}
+
+/** Info *************************************************/
+.infotext {
+	font-size : 14px;
+	padding: 0px 5px 0px 5px;
+	margin: 5px 0px 5px 0px;
+}
+/** EOF *************************************************/

@@ -59,5 +59,9 @@ set completeopt=menu,menuone,noselect
 " Vimwiki settings
 let g:vimwiki_list = [{'path': '~/Documents/personal-notes/'}]
 
+let g:copilot_filetypes = { 'xml':  v:false, 'wiki': v:false, 'md':   v:false }
+
+autocmd BufReadPost *.rasi ColorizerAttachToBuffer
+
 " Open md files in Goyo
 " au BufReadPost *.md Goyo | set wrap

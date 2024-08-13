@@ -1,12 +1,26 @@
 vim.opt.termguicolors = true
 vim.cmd.colorscheme('melange')
+require'colorizer'.setup({}, {
+	RGB      = true;         -- #RGB hex codes
+	RRGGBB   = true;         -- #RRGGBB hex codes
+	names    = true;         -- "Name" codes like Blue
+	RRGGBBAA = true;        -- #RRGGBBAA hex codes
+	rgb_fn   = true;        -- CSS rgb() and rgba() functions
+	hsl_fn   = true;        -- CSS hsl() and hsla() functions
+	css      = true;        -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+	css_fn   = true;        -- Enable all CSS *functions*: rgb_fn, hsl_fn
+	-- Available modes: foreground, background
+	mode     = 'background'; -- Set the display mode.
+})
+
+require("nvim-autopairs").setup {}
 
 vim.api.nvim_create_augroup("AutoFormat", {})
 
 vim.api.nvim_create_autocmd(
     "BufWritePost",
     {
-        pattern = "*.py",
+		pattern = "*.py",
         group = "AutoFormat",
         callback = function()
             vim.cmd("silent !black -q %")
@@ -15,8 +29,8 @@ vim.api.nvim_create_autocmd(
     }
 )
 
-vim.keymap.set({"n", "i", "x"}, "<C-Down>", "<Cmd>MultipleCursorsAddDown<CR>")
-vim.keymap.set({"n", "i", "x"}, "<C-Up>", "<Cmd>MultipleCursorsAddUp<CR>")
+vim.keymap.set({"n", "i", "x"}, "<M-j>", "<Cmd>MultipleCursorsAddDown<CR>")
+vim.keymap.set({"n", "i", "x"}, "<M-k>", "<Cmd>MultipleCursorsAddUp<CR>")
 vim.keymap.set({"n", "i"}, "<C-LeftMouse>", "<Cmd>MultipleCursorsMouseAddDelete<CR>")
 vim.keymap.set({"n", "x"}, "<Leader>a", "<Cmd>MultipleCursorsAddMatches<CR>")
 
@@ -268,6 +282,7 @@ local servers = {
 	'clangd',
 	'emmet_language_server',
 	'eslint',
+	'lua_ls',
 	'phpactor',
 	--'pylsp',
 	'pyright',
@@ -288,8 +303,10 @@ end
 -- Configure intelephense separately to clean up home
 lspconfig.intelephense.setup{
 	on_attach = on_attach,
+	capabilities = capabilities,
 	cmd = { 'env', 'HOME=/tmp', 'intelephense', '--stdio' },
 }
+
 -- basedpyright is listed on server configurations but it's not working out of the box
 --[[ require('lspconfig.configs').basedpyright = {
   default_config = {

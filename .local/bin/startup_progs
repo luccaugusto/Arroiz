@@ -16,7 +16,7 @@ last_session_cleanup()
 {
 	# Kill all running docker containers in case i forgot to do it before shutting down
 	docker_pid=$(docker ps | awk 'NR>1{ print $1}')
-	[ "$docker_pid" ] && docker kill $docker_pid # i do want to glob
+	[ "$docker_pid" ] && docker kill $docker_pid # i do want to split
 
 	# compress the time files into only one file
 	compress_time
@@ -25,28 +25,22 @@ last_session_cleanup()
 setup_workspace()
 {
 	# set up monitor layout if another monitor is present
-	other_monitors="$(xrandr -q | grep " connected")"
-	if [ "$(cat /sys/devices/platform/dock.0/docked)" = 1 ]; then
-		if [ "$(echo "$other_monitors" | wc -l)" = 2 ]; then
-			sh /home/lucca/.screenlayout/two-screens-docked.sh
-		elif [ "$(echo "$other_monitors" | wc -l)" = 3 ]; then
-			sh /home/lucca/.screenlayout/three-screens-docked.sh
+	connected_monitors="$(xrandr -q | grep -w connected)"
+	# no other monitors
+	if [ "$(echo "$connected_monitors" | wc -l)" = 1 ]; then
+		sh "$HOME/.screenlayout/1600by900.sh"
+	# other monitors and docked
+	elif [ "$(cat /sys/devices/platform/dock.0/docked)" = 1 ]; then
+		if [ "$(echo "$connected_monitors" | wc -l)" = 2 ]; then
+			sh "$HOME/.screenlayout/two-screens-docked.sh"
 		fi
+	# other monitors and not docked
 	else
-		if [ "$(echo "$other_monitors" | wc -l)" = 3 ]; then
-			sh /home/lucca/.screenlayout/two-screens-docked.sh
-		elif [ "$(echo "$other_monitors" | wc -l)" = 4 ]; then
-			case "$other_monitors" in
-				*HDMI*) sh /home/lucca/.screenlayout/screen-stack-hdmi.sh;;
-				*DP-2*) sh /home/lucca/.screenlayout/screen-stack.sh;;
-			esac
-		fi
+		case "$connected_monitors" in
+			*HDMI*) sh "$HOME/.screenlayout/hdmi-left.sh";;
+			*DP-2*) sh "$HOME/.screenlayout/screen-stack.sh";;
+		esac
 	fi
-
-	# System colors and wallpaper
-	set_colors
-	set_colors -w
-	set-alacritty-colors
 
 	# Load specific WM configs
 	if [ "$(pgrep -x bspwm)" ]; then
@@ -59,52 +53,72 @@ setup_workspace()
 	else
 		cp "$CONFIG/sxhkd/base" "$CONFIG/sxhkd/sxhkdrc"
 	fi
+
+	# set trackpoint speed
+	xinput set-prop 15 "libinput Accel Speed" 0.8
 }
 
 start_programs()
 {
+	launch_eww_bars
+
 	# low battery notifications (cronjob wasn't working)
-	batsinal &
+	[ "$(pgrep batsinal)" ] || batsinal &
 	# Wifi connection
-	nm-applet &
+	[ "$(pgrep nm-applet)" ] || nm-applet --indicator &
 	# Hide that damn mouse when it is idle
-	unclutter &
+	[ "$(pgrep unclutter)" ] || unclutter &
 	# key bindings
 	# pgrep -x awesome || sxhkd &
-	sxhkd &
+	[ "$(pgrep sxhkd)" ] || sxhkd &
 	# manage external drives
-	udiskie -a -s -f pcmanfm &
+	[ "$(pgrep udiskie)" ] || udiskie -a -s -f pcmanfm &
 	# bluetooth
-	blueman-applet &
+	[ "$(pgrep blueman-applet)" ] || blueman-applet &
 
 	# Seed torrents, like a good boy
-	[ ! "$(pgrep -x transmission-qt)" ] && transmission-qt &
+	[ "$(pgrep -x transmission-qt)" ] || transmission-qt &
 
 	# open my email account
-	thunderbird &
+	[ "$(pgrep thunderbird)" ] || thunderbird &
+	# Calendar
+	[ "$(pgrep notion)" ] || notion-calendar-electron &
 
 	# Notifications
 	pgrep 'awesome' || dunst &
 
 	# Utterly amazing transparent terminals
-	picom --config /dev/null &
+	[ "$(pgrep picom)" ] || picom --config "$HOME/.config/picom/picom.conf" &
 
 	# Let me use pt-br and en-us keyboards
 	keyboard_layout &
 
 	# Don't burn my eyes
-	toggle_redshift
+	[ "$(pgrep redshift)" ] || toggle_redshift
 
 	# Open slack so i get ready for work
 	today=$(date +%a)
 	[ ! "$today" = "Sat" ] && [ ! "$today" = "Sun" ] && slack &
+
 }
+
+now=$(date +%H:%M)
+login_time=$(who | awk '{print $4}')
 
 last_session_cleanup
 setup_workspace
-start_programs
+# only start programs right after i login so that
+# when restarting wm it won't reopen programs i closed
+[ "$(date_operations -s "$now" "$login_time")" -lt 5 ] &&
+	start_programs
+
+# System colors and wallpaper
+set_colors
+set_colors -w
+set-alacritty-colors
 
 #  NETWORK DEPENDAND STUFF
-check_system_updates &
+#  only execute if connected to the internet
+[ "$(wget -q --spider https://luccaaugusto.xyz ; echo $?)" = "0" ] && check_system_updates &
 # fetches transactions i registered by email
 # cademeudinheiro fetch &

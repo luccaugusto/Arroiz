@@ -1,0 +1,4 @@
+#!/bin/sh
+
+sh "$HOME/.config/eww/right-bar/launch_bar"
+sh "$HOME/.config/eww/mini-left-bar/launch_bar"

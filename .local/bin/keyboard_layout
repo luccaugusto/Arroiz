@@ -15,4 +15,5 @@
 # fi
 
 setxkbmap -option grp:alt_shift_toggle
-setxkbmap -option ctrl:nocaps
+# kanata does this now
+# setxkbmap -option ctrl:nocaps

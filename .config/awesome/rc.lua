@@ -218,11 +218,11 @@ end)
 screen.connect_signal("arrange", function (s)
     local only_one = #s.tiled_clients == 1
     for _, c in pairs(s.clients) do
-        if only_one and not c.floating or c.maximized or c.fullscreen then
-            c.border_width = 0
-        else
+        -- if only_one and not c.floating or c.maximized or c.fullscreen then
+        --     c.border_width = 0
+        -- else
             c.border_width = beautiful.border_width
-        end
+        -- end
     end
 end)
 
@@ -342,16 +342,16 @@ globalkeys = mytable.join(
         end,
         {description = "cycle with previous/go back", group = "client"}),
 
-    -- Show/hide wibox
-    --[[ awful.key({ modkey }, "b", function ()
-            for s in screen do
-                s.mywibox.visible = not s.mywibox.visible
-                if s.mybottomwibox then
-                    s.mybottomwibox.visible = not s.mybottomwibox.visible
-                end
-            end
-        end,
-        {description = "toggle wibox", group = "awesome"}), ]]
+    -- -- Show/hide wibox
+    -- awful.key({ modkey, "Shift" }, "b", function ()
+    --         for s in screen do
+    --             s.mywibox.visible = not s.mywibox.visible
+    --             if s.mybottomwibox then
+    --                 s.mybottomwibox.visible = not s.mybottomwibox.visible
+    --             end
+    --         end
+    --     end,
+    --     {description = "toggle wibox", group = "awesome"}),
 
     -- On-the-fly useless gaps change
     awful.key({ altkey, "Control" }, "=", function () lain.util.useless_gaps_resize(1) end,
@@ -458,30 +458,30 @@ globalkeys = mytable.join(
     awful.key({ modkey }, "f", function ()
             os.execute("rofi -show window -show-icons")
         end,
-        {description = "find window", group = "launcher"}),
+        {description = "find window", group = "launcher"})
     -- Prompt
-    awful.key({ modkey }, "x",
-              function ()
-                  awful.prompt.run {
-                    prompt       = "Run Lua code: ",
-                    textbox      = awful.screen.focused().mypromptbox.widget,
-                    exe_callback = awful.util.eval,
-                    history_path = awful.util.get_cache_dir() .. "/history_eval"
-                  }
-              end,
-              {description = "lua execute prompt", group = "awesome"})
+    -- awful.key({ modkey }, "x",
+    --           function ()
+    --               awful.prompt.run {
+    --                 prompt       = "Run Lua code: ",
+    --                 textbox      = awful.screen.focused().mypromptbox.widget,
+    --                 exe_callback = awful.util.eval,
+    --                 history_path = awful.util.get_cache_dir() .. "/history_eval"
+    --               }
+    --           end,
+    --           {description = "lua execute prompt", group = "awesome"})
     --]]
 )
 
 clientkeys = mytable.join(
     awful.key({ altkey, "Shift"   }, "m",      lain.util.magnify_client,
               {description = "magnify client", group = "client"}),
-    --[[ awful.key({ modkey,           }, "f",
+    awful.key({ modkey, "Shift"   }, "f",
         function (c)
             c.fullscreen = not c.fullscreen
             c:raise()
         end,
-        {description = "toggle fullscreen", group = "client"}), ]]
+        {description = "toggle fullscreen", group = "client"}),
     awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end,
               {description = "close", group = "client"}),
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ,
@@ -640,7 +640,7 @@ awful.rules.rules = {
 
     -- Add titlebars to normal clients and dialogs
     { rule_any = {type = { "normal", "dialog" }
-      }, properties = { titlebars_enabled = true }
+      }, properties = { titlebars_enabled = false }
     },
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
@@ -654,6 +654,8 @@ awful.rules.rules = {
 	{ rule = { class = "Mail" },
 		properties = { tag = "四" } },
 	{ rule = { class = "thunderbird" },
+		properties = { tag = "四" } },
+	{ rule = { class = "notion-calendar-electron" },
 		properties = { tag = "四" } },
 	{ rule = { class = "Postman" },
 		properties = { tag = "五" } },

@@ -7,7 +7,7 @@ devices=$(xsetwacom list devices | awk '{print $7}')
 
 for d in $devices
 do
-	xsetwacom set $d MapToOutput 1920x1080+0+0
+	xsetwacom set "$d" MapToOutput 1920x1080+0+0
 	#get area
 	#xsetwacom set $d Area 0 0 15200 8550
 done

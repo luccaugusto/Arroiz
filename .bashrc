@@ -27,8 +27,13 @@ shopt -s autocd
 set -o vi
 
 #colors in ps1
-export PS1="\[\033[38;5;14m\]\u@\[$(tput sgr0)\]\[\033[38;5;198m\]\W\[$(tput sgr0)\] \[$(tput sgr0)\]\[\033[38;5;226m\]>\[$(tput sgr0)\]"
+PS1="\[\033[38;5;14m\]\u@\[$(tput sgr0)\]\[\033[38;5;198m\]\W\[$(tput sgr0)\] \[$(tput sgr0)\]\[\033[38;5;226m\]>\[$(tput sgr0)\]"
+export PS1
 #no colors in ps1
 #export PS1="\u @\h >\[$(tput sgr0)\]"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"

@@ -1,0 +1,221 @@
+#!/bin/python3
+
+from argparse import ArgumentParser
+from typing import Any
+import os
+import subprocess
+import json
+
+
+class Card:
+    def __init__(self, profile_name, profile, card_name, sink_name):
+        self.profile_name = profile_name
+        self.profile = profile
+        self.card_name = card_name
+        self.sink_name = sink_name
+
+    DEVICE_CARD_NAME = "PCH"
+    DEVICE_SINK_CODE = "pci-0000_00_1b"
+
+    USB_CARD_NAME = "USB HIFI AUDIO"
+    USB_SINK_CODE = "USB_HIFI_AUDIO"
+
+    HDMI_CARD_NAME = "HDMI"
+    HDMI_SINK_CODE = "pci-0000_00_03"
+
+    BT_CARD_NAME = "bluez"
+    BT_SINK_CODE = "bluez"
+
+
+def get_priority_profile(
+    card: dict[str, Any], type="output"
+) -> tuple[str | None, dict | None]:
+    priority_profile = {}
+    priority_profile_name = ""
+
+    for name, profile in card["profiles"].items():
+        if type == "output" and profile["sinks"] == 0 or profile["sources"] == 1:
+            continue
+
+        if profile["available"] and profile["priority"] > priority_profile.get(
+            "priority", -1
+        ):
+            priority_profile_name = name
+            priority_profile = profile
+
+    if not priority_profile_name or not priority_profile.get("available", False):
+        return None, None
+
+    return priority_profile_name, priority_profile
+
+
+def rofi_select_card(output_cards: dict[str, Card]) -> Card:
+
+    if len(output_cards.keys()) == 1:
+        return list(output_cards.values())[0]
+
+    home = os.environ["HOME"]
+    rofi = subprocess.Popen(
+        [
+            "rofi",
+            "-dmenu",
+            "-theme",
+            f"{home}/.config/rofi/sound_selection.rasi",
+        ],
+        stdout=subprocess.PIPE,
+        stdin=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+    )
+
+    selected_card = (
+        rofi.communicate(
+            input="\n".join([card.card_name for card in output_cards.values()]).encode()
+        )[0]
+        .decode()
+        .strip()
+    )
+    return find_card_by_device(output_cards, selected_card)
+
+
+def get_cards() -> list[dict[str, Any]]:
+    cards_json = subprocess.run(
+        ["pactl", "-f", "json", "list", "cards"], stdout=subprocess.PIPE
+    ).stdout.decode()
+
+    return json.loads(cards_json)
+
+
+def current_sink() -> str:
+    return subprocess.run(
+        ["pactl", "get-default-sink"], stdout=subprocess.PIPE
+    ).stdout.decode()
+
+
+def set_card_profile(sink_name: str, profile: str) -> None:
+    subprocess.run(["pactl", "set-card-profile", sink_name, profile])
+
+
+def disable_cards(cards, exception) -> None:
+    for card in cards:
+        if card != exception:
+            subprocess.run(["pactl", "set-card-profile", card, "off"])
+
+
+def find_card_by_device(output_cards, device_name) -> Card:
+    for name, card in output_cards.items():
+        if device_name in name:
+            return card
+    raise Exception(f"Card with device name {device_name} not found")
+
+
+def decide_output(output_cards, sink_in_use) -> Card:
+    connected_cards = "|".join(output_cards.keys())
+
+    # use device as default
+    card_to_use = find_card_by_device(output_cards, Card.DEVICE_CARD_NAME)
+
+    # playing from device:
+    if Card.DEVICE_SINK_CODE in sink_in_use:
+        if Card.BT_CARD_NAME in connected_cards:
+            card_to_use = find_card_by_device(output_cards, Card.BT_CARD_NAME)
+        elif Card.USB_CARD_NAME in connected_cards:
+            card_to_use = find_card_by_device(output_cards, Card.USB_CARD_NAME)
+        elif Card.HDMI_CARD_NAME in connected_cards:
+            card_to_use = find_card_by_device(output_cards, Card.HDMI_CARD_NAME)
+
+    # playing from BT:
+    elif Card.BT_SINK_CODE in sink_in_use:
+        if Card.HDMI_CARD_NAME in connected_cards:
+            card_to_use = find_card_by_device(output_cards, Card.HDMI_CARD_NAME)
+        elif Card.USB_CARD_NAME in connected_cards:
+            card_to_use = find_card_by_device(output_cards, Card.USB_CARD_NAME)
+        else:
+            card_to_use = find_card_by_device(output_cards, Card.DEVICE_CARD_NAME)
+
+    # playing from USB:
+    elif Card.USB_SINK_CODE in sink_in_use:
+        if Card.BT_CARD_NAME in connected_cards:
+            card_to_use = find_card_by_device(output_cards, Card.BT_CARD_NAME)
+        elif Card.HDMI_CARD_NAME in connected_cards:
+            card_to_use = find_card_by_device(output_cards, Card.HDMI_CARD_NAME)
+        else:
+            card_to_use = find_card_by_device(output_cards, Card.DEVICE_CARD_NAME)
+
+    # playing from HDMI
+    elif Card.HDMI_SINK_CODE in sink_in_use:
+        if Card.BT_CARD_NAME in connected_cards:
+            card_to_use = find_card_by_device(output_cards, Card.BT_CARD_NAME)
+        elif Card.USB_CARD_NAME in connected_cards:
+            card_to_use = find_card_by_device(output_cards, Card.USB_CARD_NAME)
+        else:
+            card_to_use = find_card_by_device(output_cards, Card.DEVICE_CARD_NAME)
+
+    return card_to_use
+
+
+def hdmi_connected():
+    monitors =  (
+        subprocess.run(["xrandr", "--listactivemonitors"], stdout=subprocess.PIPE)
+        .stdout.decode()
+    )
+
+    return monitors.find("HDMI") != -1 or monitors.find("DP-2-") != -1
+
+
+def get_output_cards() -> dict[str, Card]:
+    output_cards = {}
+    for card in get_cards():
+        profile_name, profile = get_priority_profile(card, "output")
+        if profile is None:
+            continue
+
+        card_name = card["properties"].get("alsa.card_name", card["name"])
+
+        if Card.HDMI_CARD_NAME.lower() in card_name.lower() and not hdmi_connected():
+            continue
+
+        output_cards[card_name] = Card(profile_name, profile, card_name, card["name"])
+
+    return output_cards
+
+
+def _parse_args():
+    ap = ArgumentParser(
+        "sound_source_toggle",
+        description="Toggle sound source between device, bluetooth, and HDMI",
+    )
+    ap.add_argument("-i", help="Interactively select output", action="store_true")
+    return ap
+
+
+# TODO: make me set input to device card
+# for name, card in output_cards.items():
+#     if name == selected_card:
+#         subprocess.run(["pactl", "set-card-profile", card.card_name, card.profile_name])
+#     else:
+#         subprocess.run(["pactl", "set-card-profile", card.card_name, "off"])
+if __name__ == "__main__":
+    args = _parse_args().parse_args()
+    sink_in_use = current_sink()
+    output_cards = get_output_cards()
+
+    if args.i:
+        card_to_use = rofi_select_card(output_cards)
+    else:
+        card_to_use = decide_output(output_cards, sink_in_use)
+
+    set_card_profile(card_to_use.sink_name, card_to_use.profile_name)
+
+    # turn off other cards
+    for name, output_card in output_cards.items():
+        if card_to_use.card_name == name:
+            continue
+        set_card_profile(output_card.sink_name, "off")
+
+    notification_header = f"Switching to {card_to_use.card_name} audio"
+    notification_body = (
+        f"Playing on {card_to_use.card_name}'s speakers and using device's microphone"
+    )
+    subprocess.run(["notify-send", notification_header, notification_body])
+
+    # TODO: set input device or webcam

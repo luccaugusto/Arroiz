@@ -1,11 +1,10 @@
  [redshift]
  location-provider=manual
- temp-night=2500
+ temp-night=3200
  temp-day=4400
  fade=1
 
-
+ ;BH
  [manual]
- lat=-19.88
- lon=-43.96
-
+ lat=-19.91911
+ lon=-43.93862

@@ -10,19 +10,6 @@ configuration {
   }
 }
 
-/*@theme "rounded-gray-dark"*/
-
-* {
-    bg0:    #212121F2;
-    bg1:    #B9CACA;
-    bg2:    #3D3D3D80;
-    bg3:    #616161F2;
-    fg0:    #E6E6E6;
-    fg1:    #FFFFFF;
-    fg2:    #969696;
-    fg3:    #3D3D3D;
-}
-
 * {
     bg0:    #212121F2;
     bg1:    #2A2A2A;
@@ -48,6 +35,7 @@ configuration {
 window {
     location:       center;
     width:          480;
+	height:         45%;
     border-radius:  10px;
 	border-color: @bg3;
 
@@ -62,7 +50,7 @@ inputbar {
     background-color:   @fg0;
     border-color:       @bg3;
 
-    border:         2px;
+    border:         1px;
     border-radius:  10px;
 
     padding:    8px 16px;
@@ -100,14 +88,21 @@ listview {
     fixed-height: false;
 }
 
-element {
-    padding:        8px 16px;
-    spacing:        8px;
-    border-radius:  5px;
+scrollbar {
+	handle-color: @bg3;
+	handle-width: 5px;
 }
 
-element normal active {
-    text-color: @bg3;
+element {
+    padding:        2px 16px;
+    spacing:        0;
+    border-radius:  5px;
+	background-color: @bg0;
+}
+
+element normal normal, element alternate normal {
+	background-color: transparent;
+	text-color: @fg1;
 }
 
 element selected normal, element selected active {
@@ -116,6 +111,7 @@ element selected normal, element selected active {
 
 element-icon {
     size:           2em;
+	padding: 0 5px 0 0;
     vertical-align: 0.5;
 }
 

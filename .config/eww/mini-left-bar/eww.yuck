@@ -1,0 +1,42 @@
+;; ** Variables ***********************************************************************
+
+;; Redshift
+(defpoll redshift_status :interval "3s" "./scripts/redshift_status")
+(defvar REDSHIFT_ON_ICON "icons/redeye.png")
+(defvar REDSHIFT_OFF_ICON "icons/blueeye.png")
+
+;; Keyboard layout
+(defpoll keyboard_layout :interval "3s" "xkblayout-state print %s")
+(defvar KEYBOARD_ICON "icons/keyboard.png")
+
+;; ** Widgets *************************************************************************
+
+;; system
+(defwidget extrainfo []
+		(box :class "dockbox" :hexpand "true"
+			(box :orientation "h" :spacing 4 :valign "center" :halign "start" :space-evenly "false" :vexpand "false" :hexpand "false"
+				(button :onclick ""
+					(box :orientation "h" :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
+						(box :style "background-image: url('${KEYBOARD_ICON}');" :class "trayicon")
+							(label :class "infotext" :halign "start" :valign "center" :text keyboard_layout)))
+				(button :onclick "toggle_redshift"
+					(box :orientation "h" :spacing 2 :valign "center" :space-evenly "false" :vexpand "false" :hexpand "true"
+						(tooltip (label :text {redshift_status == 'on' ? "Redshift is on" : "Redshift is off"})
+						(box :style "background-image: url('${redshift_status == 'on' ? REDSHIFT_ON_ICON : REDSHIFT_OFF_ICON}');" :class "trayicon"))))
+				)))
+
+;; ** Windows *************************************************************************
+
+;; system
+(defwindow minibar [screen]
+           :monitor screen
+           :geometry (geometry :x "1%"
+                               :y "3.5%"
+                               :width "20%"
+							   :height "20px"
+                               :anchor "top left")
+           :stacking "fg"
+           :reserve (struts :distance "80px" :side "top")
+           :windowtype "dock"
+           :wm-ignore true
+(extrainfo))

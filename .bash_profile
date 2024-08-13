@@ -25,7 +25,7 @@ export GEM_HOME="$HOME/.local/gems"
 export JAVA_HOME='/usr/lib/jvm/java-11-openjdk'
 # Adds `~/.local/bin` and subdirectories to $PATH
 
-export PATH="$PATH:$(find -L ~/.local/bin -type d -printf %p:)"
+PATH="$PATH:$(find -L ~/.local/bin -type d -printf %p:)"
 export PATH="$PATH:$JAVA_HOME/bin"
 export PATH="$PATH:$HOME/.local/gems/bin"
 export PATH="$PATH:$HOME/.local/share/gem/ruby"
@@ -54,6 +54,16 @@ export FZF_CTRL_R_OPTS="
   --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
   --color header:italic
   --header 'Press CTRL-Y to copy command into clipboard'"
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/lucca/repos/google-cloud-sdk/path.bash.inc' ]; then . '/home/lucca/repos/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/lucca/repos/google-cloud-sdk/completion.bash.inc' ]; then . '/home/lucca/repos/google-cloud-sdk/completion.bash.inc'; fi
 
 # Start graphical server if WM not already running.
 if [ ! "$(systemctl is-enabled ly)" = "enabled" ]; then

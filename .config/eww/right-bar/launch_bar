@@ -1,0 +1,11 @@
+#!/bin/sh
+
+eww_bar_config="$HOME/.config/eww/right-bar"
+[ "$(pgrep -x eww)" ] && eww -c "$eww_bar_config" kill
+
+monitor_count=$(xrandr --listactivemonitors | head -n 1 | awk '{print $2}')
+
+for i in $(seq 0 "$((monitor_count - 1))"); do
+	echo "Starting eww right bar on monitor $i"
+	eww -c "$eww_bar_config" open system --id "right-bar-$i" --screen "$i"
+done

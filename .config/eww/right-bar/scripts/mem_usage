@@ -1,0 +1,7 @@
+#!/bin/sh
+
+ram=$(free -m | grep Mem)
+ram_total=$(echo "$ram" | awk '{print $2}')
+ram_used=$(echo "$ram" | awk '{print $3}')
+
+echo "$((ram_used * 100 / ram_total))%"
