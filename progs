@@ -139,6 +139,7 @@ xclip
 xdg-user-dirs
 xdg-utils
 xdotool
+xkblayout-state-git
 xf86-input-wacom
 xorg-fonts-encodings
 xorg-server

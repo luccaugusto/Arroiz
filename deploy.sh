@@ -22,6 +22,17 @@ enable_no_sudo_pacman_sy()
 	echo "%wheel ALL=(ALL) NOPASSWD: /usr/bin/pacman -Sy" | sudo EDITOR='tee -a' visudo
 }
 
+# docker data-root to /home so it won't fill up my root partition with images
+setup_docker_data_dir()
+{
+	sudo mkdir /home/docker-data-dir
+	[ -d /etc/docker ] || sudo mkdir /etc/docker
+	{
+		echo "{"
+		echo '    "data-root": "/home/docker-data-dir"'
+		echo "}"
+	} | sudo tee /etc/docker/daemon.json
+}
 
 # Cronjobs for low battery warning and log the time i spend on computer.
 user_cron_jobs()
@@ -42,6 +53,13 @@ setup_hosts()
 		echo "138.68.42.117	mail.luccaaugusto.xyz"
 		echo "2604:a880:2:d0::54:a001	mail.luccaaugusto.xyz"
 	} >> /etc/hosts
+}
+
+setup_groups()
+{
+	sudo groupadd uinput
+	sudo usermod -aG input "$USER"
+	sudo usermod -aG uinput "$USER"
 }
 
 enable_fingerprint()
@@ -146,10 +164,13 @@ elif [ "$EUID" = 0 ]; then
 else
 	./deploy_dotfiles.sh
 	setup_hosts
+	setup_groups
 	install_installers
 	install_nvim
 	install_loop
 	systemctl enable tlp.service
 	user_cron_jobs
 	enable_fingerprint
+	enable_sudo_for_wheel
+	setup_docker_data_dir
 fi
