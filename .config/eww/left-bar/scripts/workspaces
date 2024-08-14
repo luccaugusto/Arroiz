@@ -15,7 +15,7 @@ workspaces = subprocess.run(
 
 windows = (
     subprocess.run(
-        ["wmctrl", "-l"],
+        ["wmctrl", "-lx"],
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
     )
@@ -32,14 +32,26 @@ for index, label in enumerate(workspace_labels):
     monitor = index // 10
     if monitor not in workspaces_by_monitor:
         workspaces_by_monitor[monitor] = []
-        #workspaces_by_monitor[monitor] = ""
 
     class_name = "current" if index == current_workspace else "active" if index in active_windows else "empty"
-    workspaces_by_monitor[monitor].append({
+    workspace = {
         "class": class_name,
         "index": index,
         "label": label
-    })
-    #workspaces_by_monitor[monitor] += f'(button :class "{class_name}" :onclick "wmctrl -s {index}" (label :text "{label}"))'
+    }
+
+    if class_name == "current":
+        open_windows_info = [w for w in windows.split("\n") if f" {index} " in w]
+        open_windows = [
+            {
+                "id": w.split(' ')[0],
+                "name": [s for s in w.split(' ') if s != ""][2].split('.').pop(), #handle possible double spaces that fuck up the split on ' '
+            }
+            for w in open_windows_info
+        ]
+
+        workspaces_by_monitor["open"] = open_windows
+
+    workspaces_by_monitor[monitor].append(workspace)
 
 print(json.dumps(workspaces_by_monitor, ensure_ascii=False))

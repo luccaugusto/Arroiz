@@ -1,10 +1,10 @@
 ;; ** Variables ***********************************************************************
 
 ;; Workspaces
-(defpoll wm_workspace_info :interval "500ms" "scripts/workspaces")
+(defpoll wm_workspace_info :interval "1s" "scripts/workspaces")
 
 ;; Redshift
-(defpoll redshift_status :interval "3s" "scripts/redshift_status")
+(defpoll redshift_status :interval "10s" "scripts/redshift_status")
 (defvar REDSHIFT_ON_ICON "icons/redeye.png")
 (defvar REDSHIFT_OFF_ICON "icons/blueeye.png")
 
@@ -17,32 +17,30 @@
 ;; ** Widgets *************************************************************************
 
 ;; workspace
-;; (defwidget workspaces [monitor]
-;; 	(literal :content
-;; 		'(box :spacing 6 :class "workspaces" :valign "center" :hexpand false
-;; 			${wm_workspace_info?.[monitor]})'))
 (defwidget workspaces [monitor]
 	(box :spacing 6 :class "workspaces" :valign "center" :hexpand false
 		(for workspace in {wm_workspace_info?.[monitor]}
 			(button :onclick "wmctrl -s ${workspace.index}" :class "${workspace.class}"
-				(label :text {workspace.label}))
-			)))
+				(label :text {workspace.label})))))
 
-;;(label :text {workspaces[monitor]})
-;; system
+(defwidget open_windows []
+	(box :orientation "h" :spacing 6 :valign "center" :halign "start" :space-evenly "false" :vexpand "false" :hexpand "false"
+		(for window in {wm_workspace_info?.open}
+			(button :class "open-window" :onclick "wmctrl -i -R ${window.id}"
+				(label :text {window.name})))))
+
 (defwidget extrainfo [monitor]
-		(box :class "dockbox" :hexpand false
-			(workspaces :monitor monitor)
-			(box :orientation "h" :spacing 6 :valign "center" :halign "start" :space-evenly "false" :vexpand "false" :hexpand "false"
-				(button :onclick ""
-					(box :orientation "h" :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "true"
-						(box :style "background-image: url('${KEYBOARD_ICON}');" :class "trayicon")
-							(label :class "infotext" :halign "start" :valign "center" :text keyboard_layout)))
-				(button :onclick "toggle_redshift"
-					(box :orientation "h" :spacing 2 :valign "center" :space-evenly "false" :vexpand "false" :hexpand "true"
-						(tooltip (label :text {redshift_status == 'on' ? "Redshift is on" : "Redshift is off"})
-						(box :style "background-image: url('${redshift_status == 'on' ? REDSHIFT_ON_ICON : REDSHIFT_OFF_ICON}');" :class "trayicon"))))
-				)))
+	(box :class "dockbox" :orientation "h" :spacing 6 :valign "center" :halign "start" :space-evenly "false" :vexpand "false" :hexpand "false"
+		(workspaces :monitor monitor)
+		(button :onclick ""
+			(box :orientation "h" :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "true"
+				(box :style "background-image: url('${KEYBOARD_ICON}');" :class "trayicon")
+					(label :class "infotext" :halign "start" :valign "center" :text keyboard_layout)))
+		(button :onclick "toggle_redshift"
+			(box :orientation "h" :spacing 2 :valign "center" :space-evenly "false" :vexpand "false" :hexpand "true"
+				(tooltip (label :text {redshift_status == 'on' ? "Redshift is on" : "Redshift is off"})
+				(box :style "background-image: url('${redshift_status == 'on' ? REDSHIFT_ON_ICON : REDSHIFT_OFF_ICON}');" :class "trayicon"))))
+		(open_windows)))
 
 ;; ** Windows *************************************************************************
 

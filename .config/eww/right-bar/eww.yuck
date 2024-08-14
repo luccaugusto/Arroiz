@@ -1,17 +1,17 @@
 ;; ** Variables ***********************************************************************
 
 ;; Time vars
-(defpoll TIME :interval "5s" `date +\"%H:%M\"`)
-(defpoll DATE :interval "5s" `date +\"%A, %B %d\"`)
+(defpoll TIME :interval "1m" `date +\"%H:%M\"`)
+(defpoll DATE :interval "24h" `date +\"%A, %B %d\"`)
 
 ;; Battery vars
-(defpoll BATSTATUS :interval "1m" `batstatus --no-icon`)
-(defpoll BATICON :interval "1m" `scripts/battery --icon`)
-(defpoll BATPERC :interval "1m" `scripts/battery --perc`)
+(defpoll BATSTATUS :interval "2m" `batstatus --no-icon`)
+(defpoll BATICON :interval "2m" `scripts/battery --icon`)
+(defpoll BATPERC :interval "2m" `scripts/battery --perc`)
 
 ;; CPU vars
-(defpoll CPUICON :interval "1m" `scripts/cpu_temp --icon`)
-(defpoll CPUTEMP :interval "1m" `scripts/cpu_temp`)
+(defpoll CPUICON :interval "2m" `scripts/cpu_temp --icon`)
+(defpoll CPUTEMP :interval "2m" `scripts/cpu_temp`)
 
 ;; Mem vars
 (defvar MEMICON "images/ram.png")
@@ -22,39 +22,37 @@
 (defpoll VOLUME :interval "1s" `scripts/volume --get`)
 
 ;; Network
-(defpoll WIFIICON :initial "images/icons/system/no-wifi.png" :interval "10s" `scripts/check-network --icon`)
-(defpoll NETSTAT :initial "Checking Wifi" :interval "10s" `scripts/check-network --stat`)
+(defpoll WIFIICON :initial "images/icons/system/no-wifi.png" :interval "1m" `scripts/check-network --icon`)
+(defpoll NETSTAT :initial "Checking Wifi" :interval "1m" `scripts/check-network --stat`)
 
 ;; ** Widgets *************************************************************************
 
 ;; system
 (defwidget system []
-		(box :class "dockbox" :hexpand "true"
-			(box :orientation "h" :spacing 6 :valign "center" :halign "end" :space-evenly "false" :vexpand "false" :hexpand "false"
-				(systray :class "systray" :spacing 8)
-				(button :onclick "scripts/widget_apps --pow"
-					(box :orientation "h" :spacing 8 :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
-						(box :style "background-image: url('${BATICON}');" :class "trayicon baticon")
-							(label :class "infotext" :halign "start" :valign "center" :text BATSTATUS)))
-				(button :onclick "alacritty -e gotop -l kitchensink &"
-					(box :orientation "h" :spacing 8 :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
-						(box :style "background-image: url('${CPUICON}');" :class "trayicon")
-							(label :class "infotext" :halign "start" :text CPUTEMP)))
-				(button :onclick "alacritty -e gotop -l kitchensink &"
-					(box :orientation "h" :spacing 8 :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
-						(box :style "background-image: url('${MEMICON}');" :class "trayicon")
-							(label :class "infotext" :halign "start" :text MEMUSAGE)))
-				(button :onclick "scripts/volume --toggle"
-					(box :orientation "h" :spacing 8 :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
-						(box :style "background-image: url('${VOLICON}');" :class "trayicon")
-							(label :class "infotext" :halign "start" :text VOLUME)))
-				(box :orientation "h" :spacing 8 :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
-					(box :style "background-image: url('${WIFIICON}');" :class "trayicon")
-						(label :class "infotext" :halign "start" :text NETSTAT))
-				(box :class "clockbox" :orientation "v" :spacing 0 :valign "center" :halign "end" :space-evenly "false" :vexpand "false" :hexpand "false"
-						(label :class "time" :halign "end" :wrap "false" :limit-width 25 :text TIME)
-							(label :class "date" :halign "start" :wrap "false" :text DATE))
-				)))
+	(box :class "dockbox" :orientation "h" :spacing 6 :valign "center" :halign "end" :space-evenly "false" :vexpand "false" :hexpand "false"
+		(systray :class "systray" :spacing 8)
+		(button :onclick "scripts/widget_apps --pow"
+			(box :orientation "h" :spacing 8 :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
+				(box :style "background-image: url('${BATICON}');" :class "trayicon baticon")
+					(label :class "infotext" :halign "start" :valign "center" :text BATSTATUS)))
+		(button :onclick "alacritty -e gotop -l kitchensink &"
+			(box :orientation "h" :spacing 8 :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
+				(box :style "background-image: url('${CPUICON}');" :class "trayicon")
+					(label :class "infotext" :halign "start" :text CPUTEMP)))
+		(button :onclick "alacritty -e gotop -l kitchensink &"
+			(box :orientation "h" :spacing 8 :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
+				(box :style "background-image: url('${MEMICON}');" :class "trayicon")
+					(label :class "infotext" :halign "start" :text MEMUSAGE)))
+		(button :onclick "scripts/volume --toggle"
+			(box :orientation "h" :spacing 8 :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
+				(box :style "background-image: url('${VOLICON}');" :class "trayicon")
+					(label :class "infotext" :halign "start" :text VOLUME)))
+		(box :orientation "h" :spacing 8 :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
+			(box :style "background-image: url('${WIFIICON}');" :class "trayicon")
+				(label :class "infotext" :halign "start" :text NETSTAT))
+		(box :class "clockbox" :orientation "v" :spacing 0 :valign "center" :halign "end" :space-evenly "false" :vexpand "false" :hexpand "false"
+				(label :class "time" :halign "end" :wrap "false" :limit-width 25 :text TIME)
+					(label :class "date" :halign "start" :wrap "false" :text DATE))))
 
 ;; ** Windows *************************************************************************
 
