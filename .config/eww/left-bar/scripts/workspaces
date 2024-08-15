@@ -1,9 +1,6 @@
 #!/bin/python
 
-#TODO:
-#   maybe make script to button onclick to change workspace and update the workspaces poll
-#   make function to show what windows are open in the current workspace
-
+import datetime
 import subprocess
 import json
 
@@ -23,7 +20,7 @@ windows = (
     .strip()
 )
 
-active_windows = [int(w[10:13]) for w in windows.split("\n")]
+active_windows = [int(w[10:13]) for w in windows.split("\n") if w]
 workspace_labels = [w.split(' ')[-1] for w in workspaces.split("\n")]
 current_workspace = int([w.split(' ')[0] for w in workspaces.split("\n") if "*" in w][0])
 
@@ -42,16 +39,25 @@ for index, label in enumerate(workspace_labels):
 
     if class_name == "current":
         open_windows_info = [w for w in windows.split("\n") if f" {index} " in w]
-        open_windows = [
-            {
-                "id": w.split(' ')[0],
-                "name": [s for s in w.split(' ') if s != ""][2].split('.').pop(), #handle possible double spaces that fuck up the split on ' '
-            }
-            for w in open_windows_info
-        ]
+        if len(open_windows_info) > 0:
+            open_windows = [
+                {
+                    "id": w.split(" ")[0],
+                    "name": [s for s in w.split(" ") if s != ""][2]
+                    .split(".")
+                    .pop(),  # handle possible double spaces that fuck up the split on ' '
+                }
+                for w in open_windows_info
+            ]
+            workspaces_by_monitor["open"] = open_windows
+            workspaces_by_monitor["open_in_monitor"] = monitor
+        else:
+            workspaces_by_monitor["open"] = []
+            workspaces_by_monitor["open_in_monitor"] = -1
 
-        workspaces_by_monitor["open"] = open_windows
 
     workspaces_by_monitor[monitor].append(workspace)
+
+workspaces_by_monitor['time'] = datetime.datetime.now().strftime('%S')
 
 print(json.dumps(workspaces_by_monitor, ensure_ascii=False))

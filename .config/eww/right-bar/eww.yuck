@@ -2,12 +2,21 @@
 
 ;; Time vars
 (defpoll TIME :interval "1m" `date +\"%H:%M\"`)
-(defpoll DATE :interval "24h" `date +\"%A, %B %d\"`)
+(defpoll DATE :interval "24h" `date +\"%a, %B %d\"`)
 
 ;; Battery vars
 (defpoll BATSTATUS :interval "2m" `batstatus --no-icon`)
 (defpoll BATICON :interval "2m" `scripts/battery --icon`)
 (defpoll BATPERC :interval "2m" `scripts/battery --perc`)
+
+;; Keyboard layout
+(defpoll keyboard_layout :interval "3s" "xkblayout-state print %s")
+(defvar KEYBOARD_ICON "images/keyboard.png")
+
+;; Redshift
+(defpoll redshift_status :interval "10s" "scripts/redshift_status")
+(defvar REDSHIFT_ON_ICON "images/redeye.png")
+(defvar REDSHIFT_OFF_ICON "images/blueeye.png")
 
 ;; CPU vars
 (defpoll CPUICON :interval "2m" `scripts/cpu_temp --icon`)
@@ -50,6 +59,14 @@
 		(box :orientation "h" :spacing 8 :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
 			(box :style "background-image: url('${WIFIICON}');" :class "trayicon")
 				(label :class "infotext" :halign "start" :text NETSTAT))
+		(button :onclick ""
+			(box :orientation "h" :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "true"
+				(box :style "background-image: url('${KEYBOARD_ICON}');" :class "trayicon")
+					(label :class "infotext" :halign "start" :valign "center" :text keyboard_layout)))
+		(button :onclick "toggle_redshift"
+			(box :orientation "h" :spacing 2 :valign "center" :space-evenly "false" :vexpand "false" :hexpand "true"
+				(tooltip (label :text {redshift_status == 'on' ? "Redshift is on" : "Redshift is off"})
+				(box :style "background-image: url('${redshift_status == 'on' ? REDSHIFT_ON_ICON : REDSHIFT_OFF_ICON}');" :class "trayicon"))))
 		(box :class "clockbox" :orientation "v" :spacing 0 :valign "center" :halign "end" :space-evenly "false" :vexpand "false" :hexpand "false"
 				(label :class "time" :halign "end" :wrap "false" :limit-width 25 :text TIME)
 					(label :class "date" :halign "start" :wrap "false" :text DATE))))

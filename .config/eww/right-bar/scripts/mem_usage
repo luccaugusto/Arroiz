@@ -1,7 +1,14 @@
 #!/bin/sh
 
-ram=$(free -m | grep Mem)
-ram_total=$(echo "$ram" | awk '{print $2}')
-ram_used=$(echo "$ram" | awk '{print $3}')
+# ram=$(free -m | grep Mem)
+# ram_total=$(echo "$ram" | awk '{print $2}')
+# ram_used=$(echo "$ram" | awk '{print $3}')
+#
+# echo "$((ram_used * 100 / ram_total))%"
 
-echo "$((ram_used * 100 / ram_total))%"
+mem_usage=$(top -b -n 1 -E k | grep "Mem" | head -n 1)
+
+total=$(echo "$mem_usage" | awk '{print $4}')
+used=$(echo "$mem_usage" | awk '{print $8}')
+
+echo "$((used * 100 / total))%"
