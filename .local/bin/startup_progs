@@ -22,26 +22,8 @@ last_session_cleanup()
 	compress_time
 }
 
-setup_workspace()
+shortcut_configurations()
 {
-	# set up monitor layout if another monitor is present
-	connected_monitors="$(xrandr -q | grep -w connected)"
-	# no other monitors
-	if [ "$(echo "$connected_monitors" | wc -l)" = 1 ]; then
-		sh "$HOME/.screenlayout/1600by900.sh"
-	# other monitors and docked
-	elif [ "$(cat /sys/devices/platform/dock.0/docked)" = 1 ]; then
-		if [ "$(echo "$connected_monitors" | wc -l)" = 2 ]; then
-			sh "$HOME/.screenlayout/two-screens-docked.sh"
-		fi
-	# other monitors and not docked
-	else
-		case "$connected_monitors" in
-			*HDMI*) sh "$HOME/.screenlayout/hdmi-left.sh";;
-			*DP-2*) sh "$HOME/.screenlayout/screen-stack.sh";;
-		esac
-	fi
-
 	# Load specific WM configs
 	if [ "$(pgrep -x bspwm)" ]; then
 		cat "$CONFIG/sxhkd/base" "$CONFIG/sxhkd/bspwm_keys" > "$CONFIG/sxhkd/sxhkdrc"
@@ -53,15 +35,11 @@ setup_workspace()
 	else
 		cp "$CONFIG/sxhkd/base" "$CONFIG/sxhkd/sxhkdrc"
 	fi
-
-	# set trackpoint speed
-	xinput set-prop 15 "libinput Accel Speed" 0.8
 }
+
 
 start_programs()
 {
-	launch_eww_bars
-
 	# low battery notifications (cronjob wasn't working)
 	[ "$(pgrep batsinal)" ] || batsinal &
 	# Wifi connection
@@ -100,17 +78,22 @@ start_programs()
 	today=$(date +%a)
 	[ ! "$today" = "Sat" ] && [ ! "$today" = "Sun" ] && slack &
 
+	launch_eww_bars
 }
+
+# MAIN
 
 now=$(date +%H:%M)
 login_time=$(who | awk '{print $4}')
 
 last_session_cleanup
-setup_workspace
+shortcut_configurations
+
 # only start programs right after i login so that
 # when restarting wm it won't reopen programs i closed
-[ "$(date_operations -s "$now" "$login_time")" -lt 5 ] &&
+[ "$(date_operations -s "$now" "$login_time")" -lt 1 ] &&
 	start_programs
+
 
 # System colors and wallpaper
 set_colors
@@ -122,3 +105,4 @@ set-alacritty-colors
 [ "$(wget -q --spider https://luccaaugusto.xyz ; echo $?)" = "0" ] && check_system_updates &
 # fetches transactions i registered by email
 # cademeudinheiro fetch &
+
