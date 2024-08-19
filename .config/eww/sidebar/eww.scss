@@ -1,0 +1,126 @@
+/** Global *******************************************/
+*{
+	all: unset;
+	font-family: feather;
+	font-family: "JetBrains Mono";
+	color: #151515;
+}
+
+/** Texts ***********************************/
+.info {
+  color: #fff;
+  font-size: 20px;
+}
+
+.label {
+  color: #fff;
+  font-size: 18px;
+}
+
+.title {
+  color: #fff;
+  font-size: 24px;
+}
+
+/** Boxes ***********************************/
+.winbox {
+	background-color: #282828;
+	border: 2px solid #000;
+	border-radius: 16px;
+}
+
+.padding-15 {
+  padding: 15px;
+}
+
+.iconcontainer {
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.tiny-icon {
+  background-size: 50%;
+}
+
+.chart{
+  color: #EB6CE8;
+  background-color: #404040;
+  margin: 10px;
+}
+
+/** Resources ***********************************/
+.res_box {
+	background-color: #F0E9E1;
+	border: 1px solid #E6DFD7;
+	border-radius: 12px;
+	padding: 14px 18px 14px 18px;
+}
+
+.res_circle {
+	background-color: #E1DCD2;
+	border: 0px solid #161616;
+	border-radius: 100%;
+	padding: 0px;
+}
+
+.res_circle_small {
+	background-color: #F5EEE6;
+	border: 0px solid #161616;
+	border-radius: 100%;
+	padding: 40px;
+}
+
+.res_text {
+	background-color: #E6E1D7;
+	border: 1px solid #161616;
+	border-radius: 16px;
+	font-size : 14px;
+	padding: 0px 8px 0px 8px;
+	margin: 0px 0px 0px 0px;
+	font-weight : bold;
+}
+
+.res_cpu {
+	color: #FD6B85;
+}
+
+.res_mem {
+	color: #B1A6EE;
+}
+
+.res_disk {
+	color: #67D4F1;
+}
+
+/** Power Buttons ***********************************/
+.powericons {
+    background-repeat: no-repeat;
+	background-size: 48px;
+	min-height: 48px;
+	min-width: 48px;
+}
+.soundbutton {
+  border: 2px solid #EB6CE8;
+  border-radius: 10px;
+  background-color: #3A5C84;
+}
+.soundactive {
+  background-color: #A54974;
+}
+.soundbutton-content {
+  margin: 6px;
+}
+
+/** Quotes ***********************************/
+.quote_box {
+	margin: 20px;
+}
+
+.quote_text {
+	font-size : 14px;
+	font-style: italic;
+	font-weight : bold;
+}
+
+/** EOF *************************************************/

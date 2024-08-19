@@ -1,0 +1,25 @@
+#!/bin/sh
+
+brightness_max=$(brightnessctl m)
+brightness_current=$(brightnessctl g)
+brightness_percent=$((brightness_current * 100 / brightness_max ))
+
+disk_usage=$(df -h | grep home)
+
+sound_cards_info=$(sound_manager -l)
+
+info="{ \
+	\"brightness\": { \
+		\"max\": ${brightness_max}, \
+		\"current\": ${brightness_current}, \
+		\"percent\": ${brightness_percent} \
+	}, \
+	\"disk\": { \
+		\"size\": \"$(echo "$disk_usage" | awk '{print $2}')\", \
+		\"used\": \"$(echo "$disk_usage" | awk '{print $3}')\", \
+		\"free\": \"$(echo "$disk_usage" | awk '{print $4}')\" \
+	}, \
+	\"sound\": ${sound_cards_info} \
+}"
+
+echo "$info" | sed 's/\t//g'
