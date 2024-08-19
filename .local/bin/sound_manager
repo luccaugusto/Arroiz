@@ -2,10 +2,14 @@
 
 from argparse import ArgumentParser
 from typing import Any
-import os
-import subprocess
-import json
+from os import environ
+from subprocess import run, Popen, PIPE, STDOUT
+from json import loads, dumps
 
+class CardType:
+    OUTPUT = "output"
+    INPUT = "input"
+    IO = "io"
 
 class Card:
     DEVICE_CARD_NAME = "PCH"
@@ -35,10 +39,13 @@ def get_priority_profile(
     priority_profile_name = ""
 
     for name, profile in card["profiles"].items():
-        if type == "output" and (profile["sinks"] == 0 or profile["sources"] == 1):
+        if type == CardType.OUTPUT and (profile["sinks"] == 0 or profile["sources"] == 1):
             continue
 
-        if type == "input" and (profile["sinks"] == 1 or profile["sources"] == 0):
+        if type == CardType.INPUT and (profile["sinks"] == 1 or profile["sources"] == 0):
+            continue
+
+        if type == CardType.IO and (profile["sinks"] == 0 or profile["sources"] == 0):
             continue
 
         if profile["available"] and profile["priority"] > priority_profile.get(
@@ -58,17 +65,17 @@ def rofi_select_card(output_cards: dict[str, Card]) -> Card:
     if len(output_cards.keys()) == 1:
         return list(output_cards.values())[0]
 
-    home = os.environ["HOME"]
-    rofi = subprocess.Popen(
+    home =environ["HOME"]
+    rofi = Popen(
         [
             "rofi",
             "-dmenu",
             "-theme",
             f"{home}/.config/rofi/sound_selection.rasi",
         ],
-        stdout=subprocess.PIPE,
-        stdin=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
+        stdout=PIPE,
+        stdin=PIPE,
+        stderr=STDOUT,
     )
 
     selected_card = (
@@ -82,34 +89,34 @@ def rofi_select_card(output_cards: dict[str, Card]) -> Card:
 
 
 def get_cards() -> list[dict[str, Any]]:
-    cards_json = subprocess.run(
-        ["pactl", "-f", "json", "list", "cards"], stdout=subprocess.PIPE
+    cards_json = run(
+        ["pactl", "-f", "json", "list", "cards"], stdout=PIPE
     ).stdout.decode()
 
-    return json.loads(cards_json)
+    return loads(cards_json)
 
 
 def current_sink() -> str:
-    default_sink = subprocess.run(
-        ["pactl", "-f", "json", "get-default-sink"], stdout=subprocess.PIPE
+    default_sink = run(
+        ["pactl", "-f", "json", "get-default-sink"], stdout=PIPE
     ).stdout.decode()
     return default_sink
 
 
 def current_source() -> str:
-    return subprocess.run(
-        ["pactl", "get-default-source"], stdout=subprocess.PIPE
+    return run(
+        ["pactl", "get-default-source"], stdout=PIPE
     ).stdout.decode()
 
 
 def set_card_profile(sink_name: str, profile: str) -> None:
-    subprocess.run(["pactl", "set-card-profile", sink_name, profile])
+    run(["pactl", "set-card-profile", sink_name, profile])
 
 
 def disable_cards(cards, exception) -> None:
     for card in cards:
         if card != exception:
-            subprocess.run(["pactl", "set-card-profile", card, "off"])
+            run(["pactl", "set-card-profile", card, "off"])
 
 
 def find_card_by_device(output_cards, device_name) -> Card:
@@ -165,17 +172,17 @@ def decide_output(output_cards, sink_in_use) -> Card:
 
 
 def hdmi_connected():
-    monitors = subprocess.run(
-        ["xrandr", "--listactivemonitors"], stdout=subprocess.PIPE
+    monitors = run(
+        ["xrandr", "--listactivemonitors"], stdout=PIPE
     ).stdout.decode()
 
     return monitors.find("HDMI") != -1 or monitors.find("DP-2-") != -1
 
 
-def get_output_cards(sink_in_use: str | None = None) -> dict[str, Card]:
+def get_cards_by_type(card_type: str, sink_in_use: str | None = None) -> dict[str, Card]:
     output_cards = {}
     for card in get_cards():
-        profile_name, profile = get_priority_profile(card, "output")
+        profile_name, profile = get_priority_profile(card, card_type)
         if profile is None:
             continue
 
@@ -196,28 +203,6 @@ def get_output_cards(sink_in_use: str | None = None) -> dict[str, Card]:
 
     return output_cards
 
-
-def get_input_cards(source_in_use: str | None = None) -> dict[str, Card]:
-    input_cards = {}
-    for card in get_cards():
-        profile_name, profile = get_priority_profile(card, "input")
-        if profile is None:
-            continue
-
-        card_name = card["properties"].get("alsa.card_name", card["name"])
-        sink = card["name"][card["name"].find(".") + 1:]
-
-        input_cards[card_name] = Card(
-            profile_name,
-            profile,
-            card_name,
-            card["name"],
-            active=sink in source_in_use,
-        )
-
-    return input_cards
-
-
 def _parse_args():
     ap = ArgumentParser(
         "sound_source_toggle",
@@ -228,7 +213,7 @@ def _parse_args():
         "-l", help="List available output and input devices", action="store_true"
     )
     ap.add_argument("-t", help="Toggle output devices", action="store_true")
-    ap.add_argument("-s", nargs=3, help="Set sink profile")
+    ap.add_argument("-s", nargs=4, metavar=('sink', 'profile', 'card_name', 'card_type ["input", "output", "io"]'), help="Set sink profile manually")
     return ap
 
 
@@ -239,48 +224,63 @@ def _parse_args():
 #     else:
 #         subprocess.run(["pactl", "set-card-profile", card.card_name, "off"])
 if __name__ == "__main__":
-    args = _parse_args().parse_args()
+    arg_parser = _parse_args()
+    args = arg_parser.parse_args()
     sink_in_use = current_sink()
     source_in_use = current_source()
-    output_cards = get_output_cards(sink_in_use)
-    input_cards = get_input_cards(source_in_use)
+    output_cards = get_cards_by_type(CardType.OUTPUT, sink_in_use)
+    input_cards = get_cards_by_type(CardType.INPUT, source_in_use)
+    io_cards = get_cards_by_type(CardType.IO, sink_in_use)
+    output_changed = False
+    input_changed = False
 
     if args.t:
         card_to_use = decide_output(output_cards, sink_in_use)
+        output_changed = True
     elif args.i:
         card_to_use = rofi_select_card(output_cards)
+        output_changed = True
+    elif args.s:
+        sink, profile, card_name, card_type = args.s
+        card_to_use = Card(
+            profile,
+            {"name": profile, "available": True, "priority": 1},
+            card_name,
+            sink,
+        )
+        output_changed = card_type.lower() == CardType.OUTPUT or card_type.lower() == CardType.IO
+        input_changed = card_type.lower() == CardType.INPUT or card_type.lower() == CardType.IO
     elif args.l:
         cards_info = {
             "output": [o.__dict__ for o in output_cards.values()],
             "input": [o.__dict__ for o in input_cards.values()],
+            "io": [o.__dict__ for o in io_cards.values()],
         }
-        print(json.dumps(cards_info))
-        exit(0)
-    elif args.s:
-        sink, profile, card_name = args.s
-        set_card_profile(sink, profile)
-        notification_header = f"Switching to {card_name} audio"
-        notification_body = (
-            f"Playing on {card_name}'s speakers and using device's microphone"
-        )
-        subprocess.run(["notify-send", notification_header, notification_body])
+        print(dumps(cards_info))
         exit(0)
     else:
-        args.print_help()
+        arg_parser.print_help()
         exit(0)
 
     set_card_profile(card_to_use.sink_name, card_to_use.profile_name)
 
     # turn off other cards
-    for name, output_card in output_cards.items():
-        if card_to_use.card_name == name:
-            continue
-        set_card_profile(output_card.sink_name, "off")
+    if output_changed:
+        for name, output_card in output_cards.items():
+            if card_to_use.card_name == name:
+                continue
+            set_card_profile(output_card.sink_name, "off")
+
+    if input_changed:
+        for name, input_card in input_cards.items():
+            if card_to_use.card_name == name:
+                continue
+            set_card_profile(input_card.sink_name, "off")
 
     notification_header = f"Switching to {card_to_use.card_name} audio"
     notification_body = (
         f"Playing on {card_to_use.card_name}'s speakers and using device's microphone"
     )
-    subprocess.run(["notify-send", notification_header, notification_body])
+    run(["notify-send", notification_header, notification_body])
 
     # TODO: set input device or webcam

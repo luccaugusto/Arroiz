@@ -7,6 +7,7 @@
 
 (defvar SPEAKER_ICON "images/speaker.png")
 (defvar MICROPHONE_ICON "images/microphone.png")
+(defvar SPEAKER_MIC_ICON "images/speaker_mic.png")
 
 ;; ** Widgets *************************************************************************
 
@@ -31,11 +32,16 @@
 				(label :class "label" :valign "end" :halign "center" :text "${text}" :wrap true))))
 
 (defwidget profile []
-	(box :class "winbox" :hexpand true
-		(label :class "title" :text "${profile_info.user}@${profile_info.hostname}: ${profile_info.uptime}")))
+	(box :class "winbox" :hexpand true :space-evenly false
+		(label :class "profile padding-left-15" :text "# ${profile_info.user}@${profile_info.hostname}: ")
+		(label :class "info" :text "${profile_info.uptime}")
+      )
+  )
 
 (defwidget sound_selector []
-	(box :class "winbox padding-15" :orientation "h" :spacing 10 :space-evenly "true" :height 100
+	(box :class "winbox padding-15" :orientation "v" :spacing 10 :space-evenly "false" :height 100
+      (label :text "Sound Control" :class "title")
+	  (box :orientation "h" :spacing 10 :space-evenly "true" :height 100
 		(box :orientation "v" :space-evenly false :spacing 10
 			(label :text "Outputs" :class "info")
 			(for card in {sys_info?.sound.output}
@@ -44,7 +50,7 @@
 					:cursor "pointer"
 					:halign "center"
 					:class "soundbutton ${card.active ? 'soundactive' : ''}"
-					:onclick "sound_manager -s '${card.sink_name}' '${card.profile_name}' '${card.card_name}' &"
+					:onclick "sound_manager -s '${card.sink_name}' '${card.profile_name}' '${card.card_name}' 'output' &"
 					:timeout "5s"
 					(box :orientation "h" :spacing 5 :space-evenly "false" :class "soundbutton-content"
 						(box :width 30 :style "background-image: url('${SPEAKER_ICON}');" :class "iconcontainer")
@@ -58,13 +64,29 @@
 					:cursor "pointer"
 					:halign "center"
 					:class "soundbutton ${card.active ? 'soundactive' : ''}"
-					:onclick "sound_manager -s '${card.sink_name}' '${card.profile_name}' '${card.card_name}' &"
+					:onclick "sound_manager -s '${card.sink_name}' '${card.profile_name}' '${card.card_name}' 'input' &"
 					:timeout "5s"
 					(box :orientation "h" :spacing 5 :space-evenly "false" :class "soundbutton-content"
 						(box :width 25 :style "background-image: url('${MICROPHONE_ICON}');" :class "iconcontainer")
 						(label :text {card.card_name} :class "label" :wrap true)))
-				))
-		))
+				)))
+	  (box :orientation "h" :spacing 10 :space-evenly "true" :height 100
+		(box :orientation "v" :space-evenly false :spacing 10
+			(label :text "IO" :class "info")
+			(for card in {sys_info?.sound.io}
+				(eventbox
+					:height 50
+					:cursor "pointer"
+					:halign "center"
+					:class "soundbutton ${card.active ? 'soundactive' : ''}"
+					:onclick "sound_manager -s '${card.sink_name}' '${card.profile_name}' '${card.card_name}' 'io' &"
+					:timeout "5s"
+					(box :orientation "h" :spacing 5 :space-evenly "false" :class "soundbutton-content"
+						(box :width 25 :style "background-image: url('${SPEAKER_ICON}');" :class "iconcontainer")
+						(label :text {card.card_name} :class "label" :wrap true)
+						(box :width 25 :style "background-image: url('${MICROPHONE_ICON}');" :class "iconcontainer")))
+				)))
+      ))
 
 (defwidget sidebar-widget []
 	(box :orientation "v" :spacing 10 :space-evenly "false"
