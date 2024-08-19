@@ -1,0 +1,6 @@
+#!/bin/sh
+
+layout=$(awesome-client 'return mouse.screen.selected_tag.layout.name')
+parsed_layout="${layout##* \"}"
+
+echo "${parsed_layout%%\"*}"

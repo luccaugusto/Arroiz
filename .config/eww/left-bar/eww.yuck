@@ -2,6 +2,7 @@
 
 ;; Workspaces
 (defpoll wm_workspace_info :interval "1s" "scripts/workspaces")
+(defpoll workspace_layout :initial 'tile' :interval "1s" "scripts/workspace_layout")
 
 ;; ** Widgets *************************************************************************
 
@@ -9,7 +10,7 @@
 (defwidget workspaces [monitor]
 	(box :spacing 6 :class "workspaces" :valign "center" :hexpand false
 		(for workspace in {wm_workspace_info?.[monitor]}
-			(button :onclick "wmctrl -s ${workspace.index}" :class "${workspace.class}"
+			(eventbox :cursor "pointer" :onclick "wmctrl -s ${workspace.index}" :class "${workspace.class}"
 				(label :text {workspace.label})))))
 
 (defwidget open_windows [monitor]
@@ -19,7 +20,10 @@
 				(label :text {window.name})))))
 
 (defwidget extrainfo [monitor]
-	(box :class "dockbox" :orientation "h" :spacing 6 :valign "center" :halign "start" :space-evenly "false" :vexpand "false" :hexpand "false"
+	(box :class "dockbox" :orientation "h" :spacing 6 :valign "center" :halign "start" :space-evenly "false" :vexpand "false" :hexpand "true"
+		(tooltip
+			(label :text "${workspace_layout} layout")
+			(box :style "background-image: url('icons/${workspace_layout}.png');" :class "trayicon"))
 		(workspaces :monitor monitor)
 		(open_windows :monitor monitor)))
 

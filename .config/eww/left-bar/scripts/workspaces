@@ -1,6 +1,5 @@
 #!/bin/python
 
-import datetime
 import subprocess
 import json
 
@@ -57,7 +56,5 @@ for index, label in enumerate(workspace_labels):
 
 
     workspaces_by_monitor[monitor].append(workspace)
-
-workspaces_by_monitor['time'] = datetime.datetime.now().strftime('%S')
 
 print(json.dumps(workspaces_by_monitor, ensure_ascii=False))
