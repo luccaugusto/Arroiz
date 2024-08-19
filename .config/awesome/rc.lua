@@ -474,8 +474,6 @@ globalkeys = mytable.join(
 )
 
 clientkeys = mytable.join(
-    awful.key({ altkey, "Shift"   }, "m",      lain.util.magnify_client,
-              {description = "magnify client", group = "client"}),
     awful.key({ modkey, "Shift"   }, "f",
         function (c)
             c.fullscreen = not c.fullscreen
@@ -499,7 +497,7 @@ clientkeys = mytable.join(
             c.minimized = true
         end ,
         {description = "minimize", group = "client"}),
-    awful.key({ modkey,           }, "m",
+    awful.key({ modkey, "Shift"   }, "m",
         function (c)
             c.maximized = not c.maximized
             c:raise()
