@@ -32,7 +32,7 @@ mute()
 
 if [ "$opt" == 't' ]
 then
-	sound_source_toggle
+	sound_manager -t
 else
 	for s in $sinks
 	do

@@ -1,0 +1,18 @@
+#!/bin/bash
+
+config="$HOME/.config/eww/sidebar/"
+lock_file="/tmp/eww_sidebar_open"
+
+run_eww() {
+	current_desktop=$(awesome-client 'return mouse.screen.index' | cut -d ' ' -f 5)
+	monitor=$((current_desktop-1))
+	eww -c "$config" open sidebar --screen "$monitor"
+}
+
+if [ ! -f "$lock_file" ]; then
+	touch "$lock_file"
+	run_eww
+else
+	rm "$lock_file" &&
+	eww -c "$config" close-all
+fi
