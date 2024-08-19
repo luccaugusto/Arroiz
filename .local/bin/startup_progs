@@ -91,7 +91,7 @@ shortcut_configurations
 
 # only start programs right after i login so that
 # when restarting wm it won't reopen programs i closed
-[ "$(date_operations -s "$now" "$login_time")" -lt 1 ] &&
+[ "$(date_operations -s "$now" "$login_time")" -lt 2 ] &&
 	start_programs
 
 
