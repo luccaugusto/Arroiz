@@ -66,9 +66,9 @@ super + ctrl + +
 super + Escape
 	pkill -USR1 -x sxhkd && sxhkd &
 super + Return
-	samedir
-super + shift + Return
-	$TERMINAL2
+	$TERMINAL
+# super + shift + Return
+# 	$TERMINAL2
 super + w
 	$BROWSER
 super + r
