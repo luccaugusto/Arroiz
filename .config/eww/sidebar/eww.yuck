@@ -8,126 +8,161 @@
 (defvar SPEAKER_ICON "images/speaker.png")
 (defvar MICROPHONE_ICON "images/microphone.png")
 (defvar SPEAKER_MIC_ICON "images/speaker_mic.png")
+(defvar OPEN_PACKAGE_ICON "images/package.png")
+(defvar CLOSED_PACKAGE_ICON "images/closed-package.png")
 
 ;; ** Widgets *************************************************************************
 
 ;; Redshift
-(defpoll redshift_status :interval "10s" "scripts/redshift_status")
+(defpoll redshift_status :interval "1s" "scripts/redshift_status")
+(defpoll redshift_temperature :interval "10m" "grep 'temp-day' ~/.config/redshift/config | awk -F'=' '{print $2}'")
 (defvar REDSHIFT_ON_ICON "images/redeye.png")
 (defvar REDSHIFT_OFF_ICON "images/blueeye.png")
 
 ;; SysInfo
 (defpoll sys_info :interval "1s" "scripts/sys_info")
+(defpoll todo_list :interval "10m" "scripts/fetch_todo_list")
+(defvar todo_list_file "~/Documents/personal-notes/TODO.wiki")
 
 ;; quotes
 ;; (defwidget quotes []
 ;; 		(box :class "winbox"
-;; 			(box :class "quote_box" :orientation "h" :valign "center" :halign "center" :spacing 10 :space-evenly "false"
+;; 			(box :class "quote_box" :orientation "h" :valign "center" :halign "center" :spacing 10 :space-evenly false
 ;; 				(box :class "powericons" :style "background-image: url('../images/icons/quotes.png');")
 ;; 				(label :class "quote_text" :valign "center" :halign "center" :text QUOTE :wrap true :limit-width 90 ))))
 
 (defwidget square-container [icon text ?click ?class]
-		(box :class {class == "" ? "iconcontainer" : class} :style "background-image: url('${icon}');" :width "125" :height "125" :spacing 15 :valign "start"
-			(eventbox :onclick "${click}" :cursor {click == "" ? "default" : "pointer"}
-				(label :class "label" :valign "end" :halign "center" :text "${text}" :wrap true))))
+  (box :class {class == "" ? "iconcontainer" : class} :style "background-image: url('${icon}');" :width "125" :height "125" :spacing 15 :valign "start"
+    (eventbox :onclick "${click}" :cursor {click == "" ? "default" : "pointer"}
+      (label :class "label" :valign "end" :halign "center" :text "${text}" :wrap true))))
 
 (defwidget profile []
-	(box :class "winbox" :hexpand true :space-evenly false
-		(label :class "profile padding-left-15" :text "# ${profile_info.user}@${profile_info.hostname}: ")
-		(label :class "info" :text "${profile_info.uptime}")
-      )
+  (box :class "winbox" :hexpand true :space-evenly false
+    (label :class "profile" :style "padding-left: 10px;" :text " ${profile_info.user}@${profile_info.hostname}: ")
+    (label :class "label" :style "padding-right: 10px;" :text "${profile_info.uptime}")
+    )
   )
 
 (defwidget sound_selector []
-	(box :class "winbox padding-15" :orientation "v" :spacing 10 :space-evenly "false" :height 100
-      (label :text "Sound Control" :class "title")
-	  (box :orientation "h" :spacing 10 :space-evenly "true" :height 100
-		(box :orientation "v" :space-evenly false :spacing 10
-			(label :text "Outputs" :class "info")
-			(for card in {sys_info?.sound.output}
-				(eventbox
-					:height 50
-					:cursor "pointer"
-					:halign "center"
-					:class "soundbutton ${card.active ? 'soundactive' : ''}"
-					:onclick "sound_manager -s '${card.sink_name}' '${card.profile_name}' '${card.card_name}' 'output' &"
-					:timeout "5s"
-					(box :orientation "h" :spacing 5 :space-evenly "false" :class "soundbutton-content"
-						(box :width 30 :style "background-image: url('${SPEAKER_ICON}');" :class "iconcontainer")
-						(label :text {card.card_name} :class "label" :wrap true)))
-				))
-		(box :orientation "v" :space-evenly false :spacing 10
-			(label :text "Inputs" :class "info")
-			(for card in {sys_info?.sound.input}
-				(eventbox
-					:height 50
-					:cursor "pointer"
-					:halign "center"
-					:class "soundbutton ${card.active ? 'soundactive' : ''}"
-					:onclick "sound_manager -s '${card.sink_name}' '${card.profile_name}' '${card.card_name}' 'input' &"
-					:timeout "5s"
-					(box :orientation "h" :spacing 5 :space-evenly "false" :class "soundbutton-content"
-						(box :width 25 :style "background-image: url('${MICROPHONE_ICON}');" :class "iconcontainer")
-						(label :text {card.card_name} :class "label" :wrap true)))
-				)))
-	  (box :orientation "h" :spacing 10 :space-evenly "true" :height 100
-		(box :orientation "v" :space-evenly false :spacing 10
-			(label :text "IO" :class "info")
-			(for card in {sys_info?.sound.io}
-				(eventbox
-					:height 50
-					:cursor "pointer"
-					:halign "center"
-					:class "soundbutton ${card.active ? 'soundactive' : ''}"
-					:onclick "sound_manager -s '${card.sink_name}' '${card.profile_name}' '${card.card_name}' 'io' &"
-					:timeout "5s"
-					(box :orientation "h" :spacing 5 :space-evenly "false" :class "soundbutton-content"
-						(box :width 25 :style "background-image: url('${SPEAKER_ICON}');" :class "iconcontainer")
-						(label :text {card.card_name} :class "label" :wrap true)
-						(box :width 25 :style "background-image: url('${MICROPHONE_ICON}');" :class "iconcontainer")))
-				)))
-      ))
+  (box :class "winbox" :style "padding-bottom: 15px;" :orientation "v" :spacing 10 :space-evenly "false" :height 100
+    (label :text "Sound Control" :class "title")
+    (box :orientation "h" :spacing 10 :space-evenly true :height 100
+      (box :orientation "v" :space-evenly false :spacing 10
+        (label :text "Outputs" :class "info")
+        (for card in {sys_info?.sound.output}
+          (eventbox
+            :height 50
+            :width 120
+            :cursor "pointer"
+            :halign "center"
+            :class "soundbutton ${card.active ? 'soundactive' : ''}"
+            :onclick "sound_manager -s '${card.sink_name}' '${card.profile_name}' '${card.card_name}' 'output' &"
+            :timeout "5s"
+            (box :orientation "h" :spacing 5 :space-evenly false :class "soundbutton-content" :halign "center"
+              (box :width 30 :style "background-image: url('${SPEAKER_ICON}');" :class "iconcontainer")
+              (label :text {card.display_name} :class "label" :wrap true)))
+          ))
+      (box :orientation "v" :space-evenly false :spacing 10
+        (label :text "Inputs" :class "info")
+        (for card in {sys_info?.sound.input}
+          (eventbox
+            :height 50
+            :width 120
+            :cursor "pointer"
+            :halign "center"
+            :class "soundbutton ${card.active ? 'soundactive' : ''}"
+            :onclick "sound_manager -s '${card.sink_name}' '${card.profile_name}' '${card.card_name}' 'input' &"
+            :timeout "5s"
+            (box :orientation "h" :spacing 5 :space-evenly false :class "soundbutton-content" :halign "center"
+              (box :width 25 :style "background-image: url('${MICROPHONE_ICON}');" :class "iconcontainer")
+              (label :halign "center" :text {card.display_name} :class "label" :wrap true)))
+          )))
+    (box :orientation "h" :spacing 10 :space-evenly true :height 100
+      (box :orientation "v" :space-evenly false :spacing 10
+        (label :text "IO" :class "info")
+        (for card in {sys_info?.sound.io}
+          (eventbox
+            :height 50
+            :width 120
+            :cursor "pointer"
+            :halign "center"
+            :class "soundbutton ${card.active ? 'soundactive' : ''}"
+            :onclick "sound_manager -s '${card.sink_name}' '${card.profile_name}' '${card.card_name}' 'io' &"
+            :timeout "5s"
+            (box :orientation "h" :spacing 5 :space-evenly false :class "soundbutton-content" :halign "center"
+              (box :width 25 :style "background-image: url('${SPEAKER_ICON}');" :class "iconcontainer")
+              (label :text {card.display_name} :class "label" :wrap true)
+              (box :width 25 :style "background-image: url('${MICROPHONE_ICON}');" :class "iconcontainer")))
+          )))
+    ))
+
+(defwidget tasklist []
+  (box :orientation "h" :class {arraylength(todo_list) > 0 ? "winbox" : ""} :height {arraylength(todo_list) > 0 ? 200 : 0}
+    (scroll :vscroll true :hscroll false
+      (box :orientation "v" :spacing 2 :space-evenly false
+        (eventbox :cursor "pointer" :onclick "$TERMINAL -e $EDITOR ${todo_list_file} &"
+          (label :class "title" :text "== TODO =="))
+        (for task in todo_list
+          (checkbox
+            :style "color: #fff;padding: 0 15px;"
+            :onchecked "notify-send '${task}'"
+            :onunchecked ""
+            :checked {matches(task, "\[x\]")}
+            (label :class "info" :style " border-bottom: 2px solid #444; margin-bottom: 5px;" :wrap true :text {substring(task, 4, strlength(task)-4)}))
+          )))))
 
 (defwidget sidebar-widget []
-	(box :orientation "v" :spacing 10 :space-evenly "false"
-		(box :orientation "h" :spacing 4 :space-evenly false
-			(button :height "60" :width "60" :class "winbox iconcontainer tiny-icon" :style "background-image: url('images/close.png');" :onclick "toggle_sidebar")
-			(profile))
-		(box :orientation "h" :spacing 10 :space-evenly "true"
-			(box :class "winbox" :orientation "v" :space-evenly "false" :height 125 :width 125
-				(square-container
-					:icon "${redshift_status == 'on' ? REDSHIFT_ON_ICON : REDSHIFT_OFF_ICON}"
-					:text "Redshift ${redshift_status}"
-					:class "iconcontainer tiny-icon"
-					:click "toggle_redshift"))
-			(box :class "winbox" :orientation "v" :valign "start" :space-evenly "false" :height 150 :width 150
-				(circular-progress
-					:class "iconcontainer chart"
-					:value {sys_info.brightness.percent}
-					:thickness 10
-					:clockwise true
-					:height 100
-					:width 100
-						(label :class "title" :wrap true :text "${sys_info.brightness.percent}%"))
-				(label :class "info" :text "Brightness"))
-			(box :class "winbox" :orientation "v" :space-evenly "true" :height 150 :width 150
-				(square-container
-					:icon "images/floppy-disk.png"
-					:text "${sys_info.disk.used}/${sys_info.disk.size}"
-					:class "iconcontainer tiny-icon")))
-			(sound_selector)
-		))
+  (box :orientation "v" :spacing 8 :space-evenly false
+    (box :orientation "h" :spacing 4 :space-evenly false
+      (eventbox
+        :height "60"
+        :width "60"
+        :class "winbox iconcontainer tiny-icon"
+        :style "background-image: url('images/close.png');"
+        :onclick "toggle_sidebar"
+        :cursor "pointer")
+      (profile))
+    (box :orientation "h" :spacing 10 :space-evenly true
+      (box :class "winbox" :orientation "v" :space-evenly false :height 125 :width 125
+        (square-container
+          :icon "${redshift_status == 'on' ? REDSHIFT_ON_ICON : REDSHIFT_OFF_ICON}"
+          :text {redshift_status == 'on' ? " ${redshift_temperature}K" : " Redshift Off"}
+          :class "iconcontainer tiny-icon"
+          :click "toggle_redshift"))
+      (box :class "winbox" :orientation "v" :valign "start" :space-evenly false :height 150 :width 150
+        (circular-progress
+          :class "iconcontainer chart"
+          :value {sys_info.brightness.percent}
+          :thickness 10
+          :clockwise true
+          :height 100
+          :width 100
+          (label :class "title" :wrap true :text "${sys_info.brightness.percent}%"))
+        (label :class "info" :text "Brightness"))
+      (box :class "winbox" :orientation "v" :space-evenly true :height 150 :width 150
+        (square-container
+          :icon "images/floppy-disk.png"
+          :text "${sys_info.disk.used}/${sys_info.disk.size}"
+          :class "iconcontainer tiny-icon")))
+    (box :class "winbox" :orientation "h" :spacing 10
+      (eventbox :onclick {sys_info.packages_to_update > 40 ? "interactive_update &" : ""} :cursor {sys_info.packages_to_update > 40 ? "pointer" : "default"}
+        (box :orientation "h" :halign "center" :space-evenly false
+          (box :class "iconcontainer" :style "background-image: url('${sys_info.packages_to_update > 40 ? CLOSED_PACKAGE_ICON : OPEN_PACKAGE_ICON}');" :width 50 :height 50)
+          (label :class "info" :text {sys_info.packages_to_update > 40 ? "${sys_info.packages_to_update} updates available" : "All Good, up to date!"}))))
+    (tasklist)
+    (sound_selector)
+    ))
 
 ;; ** Windows *************************************************************************
 
 (defwindow sidebar [screen]
-           :monitor screen
-           :geometry (geometry :x "-1%"
-                               :y "6%"
-                               :width "25%"
-							   :height "93%"
-                               :anchor "top right")
-           :stacking "fg"
-           :windowtype "normal"
-           :wm-ignore true
-(sidebar-widget))
+  :monitor screen
+  :geometry (geometry :x "-1%"
+    :y "6%"
+    :width "25%"
+    :height "93%"
+    :anchor "top right")
+  :stacking "fg"
+  :windowtype "normal"
+  :wm-ignore true
+  (sidebar-widget))

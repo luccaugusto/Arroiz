@@ -7,6 +7,7 @@ brightness_percent=$((brightness_current * 100 / brightness_max ))
 disk_usage=$(df -h | grep home)
 
 sound_cards_info=$(sound_manager -l)
+packages_to_update=$(pacman -Qu | wc -l)
 
 info="{ \
 	\"brightness\": { \
@@ -19,7 +20,8 @@ info="{ \
 		\"used\": \"$(echo "$disk_usage" | awk '{print $3}')\", \
 		\"free\": \"$(echo "$disk_usage" | awk '{print $4}')\" \
 	}, \
-	\"sound\": ${sound_cards_info} \
+	\"sound\": ${sound_cards_info},\
+	\"packages_to_update\": ${packages_to_update}\
 }"
 
 echo "$info" | sed 's/\t//g'

@@ -9,7 +9,7 @@
 /** Texts ***********************************/
 .profile {
   color: #EB6CE8;
-  font-size: 24px;
+  font-size: 22px;
 }
 .info {
   color: #fff;
@@ -22,6 +22,7 @@
 }
 
 .title {
+  padding-top: 10px;
   color: #fff;
   font-size: 24px;
 }
@@ -33,12 +34,12 @@
 	border-radius: 16px;
 }
 
-.padding-15 {
-  padding: 15px;
-}
-
-.padding-left-15 {
-  padding-left: 15px;
+.calendar {
+	background-color: #282828;
+	border-radius: 16px;
+    color: #fff;
+    padding: 5px;
+    font-size: 15px;
 }
 
 .iconcontainer {

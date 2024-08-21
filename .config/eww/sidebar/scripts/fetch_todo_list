@@ -1,0 +1,5 @@
+#!/bin/sh
+
+todo=$(cat ~/Documents/personal-notes/TODO.wiki)
+parsed_todo=$(echo "$todo" | tr '\n' ',' | sed 's/,/","/g')
+echo "[\"${parsed_todo%,\"}]"
