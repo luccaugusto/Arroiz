@@ -15,7 +15,7 @@
 
 ;; Redshift
 (defpoll redshift_status :interval "1s" "scripts/redshift_status")
-(defpoll redshift_temperature :interval "10m" "grep 'temp-day' ~/.config/redshift/config | awk -F'=' '{print $2}'")
+(defpoll redshift_temperature :interval "10m" "redshift -c ~/.config/redshift/config -p | grep 'Color temperature' | awk -F':' '{print $2}'")
 (defvar REDSHIFT_ON_ICON "images/redeye.png")
 (defvar REDSHIFT_OFF_ICON "images/blueeye.png")
 
@@ -126,7 +126,7 @@
       (box :class "winbox" :orientation "v" :space-evenly false :height 125 :width 125
         (square-container
           :icon "${redshift_status == 'on' ? REDSHIFT_ON_ICON : REDSHIFT_OFF_ICON}"
-          :text {redshift_status == 'on' ? " ${redshift_temperature}K" : " Redshift Off"}
+          :text {redshift_status == 'on' ? " ${redshift_temperature}" : " Redshift Off"}
           :class "iconcontainer tiny-icon"
           :click "toggle_redshift"))
       (box :class "winbox" :orientation "v" :valign "start" :space-evenly false :height 150 :width 150
