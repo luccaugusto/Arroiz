@@ -50,7 +50,7 @@ start_programs()
 	# pgrep -x awesome || sxhkd &
 	[ "$(pgrep sxhkd)" ] || sxhkd &
 	# manage external drives
-	[ "$(pgrep udiskie)" ] || udiskie -a -s -f pcmanfm &
+	[ "$(pgrep udiskie)" ] || udiskie -a --appindicator -f pcmanfm &
 	# bluetooth
 	[ "$(pgrep blueman-applet)" ] || blueman-applet &
 
