@@ -1,12 +1,16 @@
 #!/bin/sh
 
+eww_open_lock=/tmp/eww_bars_open.lock
+
 toggle_eww()
 {
-	if [ "$(pgrep -x eww)" ];then
+	if [ -f "$eww_open_lock" ];then
 		killall eww
+		rm "$eww_open_lock"
+		eww -c ~/.config/eww/right-bar daemon
+		eww -c ~/.config/eww/left-bar daemon
 	else
-		sh ~/.config/eww/right-bar/launch_bar &
-		sh ~/.config/eww/left-bar/launch_bar &
+		launch_eww_bars
 	fi
 }
 
@@ -24,4 +28,3 @@ toggle_awesome()
 
 toggle_eww &
 toggle_awesome &
-
