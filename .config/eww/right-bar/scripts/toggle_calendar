@@ -1,0 +1,9 @@
+#!/bin/sh
+
+current_desktop=$(awesome-client 'return mouse.screen.index' | cut -d ' ' -f 5)
+monitor=$((current_desktop-1))
+
+cmd="open calendar --screen $monitor"
+[ "$(eww -c ~/.config/eww/right-bar/ active-windows | grep calendar)" ] && cmd="close calendar"
+
+eww -c ~/.config/eww/right-bar $cmd

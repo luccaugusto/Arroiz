@@ -32,47 +32,67 @@
 ;; ** Widgets *************************************************************************
 
 ;; system
-(defwidget system []
-	(box :class "dockbox" :orientation "h" :spacing 6 :valign "center" :halign "end" :space-evenly "false" :vexpand "false" :hexpand "false"
-		(systray :class "systray" :spacing 8)
-		(box :orientation "h" :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
-			(label :class "infotext inforound" :halign "start" :text NETSTAT))
-		(button :onclick "scripts/widget_apps --pow"
-			(box :orientation "h" :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
-				(box :style "background-image: url('${BATICON}');" :class "trayicon baticon")
-					(label :class "infotext" :halign "start" :valign "center" :text BATSTATUS)))
-		(button :onclick "alacritty -e gotop -l kitchensink &"
-			(box :orientation "h" :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
-				(box :style "background-image: url('${CPUICON}');" :class "trayicon")
-					(label :class "infotext" :halign "start" :text CPUTEMP)))
-		(button :onclick "alacritty -e gotop -l kitchensink &"
-			(box :orientation "h" :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
-				(box :style "background-image: url('${MEMICON}');" :class "trayicon")
-					(label :class "infotext" :halign "start" :text MEMUSAGE)))
-		(button :onclick "scripts/volume --toggle"
-			(box :orientation "h" :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
-				(box :style "background-image: url('${VOLICON}');" :class "trayicon")
-					(label :class "infotext" :halign "start" :text VOLUME)))
-		(button :onclick ""
-			(box :orientation "h" :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "true"
-				(box :style "background-image: url('${KEYBOARD_ICON}');" :class "trayicon")
-					(label :class "infotext" :halign "start" :valign "center" :text keyboard_layout)))
-		(box :class "clockbox" :orientation "v" :spacing 0 :valign "center" :halign "end" :space-evenly "false" :vexpand "false" :hexpand "false"
-				(label :class "time" :halign "end" :wrap "false" :limit-width 25 :text TIME)
-					(label :class "date" :halign "start" :wrap "false" :text DATE))))
+(defwidget system [screen]
+  (box :class "dockbox" :orientation "h" :spacing 6 :valign "center" :halign "end" :space-evenly "false" :vexpand "false" :hexpand "false"
+    (systray :class "systray" :spacing 8)
+    (box :orientation "h" :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
+      (label :class "infotext inforound" :halign "start" :text NETSTAT))
+    (button :onclick "scripts/widget_apps --pow"
+      (box :orientation "h" :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
+        (box :style "background-image: url('${BATICON}');" :class "trayicon baticon")
+        (label :class "infotext" :halign "start" :valign "center" :text BATSTATUS)))
+    (button :onclick "alacritty -e gotop -l kitchensink &"
+      (box :orientation "h" :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
+        (box :style "background-image: url('${CPUICON}');" :class "trayicon")
+        (label :class "infotext" :halign "start" :text CPUTEMP)))
+    (button :onclick "alacritty -e gotop -l kitchensink &"
+      (box :orientation "h" :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
+        (box :style "background-image: url('${MEMICON}');" :class "trayicon")
+        (label :class "infotext" :halign "start" :text MEMUSAGE)))
+    (button :onclick "scripts/volume --toggle"
+      (box :orientation "h" :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
+        (box :style "background-image: url('${VOLICON}');" :class "trayicon")
+        (label :class "infotext" :halign "start" :text VOLUME)))
+    (button :onclick ""
+      (box :orientation "h" :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "true"
+        (box :style "background-image: url('${KEYBOARD_ICON}');" :class "trayicon")
+        (label :class "infotext" :halign "start" :valign "center" :text keyboard_layout)))
+    (eventbox :onclick "scripts/toggle_calendar" :cursor "pointer"
+      (box :class "clockbox" :orientation "v" :spacing 0 :valign "center" :halign "end" :space-evenly "false" :vexpand "false" :hexpand "false"
+        (label :class "time" :halign "end" :wrap "false" :limit-width 25 :text TIME)
+        (label :class "date" :halign "start" :wrap "false" :text DATE)))))
+
+(defwidget right-calendar []
+    (calendar
+      :class "calendar"
+      :show-details false
+      :halign "center"
+      :vexpand "true"
+      :hexpand "true"))
 
 ;; ** Windows *************************************************************************
 
 ;; system
 (defwindow system [screen]
-           :monitor screen
-           :geometry (geometry :x "-1%"
-                               :y "10px"
-                               :width "30%"
-							   :height "40px"
-                               :anchor "top right")
-           :stacking "fg"
-           :reserve (struts :distance "80px" :side "top")
-           :windowtype "dock"
-           :wm-ignore true
-(system))
+  :monitor screen
+  :geometry (geometry :x "-1%"
+  :y "10px"
+  :width "30%"
+  :height "40px"
+  :anchor "top right")
+  :stacking "fg"
+  :reserve (struts :distance "80px" :side "top")
+  :windowtype "dock"
+  :wm-ignore true
+  (system :screen screen))
+
+(defwindow calendar [screen]
+  :monitor screen
+  :geometry (geometry :x "-1%"
+    :y "55px"
+    :anchor "top right")
+  :width "10%"
+  :stacking "fg"
+  :windowtype "dialog"
+  :wm-ignore true
+  (right-calendar :screen screen))
