@@ -1,7 +1,7 @@
  [redshift]
  location-provider=manual
  temp-night=3200
- temp-day=4400
+ temp-day=4000
  fade=1
 
  ;BH
