@@ -1,6 +1,5 @@
 ;; ** Variables ***********************************************************************
 
-;; System vars
 (defpoll profile_info :interval "1s" `scripts/profile`)
 (defpoll CPU_USAGE :interval "1s" `../scripts/sys_info --cpu`)
 (defpoll DISK_USAGE :interval "1s" `../scripts/sys_info --disk`)
@@ -11,18 +10,17 @@
 (defvar OPEN_PACKAGE_ICON "images/package.png")
 (defvar CLOSED_PACKAGE_ICON "images/closed-package.png")
 
-;; ** Widgets *************************************************************************
-
-;; Redshift
-(defpoll redshift_status :interval "1s" "scripts/redshift_status")
 (defpoll redshift_temperature :interval "10m" "redshift -c ~/.config/redshift/config -p | grep 'Color temperature' | awk -F':' '{print $2}'")
 (defvar REDSHIFT_ON_ICON "images/redeye.png")
 (defvar REDSHIFT_OFF_ICON "images/blueeye.png")
 
-;; SysInfo
-(defpoll sys_info :interval "1s" "scripts/sys_info")
+(defpoll sys_info :interval "2s" "scripts/sys_info")
 (defpoll todo_list :interval "10m" "scripts/fetch_todo_list")
 (defvar todo_list_file "~/Documents/personal-notes/TODO.wiki")
+(defvar sound_control_status "/tmp/sound_control_status")
+(deflisten show_sound_control :initial false "tail -F /tmp/sound_control_status")
+
+;; ** Widgets *************************************************************************
 
 ;; quotes
 ;; (defwidget quotes []
@@ -44,60 +42,64 @@
   )
 
 (defwidget sound_selector []
-  (box :class "winbox" :style "padding-bottom: 15px;" :orientation "v" :spacing 10 :space-evenly "false" :height 100
-    (label :text "Sound Control" :class "title")
-    (box :orientation "h" :spacing 10 :space-evenly true :height 100
-      (box :orientation "v" :space-evenly false :spacing 10
-        (label :text "Outputs" :class "info")
-        (for card in {sys_info?.sound.output}
-          (eventbox
-            :height 50
-            :width 120
-            :cursor "pointer"
-            :halign "center"
-            :class "soundbutton ${card.active ? 'soundactive' : ''}"
-            :onclick "sound_manager -s '${card.sink_name}' '${card.profile_name}' '${card.card_name}' 'output' &"
-            :timeout "5s"
-            (box :orientation "h" :spacing 5 :space-evenly false :class "soundbutton-content" :halign "center"
-              (box :width 30 :style "background-image: url('${SPEAKER_ICON}');" :class "iconcontainer")
-              (label :text {card.display_name} :class "label" :wrap true)))
-          ))
-      (box :orientation "v" :space-evenly false :spacing 10
-        (label :text "Inputs" :class "info")
-        (for card in {sys_info?.sound.input}
-          (eventbox
-            :height 50
-            :width 120
-            :cursor "pointer"
-            :halign "center"
-            :class "soundbutton ${card.active ? 'soundactive' : ''}"
-            :onclick "sound_manager -s '${card.sink_name}' '${card.profile_name}' '${card.card_name}' 'input' &"
-            :timeout "5s"
-            (box :orientation "h" :spacing 5 :space-evenly false :class "soundbutton-content" :halign "center"
-              (box :width 25 :style "background-image: url('${MICROPHONE_ICON}');" :class "iconcontainer")
-              (label :halign "center" :text {card.display_name} :class "label" :wrap true)))
-          )))
-    (box :orientation "h" :spacing 10 :space-evenly true :height 100
-      (box :orientation "v" :space-evenly false :spacing 10
-        (label :text "IO" :class "info")
-        (for card in {sys_info?.sound.io}
-          (eventbox
-            :height 50
-            :width 120
-            :cursor "pointer"
-            :halign "center"
-            :class "soundbutton ${card.active ? 'soundactive' : ''}"
-            :onclick "sound_manager -s '${card.sink_name}' '${card.profile_name}' '${card.card_name}' 'io' &"
-            :timeout "5s"
-            (box :orientation "h" :spacing 5 :space-evenly false :class "soundbutton-content" :halign "center"
-              (box :width 25 :style "background-image: url('${SPEAKER_ICON}');" :class "iconcontainer")
-              (label :text {card.display_name} :class "label" :wrap true)
-              (box :width 25 :style "background-image: url('${MICROPHONE_ICON}');" :class "iconcontainer")))
-          )))
-    ))
+  (box :class "winbox" :style "padding-bottom: 10px" :orientation "v" :space-evenly "false"
+    (eventbox :onclick {show_sound_control ? "echo false >> ${sound_control_status}" : "echo true >> ${sound_control_status}"} :cursor "pointer"
+      (box :orientation "h" :spacing 10 :halign "center" :space-evenly false
+        (box :class "iconcontainer" :width 50 :height 50 :style "margin-top: 10px; background-image: url('images/mixer.png');")
+          (label :text "Sound Control" :class "title")))
+    (revealer :transition "slidedown" :reveal {show_sound_control}
+      (box :orientation "v"
+        (box :orientation "h" :spacing 10 :space-evenly true :height 100
+          (box :orientation "v" :space-evenly false :spacing 10
+            (label :text "Outputs" :class "info")
+            (for card in {sys_info?.sound.output}
+              (eventbox
+                :height 50
+                :width 120
+                :cursor "pointer"
+                :halign "center"
+                :class "soundbutton ${card.active ? 'soundactive' : ''}"
+                :onclick "sound_manager -s '${card.sink_name}' '${card.profile_name}' '${card.card_name}' 'output' &"
+                :timeout "5s"
+                (box :orientation "h" :spacing 5 :space-evenly false :class "soundbutton-content" :halign "center"
+                  (box :width 30 :style "background-image: url('${SPEAKER_ICON}');" :class "iconcontainer")
+                  (label :text {card.display_name} :class "label" :wrap true)))
+              ))
+          (box :orientation "v" :space-evenly false :spacing 10
+            (label :text "Inputs" :class "info")
+            (for card in {sys_info?.sound.input}
+              (eventbox
+                :height 50
+                :width 120
+                :cursor "pointer"
+                :halign "center"
+                :class "soundbutton ${card.active ? 'soundactive' : ''}"
+                :onclick "sound_manager -s '${card.sink_name}' '${card.profile_name}' '${card.card_name}' 'input' &"
+                :timeout "5s"
+                (box :orientation "h" :spacing 5 :space-evenly false :class "soundbutton-content" :halign "center"
+                  (box :width 25 :style "background-image: url('${MICROPHONE_ICON}');" :class "iconcontainer")
+                  (label :halign "center" :text {card.display_name} :class "label" :wrap true)))
+              )))
+          (box :orientation "v" :space-evenly true :spacing 10
+            (label :text "IO" :class "info")
+            (for card in {sys_info?.sound.io}
+              (eventbox
+                :height 50
+                :width 120
+                :cursor "pointer"
+                :halign "center"
+                :class "soundbutton ${card.active ? 'soundactive' : ''}"
+                :onclick "sound_manager -s '${card.sink_name}' '${card.profile_name}' '${card.card_name}' 'io' &"
+                :timeout "5s"
+                (box :orientation "h" :spacing 5 :space-evenly false :class "soundbutton-content" :halign "center"
+                  (box :width 25 :style "background-image: url('${SPEAKER_ICON}');" :class "iconcontainer")
+                  (label :text {card.display_name} :class "label" :wrap true)
+                  (box :width 25 :style "background-image: url('${MICROPHONE_ICON}');" :class "iconcontainer")))
+              ))
+        ))))
 
 (defwidget tasklist []
-  (box :orientation "h" :class {arraylength(todo_list) > 0 ? "winbox" : ""} :height {arraylength(todo_list) > 0 ? 200 : 0}
+  (box :orientation "h" :class "winbox" :height 200
     (scroll :vscroll true :hscroll false
       (box :orientation "v" :spacing 2 :space-evenly false
         (eventbox :cursor "pointer" :onclick "$TERMINAL -e $EDITOR ${todo_list_file} &"
@@ -125,8 +127,8 @@
     (box :orientation "h" :spacing 10 :space-evenly true
       (box :class "winbox" :orientation "v" :space-evenly false :height 125 :width 125
         (square-container
-          :icon "${redshift_status == 'on' ? REDSHIFT_ON_ICON : REDSHIFT_OFF_ICON}"
-          :text {redshift_status == 'on' ? " ${redshift_temperature}" : " Redshift Off"}
+          :icon "${sys_info.redshift_status == 'on' ? REDSHIFT_ON_ICON : REDSHIFT_OFF_ICON}"
+          :text {sys_info.redshift_status == 'on' ? " ${redshift_temperature}" : " Redshift Off"}
           :class "iconcontainer tiny-icon"
           :click "toggle_redshift"))
       (box :class "winbox" :orientation "v" :valign "start" :space-evenly false :height 150 :width 150
@@ -149,8 +151,10 @@
         (box :orientation "h" :halign "center" :space-evenly false
           (box :class "iconcontainer" :style "background-image: url('${sys_info.packages_to_update > 40 ? CLOSED_PACKAGE_ICON : OPEN_PACKAGE_ICON}');" :width 50 :height 50)
           (label :class "info" :text {sys_info.packages_to_update > 40 ? "${sys_info.packages_to_update} updates available" : "All Good, up to date!"}))))
-    (tasklist)
-    (sound_selector)
+    (revealer :transition "slidedown" :class "winbox" :reveal true
+      (sound_selector))
+    (revealer :transition "slidedown" :reveal {arraylength(todo_list) > 0} :duration "500ms" :class "winbox"
+      (tasklist))
     ))
 
 ;; ** Windows *************************************************************************
@@ -158,10 +162,10 @@
 (defwindow sidebar [screen]
   :monitor screen
   :geometry (geometry :x "-1%"
-    :y "6%"
-    :width "25%"
-    :height "93%"
-    :anchor "top right")
+  :y "6%"
+  :width "25%"
+  :height "93%"
+  :anchor "top right")
   :stacking "fg"
   :windowtype "normal"
   :wm-ignore true

@@ -1,7 +1,0 @@
-#!/bin/sh
-
-if [ "$(pgrep -xc redshift)" -gt 0 ]; then
-	echo "on"
-else
-	echo "off"
-fi

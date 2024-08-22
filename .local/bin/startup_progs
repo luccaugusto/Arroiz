@@ -40,6 +40,9 @@ shortcut_configurations()
 
 start_programs()
 {
+
+	launch_eww_bars
+
 	# low battery notifications (cronjob wasn't working)
 	[ "$(pgrep batsinal)" ] || batsinal &
 	# Wifi connection
@@ -77,8 +80,6 @@ start_programs()
 	# Open slack so i get ready for work
 	today=$(date +%a)
 	[ ! "$today" = "Sat" ] && [ ! "$today" = "Sun" ] && slack &
-
-	launch_eww_bars
 }
 
 # MAIN
