@@ -151,10 +151,13 @@
         (box :orientation "h" :halign "center" :space-evenly false
           (box :class "iconcontainer" :style "background-image: url('${sys_info.packages_to_update > 40 ? CLOSED_PACKAGE_ICON : OPEN_PACKAGE_ICON}');" :width 50 :height 50)
           (label :class "info" :text {sys_info.packages_to_update > 40 ? "${sys_info.packages_to_update} updates available" : "All Good, up to date!"}))))
-    (revealer :transition "slidedown" :class "winbox" :reveal true
-      (sound_selector))
-    (revealer :transition "slidedown" :reveal {arraylength(todo_list) > 0} :duration "500ms" :class "winbox"
-      (tasklist))
+    (scroll :vscroll true :hscroll false :height 500
+      (box :orientation "v" :spacing 10 :space-evenly false
+        (revealer :transition "slidedown" :class "winbox" :reveal true
+          (sound_selector))
+        (revealer :transition "slidedown" :reveal {arraylength(todo_list) > 0} :duration "500ms" :class "winbox"
+          (tasklist))
+      ))
     ))
 
 ;; ** Windows *************************************************************************
