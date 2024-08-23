@@ -11,9 +11,15 @@
   color: #EB6CE8;
   font-size: 22px;
 }
+
 .info {
   color: #fff;
   font-size: 20px;
+}
+
+.checked {
+  font-size: 16px;
+  color: #888;
 }
 
 .label {
@@ -46,6 +52,10 @@
     background-size: 80%;
     background-repeat: no-repeat;
     background-position: center;
+}
+
+.big-icon {
+  background-size: 100%;
 }
 
 .tiny-icon {
@@ -127,9 +137,10 @@
 }
 
 .quote_text {
-	font-size : 14px;
+	font-size : 16px;
 	font-style: italic;
 	font-weight : bold;
+    color: #fff;
 }
 
 /** EOF *************************************************/

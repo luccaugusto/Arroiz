@@ -1,8 +1,6 @@
 ;; ** Variables ***********************************************************************
 
-(defpoll profile_info :interval "1s" `scripts/profile`)
-(defpoll CPU_USAGE :interval "1s" `../scripts/sys_info --cpu`)
-(defpoll DISK_USAGE :interval "1s" `../scripts/sys_info --disk`)
+(defpoll screen_resolution :interval "8h" "scripts/screen_resolutions")
 
 (defvar SPEAKER_ICON "images/speaker.png")
 (defvar MICROPHONE_ICON "images/microphone.png")
@@ -15,29 +13,36 @@
 (defvar REDSHIFT_OFF_ICON "images/blueeye.png")
 
 (defpoll sys_info :interval "2s" "scripts/sys_info")
-(defpoll todo_list :interval "10m" "scripts/fetch_todo_list")
+(defpoll todo_list :interval "10m" "scripts/task_list -l")
 (defvar todo_list_file "~/Documents/personal-notes/TODO.wiki")
 (defvar sound_control_status "/tmp/sound_control_status")
 (deflisten show_sound_control :initial false "tail -F /tmp/sound_control_status")
 
+(defpoll piece_of_wisdom :interval "30m" :initial "Thinking..." "fortune")
+
 ;; ** Widgets *************************************************************************
 
-;; quotes
-;; (defwidget quotes []
-;; 		(box :class "winbox"
-;; 			(box :class "quote_box" :orientation "h" :valign "center" :halign "center" :spacing 10 :space-evenly false
-;; 				(box :class "powericons" :style "background-image: url('../images/icons/quotes.png');")
-;; 				(label :class "quote_text" :valign "center" :halign "center" :text QUOTE :wrap true :limit-width 90 ))))
+(defwidget wisdom_quote []
+  (box :class "winbox"
+    (box :class "quote_box" :orientation "h" :valign "center" :halign "center" :spacing 10 :space-evenly false
+      (box :class "iconcontainer big-icon" :style "background-image: url('images/thonk.png');" :width 60 :height 60)
+      (label :class "quote_text" :valign "center" :halign "center" :text piece_of_wisdom :wrap true))))
 
-(defwidget square-container [icon text ?click ?class]
-  (box :class {class == "" ? "iconcontainer" : class} :style "background-image: url('${icon}');" :width "125" :height "125" :spacing 15 :valign "start"
-    (eventbox :onclick "${click}" :cursor {click == "" ? "default" : "pointer"}
-      (label :class "label" :valign "end" :halign "center" :text "${text}" :wrap true))))
+(defwidget square-container [screen icon text ?click ?class]
+  (eventbox :onclick "${click}" :cursor {click == "" ? "default" : "pointer"}
+    (box
+      :class {class == "" ? "iconcontainer" : class}
+      :style "background-image: url('${icon}');"
+      :width 125
+      :height 125
+      :spacing 15
+      :valign "center"
+      (label :class "label" :valign "end" :halign "center" :text {text} :wrap true))))
 
 (defwidget profile []
   (box :class "winbox" :hexpand true :space-evenly false
-    (label :class "profile" :style "padding-left: 10px;" :text " ${profile_info.user}@${profile_info.hostname}: ")
-    (label :class "label" :style "padding-right: 10px;" :text "${profile_info.uptime}")
+    (label :class "profile" :style "padding-left: 10px;" :text " ${sys_info.profile.user}@${sys_info.profile.hostname}: ")
+    (label :class "label" :style "padding-right: 10px;" :text "${sys_info.profile.uptime}")
     )
   )
 
@@ -107,13 +112,13 @@
         (for task in todo_list
           (checkbox
             :style "color: #fff;padding: 0 15px;"
-            :onchecked "notify-send '${task}'"
-            :onunchecked ""
+            :onchecked "scripts/task_list -c '${task}'"
+            :onunchecked "scripts/task_list -u '${task}'"
             :checked {matches(task, "\[x\]")}
-            (label :class "info" :style " border-bottom: 2px solid #444; margin-bottom: 5px;" :wrap true :text {substring(task, 4, strlength(task)-4)}))
+            (label :class "info ${matches(task, "\[x\]") ? "checked" : ""}" :style " border-bottom: 2px solid #444; margin-bottom: 5px;" :wrap true :text {substring(task, 4, strlength(task)-4)}))
           )))))
 
-(defwidget sidebar-widget []
+(defwidget sidebar-widget [screen]
   (box :orientation "v" :spacing 8 :space-evenly false
     (box :orientation "h" :spacing 4 :space-evenly false
       (eventbox
@@ -125,8 +130,9 @@
         :cursor "pointer")
       (profile))
     (box :orientation "h" :spacing 10 :space-evenly true
-      (box :class "winbox" :orientation "v" :space-evenly false :height 125 :width 125
+      (box :class "winbox" :orientation "v" :space-evenly false :height 150 :width 150
         (square-container
+          :screen screen
           :icon "${sys_info.redshift_status == 'on' ? REDSHIFT_ON_ICON : REDSHIFT_OFF_ICON}"
           :text {sys_info.redshift_status == 'on' ? " ${redshift_temperature}" : " Redshift Off"}
           :class "iconcontainer tiny-icon"
@@ -143,6 +149,7 @@
         (label :class "info" :text "Brightness"))
       (box :class "winbox" :orientation "v" :space-evenly true :height 150 :width 150
         (square-container
+          :screen screen
           :icon "images/floppy-disk.png"
           :text "${sys_info.disk.used}/${sys_info.disk.size}"
           :class "iconcontainer tiny-icon")))
@@ -151,10 +158,9 @@
         (box :orientation "h" :halign "center" :space-evenly false
           (box :class "iconcontainer" :style "background-image: url('${sys_info.packages_to_update > 40 ? CLOSED_PACKAGE_ICON : OPEN_PACKAGE_ICON}');" :width 50 :height 50)
           (label :class "info" :text {sys_info.packages_to_update > 40 ? "${sys_info.packages_to_update} updates available" : "All Good, up to date!"}))))
-    (scroll :vscroll true :hscroll false :height 500
+    (scroll :vscroll true :hscroll false :height {round(screen_resolution["screen-${screen}"].height / 100 * 60, 0)}
       (box :orientation "v" :spacing 10 :space-evenly false
-        (revealer :transition "slidedown" :class "winbox" :reveal true
-          (sound_selector))
+        (sound_selector)
         (revealer :transition "slidedown" :reveal {arraylength(todo_list) > 0} :duration "500ms" :class "winbox"
           (tasklist))
       ))
@@ -167,9 +173,22 @@
   :geometry (geometry :x "-1%"
   :y "6%"
   :width "25%"
-  :height "93%"
+  :height "87%"
   :anchor "top right")
   :stacking "fg"
   :windowtype "normal"
   :wm-ignore true
-  (sidebar-widget))
+  (sidebar-widget :screen screen))
+
+
+(defwindow quotes [screen]
+  :monitor screen
+  :geometry (geometry :x "-1%"
+  :y "-2%"
+  :width "25%"
+  :height "5%"
+  :anchor "bottom right")
+  :stacking "fg"
+  :windowtype "normal"
+  :wm-ignore true
+  (wisdom_quote))
