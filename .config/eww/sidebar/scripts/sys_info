@@ -7,7 +7,6 @@ brightness_percent=$((brightness_current * 100 / brightness_max ))
 disk_usage=$(df -h | grep home)
 
 sound_cards_info=$(sound_manager -l)
-packages_to_update=$(pacman -Qu | wc -l)
 redshift_status="off"
 profile="{\"hostname\": \"$(hostname)\", \"uptime\": \"$(uptime -p)\", \"user\": \"$(whoami)\"}"
 [ "$(pgrep -xc redshift)" -gt 0 ] && redshift_status="on"
@@ -25,7 +24,6 @@ info="{ \
 		\"free\": \"$(echo "$disk_usage" | awk '{print $4}')\" \
 	}, \
 	\"sound\": ${sound_cards_info},\
-	\"packages_to_update\": ${packages_to_update},\
 	\"profile\": ${profile}\
 }"
 

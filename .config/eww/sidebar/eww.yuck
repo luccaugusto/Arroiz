@@ -13,6 +13,7 @@
 (defvar REDSHIFT_OFF_ICON "images/blueeye.png")
 
 (defpoll sys_info :interval "2s" "scripts/sys_info")
+(defpoll packages_to_update :interval "12h" "pacman -Qu | wc -l")
 (defpoll todo_list :interval "10m" "scripts/task_list -l")
 (defvar todo_list_file "~/Documents/personal-notes/TODO.wiki")
 (defvar sound_control_status "/tmp/sound_control_status")
@@ -158,10 +159,10 @@
           :text "${sys_info.disk.used}/${sys_info.disk.size}"
           :class "iconcontainer tiny-icon")))
     (box :class "winbox" :orientation "h" :spacing 10
-      (eventbox :onclick {sys_info.packages_to_update > 40 ? "interactive_update &" : ""} :cursor {sys_info.packages_to_update > 40 ? "pointer" : "default"}
+      (eventbox :onclick {packages_to_update > 40 ? "interactive_update &" : ""} :cursor {packages_to_update > 40 ? "pointer" : "default"}
         (box :orientation "h" :halign "center" :space-evenly false
-          (box :class "iconcontainer" :style "background-image: url('${sys_info.packages_to_update > 40 ? CLOSED_PACKAGE_ICON : OPEN_PACKAGE_ICON}');" :width 50 :height 50)
-          (label :class "info" :text {sys_info.packages_to_update > 40 ? "${sys_info.packages_to_update} updates available" : "All Good, up to date!"}))))
+          (box :class "iconcontainer" :style "background-image: url('${packages_to_update > 40 ? CLOSED_PACKAGE_ICON : OPEN_PACKAGE_ICON}');" :width 50 :height 50)
+          (label :class "info" :text {packages_to_update > 40 ? "${packages_to_update} updates available" : "All Good, up to date!"}))))
     (scroll :vscroll true :hscroll false :height {round(screen_resolution["screen-${screen}"].height / 100 * 60, 0)}
       (box :orientation "v" :spacing 10 :space-evenly false
         (sound_selector)
