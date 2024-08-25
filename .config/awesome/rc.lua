@@ -667,6 +667,12 @@ awful.rules.rules = {
 		properties = { tag = "六" } },
 	{ rule = { class = "transmission" },
 		properties = { tag = "八" } },
+	{ rule = { class = "beekeeper-studio" },
+		properties = { tag = "九" } },
+	{ rule = { class = "elisa" },
+		properties = { tag = "十" } },
+	{ rule = { class = "spotify" },
+		properties = { tag = "十" } },
 }
 
 -- }}}

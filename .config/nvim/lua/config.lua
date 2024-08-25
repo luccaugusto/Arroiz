@@ -29,6 +29,18 @@ vim.api.nvim_create_autocmd(
     }
 )
 
+vim.api.nvim_create_autocmd(
+    "BufWritePost",
+    {
+		pattern = {"*.js", "*.ts", "*.jsx", "*.tsx"},
+        group = "AutoFormat",
+        callback = function()
+            vim.cmd("silent !prettier --log-level silent -w %")
+            vim.cmd("edit")
+        end,
+    }
+)
+
 vim.keymap.set({"n", "i", "x"}, "<M-j>", "<Cmd>MultipleCursorsAddDown<CR>")
 vim.keymap.set({"n", "i", "x"}, "<M-k>", "<Cmd>MultipleCursorsAddUp<CR>")
 vim.keymap.set({"n", "i"}, "<C-LeftMouse>", "<Cmd>MultipleCursorsMouseAddDelete<CR>")
