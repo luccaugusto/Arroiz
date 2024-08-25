@@ -1,3 +1,3 @@
 #!/bin/sh
 
-$TERMINAL -e sudo pacman -Sy archlinux-keyring && sudo yay -Syyud
+$TERMINAL -e update

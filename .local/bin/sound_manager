@@ -28,9 +28,16 @@ class Card:
         DEVICE_CARD_NAME: "LapTop",
         USB_CARD_NAME: "USB",
         HDMI_CARD_NAME: "HDMI",
-        "bluez_card.23_11_28_B3_ED_65": "Bluetooth",
         "USB  Live camera": "Webcam",
     }
+
+    @staticmethod
+    def get_display_name(properties) -> str | None:
+        name = properties.get("alsa.card_name", "")
+        if name in Card.card_name_to_display_name:
+            return Card.card_name_to_display_name[name]
+
+        return properties.get("device.alias", None)
 
     def __init__(self, profile_name, profile, card_name, sink_name, active=False, display_name=""):
         self.profile_name = profile_name
@@ -196,7 +203,7 @@ def get_cards_by_type(card_type: str, sink_in_use: str) -> dict[str, Card]:
             continue
 
         card_name = card["properties"].get("alsa.card_name", card["name"])
-        display_name = Card.card_name_to_display_name[card_name]
+        display_name = Card.get_display_name(card['properties'])
 
         if Card.HDMI_CARD_NAME.lower() in card_name.lower() and not hdmi_connected():
             continue
@@ -209,7 +216,7 @@ def get_cards_by_type(card_type: str, sink_in_use: str) -> dict[str, Card]:
             card_name,
             card["name"],
             active=sink in sink_in_use,
-            display_name=display_name,
+            display_name=display_name if display_name is not None else card["name"],
         )
 
     return output_cards

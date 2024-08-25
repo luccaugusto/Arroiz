@@ -22,11 +22,11 @@ alias jekser="bundle exec jekyll serve --livereload"
 
 # Pacman stuff
 alias pautoremove="sudo pacman -Rns $(pacman -Qtdq)"
-alias update="sudo pacman -Sy archlinux-keyring && sudo pacman -Syyud; yay -Syu"
 alias P="sudo pacman"
 alias p="pacman"
 alias pclrcache="sudo yay -Scc"
 alias freepacman="sudo rm /var/lib/pacman/db.lck"
+alias listpackages="pacman -Qi | egrep '^(Name|Installed)' | cut -f2 -d':' | paste - - | column -t | sort -nrk 2 | grep MiB | less"
 
 # Command aliases and typos
 alias ls="ls --color=auto"

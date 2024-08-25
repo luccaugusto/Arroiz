@@ -6,7 +6,11 @@ lock_file="/tmp/eww_sidebar_open"
 run_eww() {
 	current_desktop=$(awesome-client 'return mouse.screen.index' | cut -d ' ' -f 5)
 	monitor=$((current_desktop-1))
-	eww -c "$config" open sidebar --screen "$monitor"
+	eww -c "$config" open-many \
+		sidebar:sidebar \
+		quotes:quotes \
+		--arg sidebar:screen="$monitor" \
+		--arg quotes:screen="$monitor"
 }
 
 if [ ! -f "$lock_file" ]; then

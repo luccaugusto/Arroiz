@@ -1,0 +1,38 @@
+#!/bin/sh
+
+task_list=~/Documents/personal-notes/TODO.wiki
+
+list_tasks()
+{
+	todo=$(cat $task_list)
+	parsed_todo=$(echo "$todo" | tr '\n' '|' | sed 's/|/","/g')
+	echo "[\"${parsed_todo%,\"}]"
+}
+
+check_task()
+{
+	sed -i "s/^.* $1/[x] $1/" $task_list
+}
+
+uncheck_task()
+{
+	sed -i "s/^.* $1/[ ] $1/" $task_list
+}
+
+op="$1" && shift
+[ "$1" ] && arg="$1" && shift
+
+case "$op" in
+	-l) list_tasks;;
+	-c) if [ -z "$arg" ]; then
+			echo "No task specified" && exit 1
+		fi
+		check_task "$arg"
+		;;
+	-u) if [ -z "$arg" ]; then
+			echo "No task specified" && exit 1
+		fi
+		uncheck_task "$arg"
+		;;
+	*) echo "Invalid operation" && exit 1 ;;
+esac

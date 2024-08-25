@@ -1,0 +1,6 @@
+#!/bin/sh
+
+#- update all system packages,
+#- making sure to update the keyring first
+
+sudo pacman -Sy archlinux-keyring && sudo pacman -Syyud; yay -Syu

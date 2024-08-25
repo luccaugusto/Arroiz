@@ -18,7 +18,7 @@
 (defvar sound_control_status "/tmp/sound_control_status")
 (deflisten show_sound_control :initial false "tail -F /tmp/sound_control_status")
 
-(defpoll piece_of_wisdom :interval "30m" :initial "Thinking..." "fortune")
+(defvar piece_of_wisdom "A foolish man shares his problems, a wise man shares his memes ~ Ancient Philosofer Fuk Yu")
 
 ;; ** Widgets *************************************************************************
 
@@ -68,7 +68,7 @@
                 :timeout "5s"
                 (box :orientation "h" :spacing 5 :space-evenly false :class "soundbutton-content" :halign "center"
                   (box :width 30 :style "background-image: url('${SPEAKER_ICON}');" :class "iconcontainer")
-                  (label :text {card.display_name} :class "label" :wrap true)))
+                  (label :text "${substring(card.display_name,0,12)}${strlength(card.display_name) > 12 ? "..." : ""}" :class "label" :wrap true)))
               ))
           (box :orientation "v" :space-evenly false :spacing 10
             (label :text "Inputs" :class "info")
@@ -83,7 +83,7 @@
                 :timeout "5s"
                 (box :orientation "h" :spacing 5 :space-evenly false :class "soundbutton-content" :halign "center"
                   (box :width 25 :style "background-image: url('${MICROPHONE_ICON}');" :class "iconcontainer")
-                  (label :halign "center" :text {card.display_name} :class "label" :wrap true)))
+                  (label :halign "center" :text "${substring(card.display_name,0,12)}${strlength(card.display_name) > 12 ? "..." : ""}" :class "label" :wrap true)))
               )))
           (box :orientation "v" :space-evenly true :spacing 10
             (label :text "IO" :class "info")
@@ -98,13 +98,13 @@
                 :timeout "5s"
                 (box :orientation "h" :spacing 5 :space-evenly false :class "soundbutton-content" :halign "center"
                   (box :width 25 :style "background-image: url('${SPEAKER_ICON}');" :class "iconcontainer")
-                  (label :text {card.display_name} :class "label" :wrap true)
+                  (label :text "${substring(card.display_name,0,12)}${strlength(card.display_name) > 12 ? "..." : ""}" :class "label" :wrap true)
                   (box :width 25 :style "background-image: url('${MICROPHONE_ICON}');" :class "iconcontainer")))
               ))
         ))))
 
 (defwidget tasklist []
-  (box :orientation "h" :class "winbox" :height 200
+  (box :orientation "h" :class "winbox" :height 300
     (scroll :vscroll true :hscroll false
       (box :orientation "v" :spacing 2 :space-evenly false
         (eventbox :cursor "pointer" :onclick "$TERMINAL -e $EDITOR ${todo_list_file} &"
@@ -112,10 +112,14 @@
         (for task in todo_list
           (checkbox
             :style "color: #fff;padding: 0 15px;"
-            :onchecked "scripts/task_list -c '${task}'"
-            :onunchecked "scripts/task_list -u '${task}'"
-            :checked {matches(task, "\[x\]")}
-            (label :class "info ${matches(task, "\[x\]") ? "checked" : ""}" :style " border-bottom: 2px solid #444; margin-bottom: 5px;" :wrap true :text {substring(task, 4, strlength(task)-4)}))
+            :onchecked "scripts/task_list -c '${substring(task, 4, strlength(task)-4)}'"
+            :onunchecked "scripts/task_list -u '${substring(task, 4, strlength(task)-4)}'"
+            :checked {matches(substring(task, 0, 3), "\[x\]")}
+            (label
+              :class "info ${matches(substring(task, 0, 3), "\[x\]") ? "checked" : ""}"
+              :style " border-bottom: 2px solid #444; margin-bottom: 5px;"
+              :wrap true
+              :text {substring(task, 4, strlength(task)-4)}))
           )))))
 
 (defwidget sidebar-widget [screen]
