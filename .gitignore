@@ -2,3 +2,4 @@ vimwiki
 plugged
 __pycache__
 .config/ranger/history
+.config/sxhkd/sxhkdrc
