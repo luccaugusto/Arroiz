@@ -24,6 +24,7 @@ docker
 docker-compose
 dunst
 efibootmgr
+elisa
 fakeroot
 feh
 ffmpeg
@@ -84,6 +85,7 @@ pipewire
 pipewire-alsa
 pipewire-pulse
 pkgconf
+playerctl
 polybar
 posh
 pulsemixer

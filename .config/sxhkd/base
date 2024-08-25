@@ -38,11 +38,14 @@ XF86MonBrightnessDown
 # Media player controls
 # Supports spotify
 XF86AudioPlay
-	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause; [ $(pgrep -x mpc) ] && mpc --host=$MPD_HOST --port=$MPD_PORT toggle
+	playerctl play-pause
+	#dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause; [ $(pgrep -x mpc) ] && mpc --host=$MPD_HOST --port=$MPD_PORT toggle
 XF86AudioNext
-	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next; [ $(pgrep -x mpc) ] && mpc --host=$MPD_HOST --port=$MPD_PORT next
+	playerctl next
+	#dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next; [ $(pgrep -x mpc) ] && mpc --host=$MPD_HOST --port=$MPD_PORT next
 XF86AudioPrev
-	dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous; [ $(pgrep -x mpc) ] && mpc --host=$MPD_HOST --port=$MPD_PORT prev
+	playerctl previous
+	#dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous; [ $(pgrep -x mpc) ] && mpc --host=$MPD_HOST --port=$MPD_PORT prev
 
 ## in case keyboard does not have XF86 keys for audio/brightness controls, these are the alternative bindings
 super + ctrl + p
