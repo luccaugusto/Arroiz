@@ -37,7 +37,7 @@
     (systray :class "systray" :spacing 8)
     (box :orientation "h" :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
       (label :class "infotext inforound" :halign "start" :text NETSTAT))
-    (button :onclick "scripts/widget_apps --pow"
+    (button :onclick ""
       (box :orientation "h" :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
         (box :style "background-image: url('${BATICON}');" :class "trayicon baticon")
         (label :class "infotext" :halign "start" :valign "center" :text BATSTATUS)))
