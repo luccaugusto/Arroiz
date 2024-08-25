@@ -1,4 +1,4 @@
 vimwiki
 plugged
 __pycache__
-*.ranger/history
+.config/ranger/history
