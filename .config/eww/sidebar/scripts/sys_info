@@ -6,7 +6,7 @@ brightness_percent=$((brightness_current * 100 / brightness_max ))
 
 disk_usage=$(df -h | grep home)
 
-sound_cards_info=$(sound_manager -l)
+sound_cards_info=$(pactl -f json list cards | sound_manager -f)
 redshift_status="off"
 profile="{\"hostname\": \"$(hostname)\", \"uptime\": \"$(uptime -p)\", \"user\": \"$(whoami)\"}"
 [ "$(pgrep -xc redshift)" -gt 0 ] && redshift_status="on"
