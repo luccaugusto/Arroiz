@@ -2,7 +2,7 @@
 
 ## Get battery info
 BATTERY="$(acpi | awk -F ' ' 'END {print $4}' | tr -d \%,)"
-CHARGE="$(acpi | awk -F ' ' 'END {print $3}' | tr -d \,)"
+CHARGE="$(acpi | awk -F ':' '{print $2}' | tr '\n' '|')"
 
 total_charge=$(batstatus --total)
 

@@ -7,7 +7,6 @@
 ;; Battery vars
 (defpoll BATSTATUS :interval "2m" `batstatus --no-icon`)
 (defpoll BATICON :interval "2m" `scripts/battery --icon`)
-(defpoll BATPERC :interval "2m" `scripts/battery --perc`)
 
 ;; Keyboard layout
 (defpoll keyboard_layout :interval "3s" "xkblayout-state print %s")
@@ -37,26 +36,24 @@
     (systray :class "systray" :spacing 8)
     (box :orientation "h" :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
       (label :class "infotext inforound" :halign "start" :text NETSTAT))
-    (button :onclick ""
-      (box :orientation "h" :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
-        (box :style "background-image: url('${BATICON}');" :class "trayicon baticon")
-        (label :class "infotext" :halign "start" :valign "center" :text BATSTATUS)))
-    (button :onclick "alacritty -e gotop -l kitchensink &"
+    (box :orientation "h" :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
+      (box :style "background-image: url('${BATICON}');" :class "trayicon baticon")
+      (label :class "infotext" :halign "start" :valign "center" :text BATSTATUS))
+    (button :onclick "alacritty -e gotop -l kitchensink &" :class "clear"
       (box :orientation "h" :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
         (box :style "background-image: url('${CPUICON}');" :class "trayicon")
         (label :class "infotext" :halign "start" :text CPUTEMP)))
-    (button :onclick "alacritty -e gotop -l kitchensink &"
+    (button :onclick "alacritty -e gotop -l kitchensink &" :class "clear"
       (box :orientation "h" :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
         (box :style "background-image: url('${MEMICON}');" :class "trayicon")
         (label :class "infotext" :halign "start" :text MEMUSAGE)))
-    (button :onclick "scripts/volume --toggle"
+    (button :onclick "scripts/volume --toggle" :class "clear"
       (box :orientation "h" :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
         (box :style "background-image: url('${VOLICON}');" :class "trayicon")
         (label :class "infotext" :halign "start" :text VOLUME)))
-    (button :onclick ""
       (box :orientation "h" :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "true"
         (box :style "background-image: url('${KEYBOARD_ICON}');" :class "trayicon")
-        (label :class "infotext" :halign "start" :valign "center" :text keyboard_layout)))
+        (label :class "infotext" :halign "start" :valign "center" :text keyboard_layout))
     (eventbox :onclick "scripts/toggle_calendar" :cursor "pointer"
       (box :class "clockbox" :orientation "v" :spacing 0 :valign "center" :halign "end" :space-evenly "false" :vexpand "false" :hexpand "false"
         (label :class "time" :halign "end" :wrap "false" :limit-width 25 :text TIME)

@@ -1,16 +1,25 @@
-*{
+window {
 	all: unset;
 	font-family: feather;
 	font-family: "JetBrains Mono";
-	color: #FFF;
     padding: 2px;
 }
 .dockbox {
 	background-color: #202020;
 	border: 1px solid #4f4f4f;
 	border-radius: 12px;
-    padding: 0px 15px 0px 15px;
+    padding: 5px 15px;
     color: #fff;
+}
+.systray > widget > window {
+    background-color: #202020;
+    border: 1px solid #4f4f4f;
+    border-radius: 12px;
+    padding: 5px;
+    color: #000;
+}
+.clear{
+  all: unset;
 }
 .trayicon {
     background-repeat: no-repeat;
