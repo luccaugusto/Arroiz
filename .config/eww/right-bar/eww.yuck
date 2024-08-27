@@ -26,7 +26,7 @@
 
 ;; Network
 (defpoll WIFIICON :initial "images/icons/system/no-wifi.png" :interval "1m" `scripts/check-network --icon`)
-(defpoll NETSTAT :initial "Checking Wifi" :interval "30s" `scripts/check-network --stat`)
+(defpoll NETSTAT :initial "Checking Network" :interval "30s" `scripts/check-network --stat`)
 
 ;; ** Widgets *************************************************************************
 
