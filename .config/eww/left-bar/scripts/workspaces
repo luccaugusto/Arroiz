@@ -1,15 +1,16 @@
 #!/bin/python
 
-import subprocess
-import json
+#from sys import stdin
+from json import dumps
 
+import subprocess
 workspaces = subprocess.run(
     ["wmctrl", "-d"],
     stdout=subprocess.PIPE,
     stderr=subprocess.STDOUT,
 ).stdout.decode('utf8').strip()
 
-windows = (
+windows_on_workspaces = (
     subprocess.run(
         ["wmctrl", "-lx"],
         stdout=subprocess.PIPE,
@@ -19,42 +20,47 @@ windows = (
     .strip()
 )
 
-active_windows = [int(w[10:13]) for w in windows.split("\n") if w]
-workspace_labels = [w.split(' ')[-1] for w in workspaces.split("\n")]
-current_workspace = int([w.split(' ')[0] for w in workspaces.split("\n") if "*" in w][0])
+# workspace_info = "".join(stdin.readlines())
+# windows_on_workspaces, workspaces = workspace_info.split("--|--")
+
+workspace_list = workspaces.split("\n")
+
+active_workspaces = [int(w[10:13]) for w in windows_on_workspaces.split("\n") if w]
+workspace_labels = [w.split(' ').pop() for w in workspace_list]
+current_workspace = int([w.split(' ')[0] for w in workspace_list if "*" in w][0])
 
 workspaces_by_monitor = {}
+workspaces_by_monitor["open"] = []
+workspaces_by_monitor["open_in_monitor"] = -1
+
+open_windows_info = [w for w in windows_on_workspaces.split("\n") if f" {current_workspace} " in w]
+if len(open_windows_info) > 0:
+    open_windows = [
+        {
+            "id": w.split(" ")[0],
+            "name": [s for s in w.split(" ") if s != ""][2]
+            .split(".")
+            .pop(),  # handle possible double spaces that fuck up the split on ' '
+        }
+        for w in open_windows_info
+    ]
+    workspaces_by_monitor["open"] = open_windows
+
 for index, label in enumerate(workspace_labels):
     monitor = index // 10
     if monitor not in workspaces_by_monitor:
         workspaces_by_monitor[monitor] = []
 
-    class_name = "current" if index == current_workspace else "active" if index in active_windows else "empty"
-    workspace = {
+    class_name = "current" if index == current_workspace else "active" if index in active_workspaces else "empty"
+
+    workspaces_by_monitor[monitor].append({
         "class": class_name,
         "index": index,
         "label": label
-    }
+    })
 
     if class_name == "current":
-        open_windows_info = [w for w in windows.split("\n") if f" {index} " in w]
-        if len(open_windows_info) > 0:
-            open_windows = [
-                {
-                    "id": w.split(" ")[0],
-                    "name": [s for s in w.split(" ") if s != ""][2]
-                    .split(".")
-                    .pop(),  # handle possible double spaces that fuck up the split on ' '
-                }
-                for w in open_windows_info
-            ]
-            workspaces_by_monitor["open"] = open_windows
-            workspaces_by_monitor["open_in_monitor"] = monitor
-        else:
-            workspaces_by_monitor["open"] = []
-            workspaces_by_monitor["open_in_monitor"] = -1
+        workspaces_by_monitor["open_in_monitor"] = monitor
 
 
-    workspaces_by_monitor[monitor].append(workspace)
-
-print(json.dumps(workspaces_by_monitor, ensure_ascii=False))
+print(dumps(workspaces_by_monitor, ensure_ascii=False))

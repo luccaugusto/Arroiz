@@ -1,7 +1,7 @@
 ;; ** Variables ***********************************************************************
 
 ;; Workspaces
-(defpoll wm_workspace_info :interval "1s" "scripts/workspaces")
+(defpoll wm_workspace_info :interval "1s" "echo \"$(wmctrl -lx)--|--$(wmctrl -d)\" | scripts/workspaces")
 (defpoll workspace_layout :initial 'tile' :interval "1s" "scripts/workspace_layout")
 
 ;; ** Widgets *************************************************************************
