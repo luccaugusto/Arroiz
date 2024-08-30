@@ -6,17 +6,19 @@ list_tasks()
 {
 	todo=$(cat $task_list)
 	parsed_todo=$(echo "$todo" | tr '\n' '|' | sed 's/|/","/g')
+	[ "$parsed_todo" = '","' ] && echo "[]" && exit 0
+
 	echo "[\"${parsed_todo%,\"}]"
 }
 
 check_task()
 {
-	sed -i "s/^.* $1/[x] $1/" $task_list
+	sed -i "s/^\[ \] $1/[x] $1/" $task_list
 }
 
 uncheck_task()
 {
-	sed -i "s/^.* $1/[ ] $1/" $task_list
+	sed -i "s/^\[x\] $1/[ ] $1/" $task_list
 }
 
 op="$1" && shift

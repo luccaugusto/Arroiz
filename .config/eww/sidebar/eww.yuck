@@ -12,9 +12,9 @@
 (defvar REDSHIFT_ON_ICON "images/redeye.png")
 (defvar REDSHIFT_OFF_ICON "images/blueeye.png")
 
-(defpoll sys_info :interval "2s" "scripts/sys_info")
-(defpoll packages_to_update :interval "12h" "pacman -Qu | wc -l")
-(defpoll todo_list :interval "10m" "scripts/task_list -l")
+(defpoll sys_info :interval "2s" :initial "{}" "scripts/sys_info")
+(defpoll packages_to_update :interval "12h" :initial 0 "pacman -Qu | wc -l")
+(defpoll todo_list :interval "10m" :initial "[]" "scripts/task_list -l")
 (defvar todo_list_file "~/Documents/personal-notes/TODO.wiki")
 (defvar sound_control_status "/tmp/sound_control_status")
 (deflisten show_sound_control :initial false "tail -F /tmp/sound_control_status")
@@ -26,7 +26,7 @@
 (defwidget wisdom_quote []
   (box :class "winbox"
     (box :class "quote_box" :orientation "h" :valign "center" :halign "center" :spacing 10 :space-evenly false
-      (box :class "iconcontainer big-icon" :style "background-image: url('images/thonk.png');" :width 60 :height 60)
+      (image :path "images/thonk.png" :image-width 60 :image-height 60)
       (label :class "quote_text" :valign "center" :halign "center" :text piece_of_wisdom :wrap true))))
 
 (defwidget square-container [screen icon text ?click ?class]
@@ -42,17 +42,17 @@
 
 (defwidget profile []
   (box :class "winbox" :hexpand true :space-evenly false
-    (label :class "profile" :style "padding-left: 10px;" :text " ${sys_info.profile.user}@${sys_info.profile.hostname}: ")
-    (label :class "label" :style "padding-right: 10px;" :text "${sys_info.profile.uptime}")
+    (label :class "profile" :style "padding-left: 10px;" :text " ${sys_info?.profile.user}@${sys_info?.profile.hostname}: ")
+    (label :class "label" :style "padding-right: 10px;" :text "${sys_info?.profile.uptime}")
     )
   )
 
 (defwidget sound_selector []
   (box :class "winbox" :style "padding-bottom: 10px" :orientation "v" :space-evenly "false"
     (eventbox :onclick {show_sound_control ? "echo false >> ${sound_control_status}" : "echo true >> ${sound_control_status}"} :cursor "pointer"
-      (box :orientation "h" :spacing 10 :halign "center" :space-evenly false
-        (box :class "iconcontainer" :width 50 :height 50 :style "margin-top: 10px; background-image: url('images/mixer.png');")
-          (label :text "Sound Control" :class "title")))
+      (box :orientation "h" :space-evenly false :spacing 85 :style "padding-left: 20px" :halign "left"
+        (image :image-width 45 :image-height 45 :path "images/mixer.png" :style "margin-top: 10px;")
+        (label :text "Sound Control" :class "title")))
     (revealer :transition "slidedown" :reveal {show_sound_control}
       (box :orientation "v"
         (box :orientation "h" :spacing 10 :space-evenly true :height 100
@@ -68,7 +68,7 @@
                 :onclick "sound_manager -s '${card.sink_name}' '${card.profile_name}' '${card.card_name}' 'output' &"
                 :timeout "5s"
                 (box :orientation "h" :spacing 5 :space-evenly false :class "soundbutton-content" :halign "center"
-                  (box :width 30 :style "background-image: url('${SPEAKER_ICON}');" :class "iconcontainer")
+                  (image :image-width 30 :image-height 30 :path SPEAKER_ICON)
                   (label :text "${substring(card.display_name,0,12)}${strlength(card.display_name) > 12 ? "..." : ""}" :class "label" :wrap true)))
               ))
           (box :orientation "v" :space-evenly false :spacing 10
@@ -83,7 +83,7 @@
                 :onclick "sound_manager -s '${card.sink_name}' '${card.profile_name}' '${card.card_name}' 'input' &"
                 :timeout "5s"
                 (box :orientation "h" :spacing 5 :space-evenly false :class "soundbutton-content" :halign "center"
-                  (box :width 25 :style "background-image: url('${MICROPHONE_ICON}');" :class "iconcontainer")
+                  (image :image-width 25 :image-height 25 :path MICROPHONE_ICON)
                   (label :halign "center" :text "${substring(card.display_name,0,12)}${strlength(card.display_name) > 12 ? "..." : ""}" :class "label" :wrap true)))
               )))
           (box :orientation "v" :space-evenly true :spacing 10
@@ -98,30 +98,33 @@
                 :onclick "sound_manager -s '${card.sink_name}' '${card.profile_name}' '${card.card_name}' 'io' &"
                 :timeout "5s"
                 (box :orientation "h" :spacing 5 :space-evenly false :class "soundbutton-content" :halign "center"
-                  (box :width 25 :style "background-image: url('${SPEAKER_ICON}');" :class "iconcontainer")
+                  (image :image-width 25 :path SPEAKER_ICON :image-height 25)
                   (label :text "${substring(card.display_name,0,12)}${strlength(card.display_name) > 12 ? "..." : ""}" :class "label" :wrap true)
-                  (box :width 25 :style "background-image: url('${MICROPHONE_ICON}');" :class "iconcontainer")))
+                  (image :image-width 25 :path MICROPHONE_ICON :image-height 25)))
               ))
         ))))
 
 (defwidget tasklist []
-  (box :orientation "h" :class "winbox" :height 300
+  (box :orientation "h" :class "winbox" :height {arraylength(todo_list) > 0 ? 300 : 60}
     (scroll :vscroll true :hscroll false
       (box :orientation "v" :spacing 2 :space-evenly false
-        (eventbox :cursor "pointer" :onclick "$TERMINAL -e $EDITOR ${todo_list_file} &"
-          (label :class "title" :text "== TODO =="))
-        (for task in todo_list
-          (checkbox
-            :style "color: #fff;padding: 0 15px;"
-            :onchecked "scripts/task_list -c \"${substring(task, 4, strlength(task)-4)}\""
-            :onunchecked "scripts/task_list -u \"${substring(task, 4, strlength(task)-4)}\""
-            :checked {matches(substring(task, 0, 3), "\[x\]")}
-            (label
-              :class "info ${matches(substring(task, 0, 3), "\[x\]") ? "checked" : ""}"
-              :style " border-bottom: 2px solid #444; margin-bottom: 5px;"
-              :wrap true
-              :text {substring(task, 4, strlength(task)-4)}))
-          )))))
+        (eventbox :cursor "pointer" :onclick "$TERMINAL --class 'Floating' -e $EDITOR ${todo_list_file} &"
+          (box :orientation "h" :space-evenly false :spacing 120 :halign "left" :style "margin-top: 2px; padding-left: 17px"
+            (image :path "images/to-do-list.png" :image-width 45 :image-height 45)
+            (label :class "title" :text "Task List")))
+        (revealer :transition "slidedown" :reveal {arraylength(todo_list) > 0} :duration "500ms" :class "winbox"
+          (for task in todo_list
+            (checkbox
+              :style "color: #fff;padding: 0 15px;"
+              :onchecked "scripts/task_list -c \"${substring(task, 4, strlength(task)-4)}\""
+              :onunchecked "scripts/task_list -u \"${substring(task, 4, strlength(task)-4)}\""
+              :checked {matches(substring(task, 0, 3), "\[x\]")}
+              (label
+                :class "info ${matches(substring(task, 0, 3), "\[x\]") ? "checked" : ""}"
+                :style " border-bottom: 2px solid #444; margin-bottom: 5px;"
+                :wrap true
+                :text {substring(task, 4, strlength(task)-4)}))
+            ))))))
 
 (defwidget sidebar-widget [screen]
   (box :orientation "v" :spacing 8 :space-evenly false
@@ -138,36 +141,35 @@
       (box :class "winbox" :orientation "v" :space-evenly false :height 150 :width 150
         (square-container
           :screen screen
-          :icon "${sys_info.redshift_status == 'on' ? REDSHIFT_ON_ICON : REDSHIFT_OFF_ICON}"
-          :text {sys_info.redshift_status == 'on' ? " ${redshift_temperature}" : " Redshift Off"}
+          :icon "${sys_info?.redshift_status == 'on' ? REDSHIFT_ON_ICON : REDSHIFT_OFF_ICON}"
+          :text {sys_info?.redshift_status == 'on' ? " ${redshift_temperature}" : " Redshift Off"}
           :class "iconcontainer tiny-icon"
           :click "toggle_redshift"))
       (box :class "winbox" :orientation "v" :valign "start" :space-evenly false :height 150 :width 150
         (circular-progress
           :class "iconcontainer chart"
-          :value {sys_info.brightness.percent}
+          :value {sys_info?.brightness.percent}
           :thickness 10
           :clockwise true
           :height 100
           :width 100
-          (label :class "title" :wrap true :text {sys_info.brightness.percent}))
+          (label :class "title" :wrap true :text {sys_info?.brightness.percent}))
         (label :class "info" :text "Brightness"))
       (box :class "winbox" :orientation "v" :space-evenly true :height 150 :width 150
         (square-container
           :screen screen
           :icon "images/floppy-disk.png"
-          :text "${sys_info.disk.used}/${sys_info.disk.size}"
+          :text "${sys_info?.disk.used}/${sys_info?.disk.size}"
           :class "iconcontainer tiny-icon")))
     (box :class "winbox" :orientation "h" :spacing 10
       (eventbox :onclick {packages_to_update > 40 ? "interactive_update &" : ""} :cursor {packages_to_update > 40 ? "pointer" : "default"}
-        (box :orientation "h" :halign "center" :space-evenly false
-          (box :class "iconcontainer" :style "background-image: url('${packages_to_update > 40 ? CLOSED_PACKAGE_ICON : OPEN_PACKAGE_ICON}');" :width 50 :height 50)
+        (box :orientation "h" :halign "left" :space-evenly false :spacing 65 :style "padding: 10px; padding-left: 20px;"
+          (image :path {packages_to_update > 40 ? CLOSED_PACKAGE_ICON : OPEN_PACKAGE_ICON} :image-width 45 :image-height 45)
           (label :class "info" :text {packages_to_update > 40 ? "${packages_to_update} updates available" : "All Good, up to date!"}))))
     (scroll :vscroll true :hscroll false :height {round(screen_resolution["screen-${screen}"].height / 100 * 60, 0)}
       (box :orientation "v" :spacing 10 :space-evenly false
         (sound_selector)
-        (revealer :transition "slidedown" :reveal {arraylength(todo_list) > 0} :duration "500ms" :class "winbox"
-          (tasklist))
+        (tasklist)
       ))
     ))
 
