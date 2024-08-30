@@ -615,6 +615,7 @@ awful.rules.rules = {
         class = {
           "Arandr",
           "Blueman-manager",
+		  "Floating",
           "Gpick",
           "Kruler",
           "MessageWin",  -- kalarm.
@@ -649,6 +650,8 @@ awful.rules.rules = {
 		properties = { tag = "二" } },
 	{ rule = { class = "Brave-browser" },
 		properties = { tag = "二" } },
+	{ rule = { class = "Krita" },
+		properties = { tag = "三" } },
 	{ rule = { class = "Mail" },
 		properties = { tag = "四" } },
 	{ rule = { class = "thunderbird" },
@@ -660,6 +663,8 @@ awful.rules.rules = {
 	{ rule = { class = "httpie" },
 		properties = { tag = "五" } },
 	{ rule = { class = "HTTPie" },
+		properties = { tag = "五" } },
+	{ rule = { class = "zoom" },
 		properties = { tag = "五" } },
 	{ rule = { class = "Slack" },
 		properties = { tag = "六" } },
