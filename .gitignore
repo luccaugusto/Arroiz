@@ -3,3 +3,4 @@ plugged
 __pycache__
 */ranger/history
 sxhkdrc
+.local/bin/vendor
