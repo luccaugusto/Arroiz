@@ -13,6 +13,7 @@
 (defvar REDSHIFT_OFF_ICON "images/blueeye.png")
 
 (defpoll sys_info :interval "2s" :initial "{}" "scripts/sys_info")
+(defpoll task_list_empty_text :interval "10m" :initial "No tasks to do" "scripts/task_list -e")
 (defpoll packages_to_update :interval "12h" :initial 0 "pacman -Qu | wc -l")
 (defpoll todo_list :interval "10m" :initial "[]" "scripts/task_list -l")
 (defvar todo_list_file "~/Documents/personal-notes/TODO.wiki")
@@ -50,9 +51,10 @@
 (defwidget sound_selector []
   (box :class "winbox" :style "padding-bottom: 10px" :orientation "v" :space-evenly "false"
     (eventbox :onclick {show_sound_control ? "echo false >> ${sound_control_status}" : "echo true >> ${sound_control_status}"} :cursor "pointer"
-      (box :orientation "h" :space-evenly false :spacing 85 :style "padding-left: 20px" :halign "left"
+      (box :orientation "h" :space-evenly false :spacing 85 :style "padding-left: 20px" :halign "baseline"
         (image :image-width 45 :image-height 45 :path "images/mixer.png" :style "margin-top: 10px;")
-        (label :text "Sound Control" :class "title")))
+        (label :text "Sound Control" :class "title")
+        (image :image-width 35 :image-height 35 :path {show_sound_control ? "images/upward-arrow.png" : "images/downward-arrow.png"} :style "margin-top: 10px;")))
     (revealer :transition "slidedown" :reveal {show_sound_control}
       (box :orientation "v"
         (box :orientation "h" :spacing 10 :space-evenly true :height 100
@@ -105,13 +107,15 @@
         ))))
 
 (defwidget tasklist []
-  (box :orientation "h" :class "winbox" :height {arraylength(todo_list) > 0 ? 300 : 60}
+  (box :orientation "h" :class "winbox" :height {arraylength(todo_list) > 0 ? 300 : 90}
     (scroll :vscroll true :hscroll false
       (box :orientation "v" :spacing 2 :space-evenly false
         (eventbox :cursor "pointer" :onclick "$TERMINAL --class 'Floating' -e $EDITOR ${todo_list_file} &"
-          (box :orientation "h" :space-evenly false :spacing 120 :halign "left" :style "margin-top: 2px; padding-left: 17px"
+          (box :orientation "h" :space-evenly false :spacing 120 :halign "baseline" :style "margin-top: 2px; padding-left: 17px"
             (image :path "images/to-do-list.png" :image-width 45 :image-height 45)
             (label :class "title" :text "Task List")))
+          (revealer :reveal {arraylength(todo_list) == 0}
+            (label :class "note" :text task_list_empty_text))
         (revealer :transition "slidedown" :reveal {arraylength(todo_list) > 0} :duration "500ms" :class "winbox"
           (for task in todo_list
             (checkbox
@@ -163,7 +167,7 @@
           :class "iconcontainer tiny-icon")))
     (box :class "winbox" :orientation "h" :spacing 10
       (eventbox :onclick {packages_to_update > 40 ? "interactive_update &" : ""} :cursor {packages_to_update > 40 ? "pointer" : "default"}
-        (box :orientation "h" :halign "left" :space-evenly false :spacing 65 :style "padding: 10px; padding-left: 20px;"
+        (box :orientation "h" :halign "baseline" :space-evenly false :spacing 65 :style "padding: 10px; padding-left: 20px;"
           (image :path {packages_to_update > 40 ? CLOSED_PACKAGE_ICON : OPEN_PACKAGE_ICON} :image-width 45 :image-height 45)
           (label :class "info" :text {packages_to_update > 40 ? "${packages_to_update} updates available" : "All Good, up to date!"}))))
     (scroll :vscroll true :hscroll false :height {round(screen_resolution["screen-${screen}"].height / 100 * 60, 0)}

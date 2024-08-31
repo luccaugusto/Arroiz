@@ -21,6 +21,11 @@ uncheck_task()
 	sed -i "s/^\[x\] $1/[ ] $1/" $task_list
 }
 
+no_task_message()
+{
+	echo "Just go Skate..."
+}
+
 op="$1" && shift
 [ "$1" ] && arg="$1" && shift
 
@@ -35,6 +40,9 @@ case "$op" in
 			echo "No task specified" && exit 1
 		fi
 		uncheck_task "$arg"
+		;;
+	-e)
+		no_task_message
 		;;
 	*) echo "Invalid operation" && exit 1 ;;
 esac
