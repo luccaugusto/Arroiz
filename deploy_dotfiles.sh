@@ -1,5 +1,12 @@
 #!/bin/sh
 
+src="$(dirname "$0")"
+if [ "$src" = '.' ]; then
+	src="$PWD"
+else
+	src="$PWD/${src#*/}"
+fi
+
 create_symlink()
 {
 	origin="$1"
@@ -41,12 +48,5 @@ synchome()
 		fi
 	done
 }
-
-src="$(dirname "$0")"
-if [ "$src" = '.' ]; then
-	src="$PWD"
-else
-	src="$PWD/${src#*/}"
-fi
 
 synchome
