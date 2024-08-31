@@ -4,28 +4,21 @@ configuration {
       action: "kb-cancel";
       delay:  0;
   }
-  filebrowser {
-      directories-first: true;
-      sorting-method:    "name";
-  }
 }
 
 * {
     bg0:    #212121F2;
-    bg1:    #2A2A2A;
+    bg1:    #a7bac6;
     bg2:    #3D3D3D80;
     bg3:    #bc4793;
     fg0:    #E6E6E6;
     fg1:    #FFFFFF;
     fg2:    #969696;
     fg3:    #3D3D3D;
-}
 
-* {
-    font:   "Roboto 12";
+    font:   "Monaco 18";
 
     background-color:   transparent;
-    text-color:         @fg3;
 
     margin:     0px;
     padding:    0px;
@@ -34,89 +27,54 @@ configuration {
 
 window {
     location:       center;
-    width:          480;
-	height:         15%;
-    border-radius:  10px;
-	border-color: @bg3;
+    width:          485;
+	height:         700px;
+    border-radius:  20px;
+	border-color: @fg3;
 
     background-color:   @bg0;
 }
 
 mainbox {
-    padding:    12px;
+    enabled:                     true;
+    spacing:                     0px;
+    background-color:            transparent;
+    orientation:                 horizontal;
+	children: [imagebox];
+}
+
+imagebox {
+    padding:                     0;
+    background-color:            transparent;
+    background-image:            url("~/.config/rofi/images/calculator.png", height);
+    orientation:                 vertical;
+	children: [inputbar, message];
 }
 
 inputbar {
-    background-color:   @fg0;
-    border-color:       @bg3;
+    background-color:   @bg1;
 
-    border:         1px;
-    border-radius:  10px;
+    border-color:   @fg2;
+    border-radius:  8px;
 
-    padding:    8px 16px;
-    spacing:    8px;
-    children:   [ prompt, entry ];
+    padding:    16px;
+	margin:     70px 45px 0 44px;
+    children:   [ entry ];
 }
 
 prompt {
-    text-color: @fg2;
+	placeholder: "";
 }
 
 entry {
-    placeholder:        "Search";
+	text-color: @fg3;
+    placeholder:        "Mathematical";
     placeholder-color:  @fg3;
 }
 
 message {
-    margin:             12px 0 0;
-    border-radius:      10px;
-    border-color:       @bg2;
-    background-color:   @fg2;
+	margin:     0 45px 0 44px;
+	padding:            16px;
+    background-color:   @bg1;
 	text-color:         @fg1;
-}
-
-textbox {
-    padding:    8px 24px;
-}
-
-listview {
-    background-color:   transparent;
-
-    margin:     12px 0 0;
-    lines:      8;
-    columns:    1;
-
-    fixed-height: false;
-}
-
-scrollbar {
-	handle-color: @bg3;
-	handle-width: 5px;
-}
-
-element {
-    padding:        2px 16px;
-    spacing:        0;
-    border-radius:  5px;
-	background-color: @bg0;
-}
-
-element normal normal, element alternate normal {
-	background-color: transparent;
-	text-color: @fg1;
-}
-
-element selected normal, element selected active {
-    background-color:   @bg3;
-}
-
-element-icon {
-    size:           2em;
-	padding: 0 5px 0 0;
-    vertical-align: 0.5;
-}
-
-element-text {
-    text-color: inherit;
-	vertical-align: 0.5;
 }
