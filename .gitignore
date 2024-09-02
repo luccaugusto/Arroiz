@@ -4,4 +4,8 @@ __pycache__
 */ranger/history
 sxhkdrc
 .local/bin/vendor
-.config/transmission/resume
+*/transmission/resume
+*/transmission/stats.json
+*/transmission/dht.*
+*/transmission/settings.json.*
+*/ranger/bookmarks
