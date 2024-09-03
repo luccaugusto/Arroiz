@@ -30,17 +30,6 @@
       (image :path "images/thonk.png" :image-width 60 :image-height 60)
       (label :class "quote_text" :valign "center" :halign "center" :text piece_of_wisdom :wrap true))))
 
-(defwidget square-container [screen icon text ?click ?class]
-  (eventbox :onclick "${click}" :cursor {click == "" ? "default" : "pointer"}
-    (box
-      :class {class == "" ? "iconcontainer" : class}
-      :style "background-image: url('${icon}');"
-      :width 125
-      :height 125
-      :spacing 15
-      :valign "center"
-      (label :class "label" :valign "end" :halign "center" :text {text} :wrap true))))
-
 (defwidget profile []
   (box :class "winbox" :hexpand true :space-evenly false
     (label :class "profile" :style "padding-left: 10px;" :text " ${sys_info?.profile.user}@${sys_info?.profile.hostname}: ")
@@ -127,29 +116,26 @@
         :cursor "pointer")
       (profile))
     (box :orientation "h" :spacing 10 :space-evenly true
-      (box :class "winbox" :orientation "v" :space-evenly false :height 150 :width 150
-        (square-container
-          :screen screen
-          :icon "${sys_info?.redshift_status == 'on' ? REDSHIFT_ON_ICON : REDSHIFT_OFF_ICON}"
-          :text {sys_info?.redshift_status == 'on' ? " ${redshift_temperature}" : " Redshift Off"}
-          :class "iconcontainer tiny-icon"
-          :click "toggle_redshift"))
-      (box :class "winbox" :orientation "v" :valign "start" :space-evenly false :height 150 :width 150
-        (circular-progress
-          :class "iconcontainer chart"
-          :value {sys_info?.brightness.percent}
-          :thickness 10
-          :clockwise true
-          :height 100
-          :width 100
-          (label :class "title" :wrap true :text {sys_info?.brightness.percent}))
-        (label :class "info" :text "Brightness"))
-      (box :class "winbox" :orientation "v" :space-evenly true :height 150 :width 150
-        (square-container
-          :screen screen
-          :icon "images/floppy-disk.png"
-          :text "${sys_info?.disk.used}/${sys_info?.disk.size}"
-          :class "iconcontainer tiny-icon")))
+      (eventbox :onclick "toggle_redshift" :cursor "pointer"
+        (box :class "winbox" :orientation "v" :space-evenly false :height 150 :width 150 :spacing 8 :style "padding-top: 15px;"
+          (image :path "${sys_info?.redshift_status == 'on' ? REDSHIFT_ON_ICON : REDSHIFT_OFF_ICON}" :image-width 80 :image-height 80)
+          (label :text "${sys_info?.redshift_status == 'on' ? redshift_temperature : 'Redshift Off'}" :class "info")))
+      (box :class "winbox" :orientation "v" :valign "center" :space-evenly true :height 150 :width 150
+        (box :class "" :orientation "h" :valign "center" :space-evenly true
+          (eventbox :onclick "elisa &" :cursor "pointer"
+            (image :path "images/music.png" :image-width 50 :image-height 50))
+          (eventbox :onclick "notion-calendar-electron &" :cursor "pointer"
+            (image :path "images/notion-calendar.png" :image-width 50 :image-height 50)))
+        (box :class "" :orientation "h" :valign "center" :space-evenly true
+          (eventbox :onclick "arandr &" :cursor "pointer"
+            (image :path "images/monitor-config.png" :image-width 50 :image-height 50))
+
+          (eventbox :onclick "notify-send 'Meow'" :cursor "pointer"
+            (image :path "images/cat.png" :image-width 50 :image-height 50))))
+
+      (box :class "winbox" :orientation "v" :space-evenly false :height 150 :width 150 :spacing 8 :style "padding-top: 20px;"
+        (image :path "images/floppy-disk.png" :image-width 80 :image-height 80)
+        (label :class "info" :text "${sys_info?.disk.used}/${sys_info?.disk.size}")))
     (box :class "winbox" :orientation "h" :spacing 10
       (eventbox :onclick {packages_to_update > 40 ? "interactive_update &" : ""} :cursor {packages_to_update > 40 ? "pointer" : "default"}
         (box :orientation "h" :halign "baseline" :space-evenly false :spacing 65 :style "padding: 10px; padding-left: 20px;"
