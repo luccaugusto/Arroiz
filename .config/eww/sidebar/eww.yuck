@@ -101,18 +101,19 @@
           (revealer :reveal {arraylength(todo_list) == 0}
             (label :class "note" :text task_list_empty_text))
         (revealer :transition "slidedown" :reveal {arraylength(todo_list) > 0} :duration "500ms" :class "winbox"
-          (for task in todo_list
-            (checkbox
-              :style "color: #fff;padding: 0 15px;"
-              :onchecked "scripts/task_list -c \"${substring(task, 4, strlength(task)-4)}\""
-              :onunchecked "scripts/task_list -u \"${substring(task, 4, strlength(task)-4)}\""
-              :checked {matches(substring(task, 0, 3), "\[x\]")}
-              (label
-                :class "info ${matches(substring(task, 0, 3), "\[x\]") ? "checked" : ""}"
-                :style " border-bottom: 2px solid #444; margin-bottom: 5px;"
-                :wrap true
-                :text {substring(task, 4, strlength(task)-4)}))
-            ))))))
+          (box :orientation "v" :spacing 5 :space-evenly false
+            (for task in todo_list
+              (checkbox
+                :style "color: #fff;padding: 0 15px;"
+                :onchecked "scripts/task_list -c \"${substring(task, 4, strlength(task)-4)}\""
+                :onunchecked "scripts/task_list -u \"${substring(task, 4, strlength(task)-4)}\""
+                :checked {matches(substring(task, 0, 3), "\[x\]")}
+                (label
+                  :class "info ${matches(substring(task, 0, 3), "\[x\]") ? "checked" : ""}"
+                  :style "border-bottom: 2px solid #444; margin-bottom: 5px;"
+                  :wrap true
+                  :text {substring(task, 4, strlength(task)-4)}))
+            )))))))
 
 (defwidget sidebar-widget [screen]
   (box :orientation "v" :spacing 8 :space-evenly false
