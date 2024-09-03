@@ -11,15 +11,15 @@
 (defsrc
 	caps 7 8 9
 	     u i o
-	grv  j k l
+	tab  j k l
 		   m
 )
 
 (deflayer base
-	ctl   7 8 9
-		  u i o
-	@grv  j k l
-		    m
+	ctl      7 8 9
+		     u i o
+	@tabnum  j k l
+		       m
 )
 
 (deflayer numpad
@@ -31,6 +31,6 @@
 
 (defalias
 	escctl (tap-hold 100 100 esc lctl)
-	grv (tap-hold-press 200 200 grv (layer-toggle numpad))
+	tabnum (tap-hold-press 200 200 tab (layer-toggle numpad))
 )
 
