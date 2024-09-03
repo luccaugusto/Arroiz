@@ -88,22 +88,6 @@
                   (image :image-width 25 :image-height 25 :path MICROPHONE_ICON)
                   (label :halign "center" :text "${substring(card.display_name,0,12)}${strlength(card.display_name) > 12 ? "..." : ""}" :class "label" :wrap true)))
               )))
-          (box :orientation "v" :space-evenly true :spacing 10
-            (label :text "IO" :class "info")
-            (for card in {sys_info?.sound.io}
-              (eventbox
-                :height 50
-                :width 120
-                :cursor "pointer"
-                :halign "center"
-                :class "soundbutton ${card.active ? 'soundactive' : ''}"
-                :onclick "sound_manager -s '${card.sink_name}' '${card.profile_name}' '${card.card_name}' 'io' &"
-                :timeout "5s"
-                (box :orientation "h" :spacing 5 :space-evenly false :class "soundbutton-content" :halign "center"
-                  (image :image-width 25 :path SPEAKER_ICON :image-height 25)
-                  (label :text "${substring(card.display_name,0,12)}${strlength(card.display_name) > 12 ? "..." : ""}" :class "label" :wrap true)
-                  (image :image-width 25 :path MICROPHONE_ICON :image-height 25)))
-              ))
         ))))
 
 (defwidget tasklist []
