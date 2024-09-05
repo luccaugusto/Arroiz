@@ -1,0 +1,6 @@
+#!/bin/sh
+
+month=$(date +%m)
+month=${month#0}
+
+echo $month

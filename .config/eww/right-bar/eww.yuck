@@ -3,6 +3,10 @@
 ;; Time vars
 (defpoll TIME :interval "1m" `date +\"%H:%M\"`)
 (defpoll DATE :interval "24h" `date +\"%a, %B %d\"`)
+(defpoll calendar_day :interval "10h" "date '+%d'")
+(defpoll calendar_month :interval "10h" "scripts/calendar_month")
+(defpoll calendar_year :interval "10h" "date '+%Y'")
+
 
 ;; Battery vars
 (defpoll BATSTATUS :interval "2m" `batstatus --no-icon`)
@@ -27,6 +31,7 @@
 ;; Network
 (defpoll WIFIICON :initial "images/icons/system/no-wifi.png" :interval "1m" `scripts/check-network --icon`)
 (defpoll NETSTAT :initial "Checking Network" :interval "30s" `scripts/check-network --stat`)
+
 
 ;; ** Widgets *************************************************************************
 
@@ -57,15 +62,18 @@
     (eventbox :onclick "scripts/toggle_calendar" :cursor "pointer"
       (box :class "clockbox" :orientation "v" :spacing 0 :valign "center" :halign "end" :space-evenly "false" :vexpand "false" :hexpand "false"
         (label :class "time" :halign "end" :wrap "false" :limit-width 25 :text TIME)
-        (label :class "date" :halign "start" :wrap "false" :text DATE)))))
+        (label :class "date" :halign "start" :wrap "false" :text DATE)))
+    (eventbox :onclick "toggle_sidebar" :cursor "pointer"
+      (image :path "images/dotdotdot2-r.png" :image-height 30 :image-width 30))
+    ))
 
 (defwidget right-calendar []
-    (calendar
-      :class "calendar"
-      :show-details false
-      :halign "center"
-      :vexpand "true"
-      :hexpand "true"))
+	(box :class "cal-box"
+		 :orientation "v"
+	(calendar :class "cal"
+			  :day calendar_day
+			  :month calendar_month
+			  :year calendar_year)))
 
 ;; ** Windows *************************************************************************
 
