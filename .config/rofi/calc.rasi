@@ -68,7 +68,7 @@ prompt {
 
 entry {
 	text-color: @fg3;
-    placeholder:        "Mathematical";
+    placeholder:        "";
     placeholder-color:  @fg3;
 }
 
