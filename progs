@@ -61,6 +61,7 @@ luit
 m4
 make
 man-db
+mkinitcpio-firmware
 mpc
 mpd
 nerd-fonts-complete
