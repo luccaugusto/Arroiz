@@ -2,9 +2,8 @@
 #- git checkout wrapper so i always pull when checking out a branch
 
 branch="$1"
-theme=~/.config/rofi/config.rasi
 
-[ "$branch" ] || branch=$(git branch | awk '{if($1 != "*") print $1}' | rofi -dmenu -theme "$theme" -l 10)
+[ "$branch" ] || branch=$(git branch | awk '{if($1 != "*") print $1}' | rofi -dmenu -l 10)
 #exclude current branch
 #[ "$branch" ] || select branch in $(git branch | awk '{if($1 != "*") print $1}'); do break; done
 
