@@ -2,6 +2,7 @@
 
 config="$HOME/.config/eww/sidebar/"
 lock_file="/tmp/eww_sidebar_open"
+screens_resolutions=$(sh "$config/scripts/screen_resolutions")
 
 run_eww() {
 	current_desktop=$(awesome-client 'return mouse.screen.index' | cut -d ' ' -f 5)
@@ -10,7 +11,9 @@ run_eww() {
 		sidebar:sidebar \
 		quotes:quotes \
 		--arg sidebar:screen="$monitor" \
-		--arg quotes:screen="$monitor"
+		--arg sidebar:screens_resolutions="$screens_resolutions" \
+		--arg quotes:screen="$monitor" \
+		--arg quotes:screens_resolutions="$screens_resolutions"
 }
 
 if [ ! -f "$lock_file" ]; then

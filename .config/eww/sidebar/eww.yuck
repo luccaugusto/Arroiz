@@ -1,7 +1,5 @@
 ;; ** Variables ***********************************************************************
 
-(defpoll screen_resolution :interval "8h" "scripts/screen_resolutions")
-
 (defvar SPEAKER_ICON "images/speaker.png")
 (defvar MICROPHONE_ICON "images/microphone.png")
 (defvar SPEAKER_MIC_ICON "images/speaker_mic.png")
@@ -12,6 +10,7 @@
 (defvar REDSHIFT_ON_ICON "images/redeye.png")
 (defvar REDSHIFT_OFF_ICON "images/blueeye.png")
 
+(defpoll random_pic :interval "1h" :initial "images/thonk.png" "scripts/random_pic")
 (defpoll sys_info :interval "2s" :initial "{}" "scripts/sys_info")
 (defpoll task_list_empty_text :interval "10m" :initial "No tasks to do" "scripts/task_list -e")
 (defpoll packages_to_update :interval "12h" :initial 0 "pacman -Qu | wc -l")
@@ -104,7 +103,7 @@
                   :text {substring(task, 4, strlength(task)-4)}))
             )))))))
 
-(defwidget sidebar-widget [screen]
+(defwidget sidebar-widget [screen screens_resolutions]
   (box :orientation "v" :spacing 8 :space-evenly false
     (box :orientation "h" :spacing 4 :space-evenly false
       (eventbox
@@ -128,9 +127,9 @@
             (image :path "images/notion-calendar.png" :image-width 50 :image-height 50)))
         (box :class "" :orientation "h" :valign "center" :space-evenly true
           (eventbox :onclick "arandr &" :cursor "pointer"
-            (image :path "images/monitor-config.png" :image-width 50 :image-height 50))
+            (image :path "images/monitor-config2.png" :image-width 50 :image-height 50))
 
-          (eventbox :onclick "notify-send 'Meow'" :cursor "pointer"
+          (eventbox :onclick "paplay assets/miau.mp3 &" :cursor "pointer"
             (image :path "images/cat.png" :image-width 50 :image-height 50))))
 
       (box :class "winbox" :orientation "v" :space-evenly false :height 150 :width 150 :spacing 8 :style "padding-top: 20px;"
@@ -141,35 +140,37 @@
         (box :orientation "h" :halign "baseline" :space-evenly false :spacing 65 :style "padding: 10px; padding-left: 20px;"
           (image :path {packages_to_update > 40 ? CLOSED_PACKAGE_ICON : OPEN_PACKAGE_ICON} :image-width 45 :image-height 45)
           (label :class "info" :text {packages_to_update > 40 ? "${packages_to_update} updates available" : "All Good, up to date!"}))))
-    (scroll :vscroll true :hscroll false :height {round(screen_resolution["screen-${screen}"].height / 100 * 60, 0)}
-      (box :orientation "v" :spacing 10 :space-evenly false
+    (scroll :vscroll true :hscroll false :height {screens_resolutions["screen-${screen}"].height > 900 ? 600 : 420};;{round(screens_resolutions["screen-${screen}"].height / 100 * 31, 0)}
+      (box :orientation "v" :spacing 8 :space-evenly false
         (sound_selector)
         (tasklist)
+        (box :class "winbox" :height 200 :orientation "h"
+            (image :path random_pic :image-height 180))
       ))
     ))
 
 ;; ** Windows *************************************************************************
 
-(defwindow sidebar [screen]
+(defwindow sidebar [screen screens_resolutions]
   :monitor screen
   :geometry (geometry :x "-1%"
-  :y "6%"
-  :width "25%"
-  :height "87%"
-  :anchor "top right")
+    :y "6%"
+    :width "25%"
+    :height "87%"
+    :anchor "top right")
   :stacking "fg"
   :windowtype "normal"
   :wm-ignore true
-  (sidebar-widget :screen screen))
+  (sidebar-widget :screen screen :screens_resolutions screens_resolutions))
 
 
-(defwindow quotes [screen]
+(defwindow quotes [screen screens_resolutions]
   :monitor screen
   :geometry (geometry :x "-1%"
-  :y "-2%"
-  :width "25%"
-  :height "5%"
-  :anchor "bottom right")
+    :y "-2%"
+    :width {screens_resolutions["screen-${screen}"].width > 1600 ? "25%" : "30%"}
+    :height "5%"
+    :anchor "bottom right")
   :stacking "fg"
   :windowtype "normal"
   :wm-ignore true

@@ -1,0 +1,24 @@
+#!/bin/sh
+
+pics_folder="$HOME/pics"
+
+pick_pic()
+{
+	pic="$(find "$pics_folder" -name "*"  | sort -R | head -n 1)"
+	format="$(file --mime-type -b "$pic")"
+}
+
+retry=1
+
+while [ $retry = 1 ]; do
+	case "$format" in
+		*image*)
+			echo "$pic"
+			retry=0
+			;;
+		*)
+			pick_pic
+			retry=1
+			;;
+	esac
+done

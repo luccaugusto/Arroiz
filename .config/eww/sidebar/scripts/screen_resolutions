@@ -4,9 +4,9 @@ monitors=''
 index=0
 for resolutions in $(xrandr --listactivemonitors | tail -n +2 | awk '{print $3}')
 do
-	height="${resolutions%%/*}"
-	width_info="${resolutions##*x}"
-	width="${width_info%%/*}"
+	width="${resolutions%%/*}"
+	height_info="${resolutions##*x}"
+	height="${height_info%%/*}"
 
 	monitors="$monitors\"screen-$index\":{\"height\":$height,\"width\":$width}, "
 	index=$((index+1))

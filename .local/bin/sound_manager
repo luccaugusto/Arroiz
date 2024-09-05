@@ -195,7 +195,7 @@ def hdmi_connected():
     return monitors.find("HDMI") != -1 or monitors.find("DP-2-") != -1
 
 
-def get_cards_by_type(all_cards: list[dict[str, Any]], card_type: str, sink_in_use: str) -> dict[str, Card]:
+def get_cards_by_type(all_cards: list[dict[str, Any]], card_type: str, card_in_use: str) -> dict[str, Card]:
     output_cards = {}
     for card in all_cards:
         profile_name, profile = get_priority_profile(card, card_type)
@@ -215,7 +215,7 @@ def get_cards_by_type(all_cards: list[dict[str, Any]], card_type: str, sink_in_u
             profile,
             card_name,
             card["name"],
-            active=sink in sink_in_use,
+            active=sink in card_in_use,
             display_name=display_name if display_name is not None else card["name"],
         )
 
@@ -303,10 +303,7 @@ if __name__ == "__main__":
                 continue
             set_card_profile(input_card.sink_name, "off")
 
-    notification_header = f"Switching to {card_to_use.card_name} audio"
-    notification_body = (
-        f"Playing on {card_to_use.card_name}'s speakers and using device's microphone"
-    )
+    card_type = "IO" if output_changed and input_changed else "Output" if output_changed else "Input"
+    notification_header = f"Switched {card_type}"
+    notification_body = card_to_use.card_name
     run(["notify-send", notification_header, notification_body])
-
-    # TODO: set input device or webcam
