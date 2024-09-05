@@ -19,6 +19,7 @@
     icon_position = left
     min_icon_size = 32
     max_icon_size = 32
+	origin = top-center
 
 [urgency_low]
     background = "#253238"
