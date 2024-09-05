@@ -64,3 +64,32 @@ for index, label in enumerate(workspace_labels):
 
 
 print(dumps(workspaces_by_monitor, ensure_ascii=False))
+
+# shell script version
+#!/bin/sh
+#
+#workspaces="$(wmctrl -d)"
+#windows_open="$(wmctrl -lx)"
+#workspace_labels="$(echo "$workspaces" | awk '{print $9}')\n$(echo "$workspaces" | awk '{print $9}')"
+##workspace_labels="$(echo "$workspaces" | awk '{print $9}')"
+#current_workspace="$(echo "$workspaces" | awk '/\*/ {print $1}')"
+#active_workspaces="$(echo "$windows_open" | awk '{print $2}')"
+#
+#echo "$windows_open"
+#
+#i=0
+#monitor=0
+#workspace_info="{\"0\":["
+#open_in_monitor=0
+#for workspace in $workspace_labels; do
+#	cur_monitor=$((i / 10))
+#	[ "$monitor" != $cur_monitor ] && workspace_info="${workspace_info%,}],\"$cur_monitor\":"
+#	monitor=$cur_monitor
+#	class="empty"
+#	[ "$(echo "$active_workspaces" | grep -xc "$i")" -gt 0 ] && class="active"
+#	[ "$i" = "$current_workspace" ] && class="current" && open_in_monitor="$cur_monitor"
+#	workspace_info="$workspace_info{\"class\": \"$class\", \"index\": $i, \"label\": \"$workspace\"},"
+#	i=$((i + 1))
+#done
+#echo "$workspace_info\"open_in_monitor\": $open_in_monitor}]"
+
