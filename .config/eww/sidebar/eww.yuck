@@ -111,7 +111,7 @@
         :width "60"
         :class "winbox iconcontainer tiny-icon"
         :style "background-image: url('images/close.png');"
-        :onclick "toggle_sidebar"
+        :onclick "toggle_sidebar &"
         :cursor "pointer")
       (profile))
     (box :orientation "h" :spacing 10 :space-evenly true
@@ -144,9 +144,13 @@
       (box :orientation "v" :spacing 8 :space-evenly false
         (sound_selector)
         (tasklist)
-        (box :class "winbox" :orientation "h" :style "padding-top: 10px; padding-bottom: 10px"
-          (eventbox :onclick "sxiv ${random_pic} &" :cursor "pointer"
-            (image :path random_pic :image-width 400)))
+        (box :class "winbox" :orientation "v" :style "padding-top: 10px; padding-bottom: 10px" :space-evenly false :spacing 10
+          (box :orientation "h" :space-evenly false :spacing 65 :style "padding-left: 15px;"
+            (eventbox :onclick "random_pic=$(scripts/random_pic) && eww -c . update random_pic=\"$random_pic\" &" :cursor "pointer"
+              (image :path "images/refresh.png" :image-width 40 :image-height 40))
+            (label :text "Hey, look what i found" :class "info"))
+          (eventbox :onclick "sxiv ${random_pic} &" :cursor "pointer" :class "iconcontainer" :style "background-image: url('${random_pic}');"
+            (image :class "picture" :path random_pic :image-width {round(screens_resolutions["screen-${screen}"].width / 100 * 24, 0)})))
       ))
     ))
 
