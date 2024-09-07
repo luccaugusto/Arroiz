@@ -142,6 +142,7 @@ def find_card_by_device(output_cards, device_name) -> Card:
     raise Exception(f"Card with device name {device_name} not found")
 
 
+# TODO: if card is used as input, set it for IO instead of only output
 def decide_output(output_cards, sink_in_use) -> Card:
     connected_cards = "|".join(output_cards.keys())
 

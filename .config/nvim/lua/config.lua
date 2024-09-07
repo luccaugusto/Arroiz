@@ -303,6 +303,7 @@ local servers = {
 	'ruby_lsp',
 	--'ruff',
 	'solargraph',
+	'sqlls',
 	'tsserver',
 	'yamlls',
 }
