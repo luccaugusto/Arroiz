@@ -63,8 +63,8 @@
       (box :class "clockbox" :orientation "v" :spacing 0 :valign "center" :halign "end" :space-evenly "false" :vexpand "false" :hexpand "false"
         (label :class "time" :halign "end" :wrap "false" :limit-width 25 :text TIME)
         (label :class "date" :halign "start" :wrap "false" :text DATE)))
-    (eventbox :onclick "toggle_sidebar" :cursor "pointer"
-      (image :path "images/dotdotdot2-r.png" :image-height 30 :image-width 30))
+    (eventbox :onclick "toggle_sidebar &" :cursor "pointer"
+      (image :path "images/menu.png" :image-height 25 :image-width 25))
     ))
 
 (defwidget right-calendar []

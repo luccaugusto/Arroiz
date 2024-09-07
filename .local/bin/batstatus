@@ -57,6 +57,12 @@ if [ "$1" == '--util' ]; then
 	bat_util
 elif [ "$1" == '--total' ]; then
 	bat_status '--total'
+elif [ "$1" == '--status' ]; then
+	for bat in /sys/class/power_supply/BAT*
+	do
+		[ "$(cat "$bat/status")" = 'Charging' ] && echo 'Charging' && exit 0
+	done
+	echo 'Discharging'
 else
 	bat_status "$1"
 fi
