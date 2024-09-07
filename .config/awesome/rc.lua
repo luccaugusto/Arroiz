@@ -20,7 +20,7 @@ local mytable       = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 -- {{{ Error handling
 
-naughty.config.presets.defaults.position = "top_middle"
+naughty.config.defaults.position = "top_middle"
 
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -644,7 +644,7 @@ awful.rules.rules = {
 		properties = { tag = "二" } },
 	{ rule = { class = "Brave-browser" },
 		properties = { tag = "二" } },
-	{ rule = { class = "Krita" },
+	{ rule = { class = "krita" },
 		properties = { tag = "三" } },
 	{ rule = { class = "Mail" },
 		properties = { tag = "四" } },
