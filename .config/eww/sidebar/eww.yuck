@@ -115,10 +115,17 @@
         :cursor "pointer")
       (profile))
     (box :orientation "h" :spacing 10 :space-evenly true
-      (eventbox :onclick "toggle_redshift" :cursor "pointer"
-        (box :class "winbox" :orientation "v" :space-evenly false :height 150 :width 150 :spacing 8 :style "padding-top: 15px;"
-          (image :path "${sys_info?.redshift_status == 'on' ? REDSHIFT_ON_ICON : REDSHIFT_OFF_ICON}" :image-width 80 :image-height 80)
-          (label :text "${sys_info?.redshift_status == 'on' ? redshift_temperature : 'Redshift Off'}" :class "info")))
+
+      (eventbox :onclick {packages_to_update > 40 ? "interactive_update &" : ""} :cursor {packages_to_update > 40 ? "pointer" : "default"}
+        (box :orientation "v" :valign "end" :space-evenly false :spacing 10 :style "padding: 10px;" :class "winbox" :height 150 :width 150
+          (image :path {packages_to_update > 40 ? CLOSED_PACKAGE_ICON : OPEN_PACKAGE_ICON} :image-width 65 :image-height 65)
+          (label :class "info" :justify "center" :wrap true :text {packages_to_update > 40 ? "${packages_to_update} updates available" : "All Good, up to date!"})))
+
+      ;; (eventbox :onclick "toggle_redshift" :cursor "pointer"
+      ;;   (box :class "winbox" :orientation "v" :space-evenly false :height 150 :width 150 :spacing 8 :style "padding-top: 15px;"
+      ;;     (image :path "${sys_info?.redshift_status == 'on' ? REDSHIFT_ON_ICON : REDSHIFT_OFF_ICON}" :image-width 80 :image-height 80)
+      ;;     (label :text "${sys_info?.redshift_status == 'on' ? redshift_temperature : 'Redshift Off'}" :class "info")))
+
       (box :class "winbox" :orientation "v" :valign "center" :space-evenly true :height 150 :width 150
         (box :class "" :orientation "h" :valign "center" :space-evenly true
           (eventbox :onclick "elisa &" :cursor "pointer"
@@ -135,12 +142,7 @@
       (box :class "winbox" :orientation "v" :space-evenly false :height 150 :width 150 :spacing 8 :style "padding-top: 20px;"
         (image :path "images/floppy-disk.png" :image-width 80 :image-height 80)
         (label :class "info" :text "${sys_info?.disk.used}/${sys_info?.disk.size}")))
-    (box :class "winbox" :orientation "h" :spacing 10
-      (eventbox :onclick {packages_to_update > 40 ? "interactive_update &" : ""} :cursor {packages_to_update > 40 ? "pointer" : "default"}
-        (box :orientation "h" :halign "baseline" :space-evenly false :spacing 65 :style "padding: 10px; padding-left: 20px;"
-          (image :path {packages_to_update > 40 ? CLOSED_PACKAGE_ICON : OPEN_PACKAGE_ICON} :image-width 45 :image-height 45)
-          (label :class "info" :text {packages_to_update > 40 ? "${packages_to_update} updates available" : "All Good, up to date!"}))))
-    (scroll :vscroll true :hscroll false :height {screens_resolutions["screen-${screen}"].height > 900 ? 590 : 420};;{round(screens_resolutions["screen-${screen}"].height / 100 * 31, 0)}
+    (scroll :vscroll true :hscroll false :height {screens_resolutions["screen-${screen}"].height > 900 ? 650 : 480};;{round(screens_resolutions["screen-${screen}"].height / 100 * 31, 0)}
       (box :orientation "v" :spacing 8 :space-evenly false
         (sound_selector)
         (tasklist)
