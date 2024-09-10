@@ -57,6 +57,4 @@ Documentation for these scripts can be found [here](.local/bin/README.md).
 ## Just a little taste
 ![Open Programs](./programs-open.png)
 ![Sidebar](./sidebar-open.png)
-<video controls>
-  <source src="./workflow.mp4" type="video/mp4">
-</video>
+![Workflow](./workflow.gif)
