@@ -28,8 +28,13 @@ no_task_message()
 	echo "Just go Skate..."
 }
 
+escape_path()
+{
+	echo "$1" | sed 's/\//\\\//g'
+}
+
 op="$1" && shift
-[ "$1" ] && arg="$1" && shift
+[ "$1" ] && arg="$(escape_path "$1")" && shift
 
 case "$op" in
 	-l) list_tasks;;
