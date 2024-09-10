@@ -4,10 +4,12 @@
 #-only rotates it right now
 
 devices=$(xsetwacom list devices | awk '{print $7}')
+primary_monitor=$(xrandr --listactivemonitors | grep '\*' )
+primary_monitor=${primary_monitor##* }
 
 for d in $devices
 do
-	xsetwacom set "$d" MapToOutput 1920x1080+0+0
+	xsetwacom set "$d" MapToOutput "$primary_monitor"
 	#get area
 	#xsetwacom set $d Area 0 0 15200 8550
 done
