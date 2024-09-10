@@ -44,6 +44,8 @@ call plug#begin('~/.vim/plugged')
 	Plug 'hrsh7th/cmp-cmdline'
 	Plug 'hrsh7th/nvim-cmp'
 
+	Plug 'MunifTanjim/prettier.nvim'
+
 	Plug 'hrsh7th/cmp-vsnip'
 	Plug 'hrsh7th/vim-vsnip'
 
