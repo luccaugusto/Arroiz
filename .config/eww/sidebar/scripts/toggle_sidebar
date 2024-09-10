@@ -1,0 +1,36 @@
+#!/bin/bash
+
+config="$HOME/.config/eww/sidebar/"
+lock_file="/tmp/eww_sidebar_open"
+screens_resolutions=$(sh "$config/scripts/screen_resolutions")
+
+get_current_monitor()
+{
+	current_monitor="0"
+	if [ "$(pgrep awesome)" ]; then
+		current_monitor="$(awesome-client 'return mouse.screen.index' | cut -d ' ' -f 5)"
+	#else
+		# TODO: make it work for bspwm
+	fi
+	echo "$current_monitor"
+}
+
+run_eww() {
+	current_desktop=$(get_current_monitor)
+	monitor=$((current_desktop-1))
+	eww -c "$config" open-many \
+		sidebar:sidebar \
+		quotes:quotes \
+		--arg sidebar:screen="$monitor" \
+		--arg sidebar:screens_resolutions="$screens_resolutions" \
+		--arg quotes:screen="$monitor" \
+		--arg quotes:screens_resolutions="$screens_resolutions"
+}
+
+if [ ! -f "$lock_file" ]; then
+	touch "$lock_file"
+	run_eww
+else
+	rm "$lock_file" &&
+	eww -c "$config" close-all
+fi
