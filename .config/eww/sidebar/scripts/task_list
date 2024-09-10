@@ -4,7 +4,9 @@ task_list=~/Documents/personal-notes/TODO.wiki
 
 list_tasks()
 {
-	todo=$(cat $task_list)
+	# allow for comments in the task list
+	# lines starting with # are ignored
+	todo=$(sed "/^#/d" "$task_list")
 	parsed_todo=$(echo "$todo" | tr '\n' '|' | sed 's/|/","/g')
 	[ "$parsed_todo" = '","' ] && echo "[]" && exit 0
 
