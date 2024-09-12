@@ -1,6 +1,1 @@
-#!/bin/sh
-
-touch /tmp/eww_bars_open.lock
-
-sh "$HOME/.config/eww/right-bar/launch_bar" &
-sh "$HOME/.config/eww/left-bar/launch_bar" &
+/home/lucca/.config/eww/launch_eww_bars
