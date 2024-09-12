@@ -127,8 +127,8 @@
         (box :class "" :orientation "h" :valign "center" :space-evenly true
           (eventbox :onclick "elisa &" :cursor "pointer"
             (image :path "images/music.png" :image-width 50 :image-height 50))
-          (eventbox :onclick "notion-calendar-electron &" :cursor "pointer"
-            (image :path "images/notion-calendar.png" :image-width 50 :image-height 50)))
+          (eventbox :onclick "" :cursor "pointer"
+            (image :path "images/timer.png" :image-width 50 :image-height 50)))
         (box :class "" :orientation "h" :valign "center" :space-evenly true
           (eventbox :onclick "arandr &" :cursor "pointer"
             (image :path "images/monitor-config2.png" :image-width 50 :image-height 50))

@@ -32,6 +32,8 @@
 (defpoll WIFIICON :initial "images/icons/system/no-wifi.png" :interval "1m" `scripts/check-network --icon`)
 (defpoll NETSTAT :initial "Checking Network" :interval "30s" `scripts/check-network --stat`)
 
+(deflisten countdown :initial "00:00" "tail -F /tmp/countdown.txt")
+
 
 ;; ** Widgets *************************************************************************
 
@@ -75,6 +77,11 @@
 			  :month calendar_month
 			  :year calendar_year)))
 
+(defwidget timer [screen total]
+  (box :class "dockbox" :height 100 :width 400 :orientation "v" :spacing 10 :space-evenly false
+    (label :text countdown :class "timertext ${substring(countdown, 3,5) < 10 ? "urgent" : substring(countdown, 3,5) < 30 ? "important" : "" }" :halign "center")
+    (progress :class "timerprogress" :orientation "h" :value {(substring(countdown, 0,2) * 60 + substring(countdown, 3,5)) / total * 100})))
+
 ;; ** Windows *************************************************************************
 
 ;; system
@@ -101,3 +108,14 @@
   :windowtype "dialog"
   :wm-ignore true
   (right-calendar :screen screen))
+
+(defwindow timer [screen total]
+  :monitor screen
+  :geometry (geometry :x "0"
+    :y "10px"
+    :anchor "top center")
+  :width "500px"
+  :stacking "fg"
+  :windowtype "dock"
+  :wm-ignore true
+  (timer :screen screen :total total))
