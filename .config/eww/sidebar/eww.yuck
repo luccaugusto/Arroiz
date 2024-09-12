@@ -21,6 +21,8 @@
 
 (defvar piece_of_wisdom "A foolish man shares his problems, a wise man shares his memes ~ Ancient Philosofer Fuk Yu")
 
+(defvar timerinput_value "")
+
 ;; ** Widgets *************************************************************************
 
 (defwidget wisdom_quote []
@@ -127,7 +129,7 @@
         (box :class "" :orientation "h" :valign "center" :space-evenly true
           (eventbox :onclick "elisa &" :cursor "pointer"
             (image :path "images/music.png" :image-width 50 :image-height 50))
-          (eventbox :onclick "" :cursor "pointer"
+          (eventbox :onclick "${EWW_CMD} open timerinput --screen ${screen}" :cursor "pointer"
             (image :path "images/timer.png" :image-width 50 :image-height 50)))
         (box :class "" :orientation "h" :valign "center" :space-evenly true
           (eventbox :onclick "arandr &" :cursor "pointer"
@@ -152,6 +154,17 @@
             (image :class "picture" :path random_pic :image-width {round(screens_resolutions["screen-${screen}"].width / 100 * 24, 0)})))
       ))
     ))
+
+(defwidget timerinput-widget []
+  (box :orientation "v" :spacing 10 :space-evenly false :class "winbox popup"
+    (label :text "Set Timer" :class "title")
+  (input
+    :value timerinput_value
+    :class "inputfield"
+    :halign "center"
+    :onchange "${EWW_CMD} update timerinput_value={}"
+    :onaccept "${EWW_CMD} close timerinput && scripts/timer --start {} &"
+    :timeout "2s")))
 
 ;; ** Windows *************************************************************************
 
@@ -179,3 +192,15 @@
   :windowtype "normal"
   :wm-ignore true
   (wisdom_quote))
+
+(defwindow timerinput [screen]
+  :monitor screen
+  :focusable true
+  :geometry (geometry :x "0"
+    :y "8%"
+    :width 200
+    :height 150
+    :anchor "top center")
+  :stacking "fg"
+  :windowtype "dialog"
+  (timerinput-widget))

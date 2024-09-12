@@ -1,0 +1,49 @@
+#!/bin/sh
+
+cmd="$1" && shift
+
+eww_bar_config="$HOME/.config/eww/right-bar"
+monitor_count=$(xrandr --listactivemonitors | head -n 1 | awk '{print $2}')
+
+close_timers()
+{
+	for i in $(seq 0 "$((monitor_count - 1))"); do
+		echo "Closing eww timer-$i on monitor $i"
+		eww -c "$eww_bar_config" close "timer-$i"
+	done
+	pkill "$1"
+}
+
+start()
+{
+	countdown_in_minutes="$1"
+	for i in $(seq 0 "$((monitor_count - 1))"); do
+		echo "Starting eww timer-$i on monitor $i"
+		eww -c "$eww_bar_config" open timer --id "timer-$i" --screen "$i" --arg total="$countdown_in_minutes" &
+	done
+
+	while [ "$countdown_in_minutes" -gt 0 ]; do
+		hours=$((countdown_in_minutes / 60))
+		minutes=$((countdown_in_minutes % 60))
+
+		printf "%02d:%02d\n" "$hours" "$minutes" >> /tmp/countdown.txt
+		sleep 60
+		countdown_in_minutes=$((countdown_in_minutes - 1))
+	done
+
+	echo "00:00" >> /tmp/countdown.txt
+	paplay "$eww_bar_config/assets/alarm.mp3"
+
+	close_timers "$$"
+}
+
+if [ "$cmd" = "--start" ]; then
+	minutes="$1" && shift
+	echo "----" >> /tmp/countdown.txt
+	# return own pid
+	# echo "$$"
+	start "$minutes"
+elif [ "$cmd" = "--stop" ]; then
+	[ "$1" ] && close_timers "$1"
+fi
+
