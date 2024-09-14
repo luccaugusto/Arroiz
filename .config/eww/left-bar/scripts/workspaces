@@ -1,95 +1,102 @@
-#!/bin/python
+#!/usr/bin/perl
+use warnings;
+use strict;
 
-#from sys import stdin
-from json import dumps
+my $workspaces_command = 'wmctrl -d';
+my $workspaces = `$workspaces_command`;
+die "system $workspaces_command failed: $?" if $?;
 
-import subprocess
-workspaces = subprocess.run(
-    ["wmctrl", "-d"],
-    stdout=subprocess.PIPE,
-    stderr=subprocess.STDOUT,
-).stdout.decode('utf8').strip()
+my $windows_on_workspaces_command = 'wmctrl -lx';
+my $windows_on_workspaces = `$windows_on_workspaces_command`;
+die "system $windows_on_workspaces_command failed: $?" if $?;
 
-windows_on_workspaces = (
-    subprocess.run(
-        ["wmctrl", "-lx"],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-    )
-    .stdout.decode()
-    .strip()
-)
+my @workspace_list = split("\n", $workspaces);
 
-# workspace_info = "".join(stdin.readlines())
-# windows_on_workspaces, workspaces = workspace_info.split("--|--")
+my @windows_on_workspaces_list = split("\n", $windows_on_workspaces);
+my @active_workspaces = map { substr($_, 10, 3) } @windows_on_workspaces_list;
 
-workspace_list = workspaces.split("\n")
+my @workspace_labels = map { (split(' ', $_))[-1] } @workspace_list;
 
-active_workspaces = [int(w[10:13]) for w in windows_on_workspaces.split("\n") if w]
-workspace_labels = [w.split(' ').pop() for w in workspace_list]
-current_workspace = int([w.split(' ')[0] for w in workspace_list if "*" in w][0])
+my ($current_workspace) = grep { /\*/ } @workspace_list;
+my $current_workspace_id = substr($current_workspace, 0, 2);
 
-workspaces_by_monitor = {}
-workspaces_by_monitor["open"] = []
-workspaces_by_monitor["open_in_monitor"] = -1
+my @open_windows_info = grep { /$current_workspace_id/ } @windows_on_workspaces_list;
 
-open_windows_info = [w for w in windows_on_workspaces.split("\n") if f" {current_workspace} " in w]
-if len(open_windows_info) > 0:
-    open_windows = [
-        {
-            "id": w.split(" ")[0],
-            "name": [s for s in w.split(" ") if s != ""][2]
-            .split(".")
-            .pop(),  # handle possible double spaces that fuck up the split on ' '
-        }
-        for w in open_windows_info
-    ]
-    workspaces_by_monitor["open"] = open_windows
+my @open_windows;
+for(@open_windows_info) {
+    my $third_element = (split(' ', $_))[2];
+    my $last_element = (split('\.', $third_element))[-1];
+    my %window = (
+        id => substr($_, 0, 10),
+		name => $last_element
+    );
+	push @open_windows, \%window;
+}
 
-for index, label in enumerate(workspace_labels):
-    monitor = index // 10
-    if monitor not in workspaces_by_monitor:
-        workspaces_by_monitor[monitor] = []
+my %workspaces_by_monitor;
+my $open_in_monitor;
 
-    class_name = "current" if index == current_workspace else "active" if index in active_workspaces else "empty"
+sub in_array {
+	my ($needle, @haystack) = @_;
+	for (@haystack) {
+		$_ =~ s/\s+//g;
+		if ($needle eq $_) {
+			return 1;
+		}
+	}
+	return 0;
+}
 
-    workspaces_by_monitor[monitor].append({
-        "class": class_name,
-        "index": index,
-        "label": label
-    })
+my $index = 0;
+for (@workspace_labels) {
+	my $monitor = "_" . int($index / 10);
+	my $class_name;
 
-    if class_name == "current":
-        workspaces_by_monitor["open_in_monitor"] = monitor
+	unless (defined $workspaces_by_monitor{$monitor}) {
+		$workspaces_by_monitor{$monitor} = ();
+	}
 
+	if ($index == $current_workspace_id) {
+    	$class_name = "current";
+		$open_in_monitor = $monitor;
+	} elsif (in_array($index, @active_workspaces)) {
+		$class_name = "active";
+	} else {
+		$class_name = "empty";
+	}
 
-print(dumps(workspaces_by_monitor, ensure_ascii=False))
+	push @{$workspaces_by_monitor{$monitor}}, {
+		"class" => $class_name,
+		"index" => $index,
+		"label" => $_,
+	};
+	$index++;
+}
 
-# shell script version
-#!/bin/sh
-#
-#workspaces="$(wmctrl -d)"
-#windows_open="$(wmctrl -lx)"
-#workspace_labels="$(echo "$workspaces" | awk '{print $9}')\n$(echo "$workspaces" | awk '{print $9}')"
-##workspace_labels="$(echo "$workspaces" | awk '{print $9}')"
-#current_workspace="$(echo "$workspaces" | awk '/\*/ {print $1}')"
-#active_workspaces="$(echo "$windows_open" | awk '{print $2}')"
-#
-#echo "$windows_open"
-#
-#i=0
-#monitor=0
-#workspace_info="{\"0\":["
-#open_in_monitor=0
-#for workspace in $workspace_labels; do
-#	cur_monitor=$((i / 10))
-#	[ "$monitor" != $cur_monitor ] && workspace_info="${workspace_info%,}],\"$cur_monitor\":"
-#	monitor=$cur_monitor
-#	class="empty"
-#	[ "$(echo "$active_workspaces" | grep -xc "$i")" -gt 0 ] && class="active"
-#	[ "$i" = "$current_workspace" ] && class="current" && open_in_monitor="$cur_monitor"
-#	workspace_info="$workspace_info{\"class\": \"$class\", \"index\": $i, \"label\": \"$workspace\"},"
-#	i=$((i + 1))
-#done
-#echo "$workspace_info\"open_in_monitor\": $open_in_monitor}]"
+# Crappy json print, but works and doesn't require any modules
 
+print "{";
+print "\"open\": {";
+for my $window (@open_windows) {
+	print "\"id\": \"$window->{id}\", \"name\": \"$window->{name}\"";
+}
+print "},";
+print "\"open_in_monitor\": \"". substr($open_in_monitor, 1) ."\",";
+for my $monitor (keys %workspaces_by_monitor) {
+	print '"' . substr($monitor, 1) . '": [';
+	my $first = @{$workspaces_by_monitor{$monitor}}[0];
+	print "{";
+	print "\"class\": \"$first->{class}\",";
+	print "\"index\": \"$first->{index}\",";
+	print "\"label\": \"$first->{label}\"";
+	print "}";
+	for my $workspace (@{$workspaces_by_monitor{$monitor}}[1..$#{$workspaces_by_monitor{$monitor}}]) {
+		print ",{";
+		print "\"class\": \"$workspace->{class}\",";
+		print "\"index\": \"$workspace->{index}\",";
+		print "\"label\": \"$workspace->{label}\"";
+		print "}";
+	}
+	print "]";
+}
+print "}\n"
