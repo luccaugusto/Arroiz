@@ -76,11 +76,15 @@ for (@workspace_labels) {
 # Crappy json print, but works and doesn't require any modules
 
 print "{";
-print "\"open\": {";
-for my $window (@open_windows) {
-	print "\"id\": \"$window->{id}\", \"name\": \"$window->{name}\"";
+print "\"open\": [";
+if (@open_windows > 0) {
+	my $first_window = $open_windows[0];
+	print "{\"id\": \"$first_window->{id}\", \"name\": \"$first_window->{name}\"}";
+	for my $window (@open_windows[1..$#open_windows]) {
+		print ",{\"id\": \"$window->{id}\", \"name\": \"$window->{name}\"}";
+	}
 }
-print "},";
+print "],";
 print "\"open_in_monitor\": \"". substr($open_in_monitor, 1) ."\",";
 for my $monitor (keys %workspaces_by_monitor) {
 	print '"' . substr($monitor, 1) . '": [';
