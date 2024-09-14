@@ -76,6 +76,7 @@ openvpn
 os-prober
 otf-font-awesome
 otf-material-icons-git
+otf-monego-git
 pacman
 patch
 pavucontrol
@@ -155,4 +156,5 @@ xorg-xsetroot
 xterm
 xwallpaper
 yay
+yazi
 yt-dlp

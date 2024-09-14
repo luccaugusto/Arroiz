@@ -40,9 +40,7 @@ alias clean="clear"
 alias n="nvim ."
 alias scim="sc-im"
 alias r="ranger"
-alias rangre="ranger"
-alias rnager="ranger"
-alias rnagre="ranger"
+alias f="yazi"
 
 # GIT STUFF
 alias gc="git commit"

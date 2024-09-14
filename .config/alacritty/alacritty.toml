@@ -1,5 +1,5 @@
 [font]
-size = 11.2
+size = 12.2
 
 [font.normal]
 family = "Monaco"
@@ -40,4 +40,3 @@ bindings = [
 #[colors.primary]
 #background = "#043A35"
 #foreground = "#d3ccdc"
-
