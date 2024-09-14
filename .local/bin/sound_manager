@@ -19,6 +19,9 @@ class Card:
     USB_CARD_NAME = "USB HIFI AUDIO"
     USB_SINK_CODE = "USB_HIFI_AUDIO"
 
+    USB_SOURCE_NAME = "USB  Live camera"
+    USB_SOURCE_CODE = "USB_Live_camera"
+
     HDMI_CARD_NAME = "HDA Intel HDMI"
     HDMI_SINK_CODE = "pci-0000_00_03"
 
@@ -187,6 +190,37 @@ def decide_output(output_cards, sink_in_use) -> Card:
 
     return card_to_use
 
+def decide_input(input_cards, source_in_use) -> Card:
+    connected_cards = "|".join(input_cards.keys())
+
+    # use device as default
+    card_to_use = find_card_by_device(input_cards, Card.DEVICE_CARD_NAME)
+
+    # input from device:
+    if Card.DEVICE_SINK_CODE in source_in_use:
+        if Card.USB_CARD_NAME in connected_cards:
+            card_to_use = find_card_by_device(input_cards, Card.USB_CARD_NAME)
+        elif Card.BT_CARD_NAME in connected_cards:
+            card_to_use = find_card_by_device(input_cards, Card.BT_CARD_NAME)
+
+    # input from BT:
+    elif Card.BT_SINK_CODE in source_in_use:
+        if Card.USB_CARD_NAME in connected_cards:
+            card_to_use = find_card_by_device(input_cards, Card.USB_CARD_NAME)
+        else:
+            card_to_use = find_card_by_device(input_cards, Card.DEVICE_CARD_NAME)
+
+    # input from USB:
+    elif Card.USB_SINK_CODE in source_in_use:
+        if Card.BT_CARD_NAME in connected_cards:
+            card_to_use = find_card_by_device(input_cards, Card.BT_CARD_NAME)
+        elif Card.HDMI_CARD_NAME in connected_cards:
+            card_to_use = find_card_by_device(input_cards, Card.HDMI_CARD_NAME)
+        else:
+            card_to_use = find_card_by_device(input_cards, Card.DEVICE_CARD_NAME)
+
+    return card_to_use
+
 
 def hdmi_connected():
     monitors = run(
@@ -255,6 +289,7 @@ if __name__ == "__main__":
     sink_in_use = current_sink()
     source_in_use = current_source()
 
+
     if args.f:
         all_cards = loads("".join(stdin.readlines()))
     else:
@@ -262,12 +297,15 @@ if __name__ == "__main__":
 
     output_cards = get_cards_by_type(all_cards, CardType.OUTPUT, sink_in_use)
     input_cards = get_cards_by_type(all_cards, CardType.INPUT, source_in_use)
-    #io_cards = get_cards_by_type(all_cards, CardType.IO, sink_in_use)
+    io_cards = get_cards_by_type(all_cards, CardType.IO, sink_in_use)
     output_changed = False
     input_changed = False
 
     if args.t:
         card_to_use = decide_output(output_cards, sink_in_use)
+        # TODO: Output card is being used as input, set it as IO
+        if False:
+            card_to_use = io_cards[card_to_use.card_name]
         output_changed = True
     elif args.i:
         card_to_use = rofi_select_card(output_cards)
