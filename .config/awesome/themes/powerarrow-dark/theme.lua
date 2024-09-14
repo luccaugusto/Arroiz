@@ -353,7 +353,7 @@ function theme.at_screen_connect(s)
         fg = theme.fg_normal,
 		margins = {
 			top = dpi(4),
-			bottom = dpi(30),
+			bottom = dpi(20),
 			left = dpi(15),
 			right = dpi(5),
 		},
