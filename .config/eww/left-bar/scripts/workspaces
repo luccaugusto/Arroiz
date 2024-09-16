@@ -80,9 +80,9 @@ if (@open_windows > 0) {
 	for my $window (@open_windows) {
 		$workspace_info_json .= "{\"id\": \"$window->{id}\", \"name\": \"$window->{name}\"},";
 	}
+    # remove trailing comma
+	$workspace_info_json = substr $workspace_info_json, 0, -1;
 }
-# remove trailing comma
-$workspace_info_json = substr $workspace_info_json, 0, -1;
 
 $workspace_info_json .= "], \"open_in_monitor\": \"". substr($open_in_monitor, 1) ."\",";
 
