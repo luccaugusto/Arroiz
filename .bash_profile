@@ -4,8 +4,8 @@
 
 #Default programs
 export EDITOR="nvim"
-# export TERMINAL="kitty"
-export TERMINAL="alacritty"
+export TERMINAL="kitty"
+# export TERMINAL="alacritty"
 export READER="zathura"
 export BROWSER="brave"
 #in case xdg settings doesn't use $BROWSER value
