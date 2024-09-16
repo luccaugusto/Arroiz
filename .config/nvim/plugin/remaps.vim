@@ -15,6 +15,9 @@ inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-b> <S-Left>
 inoremap <C-w> <S-Right>
+inoremap <C-a> <End>
+inoremap <C-0> <Home>
+
 
 "gp selects pasted text
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
