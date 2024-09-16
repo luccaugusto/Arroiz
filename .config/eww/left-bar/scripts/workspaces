@@ -75,32 +75,32 @@ for (@workspace_labels) {
 
 # Crappy json print, but works and doesn't require any modules
 
-print "{";
-print "\"open\": [";
+my $workspace_info_json = "{\"open\": [";
 if (@open_windows > 0) {
-	my $first_window = $open_windows[0];
-	print "{\"id\": \"$first_window->{id}\", \"name\": \"$first_window->{name}\"}";
-	for my $window (@open_windows[1..$#open_windows]) {
-		print ",{\"id\": \"$window->{id}\", \"name\": \"$window->{name}\"}";
+	for my $window (@open_windows) {
+		$workspace_info_json .= "{\"id\": \"$window->{id}\", \"name\": \"$window->{name}\"},";
 	}
 }
-print "],";
-print "\"open_in_monitor\": \"". substr($open_in_monitor, 1) ."\",";
+# remove trailing comma
+$workspace_info_json = substr $workspace_info_json, 0, -1;
+
+$workspace_info_json .= "], \"open_in_monitor\": \"". substr($open_in_monitor, 1) ."\",";
+
 for my $monitor (keys %workspaces_by_monitor) {
-	print '"' . substr($monitor, 1) . '": [';
-	my $first = @{$workspaces_by_monitor{$monitor}}[0];
-	print "{";
-	print "\"class\": \"$first->{class}\",";
-	print "\"index\": \"$first->{index}\",";
-	print "\"label\": \"$first->{label}\"";
-	print "}";
-	for my $workspace (@{$workspaces_by_monitor{$monitor}}[1..$#{$workspaces_by_monitor{$monitor}}]) {
-		print ",{";
-		print "\"class\": \"$workspace->{class}\",";
-		print "\"index\": \"$workspace->{index}\",";
-		print "\"label\": \"$workspace->{label}\"";
-		print "}";
+	$workspace_info_json .= '"' . substr($monitor, 1) . '": [';
+	for my $workspace (@{$workspaces_by_monitor{$monitor}}) {
+		$workspace_info_json .= "{";
+		$workspace_info_json .= "\"class\": \"$workspace->{class}\",";
+		$workspace_info_json .= "\"index\": \"$workspace->{index}\",";
+		$workspace_info_json .= "\"label\": \"$workspace->{label}\"";
+		$workspace_info_json .= "},";
 	}
-	print "]";
+	# remove trailing comma
+	$workspace_info_json = substr $workspace_info_json, 0, -1;
+	$workspace_info_json .= "],";
 }
-print "}\n"
+# remove trailing comma
+$workspace_info_json = substr $workspace_info_json, 0, -1;
+$workspace_info_json .= "}";
+
+print $workspace_info_json . "\n";
