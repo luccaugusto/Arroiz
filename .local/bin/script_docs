@@ -11,18 +11,18 @@ get_docs()
 {
 	#DOC=".docs"
 
-	for s in $(ls $SCRIPTS)
+	for s in $(ls "$SCRIPTS")
 	do
 		if [ -d "$SCRIPTS/$s" ]; then
-			for s2 in $(ls $SCRIPTS/$s)
+			for s2 in $(ls "$SCRIPTS/$s")
 			do
 				script="$SCRIPTS/$s/$s2"
-				comments=$(grep "^#-" $script | sed "s/^#-//g" | sed "s/'/\`/g" )
+				comments=$(grep "^#-" "$script" | sed "s/^#-//g" | sed "s/'/\`/g" )
 				printf "### %s\n%s\n\n" "$s/$s2" "$comments"
 			done
 		else
 			script="$SCRIPTS/$s"
-			comments=$(grep "^#-" $script | sed "s/^#-//g" | sed "s/'/\`/g" )
+			comments=$(grep "^#-" "$script" | sed "s/^#-//g" | sed "s/'/\`/g" )
 			printf "### %s\n%s\n\n" "$s" "$comments"
 		fi
 	done
@@ -32,4 +32,4 @@ START='<!--startscripts-->'
 END='<!--endscripts-->'
 
 #Concatenate everything before $START tag with get_docs with everything after $END tag
-printf "%s\n%s\n%s\n%s\n" "$(sed "/$START/q" $README)" "$(get_docs)" "$END" "$(awk "f;/$END/{f=1}" $README)" > $README
+printf "%s\n%s\n%s\n%s\n" "$(sed "/$START/q" "$README")" "$(get_docs)" "$END" "$(awk "f;/$END/{f=1}" "$README")" > "$README"
