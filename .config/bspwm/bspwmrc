@@ -90,4 +90,3 @@ bspc rule -a dropdown sticky=on state=floating hidden=on
 bspc rule -a floats state=floating
 
 startup_progs
-launch_polybar

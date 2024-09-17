@@ -79,6 +79,8 @@ super + p
 super + shift + p
 	rofi -show run -show-icons
 super + f
+	$TERMINAL -e yazi
+super + v
 	rofi -show window -show-icons
 super + shift + m
 	rofi -show calc -modi calc -no-show-match -no-sort -theme ~/.config/rofi/calc.rasi
@@ -106,6 +108,6 @@ super + F2
 super + F10
 	toggle_redshift
 super + F11
-	killall gotop || $TERMINAL --class "Floating" -e gotop -l kitchensink
+	killall gotop || $TERMINAL -e gotop -l kitchensink
 super + F12
 	monitors
