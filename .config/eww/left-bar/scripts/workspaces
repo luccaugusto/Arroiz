@@ -20,7 +20,7 @@ my @workspace_labels = map { (split(' ', $_))[-1] } @workspace_list;
 my ($current_workspace) = grep { /\*/ } @workspace_list;
 my $current_workspace_id = substr($current_workspace, 0, 2);
 
-my @open_windows_info = grep { /$current_workspace_id/ } @windows_on_workspaces_list;
+my @open_windows_info = grep { / $current_workspace_id/ } @windows_on_workspaces_list;
 
 my @open_windows;
 for(@open_windows_info) {
