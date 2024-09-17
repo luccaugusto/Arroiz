@@ -97,9 +97,9 @@ shortcut_configurations
 
 
 # System colors and wallpaper
-set_colors
-set_colors -w
-set-alacritty-colors
+# theme_manager
+# only setting the wallpaper for now, as i want to keep my custom kitty colors
+theme_manager --set-wallpaper-only
 
 #  NETWORK DEPENDAND STUFF
 #  only execute if connected to the internet

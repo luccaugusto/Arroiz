@@ -12,17 +12,15 @@ then
 	OPT=$(printf "Change wallpaper and color\nChange color\nChange Wallpaper" | dmenu -l 3)
 	if [ "$OPT" = "Change wallpaper and color" ]
 	then
-		#Change color
-		set_colors "$IMGS$WALL"
-		#Change wallpaper
-		set_colors -w "$IMGS$WALL"
+		#Change color and wallpaper
+		theme_manager -C "$IMGS$WALL"
 	elif [ "$OPT" = "Change color" ]
 	then
 		#Change color
-		set_colors "$IMGS$WALL"
+		theme_manager -t "$IMGS$WALL"
 	elif [ "$OPT" = "Change Wallpaper" ]
 	then
 		#Change wallpaper
-		set_colors -w "$IMGS$WALL"
+		theme_manager -c "$IMGS$WALL"
 	fi
 fi

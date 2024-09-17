@@ -1,0 +1,61 @@
+#!/bin/sh
+
+wallpaper=~/.config/wallpaper
+
+set_wallpaper()
+{
+	xwallpaper --output all --stretch "$wallpaper"
+}
+
+change_and_set_wallpaper()
+{
+	cp "$1" "$wallpaper"
+	set_wallpaper
+}
+
+apply_colors()
+{
+	# for now only want it in terminals
+	ln -sf "$HOME/.cache/wal/colors-kitty.conf" "$HOME/.config/kitty/theme.conf"
+	# TODO make this work for new alacritty config file
+	set-alacritty-colors
+}
+
+set_colors()
+{
+	# generate new coloscheme
+	wal -n -e -q -i "$wallpaper"
+	# apply it in configs
+	apply_colors
+}
+
+change_and_set_colors()
+{
+	# generate new coloscheme
+	wal -q -n -e -i "$1"
+	# apply it in configs
+	apply_colors
+}
+
+case "$1" in
+	"-c")
+		change_and_set_wallpaper "$2"
+		;;
+	"-C")
+		change_and_set_wallpaper "$2"
+		change_and_set_colors "$2"
+		;;
+	"-t")
+		change_and_set_colors "$2"
+		;;
+	"--set-colors-only")
+		set_colors
+		;;
+	"--set-wallpaper-only")
+		set_wallpaper
+		;;
+	*)
+		set_wallpaper
+		set_colors
+		;;
+esac
