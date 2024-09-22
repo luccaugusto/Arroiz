@@ -22,7 +22,7 @@ format = '🔒'
 disabled = false
 
 [directory]
-truncation_length = 4
+truncation_length = 6
 truncation_symbol = '…/'
 style = 'bold sapphire'
 
