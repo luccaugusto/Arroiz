@@ -44,4 +44,3 @@ else
 		esac
 	done
 fi
-[ "$(pgrep 'awesome')" ] && awesome-client 'awesome.emit_signal("update_volume")'
