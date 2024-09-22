@@ -7,7 +7,8 @@ setup_workspace()
 	# other monitors and docked
 	if [ "$(cat /sys/devices/platform/dock.0/docked)" = 1 ]; then
 		if [ "$(echo "$connected_monitors" | wc -l)" = 2 ]; then
-			sh "$HOME/.screenlayout/two-screens-docked.sh"
+			# sh "$HOME/.screenlayout/two-screens-docked.sh"
+			sh "$HOME/.screenlayout/other-screen-only.sh"
 		fi
 	# other monitors and not docked
 	else
