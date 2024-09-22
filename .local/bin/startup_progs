@@ -22,7 +22,7 @@ last_session_cleanup()
 	compress_time
 }
 
-shortcut_configurations()
+keybidings_configurations()
 {
 	# Load specific WM configs
 	if [ "$(pgrep -x bspwm)" ]; then
@@ -50,7 +50,6 @@ start_programs()
 	# Hide that damn mouse when it is idle
 	[ "$(pgrep unclutter)" ] || unclutter &
 	# key bindings
-	# pgrep -x awesome || sxhkd &
 	[ "$(pgrep sxhkd)" ] || sxhkd &
 	# manage external drives
 	[ "$(pgrep udiskie)" ] || udiskie -a --appindicator -f pcmanfm &
@@ -69,6 +68,7 @@ start_programs()
 	pgrep 'awesome' || dunst &
 
 	# Utterly amazing transparent terminals
+	#[ "$(pgrep picom)" ] || picom --experimental-backend --config "$HOME/.config/picom/picom.conf" &
 	[ "$(pgrep picom)" ] || picom --config "$HOME/.config/picom/picom.conf" &
 
 	# Let me use pt-br and en-us keyboards
@@ -88,22 +88,18 @@ now=$(date +%H:%M)
 login_time=$(who | awk '{print $4}')
 
 last_session_cleanup
-shortcut_configurations
+keybidings_configurations
 
 # only start programs right after i login so that
 # when restarting wm it won't reopen programs i closed
 [ "$(date_operations -s "$now" "$login_time")" -lt 2 ] &&
 	start_programs
 
-
 # System colors and wallpaper
-# theme_manager
+theme_manager
 # only setting the wallpaper for now, as i want to keep my custom kitty colors
-theme_manager --set-wallpaper-only
+# theme_manager --set-wallpaper-only
 
 #  NETWORK DEPENDAND STUFF
 #  only execute if connected to the internet
 [ "$(wget -q --spider https://luccaaugusto.xyz ; echo $?)" = "0" ] && check_system_updates &
-# fetches transactions i registered by email
-# cademeudinheiro fetch &
-

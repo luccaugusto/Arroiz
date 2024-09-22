@@ -15,24 +15,21 @@ change_and_set_wallpaper()
 
 apply_colors()
 {
-	# for now only want it in terminals
-	ln -sf "$HOME/.cache/wal/colors-kitty.conf" "$HOME/.config/kitty/theme.conf"
+	# for now only want it in terminals and borders
+	ln -sf ~/.cache/wal/colors-kitty.conf ~/.config/kitty/theme.conf
 	# TODO make this work for new alacritty config file
 	set-alacritty-colors
-}
-
-set_colors()
-{
-	# generate new coloscheme
-	wal -n -e -q -i "$wallpaper"
-	# apply it in configs
-	apply_colors
+	border_color=$(head -n 13 "$HOME/.cache/wal/colors" | tail -n 1)
+	# Update border color in awesome
+	sed -i "s/^theme\.border_focus.*$/theme.border_focus = \"$border_color\"/" ~/.config/awesome/themes/powerarrow-dark/theme.lua
 }
 
 change_and_set_colors()
 {
+	# clear cache
+	wal -c &&
 	# generate new coloscheme
-	wal -q -n -e -i "$1"
+	wal -neqi "$1" &&
 	# apply it in configs
 	apply_colors
 }
@@ -49,10 +46,20 @@ case "$1" in
 		change_and_set_colors "$2"
 		;;
 	"--set-colors-only")
-		set_colors
+		change_and_set_colors "$wallpaper"
 		;;
 	"--set-wallpaper-only")
 		set_wallpaper
+		;;
+	"--help" | "-h")
+		echo "Usage: ${0##*/} [OPTION] [FILE]"
+		echo "  default                     Set wallpaper to $wallpaper and generate colorscheme"
+		echo "  -c [FILE]                   Change and set wallpaper to FILE"
+		echo "  -C [FILE]                   Change and set wallpaper to FILE and generate colorscheme"
+		echo "  -t [FILE]                   Generate colorscheme from FILE"
+		echo "  --set-colors-only           Set colorscheme from $wallpaper"
+		echo "  --set-wallpaper-only        Set wallpaper to $wallpaper"
+		echo "  --help                      Display this help message"
 		;;
 	*)
 		set_wallpaper
