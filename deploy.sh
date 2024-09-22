@@ -157,6 +157,40 @@ install_loop()
 	done < progs
 }
 
+install_picom()
+{
+	git clone https://github.com/jonaburg/picom || return
+	cd picom || return
+	meson --buildtype=release . build
+	ninja -C build
+	sudo ninja -C build install
+	cd ..
+	rm -rf picom
+}
+
+install_eww()
+{
+	git clone https://github.com/elkowar/eww || return
+	cd eww || return
+	cargo build --release --no-default-features --features x11
+	cd target/release || return
+	chmod +x ./eww
+	[ -d ~/.local/bin/vendor ] || mkdir -p ~/.local/bin/vendor
+	cp ./eww ~/.local/bin/vendor/
+	cd ../../..
+	rm -rf eww
+}
+
+install_kanata()
+{
+	git clone https://github.com/jtroo/kanata
+	cd kanata || return
+	cargo build
+	[ -d ~/.local/bin/vendor ] || mkdir -p ~/.local/bin/vendor
+	chmod +x target/debug/kanata
+	cp target/debug/kanata ~/.local/bin/vendor/
+}
+
 if [ ! "$(basename "$0")" == "deploy.sh" ]; then
 	echo "Please run the script with ./deploy.sh not sh deploy.sh"
 elif [ "$EUID" = 0 ]; then

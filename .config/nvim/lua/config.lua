@@ -69,7 +69,7 @@ vim.keymap.set({"n", "x"}, "<Leader>a", "<Cmd>MultipleCursorsAddMatches<CR>")
 require'nvim-treesitter.configs'.setup {
   ensure_installed = { "c", "jsonc", "lua", "vim", "vimdoc", "query", "python", "javascript" },
   sync_install = false,
-  auto_install = false,
+  auto_install = true,
 
   ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
   -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
