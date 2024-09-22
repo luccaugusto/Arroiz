@@ -5,10 +5,9 @@ eww_open_lock=/tmp/eww_bars_open.lock
 toggle_eww()
 {
 	if [ -f "$eww_open_lock" ];then
-		killall eww
 		rm "$eww_open_lock"
-		eww -c ~/.config/eww/right-bar daemon
-		eww -c ~/.config/eww/left-bar daemon
+		sh ~/.config/eww/left-bar/close_bar &
+		sh ~/.config/eww/right-bar/close_bar &
 	else
 		launch_eww_bars
 	fi
