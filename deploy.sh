@@ -165,7 +165,7 @@ install_picom()
 	ninja -C build
 	sudo ninja -C build install
 	cd ..
-	rm -rf picom
+	rm -rf picom/
 }
 
 install_eww()
@@ -174,11 +174,11 @@ install_eww()
 	cd eww || return
 	cargo build --release --no-default-features --features x11
 	cd target/release || return
-	chmod +x ./eww
+	chmod +x eww
 	[ -d ~/.local/bin/vendor ] || mkdir -p ~/.local/bin/vendor
-	cp ./eww ~/.local/bin/vendor/
+	cp eww ~/.local/bin/vendor/
 	cd ../../..
-	rm -rf eww
+	rm -rf eww/
 }
 
 install_kanata()
@@ -189,6 +189,8 @@ install_kanata()
 	[ -d ~/.local/bin/vendor ] || mkdir -p ~/.local/bin/vendor
 	chmod +x target/debug/kanata
 	cp target/debug/kanata ~/.local/bin/vendor/
+	cd ../
+	rm -rf kanata/
 }
 
 if [ ! "$(basename "$0")" == "deploy.sh" ]; then
@@ -202,7 +204,11 @@ else
 	install_installers
 	install_nvim
 	install_loop
+	install_picom
+	install_kanata
+	install_eww
 	systemctl enable tlp.service
+	systemctl --user enable kanata.service
 	user_cron_jobs
 	enable_fingerprint
 	enable_sudo_for_wheel
