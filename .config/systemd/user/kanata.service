@@ -1,0 +1,13 @@
+[Unit]
+Description=Kanata keyboard remapper
+Documentation=https://github.com/jtroo/kanata
+
+[Service]
+Environment=PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin
+Environment=DISPLAY=:0
+Type=simple
+ExecStart=/sbin/sh -c 'exec /home/lucca/.local/bin/vendor/kanata -c /home/lucca/.config/kanata/config.kbd'
+Restart=no
+
+[Install]
+WantedBy=default.target
