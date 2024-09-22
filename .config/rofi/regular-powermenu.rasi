@@ -25,8 +25,8 @@ configuration {
 window {
     /* properties for window widget */
     transparency:                "real";
-    location:                    west;
-    anchor:                      west;
+    location:                    east;
+    anchor:                      east;
     fullscreen:                  false;
     width:                       175px;
     x-offset:                    0px;
@@ -34,8 +34,8 @@ window {
 
     /* properties for all widgets */
     enabled:                     true;
-    border-radius:               0 15px 15px 0;
-	border:                      2px 2px 2px 0;
+    border-radius:               15px 0 0 15px;
+	border:                      2px 0 2px 2px;
 	border-color:                @selected;
     cursor:                      "default";
     background-color:            @background;
