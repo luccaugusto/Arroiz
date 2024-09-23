@@ -1,7 +1,11 @@
 #!/bin/sh
 
-current_desktop=$(awesome-client 'return mouse.screen.index' | cut -d ' ' -f 5)
-monitor=$((current_desktop-1))
+monitor=0
+if [ "$(pgrep awesome)" ]; then
+	awesome-client 'return mouse.screen.index' > /dev/null 2>&1 || exit 1
+	current_desktop=$(awesome-client 'return mouse.screen.index' | cut -d ' ' -f 5)
+	monitor=$((current_desktop-1))
+fi
 
 cmd="open calendar --screen $monitor"
 [ "$(eww -c ~/.config/eww/right-bar/ active-windows | grep calendar)" ] && cmd="close calendar"

@@ -1,11 +1,13 @@
 #!/bin/sh
 
-eww_open_lock=/tmp/eww_bars_open.lock
+bar_open_lock=/tmp/eww_bars_open.lock
+is_open="false"
+[ -f "$bar_open_lock" ] && is_open="true"
 
 toggle_eww()
 {
-	if [ -f "$eww_open_lock" ];then
-		rm "$eww_open_lock"
+	if [ "$is_open" = "true" ];then
+		rm "$bar_open_lock"
 		sh ~/.config/eww/left-bar/close_bar &
 		sh ~/.config/eww/right-bar/close_bar &
 	else
@@ -13,7 +15,7 @@ toggle_eww()
 	fi
 }
 
-toggle_awesome()
+toggle_awesome_bar()
 {
 	awesome-client '
 				for s in screen do
@@ -25,5 +27,21 @@ toggle_awesome()
 				'
 }
 
+toggle_bspwm_padding()
+{
+	padding=$(grep top_padding ~/.config/bspwm/bspwmrc | awk '{print $4}')
+	if [ "$is_open" = "true" ];then
+		bspc config top_padding 0
+	else
+		bspc config top_padding "$padding"
+	fi
+}
+
+toggle_wm_bar()
+{
+	[ "$(pgrep awesome)" ] && toggle_awesome_bar &
+	[ "$(pgrep bspwm)" ] && toggle_bspwm_padding
+}
+
 toggle_eww &
-toggle_awesome &
+toggle_wm_bar &

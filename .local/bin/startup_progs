@@ -65,7 +65,7 @@ start_programs()
 	[ "$(pgrep notion)" ] || notion-calendar-electron &
 
 	# Notifications
-	pgrep 'awesome' || dunst &
+	[ "$(pgrep awesome)" ] || dunst -conf ~/.config/dunst/dunstrc &
 
 	# Utterly amazing transparent terminals
 	#[ "$(pgrep picom)" ] || picom --experimental-backend --config "$HOME/.config/picom/picom.conf" &

@@ -1,6 +1,9 @@
 #!/bin/sh
 
-layout=$(awesome-client 'return mouse.screen.selected_tag.layout.name')
-parsed_layout="${layout##* \"}"
+parsed_layout="tile"
+if [ "$(pgrep awesome)" ]; then
+	layout=$(awesome-client 'return mouse.screen.selected_tag.layout.name')
+	parsed_layout="${layout##* \"}"
+fi
 
 echo "${parsed_layout%%\"*}"

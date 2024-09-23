@@ -66,12 +66,12 @@ super + shift + n
 # focus the node in the given direction
 super + {_,shift + }{h,j,k,l}
 	bspc node -{f,s} {west,south,north,east}
-	
+
 #------------------------------------------------
 #-- ROTATE TREE:
 #------------------------------------------------
 
-super + shift + r  
+super + shift + r
 	bspc node @/ -R 90
 
 #------------------------------------------------
@@ -79,7 +79,7 @@ super + shift + r
 #------------------------------------------------
 
 super + {_,ctrl + }c
-        bspc node -f {next,prev}.local
+        bspc node -f {next,prev}.local.leaf
 
 #------------------------------------------------
 #-- SELECT WHERE TO SPLIT:
@@ -126,6 +126,6 @@ super + {_,shift + }{j,k,i,l}
 #------------------------------------------------
 #-- Quit bspwm:
 #------------------------------------------------
-super + alt + {q,r}
+super + ctrl + {q,r}
 	bspc {quit,wm -r}
 

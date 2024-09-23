@@ -6,7 +6,7 @@ screens_resolutions=$(sh "$config/scripts/screen_resolutions")
 
 get_current_monitor()
 {
-	current_monitor="0"
+	current_monitor="1"
 	if [ "$(pgrep awesome)" ]; then
 		current_monitor="$(awesome-client 'return mouse.screen.index' | cut -d ' ' -f 5)"
 	#else
