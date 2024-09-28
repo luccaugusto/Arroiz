@@ -36,6 +36,7 @@ window {
     location:       center;
     width:          480;
 	height:         45%;
+	border:         4px;
     border-radius:  10px;
 	border-color: @bg3;
 
@@ -50,7 +51,7 @@ inputbar {
     background-color:   @fg0;
     border-color:       @bg3;
 
-    border:         1px;
+    border:         2px;
     border-radius:  10px;
 
     padding:    8px 16px;

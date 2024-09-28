@@ -22,7 +22,8 @@ format = '🔒'
 disabled = false
 
 [directory]
-truncation_length = 6
+truncation_length = 0
+truncate_to_repo = true
 truncation_symbol = '…/'
 style = 'bold sapphire'
 
