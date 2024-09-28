@@ -1,27 +1,18 @@
 #!/bin/sh
 
-brightness_max=$(brightnessctl m)
-brightness_current=$(brightnessctl g)
-brightness_percent=$((brightness_current * 100 / brightness_max ))
-
 disk_usage=$(df -h | grep home)
+disk_usage_percentage=$(echo "$disk_usage" | awk '{print $5}')
+disk_usage_percentage=${disk_usage_percentage%%%*}
 
 sound_cards_info=$(pactl -f json list cards | sound_manager -f)
-redshift_status="off"
 profile="{\"hostname\": \"$(hostname)\", \"uptime\": \"$(uptime -p)\", \"user\": \"$(whoami)\"}"
-[ "$(pgrep -xc redshift)" -gt 0 ] && redshift_status="on"
 
 info="{ \
-	\"redshift_status\": \"${redshift_status}\", \
-	\"brightness\": { \
-		\"max\": ${brightness_max}, \
-		\"current\": ${brightness_current}, \
-		\"percent\": ${brightness_percent} \
-	}, \
 	\"disk\": { \
 		\"size\": \"$(echo "$disk_usage" | awk '{print $2}')\", \
 		\"used\": \"$(echo "$disk_usage" | awk '{print $3}')\", \
-		\"free\": \"$(echo "$disk_usage" | awk '{print $4}')\" \
+		\"free\": \"$(echo "$disk_usage" | awk '{print $4}')\", \
+		\"percentage\": \"$disk_usage_percentage\" \
 	}, \
 	\"sound\": ${sound_cards_info},\
 	\"profile\": ${profile}\

@@ -13,7 +13,7 @@
 (defpoll BATICON :interval "2m" `scripts/battery --icon`)
 
 ;; Keyboard layout
-(defpoll keyboard_layout :interval "3s" "xkblayout-state print %s")
+(defpoll keyboard_layout :interval "1s" "scripts/kb_layout")
 (defvar KEYBOARD_ICON "images/keyboard.png")
 
 ;; CPU vars
@@ -58,9 +58,12 @@
       (box :orientation "h" :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
         (box :style "background-image: url('${VOLICON}');" :class "trayicon")
         (label :class "infotext" :halign "start" :text VOLUME)))
-      (box :orientation "h" :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "true"
-        (box :style "background-image: url('${KEYBOARD_ICON}');" :class "trayicon")
-        (label :class "infotext" :halign "start" :valign "center" :text keyboard_layout))
+    (box :orientation "h" :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "true"
+      (box :style "background-image: url('${KEYBOARD_ICON}');" :class "trayicon")
+      (label :class "infotext" :halign "start" :valign "center" :text keyboard_layout))
+    ;; (eventbox :onclick "dunstctl set-paused toggle" :cursor "pointer"
+    ;;   (box :orientation "h" :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
+    ;;     (image :path notification_icon :image-height 20 :image-width 20)))
     (eventbox :onclick "scripts/toggle_calendar" :cursor "pointer"
       (box :class "clockbox" :orientation "v" :spacing 0 :valign "center" :halign "end" :space-evenly "false" :vexpand "false" :hexpand "false"
         (label :class "time" :halign "end" :wrap "false" :limit-width 25 :text TIME)
@@ -87,20 +90,22 @@
 ;; system
 (defwindow system [screen]
   :monitor screen
-  :geometry (geometry :x "-1%"
-  :y "10px"
-  :width "30%"
-  :height "40px"
-  :anchor "top right")
+  :geometry (geometry :x "1%"
+    :y "10px"
+    :width "30%"
+    :height "40px"
+    :anchor "top right")
   :stacking "fg"
   :reserve (struts :distance "80px" :side "top")
   :windowtype "dock"
   :wm-ignore true
+  :exclusive true
+  :focusable false
   (system :screen screen))
 
 (defwindow calendar [screen]
   :monitor screen
-  :geometry (geometry :x "-1%"
+  :geometry (geometry :x "1%"
     :y "55px"
     :anchor "top right")
   :width "10%"

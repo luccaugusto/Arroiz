@@ -1,8 +1,8 @@
 ;; ** Variables ***********************************************************************
 
 ;; Workspaces
-(defpoll wm_workspace_info :interval "0.5s" "scripts/workspaces")
-(defpoll workspace_layout :initial 'tile' :interval "1s" "scripts/workspace_layout")
+(defpoll wm_workspace_info :interval "1s" "scripts/workspaces")
+;;(defpoll workspace_layout :initial 'tile' :interval "1s" "scripts/workspace_layout")
 
 ;; ** Widgets *************************************************************************
 
@@ -16,14 +16,14 @@
 (defwidget open_windows [monitor]
 	(box :orientation "h" :spacing 6 :valign "center" :halign "start" :space-evenly "false" :vexpand "false" :hexpand "false"
 		(for window in {wm_workspace_info?.open_in_monitor == monitor ? wm_workspace_info?.open : []}
-			(button :class "open-window" :onclick "wmctrl -i -R ${window.id}"
-				(label :text {window.name})))))
+			(eventbox :cursor "pointer" :onclick "wmctrl -i -r ${window.id} -b toggle,hidden && wmctrl -i -R ${window.id}"
+				(label :class "open-window" :text {window.name})))))
 
 (defwidget extrainfo [monitor]
 	(box :class "dockbox" :orientation "h" :spacing 6 :valign "center" :halign "start" :space-evenly "false" :hexpand "true"
-		(tooltip
-			(label :text "${workspace_layout} layout")
-			(image :path "icons/${workspace_layout}.png" :image-height 20 :image-width 20))
+		;; (tooltip
+		;; 	(label :text "${workspace_layout} layout")
+		;; 	(image :path "icons/${workspace_layout}.png" :image-height 20 :image-width 20))
 		(workspaces :monitor monitor)
 		(open_windows :monitor monitor)))
 
@@ -40,5 +40,6 @@
            :stacking "fg"
            :reserve (struts :distance "80px" :side "top")
            :windowtype "dock"
+           :exclusive true
            :wm-ignore true
 (extrainfo :monitor screen))

@@ -6,9 +6,9 @@
 (defvar OPEN_PACKAGE_ICON "images/package.png")
 (defvar CLOSED_PACKAGE_ICON "images/closed-package.png")
 
-(defpoll redshift_temperature :interval "10m" "redshift -c ~/.config/redshift/config -p | grep 'Color temperature' | awk -F':' '{print $2}'")
-(defvar REDSHIFT_ON_ICON "images/redeye.png")
-(defvar REDSHIFT_OFF_ICON "images/blueeye.png")
+;;(defpoll redshift_temperature :interval "10m" "redshift -c ~/.config/redshift/config -p | grep 'Color temperature' | awk -F':' '{print $2}'")
+;; (defvar REDSHIFT_ON_ICON "images/redeye.png")
+;; (defvar REDSHIFT_OFF_ICON "images/blueeye.png")
 
 (defpoll random_pic :interval "1h" :initial "images/thonk.png" "scripts/random_pic")
 (defpoll sys_info :interval "2s" :initial "{}" "scripts/sys_info")
@@ -84,7 +84,7 @@
   (box :orientation "h" :class "winbox" :height {arraylength(todo_list) > 0 ? 300 : 90}
     (scroll :vscroll true :hscroll false
       (box :orientation "v" :spacing 2 :space-evenly false
-        (eventbox :cursor "pointer" :onclick "$TERMINAL --class 'Floating' -e $EDITOR ${todo_list_file} &"
+        (eventbox :cursor "pointer" :onclick "$TERMINAL --class 'Tasklist' -e $EDITOR ${todo_list_file} &"
           (box :orientation "h" :space-evenly false :spacing 120 :halign "baseline" :style "margin-top: 2px; padding-left: 17px"
             (image :path "images/to-do-list.png" :image-width 45 :image-height 45)
             (label :class "title" :text "Task List")))
@@ -138,9 +138,13 @@
           (eventbox :onclick "paplay assets/miau.mp3 &" :cursor "pointer"
             (image :path "images/cat.png" :image-width 50 :image-height 50))))
 
-      (box :class "winbox" :orientation "v" :space-evenly false :height 150 :width 150 :spacing 8 :style "padding-top: 20px;"
-        (image :path "images/floppy-disk.png" :image-width 80 :image-height 80)
-        (label :class "info" :text "${sys_info?.disk.used}/${sys_info?.disk.size}")))
+      (tooltip
+        (label :text "${sys_info?.disk.used}/${sys_info?.disk.size}" :class "info")
+        (box :class "winbox" :orientation "v" :space-evenly false :height 150 :width 150 :spacing 8 :valign "center" :style "padding-top: 5px;"
+          (circular-progress :value 92 :clockwise false :start-at 75 :thickness 5 :height 135 :width 135 :class "chart"
+            (box :orientation "v" :space-evenly false :spacing 5 :valign "center"
+              (image :path "images/floppy-disk.png" :image-width 60 :image-height 60)
+              (label :class "info" :wrap true :text "${sys_info?.disk.free} free"))))))
     (scroll :vscroll true :hscroll false :height {screens_resolutions["screen-${screen}"].height > 900 ? 650 : 480};;{round(screens_resolutions["screen-${screen}"].height / 100 * 31, 0)}
       (box :orientation "v" :spacing 8 :space-evenly false
         (sound_selector)
@@ -170,7 +174,7 @@
 
 (defwindow sidebar [screen screens_resolutions]
   :monitor screen
-  :geometry (geometry :x "-1%"
+  :geometry (geometry :x "1%"
     :y "6%"
     :width "25%"
     :height "87%"
@@ -183,8 +187,8 @@
 
 (defwindow quotes [screen screens_resolutions]
   :monitor screen
-  :geometry (geometry :x "-1%"
-    :y "-2%"
+  :geometry (geometry :x "1%"
+    :y "2%"
     :width {screens_resolutions["screen-${screen}"].width > 1600 ? "25%" : "30%"}
     :height "5%"
     :anchor "bottom right")
