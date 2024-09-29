@@ -50,6 +50,13 @@ grep
 groff
 grub
 gzip
+hyprcursor
+hyprland
+hyprlang
+hyprlock
+hyprpaper
+hyprutils
+hyprwayland-scanner
 htop
 imagemagick
 jekyll
@@ -143,6 +150,7 @@ which
 wireless_tools
 xbitmaps
 xclip
+xdg-desktop-portal-hyprland
 xdg-user-dirs
 xdg-utils
 xdotool
