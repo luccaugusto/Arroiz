@@ -46,13 +46,13 @@ bspc config top_padding 				50
 bspc config bottom_padding 				0
 bspc config border_width				4
 bspc config window_gap 					20
-bspc config split_ratio          		0.5
+bspc config split_ratio          		0.6
 bspc config borderless_monocle   		false
 bspc config gapless_monocle      		false
 bspc config single_monocle				true
-bspc config pointer_modifier 			mod1
+bspc config pointer_modifier 			mod4
 bspc config pointer_action1				move
-bspc config pointer_action2				resize_side
+bspc config pointer_action2				resize_corner
 bspc config focus_follows_pointer   	true
 bspc config presel_feedback_color 		"#51c4d4"
 
@@ -65,32 +65,35 @@ xsetroot -cursor_name left_ptr
 # [Rules for applications]
 bspc config ignore_ewmh_focus true
 
-bspc rule -a firefox 				desktop=^2 	follow=off
-bspc rule -a "Vivaldi-stable"		desktop=^2 	follow=off
-bspc rule -a "Brave-browser"		desktop=^2 	follow=off
-bspc rule -a qutebrowser 			desktop=^2 	follow=off
-bspc rule -a Gimp 					desktop=^3 	follow=off
-bspc rule -a krita 					desktop=^3 	follow=off
-bspc rule -a shotcut 				desktop=^3 	follow=off
-bspc rule -a Telegram 				desktop=^4 	follow=off
-bspc rule -a thunderbird 			desktop=^4 	follow=off
-bspc rule -a "notion-calendar-electron" 			desktop=^4 	follow=off
-bspc rule -a discord				desktop=^6 	follow=off
-bspc rule -a Slack 					desktop=^6 	follow=off
-bspc rule -a "transmission"		 	desktop=^8  follow=off state=pseudo_tiled
-bspc rule -a DBeaver				desktop=^9 	follow=off
-bspc rule -a beekeeper				desktop=^9 	follow=off
-bspc rule -a Spotify 				desktop=^10 follow=off
-bspc rule -a elisa	 				desktop=^10 follow=off
+bspc rule -a firefox                     desktop=^2  follow=off
+bspc rule -a "Vivaldi-stable"            desktop=^2  follow=off
+bspc rule -a "Brave-browser"             desktop=^2  follow=off
+bspc rule -a qutebrowser                 desktop=^2  follow=off
+bspc rule -a Gimp                        desktop=^3  follow=off
+bspc rule -a krita                       desktop=^3  follow=off
+bspc rule -a shotcut                     desktop=^3  follow=off
+bspc rule -a Telegram                    desktop=^4  follow=off
+bspc rule -a thunderbird                 desktop=^4  follow=off
+bspc rule -a "notion-calendar-electron"  desktop=^4  follow=off
+bspc rule -a zoom                        desktop=^5  follow=off state=floating sticky=off
+bspc rule -a discord                     desktop=^6  follow=off
+bspc rule -a Slack                       desktop=^6  follow=off
+bspc rule -a "transmission"              desktop=^8  follow=off state=pseudo_tiled
+bspc rule -a DBeaver                     desktop=^9  follow=off
+bspc rule -a beekeeper-studio            desktop=^9  follow=off
+bspc rule -a Spotify                     desktop=^10 follow=off
+bspc rule -a elisa                       desktop=^10 follow=off
 
-bspc rule -a feh 					floating=on center=true follow=off
-bspc rule -a "screengrab"		 	floating=on center=true follow=off
-bspc rule -a calendar				desktop=^5 state=floating
-bspc rule -a "Emacs"		 		state=tiled
+bspc rule -a feh                         floating=on center=true follow=off
+bspc rule -a "screengrab"                floating=on center=true follow=off
+bspc rule -a calendar                    desktop=^5 state=floating
+bspc rule -a "Emacs"                     state=tiled
 
 # scratchpad
 bspc rule -a dropdown sticky=on state=floating hidden=on
+
 # class for floating windows
-bspc rule -a floats state=floating
+bspc rule -a Floating state=floating
+bspc rule -a Tasklist state=floating
 
 startup_progs

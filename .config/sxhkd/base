@@ -72,8 +72,8 @@ super + w
 	$BROWSER
 super + b
 	lockscreen
-super + shift + s
-	powermenu
+super + {ctrl, caps} + s
+	{powermenu, powermenu}
 super + p
 	rofi -show drun -show-icons
 super + shift + p
@@ -109,5 +109,3 @@ super + F10
 	toggle_redshift
 super + F11
 	killall gotop || $TERMINAL -e gotop -l kitchensink
-super + F12
-	monitors

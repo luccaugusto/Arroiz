@@ -527,6 +527,7 @@ awful.rules.rules = {
           "Arandr",
           "Blueman-manager",
 		  "Floating",
+		  "Tasklist",
           "Gpick",
           "Kruler",
           "MessageWin",  -- kalarm.

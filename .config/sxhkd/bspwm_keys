@@ -25,17 +25,26 @@ super + shift + b
 #------------------------------------------------
 
 #Gaps
-super + ctrl + g
-	 GAPS=$(bspc config window_gap); bspc config window_gap $((GAPS+5))
-super + ctrl + h
-	 GAPS=$(bspc config window_gap); bspc config window_gap $((GAPS-5))
+# super + ctrl + g
+# 	 GAPS=$(bspc config window_gap); bspc config window_gap $((GAPS+5))
+# super + ctrl + h
+# 	 GAPS=$(bspc config window_gap); bspc config window_gap $((GAPS-5))
 
 #------------------------------------------------
 #-- SET WINDOW FLAGS:
 #------------------------------------------------
 
-super + {t,shift + t,s,shift + f}
-	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+super + {t,shift + t,shift + f}
+	bspc node -t {tiled,pseudo_tiled,fullscreen}
+
+super + n
+	bspc node --flag hidden
+
+super + ctrl + n
+	bspc node any.hidden --flag hidden
+
+super + ctrl + space
+	bspc node -t floating
 
 #scratchpad
 super + u
@@ -108,11 +117,11 @@ super + {_,shift + }{1-9,0}
 #-- MOVER E REDIMENSIONAR JANELAS COM O MOUSE:
 #------------------------------------------------
 
-~button1
-	bspc pointer -g focus
-
-#super + button{1-3}
-	#bspc pointer -g {move,resize_side,resize_corner}
+# ~button1
+# 	bspc pointer -g focus
+#
+# super + button{1-3}
+# 	bspc pointer -g {move,resize_side,resize_corner}
 
 #super + !button{1-3}
 	#bspc pointer -t %i %i
