@@ -4,7 +4,11 @@ wallpaper=~/.config/wallpaper
 
 set_wallpaper()
 {
-	xwallpaper --output all --stretch "$wallpaper"
+	if [ "$(pgrep -x Xorg)" ]; then
+		xwallpaper --output all --stretch "$wallpaper"
+	elif [ "$(pgrep -x Hyprland)" ]; then
+		hyprctl dispatch exec hyprpaper
+	fi
 }
 
 change_and_set_wallpaper()

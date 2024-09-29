@@ -1,0 +1,45 @@
+#!/bin/sh
+
+setup_w_workspace()
+{
+	connected_monitors="$(hyprctl monitors | grep -w Monitor)"
+	echo "$connected_monitors"
+	# other monitors and docked
+	if [ "$(cat /sys/devices/platform/dock.0/docked)" = 1 ]; then
+		if [ "$(echo "$connected_monitors" | wc -l)" = 2 ]; then
+			# sh "$HOME/.screenlayout/two-screens-docked.sh"
+			hyprctl keyword monitor eDP-1,disable
+		fi
+	fi
+}
+
+# set up monitor layout if another monitor is present
+setup_x_workspace()
+{
+	connected_monitors="$(xrandr -q | grep -w connected)"
+	# other monitors and docked
+	if [ "$(cat /sys/devices/platform/dock.0/docked)" = 1 ]; then
+		if [ "$(echo "$connected_monitors" | wc -l)" = 2 ]; then
+			# sh "$HOME/.screenlayout/two-screens-docked.sh"
+			sh "$HOME/.screenlayout/other-screen-only.sh"
+		fi
+	# other monitors and not docked
+	else
+		case "$connected_monitors" in
+			*HDMI*) sh "$HOME/.screenlayout/hdmi-left.sh";;
+			*DP-2*) sh "$HOME/.screenlayout/screen-stack.sh";;
+		esac
+	fi
+
+	# set trackpoint speed
+	xinput set-prop 15 "libinput Accel Speed" 0.8
+}
+
+case "$1" in
+	*w*)
+		setup_w_workspace
+		;;
+	*)
+		setup_x_workspace
+		;;
+esac

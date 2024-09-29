@@ -24,24 +24,49 @@ last_session_cleanup()
 
 keybidings_configurations()
 {
-	# Load specific WM configs
-	if [ "$(pgrep -x bspwm)" ]; then
-		cat "$CONFIG/sxhkd/base" "$CONFIG/sxhkd/bspwm_keys" > "$CONFIG/sxhkd/sxhkdrc"
-	elif [ "$(pgrep -x dwm)" ]; then
-		cat "$CONFIG/sxhkd/base" "$CONFIG/sxhkd/dwm_keys" > "$CONFIG/sxhkd/sxhkdrc" &&
-		dwmbar &
-	elif [ "$(pgrep -x i3)" ]; then
-		cat "$CONFIG/sxhkd/base" "$CONFIG/sxhkd/i3_keys" > "$CONFIG/sxhkd/sxhkdrc"
-	else
-		cp "$CONFIG/sxhkd/base" "$CONFIG/sxhkd/sxhkdrc"
+	if [ "$(pgrep -x Xorg)" ]; then
+		# Load specific WM configs
+		if [ "$(pgrep -x bspwm)" ]; then
+			cat "$CONFIG/sxhkd/base" "$CONFIG/sxhkd/bspwm_keys" > "$CONFIG/sxhkd/sxhkdrc"
+		elif [ "$(pgrep -x dwm)" ]; then
+			cat "$CONFIG/sxhkd/base" "$CONFIG/sxhkd/dwm_keys" > "$CONFIG/sxhkd/sxhkdrc" &&
+			dwmbar &
+		elif [ "$(pgrep -x i3)" ]; then
+			cat "$CONFIG/sxhkd/base" "$CONFIG/sxhkd/i3_keys" > "$CONFIG/sxhkd/sxhkdrc"
+		else
+			cp "$CONFIG/sxhkd/base" "$CONFIG/sxhkd/sxhkdrc"
+		fi
+
+		[ "$(pgrep sxhkd)" ] || sxhkd &
 	fi
 }
 
+start_eww()
+{
+	# use correct eww binary
+	if [ "$(pgrep -x Xorg)" ]; then
+		rm ~/.local/bin/vendor/eww
+		cp ~/.local/bin/vendor/xeww ~/.local/bin/vendor/eww
+
+		# fix window paddings
+		sed -i 's/geometry :x "1%"/geometry :x "-1%"/' ~/.config/eww/right-bar/eww.yuck
+		sed -i 's/geometry :x "1%"/geometry :x "-1%"/' ~/.config/eww/sidebar/eww.yuck
+		sed -i 's/:y "2%"/:y "-2%"/' ~/.config/eww/sidebar/eww.yuck
+	else
+		rm ~/.local/bin/vendor/eww
+		cp ~/.local/bin/vendor/weww ~/.local/bin/vendor/eww
+
+		# fix window paddings
+		sed -i 's/geometry :x "-1%"/geometry :x "1%"/' ~/.config/eww/right-bar/eww.yuck
+		sed -i 's/geometry :x "-1%"/geometry :x "1%"/' ~/.config/eww/sidebar/eww.yuck
+		sed -i 's/:y "-2%"/:y "2%"/' ~/.config/eww/sidebar/eww.yuck
+	fi
+	launch_eww_bars
+}
 
 start_programs()
 {
-
-	launch_eww_bars
+	start_eww
 
 	# low battery notifications (cronjob wasn't working)
 	[ "$(pgrep batsinal)" ] || batsinal &
@@ -50,7 +75,7 @@ start_programs()
 	# Hide that damn mouse when it is idle
 	[ "$(pgrep unclutter)" ] || unclutter &
 	# key bindings
-	[ "$(pgrep sxhkd)" ] || sxhkd &
+	keybidings_configurations &
 	# manage external drives
 	[ "$(pgrep udiskie)" ] || udiskie -a --appindicator -f pcmanfm &
 	# bluetooth
@@ -68,8 +93,9 @@ start_programs()
 	[ "$(pgrep awesome)" ] || dunst -conf ~/.config/dunst/dunstrc &
 
 	# Utterly amazing transparent terminals
-	#[ "$(pgrep picom)" ] || picom --experimental-backend --config "$HOME/.config/picom/picom.conf" &
-	[ "$(pgrep picom)" ] || picom --config "$HOME/.config/picom/picom.conf" &
+	if [ "$(pgrep -x Xorg)" ]; then
+		[ "$(pgrep picom)" ] || picom --config "$HOME/.config/picom/picom.conf" &
+	fi
 
 	# Let me use pt-br and en-us keyboards
 	keyboard_layout &
@@ -88,7 +114,6 @@ now=$(date +%H:%M)
 login_time=$(who | awk '{print $4}')
 
 last_session_cleanup
-keybidings_configurations
 
 # only start programs right after i login so that
 # when restarting wm it won't reopen programs i closed

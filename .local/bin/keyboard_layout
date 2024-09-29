@@ -2,18 +2,23 @@
 
 #-Sets my keyboard layout to en_us and pt_br, also remaps Caps to Ctrl
 
-#Checks if a external keyboard is connect
-#Most likely it will be a brazilian one
-#so it sets de default layout as br and the alternative as us
-# CONNECTED=$(ls /dev/input/by-id | grep kbd)
-#
-# if [ "$CONNECTED" ]
-# then
-# 	setxkbmap -layout br,us
-# else
- 	setxkbmap -layout us,br
-# fi
+x_keyboard()
+{
+	#Checks if a external keyboard is connect
+	#Most likely it will be a brazilian one
+	#so it sets de default layout as br and the alternative as us
+	# CONNECTED=$(ls /dev/input/by-id | grep kbd)
+	#
+	# if [ "$CONNECTED" ]
+	# then
+	# 	setxkbmap -layout br,us
+	# else
+		setxkbmap -layout us,br
+	# fi
 
-setxkbmap -option grp:alt_shift_toggle
-# kanata does this now
-# setxkbmap -option ctrl:nocaps
+	setxkbmap -option grp:alt_shift_toggle
+}
+
+if [ "$(pgrep X)" ]; then
+	x_keyboard
+fi

@@ -172,11 +172,19 @@ install_eww()
 {
 	git clone https://github.com/elkowar/eww || return
 	cd eww || return
+
+	# eww for X
 	cargo build --release --no-default-features --features x11
-	cd target/release || return
-	chmod +x eww
+	chmod +x target/release/eww
 	[ -d ~/.local/bin/vendor ] || mkdir -p ~/.local/bin/vendor
-	cp eww ~/.local/bin/vendor/
+	cp target/release/eww ~/.local/bin/vendor/xeww
+
+	# eww for wayland
+	cargo build --release --no-default-features --features=wayland
+	chmod +x target/release/eww
+	[ -d ~/.local/bin/vendor ] || mkdir -p ~/.local/bin/vendor
+	cp target/release/eww ~/.local/bin/vendor/weww
+
 	cd ../../..
 	rm -rf eww/
 }

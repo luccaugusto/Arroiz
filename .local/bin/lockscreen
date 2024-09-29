@@ -11,7 +11,8 @@ mpc pause &>/dev/null
 pauseallmpv &>/dev/null
 
 #slock &
-i3lock -i "$HOME/Documents/cheetos-lock.jpg" -Mf
-
-# In five seconds, turn off display unless key press in last 4 seconds.
-#sleep 5 && [[ 4000 -lt $(xssstate -i) ]] &&  pgrep -x slock && xset dpms force off
+if [ "$(pgrep -x Xorg)" ]; then
+	i3lock -i ~/.config/lockscreen.png -Mf
+elif [ "$(pgrep -x Hyprland)" ]; then
+	hyprlock
+fi

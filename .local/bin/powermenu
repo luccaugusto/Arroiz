@@ -23,6 +23,8 @@ if [ "$(pgrep -x awesome)" ]; then
 	logout_cmd="awesome-client 'awesome.quit()'"
 elif [ "$(pgrep -x bspwm)" ]; then
 	logout_cmd="bspc quit"
+elif [ "$(pgrep -x Hyprland)" ]; then
+	logout_cmd="hyprctl dispatch exit"
 fi
 
 uptime="$(uptime -p)"

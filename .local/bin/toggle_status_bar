@@ -37,10 +37,20 @@ toggle_bspwm_padding()
 	fi
 }
 
+toggle_hyprland_reserved()
+{
+	if [ "$is_open" = "true" ];then
+		hyprctl keyword monitor  ,addreserved,0,0,0,0
+	else
+		hyprctl keyword monitor  ,addreserved,50,0,0,0
+	fi
+}
+
 toggle_wm_bar()
 {
 	[ "$(pgrep awesome)" ] && toggle_awesome_bar &
 	[ "$(pgrep bspwm)" ] && toggle_bspwm_padding
+	[ "$(pgrep Hyprland)" ] && toggle_hyprland_reserved
 }
 
 toggle_eww &
