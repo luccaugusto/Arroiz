@@ -10,13 +10,13 @@
 (defwidget workspaces [monitor]
 	(box :spacing 6 :class "workspaces" :valign "center" :hexpand false
 		(for workspace in {wm_workspace_info?.[monitor]}
-			(eventbox :cursor "pointer" :onclick "wmctrl -s ${workspace.index}" :class "${workspace.class}"
+			(eventbox :cursor "pointer" :onclick "scripts/focus_workspace ${workspace.index}" :class "${workspace.class}"
 				(label :text {workspace.label})))))
 
 (defwidget open_windows [monitor]
 	(box :orientation "h" :spacing 6 :valign "center" :halign "start" :space-evenly "false" :vexpand "false" :hexpand "false"
 		(for window in {wm_workspace_info?.open_in_monitor == monitor ? wm_workspace_info?.open : []}
-			(eventbox :cursor "pointer" :onclick "wmctrl -i -r ${window.id} -b toggle,hidden && wmctrl -i -R ${window.id}"
+			(eventbox :cursor "pointer" :onclick "scripts/toggle_minimize_client ${window.id}"
 				(label :class "open-window" :text {window.name})))))
 
 (defwidget extrainfo [monitor]

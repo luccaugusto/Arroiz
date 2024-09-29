@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if [ "$(pgrep -x Xorg)" ]; then
+	wmctrl -s "$1"
+elif [ "$(pgrep -x Hyprland)" ]; then
+	hyprctl dispatch workspace "$1"
+fi
