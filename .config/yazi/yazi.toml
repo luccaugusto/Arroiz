@@ -40,6 +40,9 @@ open = [
 	{ run = 'open "$@"',                    desc = "Open", for = "macos" },
 	{ run = 'start "" "%1"', orphan = true, desc = "Open", for = "windows" },
 ]
+open_img = [
+	{ run = 'sxiv "$1"', desc = "Open", for = "linux" },
+]
 reveal = [
 	{ run = 'xdg-open "$(dirname "$1")"',           desc = "Reveal", for = "linux" },
 	{ run = 'open -R "$1"',                         desc = "Reveal", for = "macos" },
@@ -51,8 +54,8 @@ extract = [
 	{ run = 'ya pub extract --list %*',   desc = "Extract here", for = "windows" },
 ]
 play = [
-	{ run = 'mpv --force-window "$@"', orphan = true, for = "unix" },
-	{ run = 'mpv --force-window %*', orphan = true, for = "windows" },
+	{ run = 'vlc "$@"', orphan = true, for = "unix" },
+	{ run = 'vlc %*', orphan = true, for = "windows" },
 	{ run = '''mediainfo "$1"; echo "Press enter to exit"; read _''', block = true, desc = "Show media info", for = "unix" },
 ]
 
@@ -63,7 +66,7 @@ rules = [
 	# Text
 	{ mime = "text/*", use = [ "edit", "reveal" ] },
 	# Image
-	{ mime = "image/*", use = [ "open", "reveal" ] },
+	{ mime = "image/*", use = [ "open_img", "reveal" ] },
 	# Media
 	{ mime = "{audio,video}/*", use = [ "play", "reveal" ] },
 	# Archive

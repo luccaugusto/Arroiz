@@ -72,8 +72,8 @@ super + w
 	$BROWSER
 super + b
 	lockscreen
-super + {ctrl, caps} + s
-	{powermenu, powermenu}
+super + shift + s
+	powermenu
 super + p
 	rofi -show drun -show-icons
 super + shift + p

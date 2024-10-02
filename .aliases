@@ -14,6 +14,7 @@ alias esets="$EDITOR .config/nvim/plugin/sets.vim"
 alias eremaps="$EDITOR .config/nvim/plugin/remaps.vim"
 alias ytdls="yt-dlp -f m4a"
 alias randompass="echo $(date +%s | sha256sum | base64 | head -c 32)"
+alias restartdunst="killall dunst && dunst -conf ~/.config/dunst/dunstrc &"
 
 # MY WEBSITE STUFF
 alias lxyz="ssh lucca@luccaaugusto.xyz"

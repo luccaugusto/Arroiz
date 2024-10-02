@@ -12,7 +12,7 @@ configuration {
 
 /*****----- Global Properties -----*****/
 * {
-    font:                        "Monaco 12";
+    font:                        "Monaco 28";
     background:                  #020001;
     background-alt:              #000000;
     foreground:                  #FFFFFF;
@@ -28,14 +28,15 @@ window {
     location:                    east;
     anchor:                      east;
     fullscreen:                  false;
-    width:                       175px;
-    x-offset:                    0px;
+    width:                       20%;
+	height:                      88%;
+    x-offset:                    -1%;
     y-offset:                    0px;
 
     /* properties for all widgets */
     enabled:                     true;
-    border-radius:               15px 0 0 15px;
-	border:                      2px 0 2px 2px;
+    border-radius:               15px;
+	border:                      2px;
 	border-color:                @selected;
     cursor:                      "default";
     background-color:            @background;
@@ -175,6 +176,7 @@ element-icon {
     cursor:                      inherit;
 }
 element-text {
+	padding:                     0 0 0 40px;
     background-color:            transparent;
     text-color:                  inherit;
     cursor:                      inherit;
