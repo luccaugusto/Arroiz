@@ -9,9 +9,10 @@ get_current_monitor()
 	current_monitor="1"
 	if [ "$(pgrep awesome)" ]; then
 		current_monitor="$(awesome-client 'return mouse.screen.index' | cut -d ' ' -f 5)"
-	#elif bspwm
-	#elif hyprland
+	#elif bspwm; then
 		# TODO: make it work for other wms
+	elif hyprland; then
+		current_monitor=$(hyprctl -j monitors  | jq '.[] | select(.focused) | .id')
 	fi
 	echo "$current_monitor"
 }
