@@ -2,8 +2,10 @@
 
 setup_w_workspace()
 {
+	hyprctl keyword monitor ,highres@highrr,auto,1,bitdepth,e
+	hyprctl keyword monitor ,addreserved,50,0,0,0
+
 	connected_monitors="$(hyprctl monitors | grep -w Monitor)"
-	echo "$connected_monitors"
 	# other monitors and docked
 	if [ "$(cat /sys/devices/platform/dock.0/docked)" = 1 ]; then
 		if [ "$(echo "$connected_monitors" | wc -l)" = 2 ]; then
@@ -35,11 +37,8 @@ setup_x_workspace()
 	xinput set-prop 15 "libinput Accel Speed" 0.8
 }
 
-case "$1" in
-	*w*)
-		setup_w_workspace
-		;;
-	*)
-		setup_x_workspace
-		;;
-esac
+if [ "$(pgrep Xorg)" ]; then
+	setup_x_workspace
+elif [ "$(pgrep Hyprland)" ]; then
+	setup_w_workspace
+fi
