@@ -223,11 +223,18 @@ def decide_input(input_cards, source_in_use) -> Card:
 
 
 def hdmi_connected():
-    monitors = run(
-        ["xrandr", "--listactivemonitors"], stdout=PIPE
-    ).stdout.decode()
+    xorg_running = run(["pgrep", "Xorg"]).returncode == 0
 
-    return monitors.find("HDMI") != -1 or monitors.find("DP-2-") != -1
+    if xorg_running:
+        monitors = run(
+            ["xrandr", "--listactivemonitors"], stdout=PIPE
+        ).stdout.decode()
+    else:
+        monitors = run(
+            ["hyprctl", "monitors"], stdout=PIPE
+        ).stdout.decode()
+
+    return monitors.find("HDMI") != -1 or monitors.find("DP-2-") != -1 or monitors.find("DP-3") != -1
 
 
 def get_cards_by_type(all_cards: list[dict[str, Any]], card_type: str, card_in_use: str) -> dict[str, Card]:
