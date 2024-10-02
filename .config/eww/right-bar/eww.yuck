@@ -28,6 +28,8 @@
 (defpoll VOLICON :interval "1s" `scripts/volume --icon`)
 (defpoll VOLUME :interval "1s" `scripts/volume --get`)
 
+(defpoll notification_paused :interval "1s" "dunstctl is-paused")
+
 ;; Network
 (defpoll WIFIICON :initial "images/icons/system/no-wifi.png" :interval "1m" `scripts/check-network --icon`)
 (defpoll NETSTAT :initial "Checking Network" :interval "30s" `scripts/check-network --stat`)
@@ -61,9 +63,9 @@
     (box :orientation "h" :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "true"
       (box :style "background-image: url('${KEYBOARD_ICON}');" :class "trayicon")
       (label :class "infotext" :halign "start" :valign "center" :text keyboard_layout))
-    ;; (eventbox :onclick "dunstctl set-paused toggle" :cursor "pointer"
-    ;;   (box :orientation "h" :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
-    ;;     (image :path notification_icon :image-height 20 :image-width 20)))
+    (eventbox :onclick "dunstctl set-paused toggle" :cursor "pointer"
+      (box :orientation "h" :valign "center" :halign "center" :space-evenly "true" :vexpand "false" :hexpand "false" :class "trayicon"
+        (image :path {notification_paused == "true" ? 'images/no-bell.png' : 'images/bell.png'} :image-height 20 :image-width 20)))
     (eventbox :onclick "scripts/toggle_calendar" :cursor "pointer"
       (box :class "clockbox" :orientation "v" :spacing 0 :valign "center" :halign "end" :space-evenly "false" :vexpand "false" :hexpand "false"
         (label :class "time" :halign "end" :wrap "false" :limit-width 25 :text TIME)

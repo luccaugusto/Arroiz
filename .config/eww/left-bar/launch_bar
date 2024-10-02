@@ -4,7 +4,12 @@ eww_bar_config="$HOME/.config/eww/left-bar"
 
 sh "$eww_bar_config/close_bar"
 
-monitor_count=$(xrandr --listactivemonitors | head -n 1 | awk '{print $2}')
+monitor_count=1
+if [ "$(pgrep Xorg)" ]; then
+	monitor_count=$(xrandr --listactivemonitors | head -n 1 | awk '{print $2}')
+elif [ "$(pgrep Hyprland)" ]; then
+	monitor_count=$(hyprctl monitors | grep -c Monitor)
+fi
 
 for i in $(seq 0 "$((monitor_count - 1))"); do
 	echo "Starting eww left-bar-$i on monitor $i"

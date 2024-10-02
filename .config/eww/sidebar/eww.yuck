@@ -132,7 +132,7 @@
           (eventbox :onclick "${EWW_CMD} open timerinput --screen ${screen}" :cursor "pointer"
             (image :path "images/timer.png" :image-width 50 :image-height 50)))
         (box :class "" :orientation "h" :valign "center" :space-evenly true
-          (eventbox :onclick "arandr &" :cursor "pointer"
+          (eventbox :onclick "scripts/monitor_management &" :cursor "pointer"
             (image :path "images/monitor-config2.png" :image-width 50 :image-height 50))
 
           (eventbox :onclick "paplay assets/miau.mp3 &" :cursor "pointer"

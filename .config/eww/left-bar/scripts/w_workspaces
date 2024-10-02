@@ -23,7 +23,7 @@ spaces (){
 current=$(hyprctl monitors -j | jq '.[] | select(.focused) | .activeWorkspace.id')
 workspaces=$(spaces "$current")
 
-open_clients=$(hyprctl clients -j | jq 'map({id: .address, name: .class, workspace: .workspace.id})' | jq -c --arg current "$current" '[ .[] | select(.workspace == ($current|tonumber) or .workspace == -98) ]')
+open_clients=$(hyprctl clients -j | jq 'map({id: .address, name: .class, workspace: .workspace.id})' | jq -c --arg current "$current" '[ .[] | select(.workspace == ($current|tonumber) or .workspace < -0) ]')
 
 echo "{\"open_in_monitor\": \"0\",\"0\": $workspaces, \"open\": $open_clients}"
 

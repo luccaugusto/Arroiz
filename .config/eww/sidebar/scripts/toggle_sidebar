@@ -9,8 +9,9 @@ get_current_monitor()
 	current_monitor="1"
 	if [ "$(pgrep awesome)" ]; then
 		current_monitor="$(awesome-client 'return mouse.screen.index' | cut -d ' ' -f 5)"
-	#else
-		# TODO: make it work for bspwm
+	#elif bspwm
+	#elif hyprland
+		# TODO: make it work for other wms
 	fi
 	echo "$current_monitor"
 }
@@ -29,6 +30,7 @@ run_eww() {
 
 if [ ! -f "$lock_file" ]; then
 	touch "$lock_file"
+	touch /tmp/sound_control_status
 	run_eww
 else
 	rm "$lock_file" &&

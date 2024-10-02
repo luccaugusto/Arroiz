@@ -4,6 +4,14 @@ parsed_layout="tile"
 if [ "$(pgrep awesome)" ]; then
 	layout=$(awesome-client 'return mouse.screen.selected_tag.layout.name')
 	parsed_layout="${layout##* \"}"
+elif [ "$(pgrep Hyprland)" ]; then
+	layout=$(hyprctl activeworkspace | grep "^\s*hasfullscreen" )
+	fullscreen="${layout##* }"
+	if [ "$fullscreen" = "1" ]; then
+		parsed_layout="fullscreen"
+	else
+		parsed_layout="tile"
+	fi
 fi
 
 echo "${parsed_layout%%\"*}"

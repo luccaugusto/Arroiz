@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if [ "$(pgrep Xorg)" ]; then
+	arandr &
+else
+	wdisplays &
+fi

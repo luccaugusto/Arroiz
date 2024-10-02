@@ -2,7 +2,7 @@
 
 ;; Workspaces
 (defpoll wm_workspace_info :interval "1s" "scripts/workspaces")
-;;(defpoll workspace_layout :initial 'tile' :interval "1s" "scripts/workspace_layout")
+(defpoll workspace_layout :initial 'tile' :interval "1s" "scripts/workspace_layout")
 
 ;; ** Widgets *************************************************************************
 
@@ -21,9 +21,9 @@
 
 (defwidget extrainfo [monitor]
 	(box :class "dockbox" :orientation "h" :spacing 6 :valign "center" :halign "start" :space-evenly "false" :hexpand "true"
-		;; (tooltip
-		;; 	(label :text "${workspace_layout} layout")
-		;; 	(image :path "icons/${workspace_layout}.png" :image-height 20 :image-width 20))
+		(tooltip
+			(label :text "${workspace_layout} layout")
+			(image :path "icons/${workspace_layout}.png" :image-height 20 :image-width 20))
 		(workspaces :monitor monitor)
 		(open_windows :monitor monitor)))
 
