@@ -4,8 +4,8 @@ if [ "$(pgrep -x Xorg)" ]; then
 	wmctrl -i -r "$1" -b toggle,hidden && wmctrl -i -R "$1"
 elif [ "$(pgrep -x Hyprland)" ]; then
 	hyprctl dispatch togglespecialworkspace magic
-	hyprctl dispatch movetoworkspace +0 "$1"
+	hyprctl dispatch movetoworkspace +0
 	hyprctl dispatch togglespecialworkspace magic
-	hyprctl dispatch movetoworkspace special:magic "$1"
+	hyprctl dispatch movetoworkspace special:magic
 	hyprctl dispatch togglespecialworkspace magic
 fi
