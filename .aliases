@@ -1,65 +1,65 @@
 # GENERAL STUFF
-alias q="exit"
-alias please="sudo"
-alias sdnow="shutdown now"
-alias gmspdf="groff -ms -Tpdf"
-alias umount_phone="fusermount -u"
+alias q='exit'
+alias please='sudo'
+alias sdnow='shutdown now'
+alias gmspdf='groff -ms -Tpdf'
+alias umount_phone='fusermount -u'
 alias doublefont='sudo setfont -d'
-alias ..="cd .."
-alias fd='cd && cd "$(find -maxdepth 4 -type d | grep -v "\./\." | sed "s/.\///" | fzf)"'
-alias fc='$EDITOR $(find ~/.config | fzf)'
-alias fh="cat $HOME/.bash_history | fzf"
-alias e="$EDITOR"
-alias esets="$EDITOR .config/nvim/plugin/sets.vim"
-alias eremaps="$EDITOR .config/nvim/plugin/remaps.vim"
-alias ytdls="yt-dlp -f m4a"
-alias randompass="echo $(date +%s | sha256sum | base64 | head -c 32)"
-alias restartdunst="killall dunst && dunst -conf ~/.config/dunst/dunstrc &"
+alias ..='cd ..'
+alias fd='cd && cd "$(find -maxdepth 4 -type d | grep -v '\''\./\.'\'' | sed '\''s/.\///'\'' | fzf)"'
+alias e='$EDITOR'
+alias esets='$EDITOR .config/nvim/plugin/sets.vim'
+alias eremaps='$EDITOR .config/nvim/plugin/remaps.vim'
+alias ytdls='yt-dlp -f m4a'
+alias randompass='echo $(date +%s | sha256sum | base64 | head -c 32)'
+alias restartdunst='killall dunst && dunst -conf ~/.config/dunst/dunstrc &'
+# safer rm
+alias rm='rm -i'
 
 # MY WEBSITE STUFF
-alias lxyz="ssh lucca@luccaaugusto.xyz"
-alias rxyz="ssh root@luccaaugusto.xyz"
-alias site="cd $HOME/repos/site/; bundle exec jekyll serve"
-alias jekser="bundle exec jekyll serve --livereload"
+alias lxyz='ssh lucca@luccaaugusto.xyz'
+alias rxyz='ssh root@luccaaugusto.xyz'
+alias site='cd $HOME/repos/site/; bundle exec jekyll serve'
+alias jekser='bundle exec jekyll serve --livereload'
 
 # Pacman stuff
-alias pautoremove="sudo pacman -Rns $(pacman -Qtdq)"
-alias P="sudo pacman"
-alias p="pacman"
-alias pclrcache="sudo yay -Scc"
-alias freepacman="sudo rm /var/lib/pacman/db.lck"
-alias listpackages="pacman -Qi | egrep '^(Name|Installed)' | cut -f2 -d':' | paste - - | column -t | sort -nrk 2 | grep MiB | less"
+alias pautoremove='sudo pacman -Rns $(pacman -Qtdq)'
+alias P='sudo pacman'
+alias p='pacman'
+alias pclrcache='sudo yay -Scc'
+alias freepacman='sudo rm /var/lib/pacman/db.lck'
+alias listpackages='pacman -Qi | egrep '\''^(Name|Installed)'\'' | cut -f2 -d'\'':'\'' | paste - - | column -t | sort -nrk 2 | grep MiB | less'
 
 # Command aliases and typos
-alias ls="ls --color=auto"
-alias ll="ls -laFoh"
-alias cler="clear"
-alias claer="clear"
-alias clera="clear"
-alias celar="clear"
-alias clean="clear"
-alias n="nvim ."
-alias scim="sc-im"
-alias r="ranger"
-alias f="yazi"
+alias ls='ls --color=auto'
+alias ll='ls -laFoh'
+alias cler='clear'
+alias claer='clear'
+alias clera='clear'
+alias celar='clear'
+alias clean='clear'
+alias n='nvim .'
+alias scim='sc-im'
+alias r='ranger'
+alias f='yazi'
 
 # GIT STUFF
-alias gc="git commit"
-alias grs="git restore --staged"
-alias gpsh="git push"
-alias gpll="git pull"
-alias gad="git add ."
-alias gs="git status"
-alias gita="git add"
-alias gsu="git submodule update --recursive"
-alias gpsu="git push --set-upstream origin"
-alias gsquash="git rebase -i HEAD~"
-alias gdelb="git branch -d"
+alias gc='git commit'
+alias grs='git restore --staged'
+alias gpsh='git push'
+alias gpll='git pull'
+alias gad='git add .'
+alias gs='git status'
+alias gita='git add'
+alias gsu='git submodule update --recursive'
+alias gpsu='git push --set-upstream origin'
+alias gsquash='git rebase -i HEAD~'
+alias gdelb='git branch -d'
 
 # WORK STUFF
-alias dc="docker-compose"
-alias redisclear="redis-cli flushall"
-alias ngr="ngrok http --domain=profound-cod-verbally.ngrok-free.app"
-alias stripelisten="stripe listen --forward-to localhost:4000/api/v1/stripe/webhooks"
-alias dockerinspectip="docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'"
-alias rw="cd $HOME/repos/roadway/roadway-app/backend && poetry run nvim ../"
+alias dc='docker-compose'
+alias redisclear='redis-cli flushall'
+alias ngr='ngrok http --domain=profound-cod-verbally.ngrok-free.app'
+alias stripelisten='stripe listen --forward-to localhost:4000/api/v1/stripe/webhooks'
+alias dockerinspectip='docker inspect --format='\''{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'\'''
+alias rw='cd $HOME/repos/roadway/roadway-app/backend && poetry run nvim ../'
