@@ -22,9 +22,18 @@
   color: #888;
 }
 
-.checked {
+.done {
   font-size: 16px;
   color: #888;
+}
+
+.in-progress {
+  font-size: 18px;
+  color: #e0c3ce;
+}
+
+.to-do {
+  color: #fff;
 }
 
 .label {

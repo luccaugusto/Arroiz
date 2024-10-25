@@ -279,11 +279,11 @@ def _parse_args():
     ap.add_argument("-s", nargs=4, metavar=('sink', 'profile', 'card_name', 'card_type ["input", "output", "io"]'), help="Set sink profile manually")
     return ap
 
-def list_cards(output_cards, input_cards):#, io_cards):
+def list_cards(output_cards, input_cards, io_cards):
     cards_info = {
         "output": [o.__dict__ for o in output_cards.values()],
         "input": [o.__dict__ for o in input_cards.values()],
-        #"io": [o.__dict__ for o in io_cards.values()],
+        "io": [o.__dict__ for o in io_cards.values()],
     }
     print(dumps(cards_info))
 
@@ -328,7 +328,7 @@ if __name__ == "__main__":
         output_changed = card_type.lower() == CardType.OUTPUT or card_type.lower() == CardType.IO
         input_changed = card_type.lower() == CardType.INPUT or card_type.lower() == CardType.IO
     elif args.l or args.f:
-        list_cards(output_cards, input_cards)#, io_cards)
+        list_cards(output_cards, input_cards, io_cards)
         exit(0)
     else:
         arg_parser.print_help()

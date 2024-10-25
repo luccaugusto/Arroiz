@@ -15,7 +15,7 @@ list_tasks()
 
 check_task()
 {
-	sed -i "s/^\[ \] $1/[x] $1/" $task_list
+	sed -i "s/^\[.\] $1/[x] $1/" $task_list
 }
 
 uncheck_task()
