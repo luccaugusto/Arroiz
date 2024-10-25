@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # GENERAL STUFF
 alias q='exit'
 alias please='sudo'
@@ -15,6 +17,14 @@ alias randompass='echo $(date +%s | sha256sum | base64 | head -c 32)'
 alias restartdunst='killall dunst && dunst -conf ~/.config/dunst/dunstrc &'
 # safer rm
 alias rm='rm -i'
+
+if [ "$(pgrep -x Xorg)" ]; then
+	alias clipcopy='xclip -selection clipboard c'
+	alias clippaste='xclip -selection c -o'
+elif [ "$(pgrep -x Xwayland)" ]; then
+	alias clipcopy='wl-copy'
+	alias clippaste='wl-paste'
+fi
 
 # MY WEBSITE STUFF
 alias lxyz='ssh lucca@luccaaugusto.xyz'
@@ -63,3 +73,4 @@ alias ngr='ngrok http --domain=profound-cod-verbally.ngrok-free.app'
 alias stripelisten='stripe listen --forward-to localhost:4000/api/v1/stripe/webhooks'
 alias dockerinspectip='docker inspect --format='\''{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'\'''
 alias rw='cd $HOME/repos/roadway/roadway-app/backend && poetry run nvim ../'
+alias dockerfullclean='docker system prune -a --volumes && docker volume rm $(docker volume ls -qf dangling=true)'

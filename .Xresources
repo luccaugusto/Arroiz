@@ -1,20 +1,10 @@
 !! Set a default font and font size as below:
-*font:	Monaco:pixelsize=23:antialias=true:autohint=true;
-sxiv.background: #000000
-!URxvt.font:	Monaco:pixelsize=23:antialias=true:autohint=true;
-!URxvt.font: 9x15
-URxvt.font: xft:Deja Vu Sans Mono:pixelsize=20
-!URxvt.font: xft:DejaVu Sans Mono:pixelsize=10
-!URxvt.font: xft:Bitstream Vera Sans Mono:autohint=true:pixelsize=10
-!URxvt.font: xft:Terminus:10
-!URxvt.font: -misc-dejavu sans mono-medium-r-normal-*-11-*-96-96-*-*-iso8859-*
-!URxvt.font: xft:DejaVu Sans Mono:antialias=true:pixelsize=12
-! scrollbar
-URxvt.scrollBar: false
-!URxvt.scrollstyle: plain
-!URxvt*scrollColor: #777777
-!URxvt.thickness: 2
+*font:	Monego:pixelsize=23:antialias=true:autohint=true;
 
+sxiv.background: #000000
+
+URxvt.font: xft:Deja Vu Sans Mono:pixelsize=20
+URxvt.scrollBar: false
 ! fade non-focussed windows
 URxvt*fading: 33
 
@@ -30,15 +20,7 @@ URxvt*scrollWithBuffer: true
 ! scroll back to the bottom on keypress
 URxvt*scrollTtyKeypress: true
 
-! disable the scrollback buffer for the secondary screen
-URxvt.secondaryScreen: 1
-URxvt.secondaryScroll: 0
-
-URxvt.perl-ext-common: default,matcher,confirm-paste
-URxvt.url-launcher: /usr/bin/xdg-open
-URxvt.matcher.button: 1
-
-URxvt.transparent: false
+URxvt.transparent: true
 
 ! fix ctrl+arrows
 URxvt.keysym.Control-Up: \033[1;5A
@@ -46,19 +28,47 @@ URxvt.keysym.Control-Down: \033[1;5B
 URxvt.keysym.Control-Left: \033[1;5D
 URxvt.keysym.Control-Right: \033[1;5C!
 
-URxvt.color0:  #1c1c1c
-URxvt.color8:  #3d3a3a
-URxvt.color1:  #d770af
-URxvt.color9:  #d28abf
-URxvt.color2 : #9acc79
-URxvt.color10: #8fb676
-URxvt.color3:  #d0d26b
-URxvt.color11: #c8bc45
-URxvt.color4 : #77b6c5
-URxvt.color12: #8fa7b9
-URxvt.color5:  #a488d9
-URxvt.color13: #bd89de
-URxvt.color6:  #7fcab3
-URxvt.color14: #6ec2a8
-URxvt.color7:  #8d8d8d
-URxvt.color15: #dad3d3
+! URxvt.color0:  #1c1c1c
+! URxvt.color8:  #3d3a3a
+! URxvt.color1:  #d770af
+! URxvt.color9:  #d28abf
+! URxvt.color2 : #9acc79
+! URxvt.color10: #8fb676
+! URxvt.color3:  #d0d26b
+! URxvt.color11: #c8bc45
+! URxvt.color4 : #77b6c5
+! URxvt.color12: #8fa7b9
+! URxvt.color5:  #a488d9
+! URxvt.color13: #bd89de
+! URxvt.color6:  #7fcab3
+! URxvt.color14: #6ec2a8
+! URxvt.color7:  #8d8d8d
+! URxvt.color15: #dad3d3
+
+URxvt*background: #1b1b1b
+URxvt*foreground: #cccaca
+
+!Black
+URxvt*color0: #222222
+URxvt*color8: #5b595a
+!Red
+URxvt*color1: #664742
+URxvt*color9: #664742
+!Green
+URxvt*color2: #A5AF86
+URxvt*color10: #A5AF86
+!Yellow
+URxvt*color3: #F7E7BD
+URxvt*color11: #F7E7BD
+!Blue
+URxvt*color4: #6e686f
+URxvt*color12: #6e686f
+!Magenta
+URxvt*color5: #966E6E
+URxvt*color13: #B09A91
+!Cyan
+URxvt*color6: #849492
+URxvt*color14: #849492
+!White
+URxvt*color7: #a49c9c
+URxvt*color15: #e9e6e6

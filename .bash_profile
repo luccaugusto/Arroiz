@@ -66,6 +66,8 @@ if [ -f '/home/lucca/repos/google-cloud-sdk/path.bash.inc' ]; then . '/home/lucc
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/lucca/repos/google-cloud-sdk/completion.bash.inc' ]; then . '/home/lucca/repos/google-cloud-sdk/completion.bash.inc'; fi
 
+[ -f ~/.Xresources ] && xrdb -merge ~/.Xresources
+
 # Start graphical server if WM not already running.
 if [ ! "$(systemctl is-enabled ly)" = "enabled" ]; then
 	if [[ "$(tty)" = "/dev/tty1" ]]; then
