@@ -4,9 +4,9 @@ if [ "$(pgrep -x Xorg)" ]; then
 	xkblayout-state print %s
 elif [ "$(pgrep -x Xwayland)" ]; then
 	kb_layout=$(hyprctl devices -j | jq -r '.keyboards[] | select(.main == true) | .active_keymap')
-	if [ "$kb_layout" = "English (US)" ]; then
-		echo "us"
-	else
+	if [ "$kb_layout" = "Portuguese (Brazil)" ]; then
 		echo "br"
+	else
+		echo "us"
 	fi
 fi

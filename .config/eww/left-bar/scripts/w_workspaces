@@ -15,9 +15,17 @@ labels='{
 
 spaces (){
 	current="$1"
+	monitor_count=$(hyprctl monitors | grep -c Monitor)
 
-	workspace_windows=$(hyprctl workspaces -j | jq 'map({key: .id | tostring, value: .windows}) | from_entries')
-	seq 1 10 | jq --argjson windows "${workspace_windows}" --argjson labels "${labels}" --arg current "${current}" --slurp -Mc 'map(tostring) | map({index: ., label: $labels[.], class: (if . == $current then "current" else if $windows[.]//0 > 0 then "active" else "empty" end end)})'
+	spaces=""
+
+	for i in $(seq 1 "$monitor_count")
+	do
+		monitor_index=$((i - 1))
+		workspace_windows=$(hyprctl workspaces -j | jq 'map({key: .id | tostring, value: .windows}) | from_entries')
+		spaces="$spaces,\"$monitor_index\":$(seq 1 10 | jq --argjson windows "${workspace_windows}" --argjson labels "${labels}" --arg current "${current}" --slurp -Mc 'map(tostring) | map({index: ., label: $labels[.], class: (if . == $current then "current" else if $windows[.]//0 > 0 then "active" else "empty" end end)})')"
+	done
+	echo "${spaces#,}"
 }
 
 current=$(hyprctl monitors -j | jq '.[] | select(.focused) | .activeWorkspace.id')
@@ -25,5 +33,5 @@ workspaces=$(spaces "$current")
 
 open_clients=$(hyprctl clients -j | jq 'map({id: .address, name: .class, workspace: .workspace.id})' | jq -c --arg current "$current" '[ .[] | select(.workspace == ($current|tonumber) or .workspace < -0) ]')
 
-echo "{\"open_in_monitor\": \"0\",\"0\": $workspaces, \"open\": $open_clients}"
+echo "{\"open_in_monitor\": \"0\", $workspaces, \"open\": $open_clients}"
 

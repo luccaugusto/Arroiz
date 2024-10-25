@@ -3,9 +3,9 @@
 ;; Time vars
 (defpoll TIME :interval "1m" `date +\"%H:%M\"`)
 (defpoll DATE :interval "24h" `date +\"%a, %B %d\"`)
-(defpoll calendar_day :interval "10h" "date '+%d'")
-(defpoll calendar_month :interval "10h" "scripts/calendar_month")
-(defpoll calendar_year :interval "10h" "date '+%Y'")
+(defpoll calendar_day :interval "24h" "date '+%d'")
+(defpoll calendar_month :interval "24h" "scripts/calendar_month")
+(defpoll calendar_year :interval "24h" "date '+%Y'")
 
 
 ;; Battery vars
@@ -17,12 +17,11 @@
 (defvar KEYBOARD_ICON "images/keyboard.png")
 
 ;; CPU vars
-(defpoll CPUICON :interval "2m" `scripts/cpu_temp --icon`)
-(defpoll CPUTEMP :interval "2m" `scripts/cpu_temp`)
+(defpoll CPUICON :interval "2s" `scripts/cpu_temp --icon`)
+(defpoll CPUTEMP :interval "2s" `scripts/cpu_temp`)
 
 ;; Mem vars
 (defvar MEMICON "images/ram.png")
-(defpoll MEMUSAGE :interval "1m" `scripts/mem_usage`)
 
 ;; Volume vars
 (defpoll VOLICON :interval "1s" `scripts/volume --icon`)
@@ -55,7 +54,7 @@
     (button :onclick "alacritty -e gotop -l kitchensink &" :class "clear"
       (box :orientation "h" :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
         (box :style "background-image: url('${MEMICON}');" :class "trayicon")
-        (label :class "infotext" :halign "start" :text MEMUSAGE)))
+        (label :class "infotext" :halign "start" :text "${round(EWW_RAM.used_mem_perc, 0)}%")))
     (button :onclick "scripts/volume --toggle" :class "clear"
       (box :orientation "h" :valign "center" :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
         (box :style "background-image: url('${VOLICON}');" :class "trayicon")
