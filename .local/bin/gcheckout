@@ -8,5 +8,6 @@ branch="$1"
 #[ "$branch" ] || select branch in $(git branch | awk '{if($1 != "*") print $1}'); do break; done
 
 [ "$branch" ] &&
+git fetch &&
 git checkout "$branch" &&
 git pull

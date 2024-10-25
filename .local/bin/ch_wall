@@ -4,12 +4,12 @@
 
 IMGS="$REPOS/wallpapers/"
 [ "$1" ] && IMGS="$1"
-cd $IMGS
-WALL="$(shuf -e `ls` | sxiv -t -o -i)"
+cd "$IMGS" || { exit 1; }
+WALL="$(shuf -e $(ls) | sxiv -t -o -i)"
 #Change colors
 if [ "$WALL" ]
 then
-	OPT=$(printf "Change wallpaper and color\nChange color\nChange Wallpaper" | dmenu -l 3)
+	OPT=$(printf "Change wallpaper and color\nChange color\nChange Wallpaper" | rofi -dmenu -l 3)
 	if [ "$OPT" = "Change wallpaper and color" ]
 	then
 		#Change color and wallpaper

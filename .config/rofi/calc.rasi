@@ -16,7 +16,7 @@ configuration {
     fg2:    #969696;
     fg3:    #3D3D3D;
 
-    font:   "Monaco 18";
+    font:   "Monaco 12";
 
     background-color:   transparent;
 
@@ -67,6 +67,7 @@ prompt {
 }
 
 entry {
+    font:   "Monaco 18";
 	text-color: @fg3;
     placeholder:        "";
     placeholder-color:  @fg3;

@@ -42,7 +42,7 @@ nnoremap <C-f> :<C-f>i
 map <C-s> :w<CR>
 nmap <C-s> :w<CR>
 nnoremap <leader>cc :close<CR>
-nnoremap <leader>E :NvimTreeFindFile<CR>
+nnoremap <leader>E :NvimTreeFindFile<CR>R<CR>
 nnoremap <leader>o :q<CR>
 nnoremap <leader>L :30Lex<CR>
 
@@ -68,6 +68,8 @@ nnoremap <leader>j :tabnext<CR>
 nnoremap <leader>k :tabprevious<CR>
 
 nnoremap <leader>f :filetype detect<CR>
+
+nnoremap ! :!
 
 "Allow to copy and paste from the system register
 " Only used on vim, nvim can copy and pastewith y and p
