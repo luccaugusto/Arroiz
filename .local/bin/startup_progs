@@ -94,7 +94,7 @@ start_programs()
 
 	# Utterly amazing transparent terminals
 	if [ "$(pgrep -x Xorg)" ]; then
-		[ "$(pgrep picom)" ] || picom & #--config "$HOME/.config/picom/picom.conf" &
+		[ "$(pgrep picom)" ] || picom --config "$HOME/.config/picom/picom-old.conf" &
 	fi
 
 	# Let me use pt-br and en-us keyboards

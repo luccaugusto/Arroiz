@@ -79,7 +79,7 @@
                   (label :halign "center" :text "${substring(card.display_name,0,12)}${strlength(card.display_name) > 12 ? "..." : ""}" :class "label" :wrap true)))
               )))
           (box :orientation "v" :space-evenly false :spacing 10
-            (label :text "Outputs" :class "info")
+            (label :text "IO" :class "info")
             (for card in {sys_info?.sound.io}
               (eventbox
                 :height 50

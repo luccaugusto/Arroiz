@@ -39,7 +39,7 @@ export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswi
 
 export GTK_USE_PORTAL=1
 
-[ -f ~/.Xresources ] && xrdb -merge ~/.Xresources
+[ -f ~/.Xresources ] && [ "$XDG_CURRENT_DESKTOP" != "Hyprland" ] && xrdb -merge ~/.Xresources
 
 # # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/lucca/repos/google-cloud-sdk/path.zsh.inc' ]; then . '/home/lucca/repos/google-cloud-sdk/path.zsh.inc'; fi

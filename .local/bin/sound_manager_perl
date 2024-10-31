@@ -1,0 +1,28 @@
+#!/usr/bin/perl
+
+
+my $current_sink = `pactl -f json get-default-sink`
+my $current_source = `pactl get-default-source`
+
+sub set_card_profile {
+	my $sink_name = shift;
+	my $profile = shift;
+	`pactl set-card-profile $sink_name $profile`
+}
+
+sub find_card_by_device {
+	my @output_cards = shift;
+	my $device_name = shift;
+	keys %hash; # reset the internal iterator so a prior each() doesn't affect the loop
+	while(my($name, $card) = each %hash) {
+		if ($card->{name} eq $device_name) {
+			return $card;
+		}
+	}
+	return undef
+}
+
+sub hdmi_connected {
+    my $monitors = `xrandr --listactivemonitors`;
+	return $monitors =~ /HDMI|DP-2-/;
+}

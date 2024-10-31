@@ -87,7 +87,7 @@ function MyTabLine()
   return s
 endfunction
 
-:set tabline=%!MyTabLine()
+":set tabline=%!MyTabLine()
 
 " CMP settings
 set completeopt=menu,menuone,noselect
