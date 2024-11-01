@@ -1,10 +1,10 @@
 #!/bin/python3
 
-from sys import stdin
+from sys import stdin, exit
 from argparse import ArgumentParser
 from typing import Any
 from os import environ
-from subprocess import run, Popen, PIPE, STDOUT
+from subprocess import run, Popen, PIPE, STDOUT, DEVNULL
 from json import loads, dumps
 
 class CardType:
@@ -223,7 +223,7 @@ def decide_input(input_cards, source_in_use) -> Card:
 
 
 def hdmi_connected():
-    xorg_running = run(["pgrep", "Xorg"]).returncode == 0
+    xorg_running = run(["pgrep", "Xorg"], stdout=DEVNULL).returncode == 0
 
     if xorg_running:
         monitors = run(
