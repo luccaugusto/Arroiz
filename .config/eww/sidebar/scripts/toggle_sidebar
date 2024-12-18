@@ -11,7 +11,7 @@ get_current_monitor()
 		current_monitor="$(awesome-client 'return mouse.screen.index' | cut -d ' ' -f 5)"
 	#elif bspwm; then
 		# TODO: make it work for other wms
-	elif hyprland; then
+	elif [ "$(pgrep hyprland)" ]; then
 		current_monitor=$(hyprctl -j monitors  | jq '.[] | select(.focused) | .id')
 	fi
 	echo "$current_monitor"

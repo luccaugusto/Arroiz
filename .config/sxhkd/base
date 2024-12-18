@@ -74,9 +74,9 @@ super + b
 	lockscreen
 super + shift + s
 	powermenu
-super + p
+super + space
 	rofi -show drun -show-icons
-super + shift + p
+super + shift + space
 	rofi -show run -show-icons
 super + f
 	$TERMINAL -e yazi

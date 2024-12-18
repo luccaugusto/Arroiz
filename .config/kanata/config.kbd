@@ -13,6 +13,7 @@
 	     u i o p
 	tab  j k l
 		   m
+		lalt
 )
 
 (deflayer base
@@ -20,6 +21,7 @@
 		     u i o p
 	@tabnum  j k l
 		       m
+		lmet
 )
 
 (deflayer numpad
@@ -27,6 +29,7 @@
 	    4 5 6 kp*
 	-   1 2 3
 	      0
+		-
 )
 
 (defalias

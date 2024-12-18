@@ -109,8 +109,8 @@ nnoremap <leader>nhl :set nocursorline<CR>
 "Search for selected text
 vnoremap * y/\v<C-R>"<CR>
 
-nmap <c-w><c-l> :set scrollback=1 \| sleep 100m \| set scrollback=10000<cr>
-tmap <c-w><c-l> <c-\><c-n><c-w><c-l>i<c-l>
+nmap <C-w><C-w> :set scrollback=1 \| sleep 100m \| set scrollback=10000<cr>
+tmap <C-w><C-w> <c-\><c-n><c-w><c-l>i<c-l>
 
 "===============================
 "DRAG VISUALS PLUGIN

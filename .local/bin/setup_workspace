@@ -5,11 +5,12 @@ setup_w_workspace()
 	hyprctl keyword monitor ,highres@highrr,auto,1,bitdepth,e
 	hyprctl keyword monitor ,addreserved,50,0,0,0
 
+	echo "Setting up workspace for Hyprland"
+
 	connected_monitors="$(hyprctl monitors | grep -w Monitor)"
 	# other monitors and docked
 	if [ "$(cat /sys/devices/platform/dock.0/docked)" = 1 ]; then
 		if [ "$(echo "$connected_monitors" | wc -l)" = 2 ]; then
-			# sh "$HOME/.screenlayout/two-screens-docked.sh"
 			hyprctl keyword monitor eDP-1,disable
 		fi
 	fi
