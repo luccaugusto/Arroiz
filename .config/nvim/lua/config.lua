@@ -314,7 +314,7 @@ local servers = {
 	'clangd',
 	'emmet_language_server',
 	'eslint',
-	'lua_ls',
+	--'lua_ls',
 	'phpactor',
 	--'pylsp',
 	'pyright',
