@@ -121,7 +121,7 @@ vmap  <expr>  <c-h>  DVB_Drag('left')
 vmap  <expr>  <c-l>  DVB_Drag('right')
 vmap  <expr>  <c-j>  DVB_Drag('down')
 vmap  <expr>  <c-k>  DVB_Drag('up')
-vmap  <expr>  <c-d>  DVB_Duplicate()
+" vmap  <expr>  <d>  DVB_Duplicate()
 
 "===============================
 "TELESCOPE
