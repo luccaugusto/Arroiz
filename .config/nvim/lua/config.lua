@@ -23,7 +23,7 @@ vim.api.nvim_create_autocmd(
 		pattern = "*.py",
         group = "AutoFormat",
         callback = function()
-            vim.cmd("silent !black -q %")
+            vim.cmd("silent !black --line-length 140 -q %")
             vim.cmd("edit")
         end,
     }
@@ -313,7 +313,7 @@ local servers = {
 	'bashls',
 	'clangd',
 	'emmet_language_server',
-	'eslint',
+	--'eslint',
 	--'lua_ls',
 	'phpactor',
 	--'pylsp',
@@ -324,15 +324,16 @@ local servers = {
 	--'ruff',
 	'solargraph',
 	'sqlls',
-	'tsserver',
+	'ts_ls',
 	'yamlls',
 }
- for _, lsp in pairs(servers) do
+for _, lsp in pairs(servers) do
 	lspconfig[lsp].setup {
 		on_attach = on_attach,
 		capabilities = capabilities,
 	}
 end
+
 -- Configure intelephense separately to clean up home
 lspconfig.intelephense.setup{
 	on_attach = on_attach,

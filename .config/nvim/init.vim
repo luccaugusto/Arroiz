@@ -62,7 +62,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'tpope/vim-endwise'
 
 	Plug 'github/copilot.vim'
-	Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'canary' }
+	Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'main' }
 
 	Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 

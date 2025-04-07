@@ -19,7 +19,7 @@ alias restartdunst='killall dunst && dunst -conf ~/.config/dunst/dunstrc &'
 alias rm='rm -i'
 
 if [ "$(pgrep -x Xorg)" ]; then
-	alias clipcopy='xclip -selection clipboard c'
+	alias clipcopy='xclip -selection clipboard'
 	alias clippaste='xclip -selection c -o'
 elif [ "$(pgrep -x Xwayland)" ]; then
 	alias clipcopy='wl-copy'

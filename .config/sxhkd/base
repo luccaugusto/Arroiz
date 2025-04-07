@@ -40,21 +40,21 @@ super + ctrl + minus
 # Media player controls
 # Supports spotify
 XF86AudioPlay
-	playerctl play-pause
-super + ctrl + p
-	playerctl play-pause
+	playerctl -a play-pause
+super + alt + p
+	playerctl -a play-pause
 	#dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause; [ $(pgrep -x mpc) ] && mpc --host=$MPD_HOST --port=$MPD_PORT toggle
 
 XF86AudioNext
-	playerctl next
-super + ctrl + period
-	playerctl next
+	playerctl -a next
+super + alt + period
+	playerctl -a next
 	#dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next; [ $(pgrep -x mpc) ] && mpc --host=$MPD_HOST --port=$MPD_PORT next
 
 XF86AudioPrev
-	playerctl previous
-super + ctrl + comma
-	playerctl previous
+	playerctl -a previous
+super + alt + comma
+	playerctl -a previous
 	#dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous; [ $(pgrep -x mpc) ] && mpc --host=$MPD_HOST --port=$MPD_PORT prev
 
 # ==============================
@@ -94,6 +94,8 @@ super + ctrl + Return
 	toggle_sidebar
 super + shift + b
 	toggle_status_bar
+super + ctrl + r
+	reload_wm
 
 # Print
 Print
