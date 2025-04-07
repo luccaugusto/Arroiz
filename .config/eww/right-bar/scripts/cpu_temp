@@ -1,10 +1,10 @@
 #!/bin/sh
 
-cpu_temp=$(sensors | grep "CPU" | awk '{print $2}')
+cpu_temp=$(sensors | grep "Core 0" | awk '{print $3}')
 
 if [ "$1" = '--icon' ]; then
 	temp="cold"
-	[ "${cpu_temp%%.*}" -gt 65 ] && temp="hot"
+	[ "${cpu_temp%%.*}" -gt 85 ] && temp="hot"
 	echo "images/thermometer-$temp.png"
 else
 	echo "${cpu_temp##+}"

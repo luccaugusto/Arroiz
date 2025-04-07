@@ -4,7 +4,7 @@ disk_usage=$(df -h | grep home)
 disk_usage_percentage=$(echo "$disk_usage" | awk '{print $5}')
 disk_usage_percentage=${disk_usage_percentage%%%*}
 
-sound_cards_info=$(pactl -f json list cards | sound_manager -f)
+sound_cards_info=$(sound_manager -l)
 profile="{\"hostname\": \"$(hostname)\", \"uptime\": \"$(uptime -p)\", \"user\": \"$(whoami)\"}"
 
 info="{ \

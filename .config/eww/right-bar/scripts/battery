@@ -11,9 +11,9 @@ icon()
 	elif [ "$charge" -gt "$charge_full" ]; then
 		echo "images/icons/battery/full.png"
 	else
-		if [ "$charge" -gt 64 ]; then
+		if [ "$charge" -gt 50 ]; then
 			echo "images/icons/battery/battery-3.png"
-		elif [ "$charge" -gt 34 ]; then
+		elif [ "$charge" -gt 25 ]; then
 			echo "images/icons/battery/battery-2.png"
 		elif [ "$charge" -gt 9 ]; then
 			echo "images/icons/battery/battery-1.png"

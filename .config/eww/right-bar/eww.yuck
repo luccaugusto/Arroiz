@@ -71,6 +71,8 @@
         (label :class "date" :halign "start" :wrap "false" :text DATE)))
     (eventbox :onclick "toggle_sidebar &" :cursor "pointer"
       (image :path "images/menu.png" :image-height 25 :image-width 25))
+    (eventbox :onclick "rofi -show drun -theme ~/.config/rofi/app_launcher.rasi &" :cursor "pointer"
+      (image :path "images/rainbow.png" :image-height 25 :image-width 25))
     ))
 
 (defwidget right-calendar []
@@ -91,7 +93,7 @@
 ;; system
 (defwindow system [screen]
   :monitor screen
-  :geometry (geometry :x "1%"
+  :geometry (geometry :x "-1%"
     :y "10px"
     :width "30%"
     :height "40px"
@@ -106,7 +108,7 @@
 
 (defwindow calendar [screen]
   :monitor screen
-  :geometry (geometry :x "1%"
+  :geometry (geometry :x "-1%"
     :y "55px"
     :anchor "top right")
   :width "10%"
