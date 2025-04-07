@@ -1,7 +1,17 @@
 #!/bin/bash
+set -euo pipefail  # Exit on error, undefined vars, and pipeline failures
+trap 'echo "Error occurred at line $LINENO"' ERR
+
 #-My rice deploy script, runs after you have your programs setup
 #-Maybe i will write my own arch bootstrap script one day but
 #-for now this script just sets up things specific to my setup.
+
+log() {
+	local level=$1
+	shift
+	echo "[$(date +'%Y-%m-%d %H:%M:%S')] [$level] $*"
+}
+
 
 # configure pacman
 enable_multilib()
@@ -9,7 +19,7 @@ enable_multilib()
 	{
 		echo "[multilib]"
 		echo "Include = /etc/pacman.d/mirrorlist"
-	} >> "/etc/pacman.conf"
+	} | sudo tee >> "/etc/pacman.conf"
 }
 
 enable_sudo_for_wheel()
@@ -23,15 +33,28 @@ enable_no_sudo_pacman_sy()
 }
 
 # docker data-root to /home so it won't fill up my root partition with images
-setup_docker_data_dir()
+# and limit total disk usage
+setup_docker()
 {
-	sudo mkdir /home/docker-data-dir
-	[ -d /etc/docker ] || sudo mkdir /etc/docker
-	{
-		echo "{"
-		echo '    "data-root": "/home/docker-data-dir"'
-		echo "}"
-	} | sudo tee /etc/docker/daemon.json
+	# Check if docker-data-dir already exists
+	[ ! -d /home/docker-data-dir ] && sudo mkdir /home/docker-data-dir
+
+	# Check if source file exists before copying
+	if [ -f etc/docker/daemon.json ]; then
+		sudo mkdir -p /etc/docker
+		sudo cp etc/docker/daemon.json /etc/docker/daemon.json
+	else
+		log "ERROR" "etc/docker/daemon.json not found"
+		return 1
+	fi
+}
+
+# Trackpad gestures
+setup_trackpad_gestures()
+{
+	libinput-gestures-setup autostart start
+
+	sudo cp etc/X11/xorg.conf.d/30-touchpad.conf /etc/X11/xorg.conf.d/30-touchpad.conf
 }
 
 # Cronjobs for low battery warning and log the time i spend on computer.
@@ -44,58 +67,62 @@ user_cron_jobs()
 setup_hosts()
 {
 	hostname="$(cat /etc/hostname)"
-	{
-		echo "# Static table lookup for hostnames."
-		echo "# See hosts(5) for details."
-		echo "127.0.0.1	localhost"
-		echo "::1		localhost"
-		echo "127.0.1.1	$hostname.localdomain	$hostname"
-		echo "138.68.42.117	mail.luccaaugusto.xyz"
-		echo "2604:a880:2:d0::54:a001	mail.luccaaugusto.xyz"
-	} >> /etc/hosts
+	cat etc/hosts | sed "s/{{hostname}}/$hostname/g" | sudo tee /etc/hosts
 }
 
 setup_groups()
 {
-	sudo groupadd uinput
-	sudo usermod -aG input "$USER"
-	sudo usermod -aG uinput "$USER"
+	sudo groupadd uinput 2>/dev/null || true  # Don't fail if group exists
+	sudo usermod -aG input,uinput,docker,wheel "$USER"
 }
 
 enable_fingerprint()
 {
-	for finger in {left,right}-index-finger; do fprintd-enroll -f "$finger" "$USER"; done
+	install_pkg fprintd
+
+	for finger in {left,right}-index-finger
+	do
+		fprintd-enroll -f "$finger" "$USER"
+	done
+
+	sudo systemctl enable fprintd.service
 
 	{
-		sudo echo "#%PAM-1.0"
-		sudo echo ""
-		sudo echo "auth      sufficient pam_fprintd.so"
-		sudo echo "auth      include   system-login"
-		sudo echo "account   include   system-login"
-		sudo echo "password  include   system-login"
-		sudo echo "session   include   system-login"
-	} > /etc/pam.d/system-local-login
+		echo "#%PAM-1.0"
+		echo ""
+		echo "auth      sufficient pam_fprintd.so"
+		echo "auth      include   system-login"
+		echo "account   include   system-login"
+		echo "password  include   system-login"
+		echo "session   include   system-login"
+	} | sudo tee > /etc/pam.d/system-local-login
 
 	{
-		sudo echo "#%PAM-1.0"
-		sudo echo ""
-		sudo echo "auth       sufficient   pam_unix.so try_first_pass likeauth nullok"
-		sudo echo "auth       sufficient   pam_fprintd.so"
-		sudo echo "auth       include      login"
-		sudo echo "account    include      login"
-		sudo echo "password   include      login"
-		sudo echo "session    include      login"
-	} > /etc/pam.d/ly
+		echo "#%PAM-1.0"
+		echo ""
+		echo "auth       sufficient   pam_unix.so try_first_pass likeauth nullok"
+		echo "auth       sufficient   pam_fprintd.so"
+		echo "auth       include      login"
+		echo "account    include      login"
+		echo "password   include      login"
+		echo "session    include      login"
+	} | sudo tee> /etc/pam.d/ly
 }
 
 install_pkg()
 {
-	pacman --noconfirm --needed -S "$1" >/dev/null 2>&1
+	if ! sudo pacman --noconfirm --needed -S "$1"; then
+		log "ERROR" "Failed to install package: $1"
+		return 1
+	fi
 }
 
 aur_install()
 {
-	sudo -u "$USER" yay -S --noconfirm "$1" >/dev/null 2>&1
+	if ! sudo -u "$USER" yay -S --noconfirm "$1"; then
+		log "ERROR" "Failed to install AUR package: $1"
+		return 1
+	fi
 }
 
 install_nvim()
@@ -104,14 +131,14 @@ install_nvim()
 	aur_install "phpactor"
 	aur_install "eslint"
 	aur_install "basedpyright"
-	npm i -g bash-language-server
-	npm i -g typescript typescript-language-server
-	npm i -g vscode-langservers-extracted
+	sudo npm i -g bash-language-server
+	sudo npm i -g typescript typescript-language-server
+	sudo npm i -g vscode-langservers-extracted
 	aur_install python-lsp-server
 	gem install --user-install rubocop
 	gem install --user-install solargraph
-	npm install -g @olrtg/emmet-language-server
-	yarn global add yaml-language-server
+	sudo npm install -g @olrtg/emmet-language-server
+	sudo yarn add global yaml-language-server
 	install_pkg neovim
 }
 
@@ -119,53 +146,44 @@ install_yay()
 {
 	git clone https://aur.archlinux.org/yay.git
 	pushd yay || return
-	sudo makepkg -si
+	makepkg -si
 	popd || return
 	rm -rf yay
 }
 
 install_installers()
 {
-	echo "INSTALLING INSTALLERS:"
-	echo "[1/6] enabling multilib"
+	log "INFO" "INSTALLING INSTALLERS:"
+	log "INFO" "[1/7] enabling multilib"
 	enable_multilib
-	echo "[2/6] updating pacman and keyring"
-	pacman -Sy
-	pacman -Sy archlinux-keyring
-	echo "[3/6] installing npm"
+	log "INFO" "[2/7] updating pacman and keyring"
+	sudo pacman -Sy
+	sudo pacman -Sy archlinux-keyring
+	log "INFO" "[3/7] installing npm"
 	install_pkg npm
-	echo "[4/6] installing ruby and ruby gems"
+	log "INFO" "[3/7] installing yarn"
+	sudo npm i -g yarn
+	log "INFO" "[5/7] installing ruby and ruby gems"
 	install_pkg ruby
-	echo "[5/6] installing pip"
+	log "INFO" "[6/7] installing pip"
 	install_pkg python-pip
-	echo "[6/6] installing yay"
+	log "INFO" "[7/7] installing yay"
 	install_yay
-	echo "INSTALLERS INSTALLED"
+	log "INFO" "INSTALLERS INSTALLED"
 }
 
 install_loop()
 {
-	echo "INSTALLING PACKAGES FROM PROGS LIST"
+	log "INFO" "INSTALLING PACKAGES FROM PROGS LIST"
 	pkg_count="$(wc -l < progs)"
 	current_pkg=1
 
 	while IFS= read -r pkg
 	do
-		echo "Installing $pkg [$current_pkg/$pkg_count]"
+		log "INFO" "Installing $pkg [$current_pkg/$pkg_count]"
 		install_pkg "$pkg"
 		current_pkg=$((current_pkg + 1))
 	done < progs
-}
-
-install_picom()
-{
-	git clone https://github.com/jonaburg/picom || return
-	cd picom || return
-	meson --buildtype=release . build
-	ninja -C build
-	sudo ninja -C build install
-	cd ..
-	rm -rf picom/
 }
 
 install_eww()
@@ -199,12 +217,42 @@ install_kanata()
 	cp target/debug/kanata ~/.local/bin/vendor/
 	cd ../
 	rm -rf kanata/
+
+	systemctl --user enable kanata.service
+}
+
+maybe_enable_fingerprint() {
+	answered=""
+	while [ -z "$answered" ]; do
+		read -rp "Do you want to enable fingerprint authentication? (yes/no): " answer
+		case ${answer,,} in  # ${answer,,} converts to lowercase
+			yes|y)
+				enable_fingerprint
+				answered="yes"
+				;;
+			no|n)
+				log "INFO" "Fingerprint authentication not enabled."
+				answered="no"
+				;;
+			*)
+				echo "Please answer yes or no."
+				;;
+		esac
+	done
+}
+
+enable_services()
+{
+	log "INFO" "Enabling services"
+	log "INFO" "Enabling tlp service"
+	sudo systemctl enable tlp.service
+	log "INFO" "Services enabled"
 }
 
 if [ ! "$(basename "$0")" == "deploy.sh" ]; then
-	echo "Please run the script with ./deploy.sh not sh deploy.sh"
+	log "ERROR" "Please run the script with ./deploy.sh not sh deploy.sh"
 elif [ "$EUID" = 0 ]; then
-	echo "Do not run as root"
+	log "ERROR" "Do not run as root"
 else
 	./deploy_dotfiles.sh
 	setup_hosts
@@ -212,13 +260,22 @@ else
 	install_installers
 	install_nvim
 	install_loop
-	install_picom
 	install_kanata
 	install_eww
-	systemctl enable tlp.service
-	systemctl --user enable kanata.service
+	enable_services
 	user_cron_jobs
-	enable_fingerprint
+	maybe_enable_fingerprint
 	enable_sudo_for_wheel
-	setup_docker_data_dir
+	enable_no_sudo_pacman_sy
+	setup_trackpad_gestures
+	setup_docker
+	echo ""
+	echo "Done! Enjoy your new arch install!"
+	echo "Reboot for glory"
+	echo "Reboot now? (y/n)"
+	read -r answer
+	case ${answer,,} in  # ${answer,,} converts to lowercase
+		y*) reboot
+		;;
+	esac
 fi
