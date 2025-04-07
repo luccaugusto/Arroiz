@@ -1,4 +1,4 @@
-#!bin/zsh
+#!/usr/bin/env zsh
 
 # Start graphical server if WM not already running.
 if [ ! "$(systemctl is-enabled ly)" = "enabled" ]; then

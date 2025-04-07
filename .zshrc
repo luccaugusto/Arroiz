@@ -15,3 +15,5 @@ autoload -Uz compinit
 compinit
 
 eval "$(starship init zsh)"
+
+eval "$(rbenv init -)"

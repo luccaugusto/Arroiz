@@ -26,6 +26,7 @@ export PATH="$PATH:$JAVA_HOME/bin"
 export PATH="$PATH:$HOME/.local/gems/bin"
 export PATH="$PATH:$HOME/.local/share/gem/ruby"
 export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin"
+export PATH="$PATH:$HOME/.local/share/gem/ruby/3.3.0/bin"
 
 #Others
 export GROFF_ENCODING=UTF-8
@@ -38,6 +39,9 @@ export MPD_PORT='2002'
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
 
 export GTK_USE_PORTAL=1
+
+export OPENCV_LOG_LEVEL=0
+export OPENCV_VIDEOIO_PRIORITY_INTEL_MFX=0
 
 [ -f ~/.Xresources ] && [ "$XDG_CURRENT_DESKTOP" != "Hyprland" ] && xrdb -merge ~/.Xresources
 
