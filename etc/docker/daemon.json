@@ -1,0 +1,14 @@
+{
+    "data-root": "/home/docker-data-dir",
+    "builder": {
+        "gc": {
+            "enabled": true,
+            "defaultKeepStorage": "10GB",
+            "policy": [
+                { "keepStorage": "10GB", "filter": ["unused-for=1000h"] },
+                { "keepStorage": "30GB", "filter": ["unused-for=2501h"] },
+                { "keepStorage": "60GB", "all": true }
+            ]
+        }
+    }
+}

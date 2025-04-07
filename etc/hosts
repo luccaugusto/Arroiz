@@ -1,0 +1,7 @@
+# Static table lookup for hostnames.
+# See hosts(5) for details.
+127.0.0.1	localhost
+::1		localhost
+127.0.1.1	{{hostname}}.localdomain	{{hostname}}
+138.68.42.117	mail.luccaaugusto.xyz
+2604:a880:2:d0::54:a001	mail.luccaaugusto.xyz

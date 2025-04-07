@@ -1,0 +1,3 @@
+device_config:
+- id_type: ntfs
+  options: [type=ntfs]

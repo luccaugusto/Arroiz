@@ -1,0 +1,482 @@
+#!/bin/python3
+
+import sys
+from typing import Any
+from enum import StrEnum
+from subprocess import run, PIPE, DEVNULL
+import json
+from os import environ
+from pathlib import Path
+from argparse import ArgumentParser
+        
+
+class CardType(StrEnum):
+    OUTPUT = "output"
+    INPUT = "input"
+    IO = "io"
+
+    @staticmethod
+    def from_string(s: str) -> "CardType":
+        if s == "output":
+            return CardType.OUTPUT
+        elif s == "input":
+            return CardType.INPUT
+        return CardType.IO
+
+
+class Profile:
+    __slots__ = ["name", "description", "priority", "type"]
+
+    def __init__(self, name: str, description: str, priority: int, type: CardType):
+        self.name = name
+        self.description = description
+        self.priority = priority
+        self.type = type
+
+    @staticmethod
+    def from_pw_dump(pw_dump: dict[str, Any]) -> "Profile":
+        name = pw_dump["name"]
+        description = pw_dump["description"]
+        priority = pw_dump["priority"]
+        
+        type = None
+        if pw_dump["classes"]:
+            if pw_dump["classes"][0] == 2:
+                type = CardType.IO
+            elif pw_dump["classes"][0] == 1:
+                type = CardType.OUTPUT if "Audio/Sink" in pw_dump["classes"][1] else CardType.INPUT
+        
+        return Profile(name, description, priority, type)
+
+    def dump(self) -> dict:
+        return {
+            "name": self.name,
+            "available": "yes",
+            "priority": self.priority,
+            "description": self.description,
+            "type": self.type.value if self.type else None
+        }
+
+
+class Card:
+    __slots__ = ["name", "profiles", "active_profile", "alias", "device_name"]
+
+    def __init__(self, name: str, profiles: list[Profile], active_profile: str | None, alias: str = None, device_name: str | None = None):
+        self.name = name
+        self.profiles = profiles
+        self.active_profile = active_profile
+        self.alias = alias
+        self.device_name = device_name
+
+    @staticmethod
+    def from_pw_dump(pw_dump: dict[str, Any]) -> "Card":
+        name = pw_dump["info"]["props"].get("alsa.card_name", None)
+        if name is None:
+            name = pw_dump["info"]["props"].get("device.alias", pw_dump["info"]["props"].get("device.product.name", ""))
+
+        device_name = pw_dump["info"]["props"].get("device.name", None)
+
+        profiles = [Profile.from_pw_dump(profile) for profile in pw_dump["info"]["params"].get("EnumProfile", [])]
+        profiles.sort(key=lambda x: x.priority, reverse=True)
+
+        active_profile = None
+        profile_data = pw_dump["info"]["params"].get("Profile", [])
+        if profile_data and len(profile_data) > 0:
+            active_profile = profile_data[0]["name"]
+        
+        return Card(name, profiles, active_profile, device_name=device_name)
+
+    def get_priority_profile(self) -> Profile | None:
+        priority_profile = None
+        for profile in self.profiles:
+            if priority_profile is None or profile.priority > priority_profile.priority:
+                priority_profile = profile
+        return priority_profile
+
+    def __str__(self) -> str:
+        display_name = self.alias if self.alias else self.name
+        return f"{display_name} ({self.active_profile})"
+        
+    def dump(self, card_type: CardType | None = None, current_device_name: str = None) -> dict:
+        profiles_to_dump = self.profiles
+        if card_type is not None:
+            profiles_to_dump = [profile for profile in self.profiles if profile.type == card_type]
+        
+        card_dict = {
+            "card_name": self.device_name,
+            "profiles": [profile.dump() for profile in profiles_to_dump],
+            "sink_name": self.name,
+            "active": (current_device_name and self.name == current_device_name),
+            "display_name": self.alias if self.alias else self.name
+        }
+        
+        return card_dict
+
+
+class SoundManager:
+    __slots__ = ["cards", "pw_dump", "current_sink", "current_source", "config", "aliases"]
+
+    def __init__(self):
+        self.cards = []
+        cards_json = run(["pw-dump"], stdout=PIPE).stdout.decode()
+        self.pw_dump = json.loads(cards_json)
+        self.config = self._load_config()
+        self.load_cards()
+        self._apply_aliases_to_cards()
+        self.current_sink = self.get_current_sink_or_source("sink")
+        self.current_source = self.get_current_sink_or_source("source")
+
+    def _load_config(self) -> dict:
+        config_path = Path(environ.get("XDG_CONFIG_HOME", Path.home() / ".config")) / "sound_manager" / "config.json"
+        config = None
+        if config_path.exists():
+            try:
+                with open(config_path) as f:
+                    config = json.load(f)
+            except:
+                config = {}
+        return config
+
+    def load_cards(self) -> None:
+        all_cards = [Card.from_pw_dump(card) for card in self.pw_dump if card.get("type") == "PipeWire:Interface:Device"]
+        
+        self.cards = [card for card in all_cards if card.profiles]
+
+    def _get_card_by_key(self, metadata_key: str) -> Card | None:
+        """Helper method to find a card based on a metadata key (sink or source)."""
+        # Find the default device name from metadata
+        default_device_name = None
+        for metadata in [s for s in self.pw_dump if s.get("type") == "PipeWire:Interface:Metadata"]:
+            for item in metadata.get("metadata", []):
+                if item.get("key") == metadata_key and item.get("value", {}).get("name"):
+                    default_device_name = item["value"]["name"]
+                    break
+            if default_device_name:
+                break
+
+        if not default_device_name:
+            return None
+
+        # Find the matching node and card
+        for node in self.pw_dump:
+            if (node.get("type") == "PipeWire:Interface:Node" and
+                node.get("info", {}).get("props", {}).get("node.name") == default_device_name):
+                # Try multiple possible property keys for card name
+                props = node.get("info", {}).get("props", {})
+                card_name = props.get("alsa.card_name") or props.get("device.name") or props.get("device.description")
+                
+                if not card_name:
+                    continue
+                    
+                # Return the matching card if found
+                for card in self.cards:
+                    if card.name == card_name:
+                        return card
+                
+        return None
+        
+    def _apply_aliases_to_cards(self) -> None:
+        aliases = {}
+        for card_type in [CardType.OUTPUT, CardType.INPUT]:
+            for profile in self.config.get(card_type, []):
+                if profile.get("alias"):
+                    aliases[f"{profile['card_name']}:{profile['profile']}"] = profile["alias"]
+        for card in self.cards:
+            card_key = f"{card.name}:{card.active_profile}"
+            if card_key in aliases:
+                card.alias = aliases[card_key]
+
+    def get_current_sink_or_source(self, device_type: str) -> Card | None:
+        if device_type not in ["sink", "source"]:
+            raise ValueError("device_type must be either 'sink' or 'source'")
+            
+        metadata_key = f"default.audio.{device_type}"
+        return self._get_card_by_key(metadata_key)
+    
+    def set_card_profile(self, card: Card, profile_name: str) -> None:
+        run(["pactl", "set-card-profile", card.name, profile_name])
+        
+        card.active_profile = profile_name
+        self.current_sink = self.current_sink = card
+        self.current_source = self.current_source = card
+    
+    def disable_cards_except(self, exception_card: Card | None = None) -> None:
+        for card in self.cards:
+            if exception_card and card.name == exception_card.name:
+                continue
+            self.set_card_profile(card, "off")
+    
+    def toggle_card(self, card_type: CardType = CardType.OUTPUT) -> Card | None:
+        current = self.current_sink if card_type in [CardType.OUTPUT, CardType.IO] else self.current_source
+        
+        available_cards = []
+        for card in self.cards:
+            for profile in card.profiles:
+                if profile.type == card_type or profile.type == CardType.IO:
+                    available_cards.append(card)
+                    break
+        
+        if not available_cards:
+            return None
+            
+        current_index = -1
+        if current:
+            for i, card in enumerate(available_cards):
+                if card.name == current.name:
+                    current_index = i
+                    break
+        
+        next_index = (current_index + 1) % len(available_cards)
+        next_card = available_cards[next_index]
+        
+        best_profile = next_card.get_priority_profile()
+        if best_profile:
+            self.set_card_profile(next_card, best_profile.name)
+            self.disable_cards_except(next_card)
+            return next_card
+            
+        return None
+        
+    def list_cards(self) -> None:
+        output_cards = []
+        input_cards = []
+        io_cards = []
+        
+        current_sink_name = self.current_sink.name if self.current_sink else None
+        current_source_name = self.current_source.name if self.current_source else None
+        
+        for card in self.cards:
+            has_output = any(profile.type == CardType.OUTPUT for profile in card.profiles)
+            has_input = any(profile.type == CardType.INPUT for profile in card.profiles)
+            has_io = any(profile.type == CardType.IO for profile in card.profiles)
+            
+            if has_output or has_io:
+                output_cards.append(card.dump(card_type=CardType.OUTPUT, current_device_name=current_sink_name))
+            if has_input or has_io:
+                input_cards.append(card.dump(card_type=CardType.INPUT, current_device_name=current_source_name))
+            if has_io:
+                io_cards.append(card.dump(current_device_name=current_sink_name))
+        
+        cards_info = {
+            "output": output_cards,
+            "input": input_cards,
+            "io": io_cards,
+        }
+        
+        print(json.dumps(cards_info))
+
+    def configure_cards(self) -> None:
+        """Configure card profiles by user input and save configuration."""
+        print("\nConfiguring sound profile preference list")
+        print("Run this with all sound devices connected so you can configure all your options")
+
+        config = {CardType.OUTPUT: [], CardType.INPUT: []}
+
+        # Handle output and input configurations separately
+        for card_type in (CardType.OUTPUT, CardType.INPUT):
+            available_card_profiles = []
+            
+            for card in self.cards:
+                matching_profiles = [p for p in card.profiles if p.type == card_type]
+                for profile in matching_profiles:
+                    available_card_profiles.append((card.name, profile.name))
+
+            if not available_card_profiles:
+                continue
+
+            print(f"\nAvailable {card_type.upper()} profiles:")
+            for i, (card_name, profile_name) in enumerate(available_card_profiles, 1):
+                print(f"\t{i}. {card_name} - {profile_name}")
+
+            order = None
+            while order is None:
+                try:
+                    print(f"\nEnter {card_type} profiles in order of priority (e.g., '3,1,2')")
+                    print("You can also specify an alias for a profile (e.g., '3,1,2:hdmi')")
+                    order_input = input(f"\nEnter {card_type} profiles in order of priority: ")
+                    if not order_input.strip():
+                        break
+
+                    order = []
+                    for o in order_input.split(","):
+                        alias = None
+                        number = None
+                        if ":" in o:
+                            number = int(o.split(":")[0]) - 1
+                            alias = o.split(":")[1]
+                        else:
+                            number = int(o) - 1
+
+                        order.append((number, alias))
+
+                    if any(i < 0 or i >= len(available_card_profiles) for i, _ in order):
+                        print("Invalid card numbers. Please try again.")
+                        order = None
+
+                    if len(order) != len(set(i for i, _ in order)):
+                        print("Please don't repeat card numbers.")
+                        order = None
+
+                    for card_index, alias in order:
+                        card_name, profile_name = available_card_profiles[card_index]
+                        config[card_type].append({
+                            "card_name": card_name,
+                            "profile": profile_name,
+                            "alias": alias,
+                        })
+
+                except ValueError:
+                    print("Please enter valid numbers separated by commas.")
+                except KeyboardInterrupt:
+                    return
+
+        if config:
+            self._save_card_config(config)
+    
+    def _save_card_config(self, config: dict) -> None:
+        """Save card configuration to config file."""
+        config_path = Path(environ.get("XDG_CONFIG_HOME", Path.home() / ".config")) / "sound_manager" / "config.json"
+        config_path.parent.mkdir(parents=True, exist_ok=True)
+
+        print("\nSaving priority order")
+        for device_type, profiles in config.items():
+            print(f"\n\t{device_type.upper()}")
+            for i, profile in enumerate(profiles, 1):
+                print(f"\t{i}. {profile['card_name']} - {profile['profile']}")
+
+        with open(config_path, "w") as f:
+            json.dump(config, f, indent=2)
+
+        print(f"\nConfiguration saved to {config_path}")
+
+def parse_args():
+    """Parse command line arguments."""
+    ap = ArgumentParser(
+        "sound_manager_new",
+        description="Toggle sound source between device, bluetooth, and HDMI",
+    )
+    ap.add_argument(
+        "-l", help="List available output and input devices", action="store_true"
+    )
+    ap.add_argument(
+        "-f", help="Format cards info from stdin", action="store_true",
+    )
+    ap.add_argument("-t", help="Toggle output devices", action="store_true")
+    ap.add_argument("-s", nargs=4, metavar=('sink', 'profile', 'card_name', 'card_type ["input", "output", "io"]'), 
+                   help="Set sink profile manually")
+    ap.add_argument(
+        "-c", "--configure",
+        help="Configure card profiles",
+        action="store_true"
+    )
+    return ap.parse_args()
+
+if __name__ == "__main__":
+    args = parse_args()
+    sound_manager = SoundManager()
+    
+    # Handle command line arguments
+    if args.l:
+        # List cards if -l argument is provided
+        sound_manager.list_cards()
+    elif args.f:
+        # Format cards info from stdin (read json data from stdin and format it)
+        try:
+            stdin_data = sys.stdin.read()
+            cards_info = json.loads(stdin_data)
+            
+            # Process and format the cards info
+            if isinstance(cards_info, dict):
+                # Display output cards
+                if "output" in cards_info and cards_info["output"]:
+                    print("\nOutput Devices:")
+                    for i, card in enumerate(cards_info["output"], 1):
+                        active = " *" if card.get("active") else ""
+                        print(f"{i}. {card.get('display_name')}{active}")
+                
+                # Display input cards
+                if "input" in cards_info and cards_info["input"]:
+                    print("\nInput Devices:")
+                    for i, card in enumerate(cards_info["input"], 1):
+                        active = " *" if card.get("active") else ""
+                        print(f"{i}. {card.get('display_name')}{active}")
+                
+                # Display IO cards
+                if "io" in cards_info and cards_info["io"]:
+                    print("\nInput/Output Devices:")
+                    for i, card in enumerate(cards_info["io"], 1):
+                        active = " *" if card.get("active") else ""
+                        print(f"{i}. {card.get('display_name')}{active}")
+            else:
+                print("Invalid JSON format received from stdin")
+        except json.JSONDecodeError:
+            print("Error: Invalid JSON data from stdin")
+        except Exception as e:
+            print(f"Error processing stdin data: {str(e)}")
+    elif args.t:
+        # Toggle output device
+        next_card = sound_manager.toggle_card(CardType.OUTPUT)
+        if next_card:
+            notification_header = "Switched Output"
+            notification_body = next_card.name
+            run(["notify-send", notification_header, notification_body])
+        else:
+            print("No available output devices to toggle")
+    elif args.s:
+        # Set sink profile manually
+        sink, profile, card_name, card_type_str = args.s
+        card_type = CardType.from_string(card_type_str)
+        
+        # Find the card by name
+        target_card = None
+        for card in sound_manager.cards:
+            if card.name == card_name:
+                target_card = card
+                break
+        
+        if target_card:
+            # Set the card profile
+            sound_manager.set_card_profile(target_card, profile)
+            
+            # Disable other cards based on card type
+            output_changed = card_type in [CardType.OUTPUT, CardType.IO]
+            input_changed = card_type in [CardType.INPUT, CardType.IO]
+            
+            if output_changed:
+                # Only disable other output cards if this is an output or IO card
+                other_cards = [c for c in sound_manager.cards if c.name != target_card.name]
+                for card in other_cards:
+                    # Check if the card has output profiles
+                    if any(p.type == CardType.OUTPUT or p.type == CardType.IO for p in card.profiles):
+                        sound_manager.set_card_profile(card, "off")
+            
+            # Set notification message
+            card_type_str = "IO" if output_changed and input_changed else "Output" if output_changed else "Input"
+            notification_header = f"Switched {card_type_str}"
+            notification_body = target_card.name
+            run(["notify-send", notification_header, notification_body])
+        else:
+            print(f"Card '{card_name}' not found")
+    elif args.configure:
+        # Configure card profiles
+        sound_manager.configure_cards()
+    else:
+        # Show debug info
+        print(f"Loaded {len(sound_manager.cards)} cards:")
+        for i, card in enumerate(sound_manager.cards):
+            alias_info = f" (alias: {card.alias})" if card.alias else ""
+            print(f"{i+1}. {card.name}{alias_info} - Active profile: {card.active_profile}")
+            print(f"    Profiles: {', '.join([p.name for p in card.profiles])}")
+        
+        print("\nCurrent devices:")
+        if sound_manager.current_sink:
+            print(f"Current sink: {sound_manager.current_sink}")
+        else:
+            print("No current sink found")
+            
+        if sound_manager.current_source:
+            print(f"Current source: {sound_manager.current_source}")
+        else:
+            print("No current source found")
+            
+        print("\nRun with -l to list cards in JSON format")
