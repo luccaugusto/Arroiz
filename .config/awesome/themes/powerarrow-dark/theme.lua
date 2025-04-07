@@ -349,7 +349,7 @@ function theme.at_screen_connect(s)
     local wibar = awful.wibar {
         position = "top",
         screen = s,
-        height = dpi(30),
+        height = dpi(55),
         bg = theme.bg_transparent,
         fg = theme.fg_normal,
 		margins = {

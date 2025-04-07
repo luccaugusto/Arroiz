@@ -15,6 +15,9 @@ local mytable       = awful.util.table or gears.table -- 4.{0,1} compatibility
 -- {{{ Error handling
 
 naughty.config.defaults.position = "top_middle"
+beautiful.notification_width = 300
+beautiful.notification_margin = 10
+
 
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -153,7 +156,7 @@ awful.screen.connect_for_each_screen(function(s) beautiful.at_screen_connect(s) 
 -- {{{ Mouse bindings
 
 root.buttons(mytable.join(
-	awful.button({ }, 3, function () awful.util.mymainmenu:toggle() end),
+	--awful.button({ }, 3, function () awful.util.mymainmenu:toggle() end),
     awful.button({ }, 4, awful.tag.viewnext),
     awful.button({ }, 5, awful.tag.viewprev)
 ))
@@ -271,8 +274,8 @@ globalkeys = mytable.join(
               {description = "decrement useless gaps", group = "tag"}),
 
     -- Dynamic tagging
-    awful.key({ modkey, "Shift" }, "n", function () lain.util.add_tag() end,
-              {description = "add new tag", group = "tag"}),
+    -- awful.key({ modkey, "Shift" }, "n", function () lain.util.add_tag() end,
+    --           {description = "add new tag", group = "tag"}),
     awful.key({ modkey, "Shift" }, "r", function () lain.util.rename_tag() end,
               {description = "rename tag", group = "tag"}),
     awful.key({ modkey, "Shift" }, "Left", function () lain.util.move_tag(-1) end,
@@ -302,18 +305,10 @@ globalkeys = mytable.join(
               {description = "increase the number of columns", group = "layout"}),
     awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1, nil, true)    end,
               {description = "decrease the number of columns", group = "layout"}),
-    awful.key({ modkey,           }, "space", function () awful.layout.inc( 1)                end,
+    awful.key({ modkey,           }, ";", function () awful.layout.inc( 1)                end,
               {description = "select next", group = "layout"}),
-    awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
+    awful.key({ modkey, "Shift"   }, ";", function () awful.layout.inc(-1)                end,
               {description = "select previous", group = "layout"}),
-
-    awful.key({ modkey, "Control" }, "n", function ()
-        local c = awful.client.restore()
-        -- Focus restored client
-        if c then
-            c:emit_signal("request::activate", "key.unminimize", {raise = true})
-        end
-    end, {description = "restore minimized", group = "client"}),
 
     -- Dropdown application
     awful.key({ modkey, }, "u", function () awful.screen.focused().quake:toggle() end,
@@ -346,10 +341,10 @@ globalkeys = mytable.join(
 
     -- Default
     -- Menubar
-    -- awful.key({ modkey }, "p", function() menubar.show() end,
+    -- awful.key({ modkey }, "space", function() menubar.show() end,
     --           {description = "show the menubar", group = "launcher"}),
     --dmenu
-    --[[ awful.key({ modkey }, "p", function ()
+    --[[ awful.key({ modkey }, "space", function ()
             os.execute(string.format("dmenu_run -i -fn 'Monospace' -nb '%s' -nf '%s' -sb '%s' -sf '%s'",
             beautiful.bg_normal, beautiful.fg_normal, beautiful.bg_focus, beautiful.fg_focus))
         end,
@@ -358,11 +353,11 @@ globalkeys = mytable.join(
     -- alternatively use rofi, a dmenu-like application with more features
     -- check https://github.com/DaveDavenport/rofi for more details
     -- rofi
-    -- awful.key({ modkey }, "p", function ()
+    -- awful.key({ modkey }, "space", function ()
     --         os.execute("rofi -show drun -show-icons")
     --     end,
     --     {description = "show rofi", group = "launcher"}),
-    -- awful.key({ modkey, "Shift" }, "p", function ()
+    -- awful.key({ modkey, "Shift" }, "space", function ()
     --         os.execute("rofi -show run -show-icons")
     --     end,
     --     {description = "run anny executable with rofi", group = "launcher"}),
@@ -391,7 +386,7 @@ clientkeys = mytable.join(
             c:raise()
         end,
         {description = "toggle fullscreen", group = "client"}),
-    awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end,
+    awful.key({ modkey,           }, "q",      function (c) c:kill()                         end,
               {description = "close", group = "client"}),
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ,
               {description = "toggle floating", group = "client"}),
@@ -399,6 +394,8 @@ clientkeys = mytable.join(
               {description = "move to master", group = "client"}),
     awful.key({ modkey,           }, "o",      function (c) c:move_to_screen()               end,
               {description = "move to screen", group = "client"}),
+     awful.key({ modkey, "Shift"   }, "o",      function () os.execute("move_all_windows_to_other_screen") end,
+              {description = "+10%", group = "hotkeys"}),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
               {description = "toggle keep on top", group = "client"}),
     awful.key({ modkey,           }, "n",
@@ -408,6 +405,14 @@ clientkeys = mytable.join(
             c.minimized = true
         end ,
         {description = "minimize", group = "client"}),
+    awful.key({ modkey, "Control" }, "n", function ()
+        local c = awful.client.restore()
+        -- Focus restored client
+        if c then
+            c:emit_signal("request::activate", "key.unminimize", {raise = true})
+        end
+    end, {description = "restore minimized", group = "client"}),
+
     awful.key({ modkey,           }, "m",
         function (c)
             c.maximized = not c.maximized
@@ -559,7 +564,7 @@ awful.rules.rules = {
     -- { rule = { class = "Firefox" },
     --   properties = { screen = 1, tag = "2" } },
 
-	{ rule = { class = "Firefox" },
+	{ rule = { class = "firefox" },
 		properties = { tag = "二" } },
 	{ rule = { class = "Brave-browser" },
 		properties = { tag = "二" } },
@@ -569,7 +574,9 @@ awful.rules.rules = {
 		properties = { tag = "四" } },
 	{ rule = { class = "thunderbird" },
 		properties = { tag = "四" } },
-	{ rule = { class = "notion-calendar-electron" },
+	{ rule = { class = "ferdium" },
+		properties = { tag = "四" } },
+	{ rule = { class = "Ferdium" },
 		properties = { tag = "四" } },
 	{ rule = { class = "Postman" },
 		properties = { tag = "五" } },
@@ -586,6 +593,8 @@ awful.rules.rules = {
 	{ rule = { class = "transmission" },
 		properties = { tag = "八" } },
 	{ rule = { class = "beekeeper-studio" },
+		properties = { tag = "九" } },
+	{ rule = { class = "DBeaver" },
 		properties = { tag = "九" } },
 	{ rule = { class = "elisa" },
 		properties = { tag = "十" } },
