@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 FPS="10"
 FORMAT="png"
 OUTPUT="output.mp4"

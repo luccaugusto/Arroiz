@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env sh
 
 #-Shows me all files in my wallpaper repository and i can choose one to be my new wallpaper
 

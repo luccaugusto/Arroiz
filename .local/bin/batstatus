@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env sh
 
 #-Echos to stdout the current capacity of each battery.
 #-if util is passed as a argument, echoes the percent

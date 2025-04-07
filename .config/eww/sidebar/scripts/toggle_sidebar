@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env sh
 
 config="$HOME/.config/eww/sidebar/"
 lock_file="/tmp/eww_sidebar_open"

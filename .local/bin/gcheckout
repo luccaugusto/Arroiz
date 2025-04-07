@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 #- git checkout wrapper so i always pull when checking out a branch
 
 branch="$1"

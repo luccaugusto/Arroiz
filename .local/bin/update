@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 #- update all system packages,
 #- making sure to update the keyring first

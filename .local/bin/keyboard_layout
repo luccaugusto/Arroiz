@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 #-Sets my keyboard layout to en_us and pt_br, also remaps Caps to Ctrl
 

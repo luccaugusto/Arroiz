@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 touch /tmp/eww_bars_open.lock
 

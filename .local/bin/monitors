@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env sh
 
 #-Helper for dealing with multiple monitors, works via dmenu
 

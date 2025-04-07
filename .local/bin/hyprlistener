@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 handle() {
   case $1 in

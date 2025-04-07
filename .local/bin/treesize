@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env sh
 
 #-Shows directories size in human readable format
 #-Got it from vitor mansur, thanks

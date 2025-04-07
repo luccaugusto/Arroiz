@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 #- Rotate wallpaper every INTERVAL seconds to a random image in the given directory without repeating
 

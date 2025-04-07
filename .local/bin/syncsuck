@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env sh
 
 #-updates my Suckless repository
 #-Generates diff files for the changes i made automatically

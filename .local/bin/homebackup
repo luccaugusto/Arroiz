@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env sh
 
 # TODO:
 # - add option to not skip media files bigger than 10MB

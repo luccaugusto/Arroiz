@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 #-Runs programs after wm is launched. Basically an extension for bash_profile in this setup.
 #-Also avoids any errors that might occur if a program runs before another one.

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 #-From Luke Smith's dotfiles
 #-Open a terminal window in the same directory as the currently active window.

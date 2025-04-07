@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env sh
 
 #-Warns me via notify-send when i should update (LIMIT + packages needing update).
 LIMIT=40

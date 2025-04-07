@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 #-Script that controls a calendar with emails
 #-New appointments can be created by sending an email with an add command

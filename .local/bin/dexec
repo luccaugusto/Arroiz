@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env sh
 #- Allows to execute a command in a running container selecting it by name
 
 select container in $(docker ps --format '{{.Names}}'); do break; done

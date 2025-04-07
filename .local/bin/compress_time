@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 #-Convert all the date files in my .time directory to a single csv file.
 #-Drastically reduce the number of files in that folder

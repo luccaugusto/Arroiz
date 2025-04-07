@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env sh
 
 #-Cretes a new branch always updated from another branch.
 #-Prompts with dmenu for the branch type: feature, bugfix or hotfix. If it is a hotfix branch, create it from master.

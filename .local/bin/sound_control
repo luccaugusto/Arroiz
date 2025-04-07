@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env sh
 
 #-Wrapper for controlling volume, makes bluetooth and computer volume the same
 

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 #-Show how long i have been using the computer.
 #--b argument show since when its counting.

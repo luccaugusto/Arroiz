@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 disks="$(udisksctl status | tail -n +3 )" #| awk '{print $1, $5}')"
 

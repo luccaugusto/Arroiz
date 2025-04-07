@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 # Check if w3m is installed
 if [ ! "$(command -v w3m)" ]

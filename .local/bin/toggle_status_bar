@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 bar_open_lock=/tmp/eww_bars_open.lock
 is_open="false"

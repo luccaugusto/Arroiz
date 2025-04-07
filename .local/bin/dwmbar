@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env sh
 
 #-Simple bar script for DWM
 
@@ -29,7 +29,7 @@ bar()
 	light=" ${l%.*}"
 	echo "$light% $separator"
 
-	
+
 	#volume
 	vol="$(pamixer --get-volume-human)"
 	if [ "$vol" == "muted" ];then
@@ -41,7 +41,7 @@ bar()
 
 
 	date '+%Y %b %d %I:%M%p'
-	
+
 	echo "$separator"
 
 	#wifi

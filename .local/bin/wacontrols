@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env sh
 
 #-Helper for manipulating wacom devices
 #-only rotates it right now

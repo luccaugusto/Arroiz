@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env sh
 
 #-Grabs the doc comments of all scripts in .scripts folder and output them in MD
 #-to the README.md file in my rice repository.
