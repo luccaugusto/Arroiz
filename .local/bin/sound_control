@@ -33,6 +33,32 @@ mute()
 	# [ $(pgrep dwm) ] && reloadbar
 }
 
+send_notification()
+{
+	fill_char="─"
+	blank_char="╶"
+	fill_char_bold="━"
+	blank_char_bold="╸"
+	volume_string=$(wpctl get-volume @DEFAULT_AUDIO_SINK@)
+	muted=$(echo "$volume_string" | awk '{print $3}')
+	volume=$(echo "$volume_string" | awk '{print int($2 * 100)}')
+	filled=$((volume / 5))
+	empty=$((20 - filled))
+
+	if [ -n "$muted" ]; then
+		notify-send -t 1000 -h string:x-canonical-private-synchronous:volume "Volume" "Mute"
+	else
+		bar=""
+		for ((i = 0; i < filled; i++)); do
+			bar+="$fill_char"
+		done
+		for ((i = 0; i < empty; i++)); do
+			bar+="$blank_char"
+		done
+		notify-send -t 1000 -h string:x-canonical-private-synchronous:volume "Volume ${volume}%" "$bar"
+	fi
+}
+
 if [ "$opt" == 't' ]
 then
 	sound_manager -t
@@ -45,5 +71,6 @@ else
 			m) mute ;;
 			*) echo "Invalid option" ;;
 		esac
+		#send_notification
 	# done
 fi

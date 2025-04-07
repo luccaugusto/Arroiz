@@ -1,0 +1,19 @@
+#!/bin/sh
+
+#- refreshes my window manager
+
+
+if [ "$(pgrep -x awesome)" ]; then
+	reload_cmd="awesome-client 'awesome.restart()'"
+elif [ "$(pgrep -x bspwm)" ]; then
+	reload_cmd="bspc wm --restart"
+elif [ "$(pgrep -x Hyprland)" ]; then
+	reload_cmd="hyprctl reload"
+fi
+
+sleep 0.1 &&
+setup_workspace &&
+sleep 0.1 &&
+killall eww && launch_eww_bars
+sleep 0.1 &&
+eval "$reload_cmd" &&

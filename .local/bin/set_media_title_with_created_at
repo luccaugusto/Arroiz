@@ -1,0 +1,113 @@
+#!/bin/sh
+
+
+undo="false"
+
+[ ! "$1" ]  && { echo "Usage: $0 <dir/file>"  &&  exit 1; }
+[ ! -d "$1" ] && { echo "Error: $1 is not a directory" && exit 1; }
+
+dir="$1"; shift
+
+[ "$1" == "--undo" ] && undo="true" && shift
+
+# record rename mappings so we can revert the names if needed
+names_to_creation_times_file="${dir}/new_to_old_names.txt"
+
+get_video_created_at()
+{
+	[ ! "$1" ] && { echo "Missing parameter for get_video_created_at" && exit 1; }
+
+	video_file="$1"
+	[ ! -f "$video_file" ] && { echo "Error: File $video_file not found" && exit 1; }
+
+	path=${video_file%%/*}
+	filename=${video_file##*/} # remove path
+	filename=${filename%%.*} # remove extension
+
+	info_file="${path}/${filename}.txt"
+
+	ffmpeg -i "$video_file" -dump 2> "$info_file"
+
+	raw_creation_time=$(grep creation_time "$info_file" | tail -n 1 | awk '{print $3}')
+	created_at=$(echo ${raw_creation_time%%.*} | sed 's/-//g' | sed 's/T/_/g' | sed 's/://g')
+	rm "$info_file"
+
+	echo "$created_at"
+}
+
+get_image_created_at()
+{
+	[ ! "$1" ] && { echo "Missing parameter for get_image_created_at" && exit 1; }
+
+	image_file="$1"
+	[ ! -f "$image_file" ] && { echo "Error: File $image_file not found" && exit 1; }
+
+	created_at=$(file "$image_file" | tr ',' '\n' | grep "datetime" | awk -F'=' '{print $2}' | sed 's/ /_/g' | sed 's/://g')
+	echo "$created_at"
+}
+
+set_video_file_name_as_creation_time()
+{
+	echo "" > "$names_to_creation_times_file"
+
+	for file in $(find "$dir" -type f); do
+		path=${file%%/*}
+		filename=${file##*/} # remove path
+
+		[ "$file" == "$names_to_creation_times_file" ] && continue
+
+		extension=${filename##*.}
+
+		case "${extension,,}" in
+			"mp4" | "mov" | "avi" | "mkv")
+				creation_time=$(get_video_created_at "$file")
+				;;
+			"jpg" | "jpeg" | "png")
+				creation_time=$(get_image_created_at "$file")
+				;;
+			*)
+				echo "Skipping: $file, unsupported extension"
+				continue
+				;;
+		esac
+
+		[ ! "$creation_time" ] && continue
+
+		creation_time_file_name="${path}/${creation_time}.${extension}"
+
+		# handle files with the same timestamp
+		if [ -f "$creation_time_file_name" ]; then
+			colision_count=$(ls -1q ${path}/${creation_time}* | wc -l)
+			creation_time_file_name="${path}/${creation_time}_${colision_count}.${extension}"
+		fi
+
+		echo "Renaming: $file -> $creation_time_file_name"
+		mv "$file" "$creation_time_file_name"
+		echo "${creation_time_file_name} ${file}" >> "$names_to_creation_times_file"
+		unset creation_time
+	done
+}
+
+revert_to_original_names()
+{
+	[ ! -f "$names_to_creation_times_file" ] && { echo "Error: Mapping file not found at $names_to_creation_times_file" && return 1; }
+
+	while IFS=' ' read -r created_at_name original_name; do
+		[ -z "$created_at_name" ] && continue
+
+		if [ -f "$created_at_name" ]; then
+			echo "Reverting: $created_at_name -> $original_name"
+			mv "$created_at_name" "$original_name"
+		else
+			echo "Warning: File $created_at_name not found, skipping..."
+		fi
+	done < "$names_to_creation_times_file"
+
+	rm "$names_to_creation_times_file"
+}
+
+if [ "$undo" == "false" ]; then
+	set_video_file_name_as_creation_time
+else
+	revert_to_original_names
+fi

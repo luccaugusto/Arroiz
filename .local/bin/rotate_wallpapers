@@ -1,0 +1,22 @@
+#!/bin/sh
+
+#- Rotate wallpaper every INTERVAL seconds to a random image in the given directory without repeating
+
+wallpaper_folder="$1"
+
+[ -z "$wallpaper_folder" ] && { echo "Usage: $0 <wallpaper_folder>" && exit 1; }
+
+interval=600 # 10 minutes
+
+while true; do
+
+	if [ ! -f /tmp/wallpaper_line ] || [ $(wc -l /tmp/wallpaper_line | cut -d' ' -f1) -eq 0 ];
+	then
+		find "$wallpaper_folder" -type f | shuf > /tmp/wallpaper_line
+	fi
+
+	wallpaper=$(head -n 1 /tmp/wallpaper_line)
+	sed -i '1d' /tmp/wallpaper_line
+	theme_manager -w "$wallpaper"
+	sleep $interval
+done
