@@ -1,5 +1,7 @@
 #!/bin/sh
 
+#- Manage my wallpaper and colorscheme
+
 wallpaper=~/.config/wallpaper
 
 set_wallpaper()
@@ -40,15 +42,21 @@ change_and_set_colors()
 }
 
 case "$1" in
-	"-c")
+	"-w")
 		change_and_set_wallpaper "$2"
 		;;
 	"-C")
 		change_and_set_wallpaper "$2"
 		change_and_set_colors "$2"
 		;;
-	"-t")
+	"-c")
 		change_and_set_colors "$2"
+		;;
+	"--rotate")
+		rotate_wallpapers "$2" &
+		;;
+	"--stop-rotate")
+		killall rotate_wallpapers
 		;;
 	"--set-colors-only")
 		change_and_set_colors "$wallpaper"
@@ -57,11 +65,13 @@ case "$1" in
 		set_wallpaper
 		;;
 	"--help" | "-h")
-		echo "Usage: ${0##*/} [OPTION] [FILE]"
+		echo "Usage: ${0##*/} [OPTION] [PATH]"
 		echo "  default                     Set wallpaper to $wallpaper and generate colorscheme"
-		echo "  -c [FILE]                   Change and set wallpaper to FILE"
+		echo "  -w [FILE]                   Change and set wallpaper to FILE"
 		echo "  -C [FILE]                   Change and set wallpaper to FILE and generate colorscheme"
-		echo "  -t [FILE]                   Generate colorscheme from FILE"
+		echo "  -c [FILE]                   Generate colorscheme from FILE"
+		echo "  --rotate [DIR]              Change wallpaper every 10 minutes from a random one in DIR"
+		echo "  --stop-rotate               Stop changing wallpaper"
 		echo "  --set-colors-only           Set colorscheme from $wallpaper"
 		echo "  --set-wallpaper-only        Set wallpaper to $wallpaper"
 		echo "  --help                      Display this help message"

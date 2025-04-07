@@ -6,6 +6,10 @@
 
 check_system_updates()
 {
+	[ "$(curl -s -o /dev/null -w "%{http_code}" https://luccaaugusto.xyz)" = "200" ] || {
+		return
+	}
+
 	# check if i need updates
 	sudo pacman -Sy
 	# Tell me if i need to update
@@ -43,9 +47,9 @@ keybidings_configurations()
 
 start_eww()
 {
+	rm ~/.local/bin/vendor/eww
 	# use correct eww binary
 	if [ "$(pgrep -x Xorg)" ]; then
-		rm ~/.local/bin/vendor/eww
 		cp ~/.local/bin/vendor/xeww ~/.local/bin/vendor/eww
 
 		# fix window paddings
@@ -53,7 +57,6 @@ start_eww()
 		sed -i 's/geometry :x "1%"/geometry :x "-1%"/' ~/.config/eww/sidebar/eww.yuck
 		sed -i 's/:y "2%"/:y "-2%"/' ~/.config/eww/sidebar/eww.yuck
 	else
-		rm ~/.local/bin/vendor/eww
 		cp ~/.local/bin/vendor/weww ~/.local/bin/vendor/eww
 
 		# fix window paddings
@@ -66,7 +69,8 @@ start_eww()
 
 start_programs()
 {
-	start_eww
+	# wait a bit so systray is ready for all the other programs
+	sleep 2
 
 	# low battery notifications (cronjob wasn't working)
 	[ "$(pgrep batsinal)" ] || batsinal &
@@ -86,8 +90,8 @@ start_programs()
 
 	# open my email account
 	[ "$(pgrep thunderbird)" ] || thunderbird &
-	# Calendar
-	[ "$(pgrep notion)" ] || notion-calendar-electron &
+	# Calendar and other stuff
+	[ "$(pgrep ferdium)" ] || ferdium &
 
 	# Notifications
 	[ "$(pgrep awesome)" ] || dunst -conf ~/.config/dunst/dunstrc &
@@ -100,8 +104,11 @@ start_programs()
 	# Let me use pt-br and en-us keyboards
 	keyboard_layout &
 
+	#trackpad gestures
+	[ "$(pgrep libinput-gestures)" ] || libinput-gestures-setup start &
+
 	# Don't burn my eyes
-	[ "$(pgrep redshift)" ] || toggle_redshift
+	# [ "$(pgrep redshift)" ] || toggle_redshift
 
 	# Open slack so i get ready for work
 	today=$(date +%a)
@@ -120,6 +127,8 @@ last_session_cleanup
 [ "$(date_operations -s "$now" "$login_time")" -lt 2 ] &&
 	start_programs
 
+start_eww
+
 # System colors and wallpaper
 theme_manager
 # only setting the wallpaper for now, as i want to keep my custom kitty colors
@@ -127,4 +136,4 @@ theme_manager
 
 #  NETWORK DEPENDAND STUFF
 #  only execute if connected to the internet
-[ "$(wget -q --spider https://luccaaugusto.xyz ; echo $?)" = "0" ] && check_system_updates &
+check_system_updates &

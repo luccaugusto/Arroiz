@@ -10,6 +10,7 @@ toggle_eww()
 		rm "$bar_open_lock"
 		sh ~/.config/eww/left-bar/close_bar &
 		sh ~/.config/eww/right-bar/close_bar &
+		killall eww
 	else
 		launch_eww_bars
 	fi
