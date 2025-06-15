@@ -17,7 +17,7 @@
 # 	bash "$option"
 # fi
 
-theme="$HOME/.config/rofi/regular-powermenu.rasi"
+theme="$HOME/.config/rofi/powermenu-theme.rasi"
 
 if [ "$(pgrep -x awesome)" ]; then
 	logout_cmd="awesome-client 'awesome.quit()'"
@@ -31,13 +31,6 @@ uptime="$(uptime -p)"
 host=$(cat /etc/hostname)
 
 # Options
-# shutdown='  shutdown'
-# reboot=' reboot'
-# lock='  lock'
-# logout='  logout'
-# yes='  yes'
-# no='X  no'
-
 shutdown='   shutdown'
 reboot='  reboot'
 lock='   lock'
@@ -47,8 +40,7 @@ no='X  no'
 
 rofi_cmd() {
 	rofi -dmenu \
-		-p "$USER@$host" \
-		-mesg "Uptime: ${uptime##up }" \
+		-p "${USER}@${host}${uptime}" \
 		-theme "$theme"
 }
 

@@ -71,7 +71,8 @@ super + Return
 super + w
 	$BROWSER
 super + b
-	lockscreen
+	xscreensaver-command -lock
+	# lockscreen
 super + shift + s
 	powermenu
 super + space
