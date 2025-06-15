@@ -13,9 +13,11 @@ export XDG_CONFIG_HOME="$CONFIG"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 
-export XDG_CURRENT_DESKTOP="Hyprland"
+#export XDG_CURRENT_DESKTOP="awesomewm"
 # Install Ruby Gems to ~/gems
 export GEM_HOME="$HOME/.local/gems"
+
+export COMPOSE_BAKE=true
 
 #Adding everything i need to my path
 export JAVA_HOME='/usr/lib/jvm/java-11-openjdk'

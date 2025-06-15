@@ -67,10 +67,11 @@ alias gsquash='git rebase -i HEAD~'
 alias gdelb='git branch -d'
 
 # WORK STUFF
-alias dc='docker-compose'
+alias dc='docker compose'
 alias redisclear='redis-cli flushall'
 alias ngr='ngrok http --domain=profound-cod-verbally.ngrok-free.app'
 alias stripelisten='stripe listen --forward-to localhost:4000/api/v1/stripe/webhooks'
 alias dockerinspectip='docker inspect --format='\''{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'\'''
 alias rw='cd $HOME/repos/roadway/roadway-app/backend && poetry run nvim ../'
 alias dockerfullclean='docker system prune -a --volumes && docker volume rm $(docker volume ls -qf dangling=true)'
+alias dockervolumeclean='docker volume rm $(docker volume ls -qf dangling=true | grep -v postgres-backend-data)'

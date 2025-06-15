@@ -2,13 +2,13 @@ AlsoSaveAsKra=false
 AntialiasSelectionOutline=false
 ArtColorSel.ColorSpace=0
 ArtColorSel.InversedSaturation=false
-ArtColorSel.Light=0.6784609028905071
+ArtColorSel.Light=0
 ArtColorSel.LightPieces=11
 ArtColorSel.NumRings=7
 ArtColorSel.RingPieces=12
-ArtColorSel.SelColorH=0.08302824106603553
-ArtColorSel.SelColorS=0.5510915203771098
-ArtColorSel.SelColorX=0.6784609028905071
+ArtColorSel.SelColorH=0
+ArtColorSel.SelColorS=0
+ArtColorSel.SelColorX=0
 ArtColorSel.defaultHueSteps=12
 ArtColorSel.defaultSaturationSteps=7
 ArtColorSel.defaultValueScaleSteps=11
@@ -40,10 +40,10 @@ CreateBackupFile=true
 ExportConfiguration-ANIMATION_EXPORT=<!DOCTYPE params>\n<params>\n <param name="basename" type="string"><![CDATA[frame]]></param>\n <param name="custom_ffmpeg_options" type="string"><![CDATA[-c:v libx265 -crf 0 -preset medium -profile:v main -pix_fmt yuv420p]]></param>\n <param name="delete_sequence" type="internal">true</param>\n <param name="directory" type="string"><![CDATA[]]></param>\n <param name="encode_video" type="internal">true</param>\n <param name="ffmpeg_path" type="string"><![CDATA[/usr/bin/..//bin/ffmpeg]]></param>\n <param name="filename" type="string"><![CDATA[/home/lucca/Documents/Animations/Portfolio.gif]]></param>\n <param name="first_frame" type="internal">0</param>\n <param name="frame_export/ColorDepthID" type="string"><![CDATA[U8]]></param>\n <param name="frame_export/ColorModelID" type="string"><![CDATA[RGBA]]></param>\n <param name="frame_export/ImageContainsTransparency" type="internal">false</param>\n <param name="frame_export/sRGB" type="internal">true</param>\n <param name="frame_mimetype" type="string"><![CDATA[image/png]]></param>\n <param name="framerate" type="internal">20</param>\n <param name="height" type="internal">1024</param>\n <param name="include_audio" type="internal">true</param>\n <param name="last_document_path" type="string"><![CDATA[/home/lucca/Documents/Animations/Portfolio.kra]]></param>\n <param name="last_frame" type="internal">56</param>\n <param name="only_unique_frames" type="internal">false</param>\n <param name="sequence_start" type="internal">0</param>\n <param name="video_mimetype" type="string"><![CDATA[image/gif]]></param>\n <param name="width" type="internal">1024</param>\n</params>\n
 ExportConfiguration-StrokeSelection=<!DOCTYPE params>\n<params>\n <param type="color" name="color"><![CDATA[<!DOCTYPE color>\n<color>\n <RGB space="sRGB-elle-V2-g10.icc" g="0" b="0" r="0"/>\n</color>\n]]></param>\n <param type="internal" name="colorFillSource">0</param>\n <param type="color" name="customColor"><![CDATA[<!DOCTYPE color>\n<color>\n <RGB space="sRGB-elle-V2-g10.icc" g="0" b="0" r="0"/>\n</color>\n]]></param>\n <param type="color" name="fillColor"><![CDATA[<!DOCTYPE color>\n<color>\n <RGB space="sRGB-elle-V2-g10.icc" g="0" b="0" r="0"/>\n</color>\n]]></param>\n <param type="internal" name="lineColorSource">1</param>\n <param type="internal" name="lineDimension">0</param>\n <param type="internal" name="lineSize">8</param>\n <param type="internal" name="useBrush">false</param>\n</params>\n
 ExportConfiguration-VIDEO_ENCODER=<!DOCTYPE params>\n<params>\n <param name="CodecId" type="string"><![CDATA[libx265]]></param>\n <param name="CustomLineValue" type="string"><![CDATA[]]></param>\n <param name="TheoraBitrate" type="internal">5000</param>\n <param name="customUserOptions" type="string"><![CDATA[-c:v libx265 -crf 0 -preset medium -profile:v main -pix_fmt yuv420p]]></param>\n <param name="h264ConstantRateFactor" type="internal">0</param>\n <param name="h264PresetIndex" type="internal">0</param>\n <param name="h264ProfileIndex" type="internal">5</param>\n <param name="h264TuneIndex" type="internal">1</param>\n <param name="h265ConstantRateFactor" type="internal">0</param>\n <param name="h265PresetIndex" type="internal">5</param>\n <param name="h265ProfileIndex" type="internal">0</param>\n <param name="h265TuneIndex" type="internal">1</param>\n <param name="h265UseHDRMetadata" type="internal">false</param>\n <param name="hdrMetadata/blueX" type="internal">0.131</param>\n <param name="hdrMetadata/blueY" type="internal">0.046</param>\n <param name="hdrMetadata/greenX" type="internal">0.17</param>\n <param name="hdrMetadata/greenY" type="internal">0.797</param>\n <param name="hdrMetadata/maxCLL" type="internal">1000</param>\n <param name="hdrMetadata/maxFALL" type="internal">400</param>\n <param name="hdrMetadata/maxLuminance" type="internal">1000</param>\n <param name="hdrMetadata/minLuminance" type="internal">0.005</param>\n <param name="hdrMetadata/predefinedMasterDisplayId" type="string"><![CDATA[p2100-pq]]></param>\n <param name="hdrMetadata/redX" type="internal">0.708</param>\n <param name="hdrMetadata/redY" type="internal">0.292</param>\n <param name="hdrMetadata/whiteX" type="internal">0.3127</param>\n <param name="hdrMetadata/whiteY" type="internal">0.329</param>\n</params>\n
-ExportConfiguration-image/jpeg=<!DOCTYPE params>\n<params>\n <param name="baseline" type="internal">true</param>\n <param name="exif" type="internal">true</param>\n <param name="filters" type="string"><![CDATA[]]></param>\n <param name="forceSRGB" type="internal">false</param>\n <param name="iptc" type="internal">true</param>\n <param name="optimize" type="internal">true</param>\n <param name="progressive" type="internal">false</param>\n <param name="quality" type="internal">100</param>\n <param name="saveProfile" type="internal">true</param>\n <param name="smoothing" type="internal">0</param>\n <param name="storeAuthor" type="internal">false</param>\n <param name="storeMetaData" type="internal">false</param>\n <param name="subsampling" type="internal">0</param>\n <param name="transparencyFillcolor" type="color"><![CDATA[<!DOCTYPE color>\n<color>\n <RGB g="1" space="sRGB-elle-V2-g10.icc" b="1" r="1"/>\n</color>\n]]></param>\n <param name="xmp" type="internal">true</param>\n</params>\n
-ExportConfiguration-image/png=<!DOCTYPE params>\n<params>\n <param type="internal" name="alpha">true</param>\n <param type="internal" name="compression">9</param>\n <param type="internal" name="downsample">false</param>\n <param type="internal" name="forceSRGB">false</param>\n <param type="internal" name="indexed">false</param>\n <param type="internal" name="interlaced">false</param>\n <param type="internal" name="saveAsHDR">false</param>\n <param type="internal" name="saveSRGBProfile">false</param>\n <param type="internal" name="storeAuthor">true</param>\n <param type="internal" name="storeMetaData">false</param>\n <param type="color" name="transparencyFillcolor"><![CDATA[<!DOCTYPE color>\n<color>\n <RGB b="1" space="sRGB-elle-V2-g10.icc" r="1" g="1"/>\n</color>\n]]></param>\n</params>\n
+ExportConfiguration-image/jpeg=<!DOCTYPE params>\n<params>\n <param name="baseline" type="internal">true</param>\n <param name="exif" type="internal">true</param>\n <param name="filters" type="string"><![CDATA[]]></param>\n <param name="forceSRGB" type="internal">false</param>\n <param name="iptc" type="internal">true</param>\n <param name="optimize" type="internal">true</param>\n <param name="progressive" type="internal">false</param>\n <param name="quality" type="internal">100</param>\n <param name="saveProfile" type="internal">true</param>\n <param name="smoothing" type="internal">0</param>\n <param name="storeAuthor" type="internal">false</param>\n <param name="storeMetaData" type="internal">false</param>\n <param name="subsampling" type="internal">0</param>\n <param name="transparencyFillcolor" type="color"><![CDATA[<!DOCTYPE color>\n<color>\n <RGB b="1" g="1" r="1" space="sRGB-elle-V2-g10.icc"/>\n</color>\n]]></param>\n <param name="xmp" type="internal">true</param>\n</params>\n
+ExportConfiguration-image/png=<!DOCTYPE params>\n<params>\n <param name="alpha" type="internal">true</param>\n <param name="compression" type="internal">9</param>\n <param name="downsample" type="internal">false</param>\n <param name="forceSRGB" type="internal">false</param>\n <param name="indexed" type="internal">false</param>\n <param name="interlaced" type="internal">false</param>\n <param name="saveAsHDR" type="internal">false</param>\n <param name="saveSRGBProfile" type="internal">false</param>\n <param name="storeAuthor" type="internal">true</param>\n <param name="storeMetaData" type="internal">false</param>\n <param name="transparencyFillcolor" type="color"><![CDATA[<!DOCTYPE color>\n<color>\n <RGB r="1" space="sRGB-elle-V2-g10.icc" g="1" b="1"/>\n</color>\n]]></param>\n</params>\n
 FetchNews=true
-FilterSelector/LastUsedFilter=hsvadjustment
+FilterSelector/LastUsedFilter=perchannel
 GamutMasks.viewMode=0
 KineticScrollingEnabled=true
 KineticScrollingGesture=0
@@ -60,9 +60,10 @@ Krita/Ocio/OcioConfigPath=
 Krita/Ocio/OcioLockColorVisualRepresentation=false
 Krita/Ocio/OcioLutPath=
 Krita/Ocio/UseOcio=false
-LastBackGroundColor=<!DOCTYPE LastBackGroundColor>\n<LastBackGroundColor>\n <RGB b="1" g="1" r="1" space="sRGB-elle-V2-srgbtrc.icc"/>\n</LastBackGroundColor>\n
+LastBackGroundColor=<!DOCTYPE LastBackGroundColor>\n<LastBackGroundColor>\n <RGB g="1" b="1" r="1" space="sRGB-elle-V2-srgbtrc.icc"/>\n</LastBackGroundColor>\n
 LastEraser=a)_Eraser_Circle
-LastForeGroundColor=<!DOCTYPE LastForeGroundColor>\n<LastForeGroundColor>\n <RGB b="0.474509805440903" g="0.662745118141174" r="0.800000011920929" space="sRGB-elle-V2-srgbtrc.icc"/>\n</LastForeGroundColor>\n
+LastEraser_0=a) Eraser Circle
+LastForeGroundColor=<!DOCTYPE LastForeGroundColor>\n<LastForeGroundColor>\n <RGB g="0" b="0" r="0" space="sRGB-elle-V2-srgbtrc.icc"/>\n</LastForeGroundColor>\n
 LastPreset=b) Basic-5 Size
 LastPreset_-1=b) Basic-5 Size
 LastPreset_0=d)_Ink-2_Fineliner
@@ -74,11 +75,11 @@ LineSmoothingScalableDistance=true
 LineSmoothingSmoothPressure=false
 LineSmoothingStabilizeSensors=true
 LineSmoothingTailAggressiveness=0.15
-LineSmoothingType=2
+LineSmoothingType=1
 LineSmoothingUseDelayDistance=true
 NumberOfLayersForNewImage=2
 OpenGLFilterMode=3
-PinnedFonts=C059,LT Carpet,FreeSans,Carlito,Cantarell
+PinnedFonts=Cantarell,RobotoMono Nerd Font SmBd [pyrs],Serif,Sans Serif,Liberation Serif
 ResourceCacheDbDirectory=/home/lucca/.local/share/krita
 ResourceDirectory=/home/lucca/.local/share/krita
 ShowEraserOutlineWhilePainting=true
@@ -107,7 +108,7 @@ autosavefileshidden=true
 backupfilelocation=0
 backupfilesuffix=~
 baseLength=60
-brushHudSettings=<!DOCTYPE hud_properties>\n<hud_properties>\n <version value="1" type="value"/>\n <paintbrush>\n  <properties_list type="array">\n   <item_0 value="size" type="value"/>\n   <item_1 value="opacity" type="value"/>\n   <item_2 value="angle" type="value"/>\n  </properties_list>\n </paintbrush>\n <colorsmudge>\n  <properties_list type="array">\n   <item_0 value="size" type="value"/>\n   <item_1 value="opacity" type="value"/>\n   <item_2 value="smudge_mode" type="value"/>\n   <item_3 value="smudge_length" type="value"/>\n   <item_4 value="smudge_color_rate" type="value"/>\n  </properties_list>\n </colorsmudge>\n <sketchbrush>\n  <properties_list type="array">\n   <item_0 value="opacity" type="value"/>\n   <item_1 value="size" type="value"/>\n  </properties_list>\n </sketchbrush>\n <hairybrush>\n  <properties_list type="array">\n   <item_0 value="size" type="value"/>\n   <item_1 value="opacity" type="value"/>\n  </properties_list>\n </hairybrush>\n <experimentbrush>\n  <properties_list type="array">\n   <item_0 value="opacity" type="value"/>\n   <item_1 value="shape_windingfill" type="value"/>\n  </properties_list>\n </experimentbrush>\n <spraybrush>\n  <properties_list type="array">\n   <item_0 value="size" type="value"/>\n   <item_1 value="opacity" type="value"/>\n   <item_2 value="spray_particlecount" type="value"/>\n   <item_3 value="spray_density" type="value"/>\n  </properties_list>\n </spraybrush>\n <hatchingbrush>\n  <properties_list type="array">\n   <item_0 value="size" type="value"/>\n   <item_1 value="opacity" type="value"/>\n   <item_2 value="hatching_angle" type="value"/>\n   <item_3 value="hatching_thickness" type="value"/>\n   <item_4 value="hatching_separation" type="value"/>\n  </properties_list>\n </hatchingbrush>\n <gridbrush>\n  <properties_list type="array">\n   <item_0 value="size" type="value"/>\n   <item_1 value="opacity" type="value"/>\n   <item_2 value="grid_divisionlevel" type="value"/>\n  </properties_list>\n </gridbrush>\n <curvebrush>\n  <properties_list type="array">\n   <item_0 value="opacity" type="value"/>\n   <item_1 value="curve_historysize" type="value"/>\n   <item_2 value="curve_linewidth" type="value"/>\n   <item_3 value="curve_lineopacity" type="value"/>\n   <item_4 value="curve_connectionline" type="value"/>\n  </properties_list>\n </curvebrush>\n <dynabrush>\n  <properties_list type="array">\n   <item_0 value="dyna_diameter" type="value"/>\n   <item_1 value="opacity" type="value"/>\n   <item_2 value="dyna_mass" type="value"/>\n   <item_3 value="dyna_drag" type="value"/>\n  </properties_list>\n </dynabrush>\n <particlebrush>\n  <properties_list type="array">\n   <item_0 value="opacity" type="value"/>\n   <item_1 value="particle_particles" type="value"/>\n   <item_2 value="particle_opecityweight" type="value"/>\n   <item_3 value="particle_iterations" type="value"/>\n  </properties_list>\n </particlebrush>\n <duplicate>\n  <properties_list type="array">\n   <item_0 value="size" type="value"/>\n   <item_1 value="opacity" type="value"/>\n   <item_2 value="clone_healing" type="value"/>\n   <item_3 value="clone_movesource" type="value"/>\n  </properties_list>\n </duplicate>\n <deformbrush>\n  <properties_list type="array">\n   <item_0 value="size" type="value"/>\n   <item_1 value="opacity" type="value"/>\n   <item_2 value="deform_amount" type="value"/>\n   <item_3 value="deform_mode" type="value"/>\n  </properties_list>\n </deformbrush>\n <tangentnormal>\n  <properties_list type="array">\n   <item_0 value="size" type="value"/>\n   <item_1 value="opacity" type="value"/>\n  </properties_list>\n </tangentnormal>\n <filter>\n  <properties_list type="array">\n   <item_0 value="size" type="value"/>\n   <item_1 value="opacity" type="value"/>\n  </properties_list>\n </filter>\n <roundmarker>\n  <properties_list type="array">\n   <item_0 value="opacity" type="value"/>\n   <item_1 value="size" type="value"/>\n  </properties_list>\n </roundmarker>\n</hud_properties>\n
+brushHudSettings=<!DOCTYPE hud_properties>\n<hud_properties>\n <version type="value" value="1"/>\n <paintbrush>\n  <properties_list type="array">\n   <item_0 type="value" value="size"/>\n   <item_1 type="value" value="opacity"/>\n   <item_2 type="value" value="angle"/>\n  </properties_list>\n </paintbrush>\n <colorsmudge>\n  <properties_list type="array">\n   <item_0 type="value" value="size"/>\n   <item_1 type="value" value="opacity"/>\n   <item_2 type="value" value="smudge_mode"/>\n   <item_3 type="value" value="smudge_length"/>\n   <item_4 type="value" value="smudge_color_rate"/>\n  </properties_list>\n </colorsmudge>\n <sketchbrush>\n  <properties_list type="array">\n   <item_0 type="value" value="opacity"/>\n   <item_1 type="value" value="size"/>\n  </properties_list>\n </sketchbrush>\n <hairybrush>\n  <properties_list type="array">\n   <item_0 type="value" value="size"/>\n   <item_1 type="value" value="opacity"/>\n  </properties_list>\n </hairybrush>\n <experimentbrush>\n  <properties_list type="array">\n   <item_0 type="value" value="opacity"/>\n   <item_1 type="value" value="shape_windingfill"/>\n  </properties_list>\n </experimentbrush>\n <spraybrush>\n  <properties_list type="array">\n   <item_0 type="value" value="size"/>\n   <item_1 type="value" value="opacity"/>\n   <item_2 type="value" value="spray_particlecount"/>\n   <item_3 type="value" value="spray_density"/>\n  </properties_list>\n </spraybrush>\n <hatchingbrush>\n  <properties_list type="array">\n   <item_0 type="value" value="size"/>\n   <item_1 type="value" value="opacity"/>\n   <item_2 type="value" value="hatching_angle"/>\n   <item_3 type="value" value="hatching_thickness"/>\n   <item_4 type="value" value="hatching_separation"/>\n  </properties_list>\n </hatchingbrush>\n <gridbrush>\n  <properties_list type="array">\n   <item_0 type="value" value="size"/>\n   <item_1 type="value" value="opacity"/>\n   <item_2 type="value" value="grid_divisionlevel"/>\n  </properties_list>\n </gridbrush>\n <curvebrush>\n  <properties_list type="array">\n   <item_0 type="value" value="opacity"/>\n   <item_1 type="value" value="curve_historysize"/>\n   <item_2 type="value" value="curve_linewidth"/>\n   <item_3 type="value" value="curve_lineopacity"/>\n   <item_4 type="value" value="curve_connectionline"/>\n  </properties_list>\n </curvebrush>\n <dynabrush>\n  <properties_list type="array">\n   <item_0 type="value" value="dyna_diameter"/>\n   <item_1 type="value" value="opacity"/>\n   <item_2 type="value" value="dyna_mass"/>\n   <item_3 type="value" value="dyna_drag"/>\n  </properties_list>\n </dynabrush>\n <particlebrush>\n  <properties_list type="array">\n   <item_0 type="value" value="opacity"/>\n   <item_1 type="value" value="particle_particles"/>\n   <item_2 type="value" value="particle_opecityweight"/>\n   <item_3 type="value" value="particle_iterations"/>\n  </properties_list>\n </particlebrush>\n <duplicate>\n  <properties_list type="array">\n   <item_0 type="value" value="size"/>\n   <item_1 type="value" value="opacity"/>\n   <item_2 type="value" value="clone_healing"/>\n   <item_3 type="value" value="clone_movesource"/>\n  </properties_list>\n </duplicate>\n <deformbrush>\n  <properties_list type="array">\n   <item_0 type="value" value="size"/>\n   <item_1 type="value" value="opacity"/>\n   <item_2 type="value" value="deform_amount"/>\n   <item_3 type="value" value="deform_mode"/>\n  </properties_list>\n </deformbrush>\n <tangentnormal>\n  <properties_list type="array">\n   <item_0 type="value" value="size"/>\n   <item_1 type="value" value="opacity"/>\n  </properties_list>\n </tangentnormal>\n <filter>\n  <properties_list type="array">\n   <item_0 type="value" value="size"/>\n   <item_1 type="value" value="opacity"/>\n  </properties_list>\n </filter>\n <roundmarker>\n  <properties_list type="array">\n   <item_0 type="value" value="opacity"/>\n   <item_1 type="value" value="size"/>\n  </properties_list>\n </roundmarker>\n</hud_properties>\n
 calculateAnimationCacheInBackground=true
 canvasBorderColor=128,128,128
 canvasState=OPENGL_SUCCESS
@@ -152,7 +153,7 @@ eraserCursorStyle=9
 eraserOutlineStyle=2
 favoriteCompositeOps=normal,erase,multiply,burn,darken,add,dodge,screen,overlay,soft_light_svg,luminize,lighten,saturation,color,divide,nand,and
 favoritePresetsTag=de sempre
-filterdialog/geometry=\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\x07\x80\x00\x00\x00s\x00\x00\nt\x00\x00\x02g\x00\x00\x07\x84\x00\x00\x00w\x00\x00\np\x00\x00\x02c\x00\x00\x00\x00\x00\x00\x00\x00\x07\x80\x00\x00\x07\x84\x00\x00\x00w\x00\x00\np\x00\x00\x02c
+filterdialog/geometry=\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\x03\xae\x00\x00\x05\x93\x00\x00\x06\xa2\x00\x00\x07\x87\x00\x00\x03\xb2\x00\x00\x05\x97\x00\x00\x06\x9e\x00\x00\x07\x83\x00\x00\x00\x00\x00\x00\x00\x00\x07\x80\x00\x00\x03\xb2\x00\x00\x05\x97\x00\x00\x06\x9e\x00\x00\x07\x83
 filterdialog/rememberlastpreset=false
 forceAlwaysFullSizedEraserOutline=false
 forceAlwaysFullSizedOutline=false
@@ -185,9 +186,9 @@ hideScrollbarsFullScreen=true
 hideStatusbarFullScreen=true
 hideTitleBarFullscreen=true
 hideToolbarFullscreen=true
-imageHeightDef=130
+imageHeightDef=3508
 imageResolutionDef=300
-imageWidthDef=130
+imageWidthDef=2480
 imagesizedlg_imsizeunit=px
 imagesizedlg_printSizeSeparatly=false
 imagesizedlg_ratioLock=true
@@ -216,8 +217,8 @@ memorySoftLimitPercent=2
 monitorProfile=sRGB-elle-V2-srgbtrc.icc
 monitorProfile/OverrideX11=false
 monitorProfile_1=sRGB-elle-V2-srgbtrc.icc
-moveToolChangedValueX=209
-moveToolChangedValueY=13
+moveToolChangedValueX=-4
+moveToolChangedValueY=-86
 moveToolUnit=0
 needsPixmapCacheWorkaround=false
 newCursorStyle=3
@@ -283,7 +284,7 @@ popuppalette/useDynamicSlotCount=true
 popuppalette/usevisualcolorselector=false
 preferredVectorImportResolution=300
 presetChooserViewMode=1
-presethistory=b) Basic-5 Size,b) Basic-5 Size Opacity,v) Clone Tool,d) Ink-2 Fineliner,b) Basic-2 Opacity,b) Basic-4 Flow Opacity,b) Basic-3 Flow,k) Blender Blur,d) Ink-8 Sumi-e,f) Bristles-3 Large Smooth
+presethistory=f) Bristles-3 Large Smooth,u) Pixel Art,b) Basic-5 Size,v) Sketching-2 Chrome Large,b) Basic-1,d) Ink-2 Fineliner,b) Basic-2 Opacity,b) Airbrush Soft,c) Pencil-2,a) Eraser Circle
 renameMergedLayers=true
 renamePastedLayers=true
 renderIntent=0
@@ -334,8 +335,8 @@ active-profile=luccaugusto
 
 [File Dialogs]
 DontUseNativeFileDialog=true
-OpenDocument=/home/lucca/Downloads/seiva
-SaveAs=/home/lucca/Downloads/seiva
+OpenDocument=/home/lucca/.config/rofi/images
+SaveAs=/home/lucca/.config/rofi/images
 
 [GradientChooser]
 global/itemSize=medium
@@ -388,7 +389,7 @@ fuzziness=18
 limitToCurrentLayer=0
 sampleLayersMode=sampleCurrentLayer
 sizemod=0
-threshold=6
+threshold=18
 useSelectionAsBoundary=false
 
 [KisToolSelectElliptical]
@@ -403,13 +404,13 @@ threshold=100
 
 [KisToolSelectRectangular]
 growSelection=0
-roundCornersX=25
-roundCornersY=25
+roundCornersX=0
+roundCornersY=0
 
 [KisToolSelectSimilar]
 fuzziness=21
 sampleLayersMode=sampleCurrentLayer
-threshold=1
+threshold=47
 
 [KisToolTransform]
 filterId=Bicubic
@@ -441,7 +442,7 @@ dragAmount=0.98
 massAmount=0.01
 
 [KritaShape/KisToolEllipse]
-fillType=2
+fillType=1
 outlineType=1
 patternTransformRotation=0
 patternTransformScale=100
@@ -845,8 +846,8 @@ yPosition=16
 Collapsed=false
 DockArea=2
 Locked=true
-height=302
-width=281
+height=464
+width=640
 xPosition=0
 yPosition=16
 
@@ -896,51 +897,55 @@ File44[$e]=$HOME/Documents/FDP/marca/estampas_finalizadas/trimmed/logo-fundodopo
 File45[$e]=$HOME/Documents/FDP/marca/mediakit/FDP_Logo_circulo.kra
 File46[$e]=$HOME/Documents/sync/Adesivo_10_Anos_Do_Fundo.png
 File47[$e]=$HOME/Documents/freela/calendarioMoreira/calendario-2024.kra
-File48[$e]=$HOME/Documents/burocratico/carteira_motorista.jpeg
-File49[$e]=$HOME/Documents/FDP/marca/bandas-basicao.kra
+File48[$e]=$HOME/Documents/FDP/marca/bandas-basicao.kra
+File49[$e]=$HOME/Documents/FDP/marca/Camisa_Do_Meu_Pai.png
 File5[$e]=$HOME/Documents/IMG/src/bemvindoaofundo-alt.kra
-File50[$e]=$HOME/Documents/FDP/marca/Camisa_Do_Meu_Pai.png
-File51[$e]=$HOME/Documents/FDP/marca/paps-branco.png
-File52[$e]=$HOME/repos/mail-man/solved_captchas/bbwf.png
-File53[$e]=$HOME/Documents/IMG/res/espada-kaique.jpeg
-File54[$e]=$HOME/.config/eww/right-bar/images/ram.png
-File55[$e]=$HOME/.config/eww/sidebar/images/downward-arrow.png
-File56[$e]=$HOME/.config/eww/sidebar/images/upward-arrow.png
-File57[$e]=$HOME/Documents/IMG/src/true-friends.kra
-File58[$e]=$HOME/Documents/FDP/jointheclub.kra
-File59[$e]=$HOME/Documents/FDP/marca/man-i-love-frank.kra
+File50[$e]=$HOME/Documents/FDP/marca/paps-branco.png
+File51[$e]=$HOME/repos/mail-man/solved_captchas/bbwf.png
+File52[$e]=$HOME/Documents/IMG/res/espada-kaique.jpeg
+File53[$e]=$HOME/.config/eww/right-bar/images/ram.png
+File54[$e]=$HOME/.config/eww/sidebar/images/downward-arrow.png
+File55[$e]=$HOME/.config/eww/sidebar/images/upward-arrow.png
+File56[$e]=$HOME/Documents/IMG/src/true-friends.kra
+File57[$e]=$HOME/Documents/FDP/jointheclub.kra
+File58[$e]=$HOME/Documents/FDP/marca/man-i-love-frank.kra
+File59[$e]=$HOME/Documents/PapoDeSauna/pds_s3_ep_base.kra
 File6[$e]=$HOME/Documents/IMG/camisas/prickCMYK.kra
-File60[$e]=$HOME/Documents/PapoDeSauna/pds_s3_ep_base.kra
-File61[$e]=$HOME/.config/eww/sidebar/images/notion-calendar.png
-File62[$e]=$HOME/.config/eww/sidebar/images/monitor-config.png
-File63[$e]=$HOME/.config/eww/sidebar/images/monitor-config2.png
-File64[$e]=$HOME/.config/eww/right-bar/images/dotdotdot2-r.png
-File65[$e]=$HOME/.config/eww/sidebar/images/redeye.png
-File66[$e]=$HOME/.config/eww/right-bar/images/menu.png
-File67[$e]=$HOME/.config/eww/sidebar/images/refresh.png
-File68[$e]=$HOME/.config/eww/right-bar/images/icons/battery/charging.png
-File69[$e]=$HOME/.config/rofi/images/calculator.png
+File60[$e]=$HOME/.config/eww/sidebar/images/notion-calendar.png
+File61[$e]=$HOME/.config/eww/sidebar/images/monitor-config.png
+File62[$e]=$HOME/.config/eww/sidebar/images/monitor-config2.png
+File63[$e]=$HOME/.config/eww/right-bar/images/dotdotdot2-r.png
+File64[$e]=$HOME/.config/eww/sidebar/images/redeye.png
+File65[$e]=$HOME/.config/eww/right-bar/images/menu.png
+File66[$e]=$HOME/.config/eww/sidebar/images/refresh.png
+File67[$e]=$HOME/.config/eww/right-bar/images/icons/battery/charging.png
+File68[$e]=$HOME/.config/rofi/images/calculator.png
+File69[$e]=$HOME/Documents/freela/8mconsultoria/imagens/roda-na-mesa-1.jpeg
 File7[$e]=$HOME/Documents/IMG/src/gostosaHeavyMetal.kra
-File70[$e]=$HOME/Documents/freela/8mconsultoria/imagens/roda-na-mesa-1.jpeg
-File71[$e]=$HOME/Documents/freela/8mconsultoria/imagens/WhatsApp Image 2024-09-11 at 19.56.46.jpeg
-File72[$e]=$HOME/Documents/freela/8mconsultoria/imagens/WhatsApp Image 2024-09-11 at 19.58.03.jpeg
-File73[$e]=$HOME/Documents/freela/8mconsultoria/imagens/WhatsApp Image 2024-09-18 at 13.29.21.jpeg
-File74[$e]=$HOME/Documents/freela/8mconsultoria/imagens/WhatsApp Image 2024-09-18 at 13.35.52.jpeg
-File75[$e]=$HOME/Documents/freela/8mconsultoria/imagens/fvfb.jpg
-File76[$e]=$HOME/.config/eww/right-bar/images/bell.png
-File77[$e]=$HOME/Documents/IMG/src/lee-and-james.kra
-File78[$e]=$HOME/Documents/IMG/src/lee-and-james.jpg
-File79[$e]=$HOME/Documents/IMG/src/os_lunaticos.kra
+File70[$e]=$HOME/Documents/freela/8mconsultoria/imagens/WhatsApp Image 2024-09-11 at 19.56.46.jpeg
+File71[$e]=$HOME/Documents/freela/8mconsultoria/imagens/WhatsApp Image 2024-09-11 at 19.58.03.jpeg
+File72[$e]=$HOME/Documents/freela/8mconsultoria/imagens/WhatsApp Image 2024-09-18 at 13.29.21.jpeg
+File73[$e]=$HOME/Documents/freela/8mconsultoria/imagens/WhatsApp Image 2024-09-18 at 13.35.52.jpeg
+File74[$e]=$HOME/Documents/freela/8mconsultoria/imagens/fvfb.jpg
+File75[$e]=$HOME/.config/eww/right-bar/images/bell.png
+File76[$e]=$HOME/Documents/IMG/src/lee-and-james.kra
+File77[$e]=$HOME/Documents/IMG/src/lee-and-james.jpg
+File78[$e]=$HOME/Documents/IMG/src/os_lunaticos.kra
+File79[$e]=$HOME/Documents/FDP/fdpfilmes/21pilots-doidimais/twenty-one-pilots-2025/IMG_2693.HEIC
 File8[$e]=$HOME/Documents/FDP/marca/mediakit/FDP_Logo_circulo.psd
-File80[$e]=$HOME/Documents/FDP/fdpfilmes/21pilots-doidimais/twenty-one-pilots-2025/IMG_2693.HEIC
-File81[$e]=$HOME/Documents/FDP/fdpfilmes/21pilots-doidimais/twenty-one-pilots-2025/clancy_world_tour.png
-File82[$e]=$HOME/Downloads/logo-8m.png
-File83[$e]=$HOME/Downloads/michelle.jpeg
-File84[$e]=$HOME/Documents/IMG/src/4-elementos-hachura.kra
-File85[$e]=$HOME/Downloads/seiva/23.jpeg
-File86[$e]=$HOME/Downloads/seiva/seiva-logo-1.jpeg
-File87[$e]=$HOME/Downloads/seiva/seiva-logo-wide.kra
+File80[$e]=$HOME/Documents/FDP/fdpfilmes/21pilots-doidimais/twenty-one-pilots-2025/clancy_world_tour.png
+File81[$e]=$HOME/Downloads/logo-8m.png
+File82[$e]=$HOME/Downloads/michelle.jpeg
+File83[$e]=$HOME/Documents/IMG/src/4-elementos-hachura.kra
+File84[$e]=$HOME/Documents/round-circle.kra
+File85[$e]=$HOME/Documents/obs-cam-mask.png
+File86[$e]=$HOME/pics/brain/ShrekPrint.JPG
+File87[$e]=$HOME/Documents/IMG/src/shrek-the-first.kra
+File88[$e]=$HOME/Documents/seiva/banner-desktop.kra
+File89[$e]=$HOME/Documents/seiva/banner-mobile.kra
 File9[$e]=$HOME/Documents/IMG/src/stolen-car-radio.kra
+File90[$e]=$HOME/.config/rofi/images/sleepy-cat.gif
+File91[$e]=$HOME/.config/rofi/images/sleepy-cat.png
 Name1=promptfolio-logo.kra
 Name10=jumpsuit.kra
 Name11=inPieces.kra
@@ -983,51 +988,55 @@ Name44=logo-fundodopoco-peito-preto.png
 Name45=FDP_Logo_circulo.kra
 Name46=Adesivo_10_Anos_Do_Fundo.png
 Name47=calendario-2024.kra
-Name48=carteira_motorista.jpeg
-Name49=bandas-basicao.kra
+Name48=bandas-basicao.kra
+Name49=Camisa_Do_Meu_Pai.png
 Name5=bemvindoaofundo-alt.kra
-Name50=Camisa_Do_Meu_Pai.png
-Name51=paps-branco.png
-Name52=bbwf.png
-Name53=espada-kaique.jpeg
-Name54=ram.png
-Name55=downward-arrow.png
-Name56=upward-arrow.png
-Name57=true-friends.kra
-Name58=jointheclub.kra
-Name59=man-i-love-frank.kra
+Name50=paps-branco.png
+Name51=bbwf.png
+Name52=espada-kaique.jpeg
+Name53=ram.png
+Name54=downward-arrow.png
+Name55=upward-arrow.png
+Name56=true-friends.kra
+Name57=jointheclub.kra
+Name58=man-i-love-frank.kra
+Name59=pds_s3_ep_base.kra
 Name6=prickCMYK.kra
-Name60=pds_s3_ep_base.kra
-Name61=notion-calendar.png
-Name62=monitor-config.png
-Name63=monitor-config2.png
-Name64=dotdotdot2-r.png
-Name65=redeye.png
-Name66=menu.png
-Name67=refresh.png
-Name68=charging.png
-Name69=calculator.png
+Name60=notion-calendar.png
+Name61=monitor-config.png
+Name62=monitor-config2.png
+Name63=dotdotdot2-r.png
+Name64=redeye.png
+Name65=menu.png
+Name66=refresh.png
+Name67=charging.png
+Name68=calculator.png
+Name69=roda-na-mesa-1.jpeg
 Name7=gostosaHeavyMetal.kra
-Name70=roda-na-mesa-1.jpeg
-Name71=WhatsApp Image 2024-09-11 at 19.56.46.jpeg
-Name72=WhatsApp Image 2024-09-11 at 19.58.03.jpeg
-Name73=WhatsApp Image 2024-09-18 at 13.29.21.jpeg
-Name74=WhatsApp Image 2024-09-18 at 13.35.52.jpeg
-Name75=fvfb.jpg
-Name76=bell.png
-Name77=lee-and-james.kra
-Name78=lee-and-james.jpg
-Name79=os_lunaticos.kra
+Name70=WhatsApp Image 2024-09-11 at 19.56.46.jpeg
+Name71=WhatsApp Image 2024-09-11 at 19.58.03.jpeg
+Name72=WhatsApp Image 2024-09-18 at 13.29.21.jpeg
+Name73=WhatsApp Image 2024-09-18 at 13.35.52.jpeg
+Name74=fvfb.jpg
+Name75=bell.png
+Name76=lee-and-james.kra
+Name77=lee-and-james.jpg
+Name78=os_lunaticos.kra
+Name79=IMG_2693.HEIC
 Name8=FDP_Logo_circulo.psd
-Name80=IMG_2693.HEIC
-Name81=clancy_world_tour.png
-Name82=logo-8m.png
-Name83=michelle.jpeg
-Name84=4-elementos-hachura.kra
-Name85=23.jpeg
-Name86=seiva-logo-1.jpeg
-Name87=seiva-logo-wide.kra
+Name80=clancy_world_tour.png
+Name81=logo-8m.png
+Name82=michelle.jpeg
+Name83=4-elementos-hachura.kra
+Name84=round-circle.kra
+Name85=obs-cam-mask.png
+Name86=ShrekPrint.JPG
+Name87=shrek-the-first.kra
+Name88=banner-desktop.kra
+Name89=banner-mobile.kra
 Name9=stolen-car-radio.kra
+Name90=sleepy-cat.gif
+Name91=sleepy-cat.png
 maxRecentFileItems=100
 
 [SelectedTags]
@@ -1046,12 +1055,12 @@ workspaces=All
 currentCollection=0
 
 [SvgTextTool]
-Geometry=AdnQywADAAAAAAAQAAAARwAAB28AAASfAAAAFAAAAEsAAAdrAAAEmwAAAAEAAAAAB4AAAAAUAAAASwAAB2sAAASb
+Geometry=AdnQywADAAAAAAeQAAAAgwAADu8AAARjAAAHlAAAAIcAAA7rAAAEXwAAAAAAAAAAB4AAAAeUAAAAhwAADusAAARf
 defaultAlignment=0
 defaultFont=LT Carpet
 defaultLetterSpacing=0
 defaultSize=72
-windowState=AAAA/wAAAAD9AAAAAAAAB1gAAAPGAAAABAAAAAQAAAAIAAAACPwAAAADAAAAAgAAAAEAAAAWAG0AYQBpAG4AVABvAG8AbABCAGEAcgEAAAAA/////wAAAAAAAAAAAAAAAgAAAAEAAAAYAGYAbwBuAHQAUwBlAHQAdABpAG4AZwBzAQAAAAD/////AAAAAAAAAAAAAAACAAAAAQAAABQAZgBvAHIAbQBhAHQAdABpAG4AZwEAAAAA/////wAAAAAAAAAA
+windowState=AAAA/wAAAAD9AAAAAAAAB1gAAANOAAAABAAAAAQAAAAIAAAACPwAAAADAAAAAgAAAAEAAAAWAG0AYQBpAG4AVABvAG8AbABCAGEAcgEAAAAA/////wAAAAAAAAAAAAAAAgAAAAEAAAAYAGYAbwBuAHQAUwBlAHQAdABpAG4AZwBzAQAAAAD/////AAAAAAAAAAAAAAACAAAAAQAAABQAZgBvAHIAbQBhAHQAdABpAG4AZwEAAAAA/////wAAAAAAAAAA
 
 [TemplateChooserDialog]
 AlwaysUseTemplate=
@@ -1102,7 +1111,7 @@ forceLodMode=true
 showPreview=true
 
 [gaussian blur_filter_bookmarks]
-Last Used=<!DOCTYPE params>\n<params version="1">\n <param type="internal" name="horizRadius">15.63</param>\n <param type="internal" name="lockAspect">true</param>\n <param type="internal" name="vertRadius">15.63</param>\n</params>\n
+Last Used=<!DOCTYPE params>\n<params version="1">\n <param name="horizRadius" type="internal">66.56</param>\n <param name="lockAspect" type="internal">true</param>\n <param name="vertRadius" type="internal">66.56</param>\n</params>\n
 
 [gaussianhighpass_filter_bookmarks]
 Last Used=<!DOCTYPE params>\n<params version="1">\n <param type="internal" name="blurAmount">1</param>\n</params>\n
@@ -1153,7 +1162,7 @@ Last Used=<!DOCTYPE params>\n<params version="1">\n <param name="brushSize" type
 Last Used=<!DOCTYPE params>\n<params version="1">\n <param type="internal" name="alphaClip">0.5</param>\n <param type="internal" name="alphaDither/noiseSeed">2145174067</param>\n <param type="string" name="alphaDither/pattern"><![CDATA[DITH 0202 GEN ]]></param>\n <param type="internal" name="alphaDither/patternValueMode">0</param>\n <param type="internal" name="alphaDither/spread">1</param>\n <param type="internal" name="alphaDither/thresholdMode">0</param>\n <param type="internal" name="alphaEnabled">true</param>\n <param type="internal" name="alphaIndex">0</param>\n <param type="internal" name="alphaMode">0</param>\n <param type="internal" name="colorspace">0</param>\n <param type="internal" name="dither/colorMode">0</param>\n <param type="internal" name="dither/noiseSeed">233665123</param>\n <param type="internal" name="dither/offsetScale">0.125</param>\n <param type="string" name="dither/pattern"><![CDATA[DITH 0202 GEN ]]></param>\n <param type="internal" name="dither/patternValueMode">0</param>\n <param type="internal" name="dither/spread">1</param>\n <param type="internal" name="dither/thresholdMode">0</param>\n <param type="internal" name="ditherEnabled">false</param>\n <param type="string" name="palette"><![CDATA[Swatch CMYK]]></param>\n</params>\n
 
 [perchannel_filter_bookmarks]
-Last Used=<!DOCTYPE params>\n<params version="1">\n <param name="nTransfers">8</param>\n <param name="curve0">0,0;0.347162,0.34058;0.39083,0.923913;1,1;</param>\n <param name="curve1">0,0;1,1;</param>\n <param name="curve2">0,0;1,1;</param>\n <param name="curve3">0,0;1,1;</param>\n <param name="curve4">0,0;1,1;</param>\n <param name="curve5">0,0;1,1;</param>\n <param name="curve6">0,0;1,1;</param>\n <param name="curve7">0,0;1,1;</param>\n</params>\n
+Last Used=<!DOCTYPE params>\n<params version="1">\n <param name="nTransfers">8</param>\n <param name="curve0">0,0;0.340611,0.0357143;0.541485,0.671429;1,1;</param>\n <param name="curve1">0,0;1,1;</param>\n <param name="curve2">0,0;1,1;</param>\n <param name="curve3">0,0;1,1;</param>\n <param name="curve4">0,0;1,1;</param>\n <param name="curve5">0,0;1,1;</param>\n <param name="curve6">0,0;1,1;</param>\n <param name="curve7">0,0;1,1;</param>\n</params>\n
 
 [posterize_filter_bookmarks]
 Last Used=<!DOCTYPE params>\n<params version="0">\n <param name="steps" type="internal">16</param>\n</params>\n
