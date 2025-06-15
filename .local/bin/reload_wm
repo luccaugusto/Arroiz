@@ -11,9 +11,17 @@ elif [ "$(pgrep -x Hyprland)" ]; then
 	reload_cmd="hyprctl reload"
 fi
 
+reload_eww() {
+	sleep 5 &&
+	killall eww &&
+	launch_eww_bars
+}
+
+
 sleep 0.1 &&
 setup_workspace &&
 sleep 0.1 &&
-killall eww && launch_eww_bars
+reload_eww &
+restartkanata &
 sleep 0.1 &&
-eval "$reload_cmd" &&
+eval "$reload_cmd"

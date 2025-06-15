@@ -20,17 +20,9 @@ get_video_created_at()
 	video_file="$1"
 	[ ! -f "$video_file" ] && { echo "Error: File $video_file not found" && exit 1; }
 
-	path=${video_file%%/*}
-	filename=${video_file##*/} # remove path
-	filename=${filename%%.*} # remove extension
+	raw_creation_time=$(ffmpeg -i "$video_file" -dump 2>&1 1>/dev/null | grep creation_time | tail -n 1 | awk '{print $3}')
 
-	info_file="${path}/${filename}.txt"
-
-	ffmpeg -i "$video_file" -dump 2> "$info_file"
-
-	raw_creation_time=$(grep creation_time "$info_file" | tail -n 1 | awk '{print $3}')
 	created_at=$(echo ${raw_creation_time%%.*} | sed 's/-//g' | sed 's/T/_/g' | sed 's/://g')
-	rm "$info_file"
 
 	echo "$created_at"
 }

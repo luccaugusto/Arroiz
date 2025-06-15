@@ -2,17 +2,17 @@
 
 #- This script moves all windows to workspaces 0-9, useful for when disconnecting monitors
 
-mode="move_to_primary"
+mode="primary"
 [ "$1" ] && mode="$1"
 
 for window in $(wmctrl -l | awk '{print $1"_"$2}'); do
 	window_id=${window%%_*}
 	window_workspace=${window##*_}
 	case $mode in
-		move_to_primary)
+		primary)
 			new_window_workspace=$((window_workspace % 10))
 			;;
-		move_to_secondary)
+		secondary)
 			new_window_workspace=$((window_workspace % 10 + 10))
 			;;
 		toggle)

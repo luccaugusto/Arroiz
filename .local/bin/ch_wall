@@ -3,9 +3,12 @@
 #-Shows me all files in my wallpaper repository and i can choose one to be my new wallpaper
 
 IMGS="$REPOS/wallpapers/"
-[ "$1" ] && IMGS="$1"
+if [ "$1" ]
+then
+	IMGS="$(realpath "$1")"
+fi
 cd "$IMGS" || { exit 1; }
-WALL="$(shuf -e $(ls) | sxiv -t -o -i)"
+WALL="$(shuf -e * | sxiv -t -o -i)"
 #Change colors
 if [ "$WALL" ]
 then
@@ -13,14 +16,14 @@ then
 	if [ "$OPT" = "Change wallpaper and color" ]
 	then
 		#Change color and wallpaper
-		theme_manager -C "$IMGS$WALL"
+		theme_manager -C "$IMGS/$WALL"
 	elif [ "$OPT" = "Change color" ]
 	then
 		#Change color
-		theme_manager -t "$IMGS$WALL"
+		theme_manager -t "$IMGS/$WALL"
 	elif [ "$OPT" = "Change Wallpaper" ]
 	then
 		#Change wallpaper
-		theme_manager -c "$IMGS$WALL"
+		theme_manager -c "$IMGS/$WALL"
 	fi
 fi

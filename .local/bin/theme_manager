@@ -2,7 +2,7 @@
 
 #- Manage my wallpaper and colorscheme
 
-wallpaper=~/.config/wallpaper
+wallpaper=~/.config/wallpaper.jpg
 
 set_wallpaper()
 {
@@ -20,15 +20,41 @@ change_and_set_wallpaper()
 	set_wallpaper
 }
 
+get_hex_from_css()
+{
+	css="$1"; shift
+	color_name="$1"; shift
+	color_hex=$(echo "$css" | grep "$color_name")
+	color_hex=${color_hex##*:}
+	echo ${color_hex//[;]/}
+}
+
+set_rofi_theme_colors()
+{
+	colors=$(cat ~/.cache/wal/colors.css)
+	bg_alt=$(get_hex_from_css "$colors" "color6")
+	fg=$(get_hex_from_css "$colors" "color0")
+	selected=$(get_hex_from_css "$colors" "color2")
+	active=$(get_hex_from_css "$colors" "color7")
+	urgent=$(get_hex_from_css "$colors" "color4")
+
+	sed -i -e "s/^\s*background-alt.*$/    background-alt: $bg_alt;/" \
+		-e "s/^\s*foreground.*$/    foreground: $fg;/" \
+		-e "s/^\s*selected.*$/    selected: $selected;/" \
+		-e "s/^\s*active.*$/    active: $active;/" \
+		-e "s/^\s*urgent.*$/    urgent: $urgent;/" ~/.config/rofi/wallpaper-colors.rasi
+}
+
 apply_colors()
 {
 	# for now only want it in terminals and borders
 	ln -sf ~/.cache/wal/colors-kitty.conf ~/.config/kitty/theme.conf
 	# TODO make this work for new alacritty config file
-	set-alacritty-colors
+	# set-alacritty-colors
 	border_color=$(head -n 13 "$HOME/.cache/wal/colors" | tail -n 1)
 	# Update border color in awesome
 	sed -i "s/^theme\.border_focus.*$/theme.border_focus = \"$border_color\"/" ~/.config/awesome/themes/powerarrow-dark/theme.lua
+	set_rofi_theme_colors
 }
 
 change_and_set_colors()

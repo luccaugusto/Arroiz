@@ -47,6 +47,8 @@ keybidings_configurations()
 
 start_eww()
 {
+	sleep 1 # wait for systray
+
 	rm ~/.local/bin/vendor/eww
 	# use correct eww binary
 	if [ "$(pgrep -x Xorg)" ]; then
@@ -67,7 +69,31 @@ start_eww()
 	launch_eww_bars
 }
 
-start_programs()
+run_basic_apps()
+{
+	start_eww & # Beautiful bars
+
+	keyboard_layout & # Let me use pt-br and en-us keyboards
+
+	# System colors and wallpaper
+	theme_manager
+	# only setting the wallpaper for now, as i want to keep my custom kitty colors
+	# theme_manager --set-wallpaper-only
+
+	[ "$(pgrep -x kanata)" ] && restartkanata &
+}
+
+open_slack()
+{
+	today=$(date +%a)
+	if [ ! "$today" = "Sat" ] && [ ! "$today" = "Sun" ]
+	then
+		sleep 2
+		slack &
+	fi
+}
+
+autostart_apps()
 {
 	# wait a bit so systray is ready for all the other programs
 	sleep 2
@@ -101,8 +127,7 @@ start_programs()
 		[ "$(pgrep picom)" ] || picom --config "$HOME/.config/picom/picom-old.conf" &
 	fi
 
-	# Let me use pt-br and en-us keyboards
-	keyboard_layout &
+	xscreensaver --no-splash  &
 
 	#trackpad gestures
 	[ "$(pgrep libinput-gestures)" ] || libinput-gestures-setup start &
@@ -111,8 +136,7 @@ start_programs()
 	# [ "$(pgrep redshift)" ] || toggle_redshift
 
 	# Open slack so i get ready for work
-	today=$(date +%a)
-	[ ! "$today" = "Sat" ] && [ ! "$today" = "Sun" ] && slack &
+	open_slack &
 }
 
 # MAIN
@@ -122,17 +146,12 @@ login_time=$(who | awk '{print $4}')
 
 last_session_cleanup
 
+run_basic_apps &
+
 # only start programs right after i login so that
 # when restarting wm it won't reopen programs i closed
 [ "$(date_operations -s "$now" "$login_time")" -lt 2 ] &&
-	start_programs
-
-start_eww
-
-# System colors and wallpaper
-theme_manager
-# only setting the wallpaper for now, as i want to keep my custom kitty colors
-# theme_manager --set-wallpaper-only
+	autostart_apps
 
 #  NETWORK DEPENDAND STUFF
 #  only execute if connected to the internet
