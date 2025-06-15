@@ -17,6 +17,8 @@ inoremap <C-b> <S-Left>
 inoremap <C-w> <S-Right>
 inoremap <C-a> <End>
 inoremap <C-0> <Home>
+inoremap <C-e> <Esc>ea
+inoremap <C-d><C-w> <Esc>dwi
 
 "normal mode line break
 nnoremap <C-CR> mzi<CR><Esc>`z
@@ -35,7 +37,7 @@ nnoremap <leader>vt :vsplit<CR>:terminal<CR>
 nnoremap <leader>tt :tabnew<CR>:terminal<CR>
 
 "exit terminal mode
-":tnoremap <Esc> <C-\><C-n>
+"tnoremap <Esc> <C-\><C-n>
 
 nnoremap <leader>b :buffers<CR>:bd
 
@@ -113,6 +115,7 @@ vnoremap * y/\v<C-R>"<CR>
 
 nmap <C-w><C-w> :set scrollback=1 \| sleep 100m \| set scrollback=10000<cr>
 tmap <C-w><C-w> <c-\><c-n><c-w><c-l>i<c-l>
+tmap <C-w><C-n> <c-\><c-n>
 
 "===============================
 "DRAG VISUALS PLUGIN

@@ -33,8 +33,8 @@
 
 (defwidget profile []
 (box :class "winbox" :hexpand true :space-evenly false
-  (label :class "profile" :style "padding-left: 10px;" :text " ${sys_info?.profile.user}@${sys_info?.profile.hostname}: ")
-  (label :class "label" :style "padding-right: 10px;" :text "${sys_info?.profile.uptime}")
+  (label :class "profile" :style "padding-left: 10px;" :text " ${sys_info?.profile?.user}@${sys_info?.profile?.hostname}: ")
+  (label :class "label" :style "padding-right: 10px;" :text "${sys_info?.profile?.uptime}")
   )
 )
 
@@ -52,7 +52,7 @@
       (box :orientation "h" :spacing 10 :space-evenly true :height 100
         (box :orientation "v" :space-evenly false :spacing 10
           (label :text "Outputs" :class "info")
-          (for card in {sys_info?.sound.output}
+          (for card in {sys_info?.sound?.output ?: "[]"}
             (eventbox
               :height 50
               :width 120
@@ -67,7 +67,7 @@
             ))
         (box :orientation "v" :space-evenly false :spacing 10
           (label :text "Inputs" :class "info")
-          (for card in {sys_info?.sound.input}
+          (for card in {sys_info?.sound?.input ?: "[]"}
             (eventbox
               :height 50
               :width 120
@@ -82,7 +82,7 @@
             )))
         (box :orientation "v" :space-evenly false :spacing 10
           (label :text "IO" :class "info")
-          (for card in {sys_info?.sound.io}
+          (for card in {sys_info?.sound?.io ?: "[]"}
             (eventbox
               :height 50
               :width 120
@@ -156,12 +156,12 @@
           (image :path "images/cat.png" :image-width 50 :image-height 50))))
 
     (tooltip
-      (label :text "${sys_info?.disk.used}/${sys_info?.disk.size}" :class "info")
+      (label :text "${sys_info?.disk?.used}/${sys_info?.disk?.size}" :class "info")
       (box :class "winbox" :orientation "v" :space-evenly false :height 150 :width 150 :spacing 8 :valign "center" :style "padding-top: 5px;"
         (circular-progress :value 92 :clockwise false :start-at 75 :thickness 5 :height 135 :width 135 :class "chart"
           (box :orientation "v" :space-evenly false :spacing 5 :valign "center"
             (image :path "images/floppy-disk.png" :image-width 60 :image-height 60)
-            (label :class "info" :wrap true :text "${sys_info?.disk.free} free"))))))
+            (label :class "info" :wrap true :text "${sys_info?.disk?.free} free"))))))
   (scroll :vscroll true :hscroll false :height {round(screens_resolutions["screen-${screen}"].height * 0.60, 0)}
     (box :orientation "v" :spacing 8 :space-evenly false
       (sound_selector)
