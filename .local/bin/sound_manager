@@ -260,7 +260,7 @@ def get_configured_cards_by_type(config: dict, card_type: str, all_cards: list[d
                 {"name": profile_name, "available": True, "priority": 1},
                 card_name,
                 sink,
-                active=sink in card_in_use,
+                active=card_name in card_in_use,
                 display_name=display_name,
             )
             
