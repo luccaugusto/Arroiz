@@ -230,6 +230,43 @@ def get_card_profiles_by_type(card: dict[str, Any], card_type: str) -> list[dict
 
     return matching_profiles
 
+def get_card_profiles_by_type_non_exclusive(card: dict[str, Any], card_type: str) -> list[dict[str, Any]]:
+    """
+    Similar to get_card_profiles_by_type but returns profiles non-exclusively.
+    For example, a profile with both sink and source will be returned for OUTPUT type,
+    whereas the exclusive version would only return it for IO type.
+    This is mainly used for configuration to show all possible options.
+    """
+    card_info = card.get("info", {})
+    card_attributes = card_info.get("params", {})
+    profiles = card_attributes.get("EnumProfile", [])
+
+    # Filter profiles based on type and availability
+    matching_profiles = []
+    for p in profiles:
+        if p.get("available", 'no') == 'no':
+            continue
+
+        # Get profile classes
+        classes = p.get("classes", [])
+        
+        has_sink = any("Audio/Sink" in str(c) for c in classes)
+        has_source = any("Audio/Source" in str(c) for c in classes)
+
+        if card_type == CardType.OUTPUT:
+            if has_sink:  # Include if it has sink, regardless of source
+                matching_profiles.append(p)
+                
+        elif card_type == CardType.INPUT:
+            if has_source:  # Include if it has source, regardless of sink
+                matching_profiles.append(p)
+                
+        elif card_type == CardType.IO:
+            if has_sink and has_source:  # Keep IO exclusive since it needs both
+                matching_profiles.append(p)
+
+    return matching_profiles
+
 def get_configured_cards_by_type(config: dict, card_type: str, all_cards: list[dict[str, Any]], card_in_use: str) -> dict[str, Card]:
     """
     Returns a dictionary of cards built from the user's configuration.
@@ -311,7 +348,7 @@ def get_cards_by_type(all_cards: list[dict[str, Any]], card_type: str, card_in_u
     configured_cards.update(default_cards)
     return configured_cards
 
-def get_all_card_profiles_by_type(all_cards: list[dict[str, Any]], card_type: str) -> dict[str, Any]:
+def get_all_card_profiles_by_type(all_cards: list[dict[str, Any]], card_type: str, non_exclusive: bool = False) -> dict[str, Any]:
     cards_with_profiles = {}
 
     for card in all_cards:
@@ -319,7 +356,11 @@ def get_all_card_profiles_by_type(all_cards: list[dict[str, Any]], card_type: st
         card_attributes = card_info.get("props", card_info.get("params", {}))
         card_name = card_attributes.get("alsa.card_name", card_attributes.get("device.name", ""))
 
-        matching_profiles = get_card_profiles_by_type(card, card_type)
+        # Use non-exclusive function for configuration
+        if non_exclusive:
+            matching_profiles = get_card_profiles_by_type_non_exclusive(card, card_type)
+        else:
+            matching_profiles = get_card_profiles_by_type(card, card_type)
 
         if matching_profiles:
             cards_with_profiles[card_name] = matching_profiles
@@ -368,7 +409,7 @@ def configure_cards(all_cards: list[dict[str, Any]]) -> None:
     for card_type in (CardType.OUTPUT, CardType.INPUT, CardType.IO):
         system('clear')
         config.setdefault(card_type, [])
-        cards_with_profiles = get_all_card_profiles_by_type(all_cards, card_type)
+        cards_with_profiles = get_all_card_profiles_by_type(all_cards, card_type, non_exclusive=True)
 
         current_config_for_type = config.get(card_type, [])
         
@@ -445,8 +486,8 @@ def configure_cards(all_cards: list[dict[str, Any]]) -> None:
 
 def _parse_args():
     ap = ArgumentParser(
-        "sound_source_toggle",
-        description="Toggle sound source between device, bluetooth, and HDMI",
+        "sound_manager",
+        description="Manage sound profiles",
     )
     ap.add_argument(
         "-l", help="List available output and input devices", action="store_true"
@@ -523,8 +564,6 @@ if __name__ == "__main__":
     if args.t:
         card_to_use = decide_card({**output_cards, **io_cards}, sink_in_use, CardType.OUTPUT)
         # TODO: Output card is being used as input, set it as IO
-        if False:
-            card_to_use = io_cards[card_to_use.card_name]
         output_changed = True
     elif args.s:
         sink, profile, card_name, card_type = args.s
@@ -546,8 +585,6 @@ if __name__ == "__main__":
         arg_parser.print_help()
         exit(0)
 
-    set_card_profile(card_to_use.sink_name, card_to_use.profile_name)
-
     # turn off other cards
     if output_changed:
         for name, output_card in output_cards.items():
@@ -560,6 +597,8 @@ if __name__ == "__main__":
             if card_to_use.card_name == name:
                 continue
             set_card_profile(input_card.sink_name, "off")
+
+    set_card_profile(card_to_use.sink_name, card_to_use.profile_name)
 
     card_type = "IO" if output_changed and input_changed else "Output" if output_changed else "Input"
     notification_header = f"Switched {card_type}"
