@@ -3,10 +3,21 @@
 from sys import exit
 from argparse import ArgumentParser
 from typing import Any
-from os import environ
+from os import environ, system
 from subprocess import run, PIPE, DEVNULL
 import json
 from pathlib import Path
+
+class Colors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
 
 class CardType:
     OUTPUT = "output"
@@ -201,41 +212,83 @@ def get_card_profiles_by_type(card: dict[str, Any], card_type: str) -> list[dict
 
         # Get profile classes
         classes = p.get("classes", [])
-
+        
         has_sink = any("Audio/Sink" in str(c) for c in classes)
         has_source = any("Audio/Source" in str(c) for c in classes)
 
         if card_type == CardType.OUTPUT:
             if has_sink and not has_source:
                 matching_profiles.append(p)
-
+                
         elif card_type == CardType.INPUT:
             if has_source and not has_sink:
                 matching_profiles.append(p)
-
+                
         elif card_type == CardType.IO:
             if has_sink and has_source:
                 matching_profiles.append(p)
 
     return matching_profiles
 
-def get_cards_by_type(all_cards: list[dict[str, Any]], card_type: str, card_in_use: str) -> dict[str, Card]:
+def get_configured_cards_by_type(config: dict, card_type: str, all_cards: list[dict[str, Any]], card_in_use: str) -> dict[str, Card]:
+    """
+    Returns a dictionary of cards built from the user's configuration.
+    """
+    cards = {}
+    configured_profiles = config.get(card_type, [])
+    
+    # Create a lookup for all available cards
+    available_cards_map = {
+        card.get("info", {}).get("props", {}).get("alsa.card_name", card.get("info", {}).get("props", {}).get("device.product.name", "")): card
+        for card in all_cards
+    }
+
+    for conf_profile in configured_profiles:
+        card_name = conf_profile["card_name"]
+        profile_name = conf_profile["profile"]
+        
+        # Only add cards that are currently available
+        if card_name in available_cards_map:
+            card_data = available_cards_map[card_name]
+            card_info = card_data.get("info", {})
+            card_attributes = card_info.get("props", {})
+            display_name = Card.get_display_name(card_attributes)
+            sink = card_attributes.get("device.name", "")
+
+            cards[f"{card_name}_{profile_name}"] = Card(
+                profile_name,
+                {"name": profile_name, "available": True, "priority": 1},
+                card_name,
+                sink,
+                active=sink in card_in_use,
+                display_name=display_name,
+            )
+            
+    return cards
+
+def get_default_cards_by_type(all_cards: list[dict[str, Any]], card_type: str, card_in_use: str, configured_cards: list[str]) -> dict[str, Card]:
+    """
+    Gets the default (highest priority) profile for cards that are not already configured by the user.
+    """
     cards = {}
     for card in all_cards:
         card_info = card.get("info", {})
-        card_attributes = card_info.get("props", card_info.get("params", {}))
+        card_attributes = card_info.get("props", {})
         card_name = card_attributes.get("alsa.card_name", card_attributes.get("device.product.name", ""))
+
+        if card_name in configured_cards:
+            continue
+
         display_name = Card.get_display_name(card_attributes)
-
-        # Get profiles from params
         profiles = get_card_profiles_by_type(card, card_type)
-
+        if not profiles:
+            continue
+            
         profile_name, profile = get_priority_profile({"profiles": {p["name"]: p for p in profiles}})
         if profile is None:
             continue
 
         sink = card_attributes.get("device.name", "")
-
         cards[card_name] = Card(
             profile_name,
             profile,
@@ -244,8 +297,19 @@ def get_cards_by_type(all_cards: list[dict[str, Any]], card_type: str, card_in_u
             active=sink in card_in_use,
             display_name=display_name if display_name is not None else card_name,
         )
-
     return cards
+
+def get_cards_by_type(all_cards: list[dict[str, Any]], card_type: str, card_in_use: str, config: dict) -> dict[str, Card]:
+    # First, get cards from the configuration
+    configured_cards = get_configured_cards_by_type(config, card_type, all_cards, card_in_use)
+    
+    # Then, get default profiles for cards not in the configuration
+    configured_card_names = [c.card_name for c in configured_cards.values()]
+    default_cards = get_default_cards_by_type(all_cards, card_type, card_in_use, configured_card_names)
+    
+    # Merge the two dictionaries
+    configured_cards.update(default_cards)
+    return configured_cards
 
 def get_all_card_profiles_by_type(all_cards: list[dict[str, Any]], card_type: str) -> dict[str, Any]:
     cards_with_profiles = {}
@@ -270,80 +334,110 @@ def save_card_config(config: dict) -> None:
     config_path = get_config_path()
     config_path.parent.mkdir(parents=True, exist_ok=True)
 
-    print("\nSaving priority order")
+    system('clear')
+    print(f"{Colors.BOLD}{Colors.HEADER}Saving priority order{Colors.ENDC}")
     for device_type, profiles in config.items():
-        print(f"\n\t{device_type.upper()}")
+        if not profiles:
+            continue
+        print(f"\n\t{Colors.OKCYAN}{device_type.upper()}{Colors.ENDC}")
         for i, profile in enumerate(profiles, 1):
-            print(f"\t{i}. {profile['card_name']} - {profile['profile']}")
+            alias_str = f" (alias: {Colors.WARNING}{profile.get('alias')}{Colors.ENDC})" if profile.get('alias') else ""
+            print(f"\t{Colors.OKGREEN}{i}.{Colors.ENDC} {profile['card_name']} - {profile['profile']}{alias_str}")
 
     with open(config_path, "w") as f:
         json.dump(config, f, indent=2)
 
-    print(f"\nConfiguration saved to {config_path}")
+    print(f"\n{Colors.OKGREEN}Configuration saved to {config_path}{Colors.ENDC}")
 
 def configure_cards(all_cards: list[dict[str, Any]]) -> None:
-    print("\nConfiguring sound profile preference list")
-    print("Run this with all sound devices connected so you can configure all your options")
+    system('clear')
+    print(f"{Colors.BOLD}{Colors.HEADER}Configuring sound profile preference list{Colors.ENDC}")
+    print(f"{Colors.WARNING}Run this with all sound devices connected so you can configure all your options{Colors.ENDC}\n")
 
-    config = {CardType.OUTPUT: [], CardType.INPUT: []}
+    config_path = get_config_path()
+    config = {}
+    if config_path.exists():
+        with open(config_path) as f:
+            try:
+                config = json.load(f)
+            except json.JSONDecodeError:
+                print(f"{Colors.WARNING}Warning: could not parse existing config, starting fresh.{Colors.ENDC}")
+                pass
 
-    # Handle output and input configurations separately
-    for card_type in (CardType.OUTPUT, CardType.INPUT):
+    # Handle output, input, and io configurations separately
+    for card_type in (CardType.OUTPUT, CardType.INPUT, CardType.IO):
+        system('clear')
+        config.setdefault(card_type, [])
         cards_with_profiles = get_all_card_profiles_by_type(all_cards, card_type)
 
-        if not cards_with_profiles:
-            continue
-
+        current_config_for_type = config.get(card_type, [])
+        
+        # Build a list of unique available profiles from connected devices
         available_card_profiles = []
+        seen_profiles = set()
         for card_name, profiles in cards_with_profiles.items():
             for profile in profiles:
-                available_card_profiles.append((card_name, profile["name"]))
+                profile_key = (card_name, profile["name"])
+                if profile_key not in seen_profiles:
+                    available_card_profiles.append(profile_key)
+                    seen_profiles.add(profile_key)
 
-        print(f"\nAvailable {card_type.upper()} profiles:")
-        for i, (card_name, profile_name) in enumerate(available_card_profiles, 1):
-            print(f"\t{i}. {card_name} - {profile_name}")
+        print(f"{Colors.BOLD}{Colors.OKCYAN}Configuring {card_type.upper()} profiles{Colors.ENDC}")
+        
+        # Display currently configured profiles
+        print(f"\n{Colors.OKBLUE}Currently configured profiles:{Colors.ENDC}")
+        if not current_config_for_type:
+            print("\tNone")
+        else:
+            for i, profile in enumerate(current_config_for_type, 1):
+                alias_str = f" (alias: {Colors.WARNING}{profile['alias']}{Colors.ENDC})" if profile.get("alias") else ""
+                print(f"\t{Colors.OKGREEN}{i}.{Colors.ENDC} {profile['card_name']} - {profile['profile']}{alias_str}")
+
+        print(f"\n{Colors.OKBLUE}Available profiles on connected devices:{Colors.ENDC}")
+        if not available_card_profiles:
+            print("\tNone")
+        else:
+            for i, (card_name, profile_name) in enumerate(available_card_profiles, 1):
+                print(f"\t{Colors.OKGREEN}{i}.{Colors.ENDC} {card_name} - {profile_name}")
 
         order = None
         while order is None:
             try:
-                print(f"\nEnter {card_type} profiles in order of priority (e.g., '3,1,2')\nYou can also specify an alias for a profile (e.g., '3,1,2:hdmi')")
-                order_input = input(f"\nEnter {card_type} profiles in order of priority: ")
+                print(f"\n{Colors.BOLD}{Colors.WARNING}Enter new priority order for {card_type}{Colors.ENDC} (e.g., '3,1,2')")
+                print(f"{Colors.WARNING}Append aliases with ':' (e.g., '1:main,2:headphones'). Leave empty to keep current config.{Colors.ENDC}")
+                order_input = input(f"{Colors.BOLD}New {card_type} priority: {Colors.ENDC}")
                 if not order_input.strip():
                     break
 
                 order = []
+                new_profile_list = []
+                
                 for o in order_input.split(","):
                     alias = None
-                    number = None
+                    number_str = o
                     if ":" in o:
-                        number = int(o.split(":")[0]) - 1
-                        alias = o.split(":")[1]
-                    else:
-                        number = int(o) - 1
+                        number_str, alias = o.split(":", 1)
+                    
+                    number = int(number_str) - 1
 
-                    order.append((number, alias))
-
-                if any(i < 0 or i >= len(available_card_profiles) for i, _ in order):
-                    print("Invalid card numbers. Please try again.")
-                    order = None
-
-                if len(order) != len(set(i for i, _ in order)):
-                    print("Please don't repeat card numbers.")
-                    order = None
-
-                for card_index_and_alias in order:
-                    card_index = card_index_and_alias[0]
-                    alias = card_index_and_alias[1]
-                    card_name, profile_name = available_card_profiles[card_index]
-                    config[card_type].append({
+                    if not (0 <= number < len(available_card_profiles)):
+                        raise ValueError("Invalid profile number.")
+                        
+                    card_name, profile_name = available_card_profiles[number]
+                    new_profile_list.append({
                         "card_name": card_name,
                         "profile": profile_name,
                         "alias": alias,
                     })
+                
+                # Replace the configuration for the current card type
+                config[card_type] = new_profile_list
+                break
 
-            except ValueError:
-                print("Please enter valid numbers separated by commas.")
+            except ValueError as e:
+                print(f"{Colors.FAIL}Invalid input: {e}. Please try again.{Colors.ENDC}")
             except KeyboardInterrupt:
+                print(f"\n{Colors.WARNING}Configuration cancelled.{Colors.ENDC}")
                 return
 
     if config:
@@ -377,8 +471,8 @@ def list_cards(output_cards, input_cards, io_cards):
         try:
             with open(config_path) as f:
                 config = json.load(f)
-                # Build aliases dictionary from both input and output configurations
-                for card_type in [CardType.OUTPUT, CardType.INPUT]:
+                # Build aliases dictionary from all configurations
+                for card_type in [CardType.OUTPUT, CardType.INPUT, CardType.IO]:
                     for profile in config.get(card_type, []):
                         if profile.get("alias"):
                             aliases[f"{profile['card_name']}:{profile['profile']}"] = profile["alias"]
@@ -411,14 +505,23 @@ if __name__ == "__main__":
 
     all_cards = get_cards()
 
-    output_cards = get_cards_by_type(all_cards, CardType.OUTPUT, sink_in_use)
-    input_cards = get_cards_by_type(all_cards, CardType.INPUT, source_in_use)
-    io_cards = get_cards_by_type(all_cards, CardType.IO, sink_in_use)
+    config_path = get_config_path()
+    config = {}
+    if config_path.exists():
+        with open(config_path) as f:
+            try:
+                config = json.load(f)
+            except json.JSONDecodeError:
+                pass # Ignore if config is broken
+
+    output_cards = get_cards_by_type(all_cards, CardType.OUTPUT, sink_in_use, config)
+    input_cards = get_cards_by_type(all_cards, CardType.INPUT, source_in_use, config)
+    io_cards = get_cards_by_type(all_cards, CardType.IO, sink_in_use, config)
     output_changed = False
     input_changed = False
 
     if args.t:
-        card_to_use = decide_card(output_cards, sink_in_use, CardType.OUTPUT)
+        card_to_use = decide_card({**output_cards, **io_cards}, sink_in_use, CardType.OUTPUT)
         # TODO: Output card is being used as input, set it as IO
         if False:
             card_to_use = io_cards[card_to_use.card_name]
