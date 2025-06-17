@@ -41,39 +41,21 @@ class Card:
 
 
 def get_priority_profile(
-    card: dict[str, Any], type: str = CardType.OUTPUT
+    card: dict[str, Any]
 ) -> tuple[str | None, dict | None]:
-    priority_profile = {}
-    priority_profile_name = ""
-    profiles = []
+    """
+    Selects the profile with the highest priority from a list of profiles.
+    Assumes that the profiles passed in are already filtered for availability and type.
+    """
+    priority_profile = None
+    priority_profile_name = None
+    max_priority = -1
 
-    if type == CardType.OUTPUT:
-        profiles = [(name, p) for name, p in card["profiles"].items() if
-            (
-                any("Audio/Sink" in str(c) and "Audio/Source" not in str(c) for c in p.get("classes", [])) and
-                p.get("available", 'no') != 'no'
-            )]
-    elif type == CardType.INPUT:
-        profiles = [(name, p) for name, p in card["profiles"].items() if
-            (
-                any("Audio/Source" in str(c) and "Audio/Sink" not in str(c) for c in p.get("classes", [])) and
-                p.get("available", 'no') != 'no'
-            )]
-    elif type == CardType.IO:
-        profiles = [(name, p) for name, p in card["profiles"].items() if
-            (
-                any("Audio/Source" in str(c) for c in p.get("classes", [])) and
-                any("Audio/Sink" in str(c) for c in p.get("classes", [])) and
-                p.get("available", 'no') != 'no'
-            )]
-
-    if len(profiles) == 0:
-        return None, None
-
-    for name, profile in profiles:
-        if profile.get("available", 'no') != 'no' and profile.get("priority", 0) > priority_profile.get("priority", -1):
-            priority_profile_name = name
+    for name, profile in card.get("profiles", {}).items():
+        if profile.get("priority", 0) > max_priority:
+            max_priority = profile.get("priority", 0)
             priority_profile = profile
+            priority_profile_name = name
 
     return priority_profile_name, priority_profile
 
@@ -214,30 +196,25 @@ def get_card_profiles_by_type(card: dict[str, Any], card_type: str) -> list[dict
     # Filter profiles based on type and availability
     matching_profiles = []
     for p in profiles:
-        name = p["name"]
         if p.get("available", 'no') == 'no':
             continue
 
         # Get profile classes
         classes = p.get("classes", [])
 
+        has_sink = any("Audio/Sink" in str(c) for c in classes)
+        has_source = any("Audio/Source" in str(c) for c in classes)
+
         if card_type == CardType.OUTPUT:
-            # Output-only profiles: has Audio/Sink but NOT both Audio/Sink and Audio/Source in the same class
-            if (any("Audio/Sink" in str(c) for c in classes) and 
-                not any(("Audio/Sink" in str(c) and "Audio/Source" in str(c)) for c in classes)):
+            if has_sink and not has_source:
                 matching_profiles.append(p)
-                
+
         elif card_type == CardType.INPUT:
-            # Input-only profiles: has Audio/Source but NOT both Audio/Sink and Audio/Source in the same class
-            if (any("Audio/Source" in str(c) for c in classes) and 
-                not any(("Audio/Sink" in str(c) and "Audio/Source" in str(c)) for c in classes)):
+            if has_source and not has_sink:
                 matching_profiles.append(p)
-                
+
         elif card_type == CardType.IO:
-            # IO profiles: has BOTH Audio/Source AND Audio/Sink
-            # This matches the logic in get_priority_profile for IO types
-            if (any("Audio/Source" in str(c) for c in classes) and 
-                any("Audio/Sink" in str(c) for c in classes)):
+            if has_sink and has_source:
                 matching_profiles.append(p)
 
     return matching_profiles
@@ -252,8 +229,8 @@ def get_cards_by_type(all_cards: list[dict[str, Any]], card_type: str, card_in_u
 
         # Get profiles from params
         profiles = get_card_profiles_by_type(card, card_type)
-        profile_name, profile = get_priority_profile({"profiles": {p["name"]: p for p in profiles}}, card_type)
 
+        profile_name, profile = get_priority_profile({"profiles": {p["name"]: p for p in profiles}})
         if profile is None:
             continue
 
