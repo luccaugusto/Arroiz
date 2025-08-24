@@ -22,16 +22,29 @@ spaces (){
 	for i in $(seq 1 "$monitor_count")
 	do
 		monitor_index=$((i - 1))
+		workspace_offset=$((monitor_index * 10))
 		workspace_windows=$(hyprctl workspaces -j | jq 'map({key: .id | tostring, value: .windows}) | from_entries')
-		spaces="$spaces,\"$monitor_index\":$(seq 1 10 | jq --argjson windows "${workspace_windows}" --argjson labels "${labels}" --arg current "${current}" --slurp -Mc 'map(tostring) | map({index: ., label: $labels[.], class: (if . == $current then "current" else if $windows[.]//0 > 0 then "active" else "empty" end end)})')"
+		# The following jq command generates the workspace objects for each monitor.
+		# It calculates a global index for each workspace (1-10, 11-20, etc.)
+		# and assigns a class ("current", "active", "empty") based on its state.
+		spaces="$spaces,\"$monitor_index\":$(seq 1 10 | jq --argjson windows "${workspace_windows}" --argjson labels "${labels}" --arg current "${current}" --argjson offset "${workspace_offset}" --slurp -Mc 'map(. as $local_idx_num | ($local_idx_num | tostring) as $local_idx_str | ($local_idx_num + $offset) as $global_idx | ($global_idx | tostring) as $global_idx_str | {"index": $global_idx_str, "label": $labels[$local_idx_str], "class": if $global_idx_str == $current then "current" else if $windows[$global_idx_str]//0 > 0 then "active" else "empty" end end})')"
 	done
 	echo "${spaces#,}"
 }
 
-current=$(hyprctl monitors -j | jq '.[] | select(.focused) | .activeWorkspace.id')
+# Get information about all monitors in a single call.
+monitor_info=$(hyprctl monitors -j)
+# Find the ID of the focused monitor.
+focused_monitor=$(echo "$monitor_info" | jq '.[] | select(.focused) | .id')
+# Find the ID of the active workspace on the focused monitor.
+current=$(echo "$monitor_info" | jq '.[] | select(.focused) | .activeWorkspace.id')
+
 workspaces=$(spaces "$current")
 
-open_clients=$(hyprctl clients -j | jq 'map({id: .address, name: .class, workspace: .workspace.id})' | jq -c --arg current "$current" '[ .[] | select(.workspace == ($current|tonumber) or .workspace < -0) ]')
+# Get a list of open clients (windows) on the current workspace or special workspaces (like scratchpads).
+# The output is formatted to only include the window ID and name, matching x_workspaces.
+open_clients=$(hyprctl clients -j | jq -c --arg current "$current" '[.[] | select(.workspace.id == ($current|tonumber) or .workspace.id < 0) | {id: .address, name: .class}]')
 
-echo "{\"open_in_monitor\": \"0\", $workspaces, \"open\": $open_clients}"
+# Construct the final JSON output.
+echo "{\"open_in_monitor\": \"$focused_monitor\", $workspaces, \"open\": $open_clients}"
 
