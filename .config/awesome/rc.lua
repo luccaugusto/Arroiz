@@ -288,8 +288,8 @@ globalkeys = mytable.join(
     -- Standard program
     -- awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
     --           {description = "open a terminal", group = "launcher"}),
-    awful.key({ modkey, "Control" }, "r", awesome.restart,
-              {description = "reload awesome", group = "awesome"}),
+    -- awful.key({ modkey, "Control" }, "r", awesome.restart,
+    --           {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
 
@@ -394,8 +394,8 @@ clientkeys = mytable.join(
               {description = "move to master", group = "client"}),
     awful.key({ modkey,           }, "o",      function (c) c:move_to_screen()               end,
               {description = "move to screen", group = "client"}),
-     awful.key({ modkey, "Shift"   }, "o",      function () os.execute("move_all_windows_to_other_screen") end,
-              {description = "+10%", group = "hotkeys"}),
+     awful.key({ modkey, "Shift"   }, "o",      function () os.execute("move_all_windows toggle") end,
+              {description = "Move all windows to other screen", group = "hotkeys"}),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
               {description = "toggle keep on top", group = "client"}),
     awful.key({ modkey,           }, "n",
@@ -556,8 +556,9 @@ awful.rules.rules = {
       }, properties = { floating = true }},
 
     -- Add titlebars to normal clients and dialogs
-    { rule_any = {type = { "normal", "dialog" }
-      }, properties = { titlebars_enabled = false }
+    {
+		rule_any = {type = { "normal", "dialog" } }
+		, properties = { titlebars_enabled = true }
     },
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
@@ -569,6 +570,10 @@ awful.rules.rules = {
 	{ rule = { class = "Brave-browser" },
 		properties = { tag = "二" } },
 	{ rule = { class = "krita" },
+		properties = { tag = "三" } },
+	{ rule = { class = "cursor" },
+		properties = { tag = "三" } },
+	{ rule = { class = "Cursor" },
 		properties = { tag = "三" } },
 	{ rule = { class = "Mail" },
 		properties = { tag = "四" } },
@@ -641,23 +646,44 @@ client.connect_signal("request::titlebars", function(c)
         end)
     )
 
-    awful.titlebar(c, { size = 16 }) : setup {
+    awful.titlebar(c, {
+		size = 20,
+		bg_normal = "#282828",
+		bg_focus = "#000000",--titlebar-bg-focus
+	}) : setup {
         { -- Left
             buttons = buttons,
             layout  = wibox.layout.fixed.horizontal
         },
         { -- Middle
-            { -- Title
-                align  = "center",
-                widget = awful.titlebar.widget.titlewidget(c)
-            },
-            buttons = buttons,
+			buttons = buttons,
             layout  = wibox.layout.flex.horizontal
         },
         { -- Right
-            awful.titlebar.widget.floatingbutton (c),
-            awful.titlebar.widget.stickybutton   (c),
-            awful.titlebar.widget.closebutton    (c),
+            -- Floating button with margins/padding
+            wibox.container.margin(
+                awful.titlebar.widget.floatingbutton(c),
+                10,  -- left margin
+                10,  -- right margin
+                2,  -- top margin
+                2   -- bottom margin
+            ),
+            -- Sticky button with margins/padding
+            wibox.container.margin(
+                awful.titlebar.widget.stickybutton(c),
+                10,  -- left margin
+                10,  -- right margin
+                2,  -- top margin
+                2   -- bottom margin
+            ),
+            -- Close button with margins/padding
+            wibox.container.margin(
+                awful.titlebar.widget.closebutton(c),
+                10,  -- left margin
+                10,  -- right margin
+                2,  -- top margin
+                2   -- bottom margin
+            ),
             layout = wibox.layout.fixed.horizontal()
         },
         layout = wibox.layout.align.horizontal
