@@ -1,0 +1,25 @@
+#!/usr/bin/env sh
+
+# Flameshot is great but only works with 1 monitor currently,
+# it was perfect but some update broke it :-(
+# Now i use ksnip for multi monitor and flameshot for single monitor
+screenshot_tool="ksnip -r"
+
+x_screenshot() {
+	[ $(xrandr -q | grep -w connected | wc -l) = 1 ] &&
+		screenshot_tool="flameshot gui"
+}
+
+w_screenshot() {
+	screenshot_tool="flameshot gui"
+	# [ $(hyprctl monitors | grep -c 'Monitor') -gt 1 ] &&
+	# 	screenshot_tool="hyprshot -m region --clipboard-only"
+}
+
+if [ "$(pgrep Xorg)" ]; then
+	x_screenshot
+elif [ "$(pgrep Hyprland)" ]; then
+	w_screenshot
+fi
+
+eval "$screenshot_tool"

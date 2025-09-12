@@ -1,0 +1,7 @@
+[[plugin.deps]]
+use = "hankertrix/augment-command"
+rev = "a03a237"
+hash = "56dfc522998328d0c417226e88da862c"
+
+[flavor]
+deps = []

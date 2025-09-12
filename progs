@@ -16,6 +16,7 @@ brave-bin
 brightnessctl
 bspwm
 cargo
+cliphist
 composer
 cronie
 dialog
@@ -65,6 +66,7 @@ jq
 kitty
 krita
 krita-plugin-gmic
+ksnip
 libinput
 libinput-gestures
 linux

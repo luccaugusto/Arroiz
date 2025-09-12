@@ -5,6 +5,9 @@ disk_usage_percentage=$(echo "$disk_usage" | awk '{print $5}')
 disk_usage_percentage=${disk_usage_percentage%%%*}
 
 sound_cards_info=$(sound_manager -l)
+if [ -z "$sound_cards_info" ]; then
+    sound_cards_info="{}"
+fi
 profile="{\"hostname\": \"$(hostname)\", \"uptime\": \"$(uptime -p)\", \"user\": \"$(whoami)\"}"
 
 info="{ \

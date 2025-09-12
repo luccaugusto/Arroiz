@@ -251,19 +251,19 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 )
 
 -- Copilot chat
-require("CopilotChat").setup {
-	debug = true,
-	context = nil,
-}
-
-vim.keymap.set({'n', 'v'}, '<Leader>cp',
-	function()
-		local input = vim.fn.input("Quick Chat: ")
-		if input ~= "" then
-			require("CopilotChat").ask(input, { selection = require("CopilotChat.select").visual })
-		end
-	end
-)
+-- require("CopilotChat").setup {
+-- 	debug = true,
+-- 	context = nil,
+-- }
+--
+-- vim.keymap.set({'n', 'v'}, '<Leader>cp',
+-- 	function()
+-- 		local input = vim.fn.input("Quick Chat: ")
+-- 		if input ~= "" then
+-- 			require("CopilotChat").ask(input, { selection = require("CopilotChat.select").visual })
+-- 		end
+-- 	end
+-- )
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches

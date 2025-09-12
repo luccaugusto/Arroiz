@@ -53,7 +53,9 @@ apply_colors()
 	# set-alacritty-colors
 	border_color=$(head -n 13 "$HOME/.cache/wal/colors" | tail -n 1)
 	# Update border color in awesome
-	sed -i "s/^theme\.border_focus.*$/theme.border_focus = \"$border_color\"/" ~/.config/awesome/themes/powerarrow-dark/theme.lua
+	# sed -i "s/^theme\.border_focus.*$/theme.border_focus = \"$border_color\"/" ~/.config/awesome/themes/powerarrow-dark/theme.lua
+	# Update titlebar color in awesome
+	# sed -i "s/bg_focus = .*,--titlebar-bg-focus/bg_focus = \"$border_color\",--titlebar-bg-focus/" ~/.config/awesome/rc.lua
 	set_rofi_theme_colors
 }
 

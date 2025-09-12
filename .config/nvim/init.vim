@@ -63,7 +63,7 @@ call plug#begin('~/.vim/plugged')
 
 	Plug 'github/copilot.vim'
 
-	Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'main' }
+	" Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'main' }
 	Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
 	Plug 'norcalli/nvim-colorizer.lua'
@@ -94,3 +94,10 @@ autocmd Filetype typescriptreact   setlocal shiftwidth=2 tabstop=2 expandtab
 let loaded_netrwPlugin = 1
 
 lua require("config")
+
+let g:copilot_filetypes = {
+	\ 'xml': v:false,
+	\ 'wiki': v:false,
+	\ 'markdown': v:false,
+	\ 'md': v:false,
+	\ }

@@ -1,31 +1,6 @@
 #!/usr/bin/env sh
 
-#-Shutdown, reboot or logout via rofi
-
-# option="$(printf "cancel\nshutdown now\nreboot\nlogout" | rofi -dmenu)"
-#
-# if [ "$option" = "cancel" ]; then
-# 	exit 0
-# elif [ "$option" = "logout" ]; then
-# 	wm="$(grep "^exec" ~/.xinitrc | cut -d ' ' -f 2)"
-# 	if [ "$wm" = "awesome" ]; then
-# 		awesome-client 'awesome.quit()'
-# 	elif [ "$wm" = "bspwm" ]; then
-# 		bspc quit
-# 	fi
-# else
-# 	bash "$option"
-# fi
-
 theme="$HOME/.config/rofi/powermenu-theme.rasi"
-
-if [ "$(pgrep -x awesome)" ]; then
-	logout_cmd="awesome-client 'awesome.quit()'"
-elif [ "$(pgrep -x bspwm)" ]; then
-	logout_cmd="bspc quit"
-elif [ "$(pgrep -x Hyprland)" ]; then
-	logout_cmd="hyprctl dispatch exit"
-fi
 
 uptime="$(uptime -p)"
 host=$(cat /etc/hostname)
@@ -73,7 +48,7 @@ case "$(run_rofi)" in
 		systemctl reboot
         ;;
     "$logout")
-		eval "$logout_cmd"
+		log_out
         ;;
     "$lock")
 		lockscreen

@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+# This script requires jq to be installed.
+#
+# Usage:
+# workspace_manager <workspace_number>
+# workspace_manager "move <workspace_number>"
+#
+# This script switches to or moves a window to a workspace based on the focused monitor.
+# It assumes workspaces 1-10 are on the primary monitor and 11-20 on the secondary.
+
+
+primary_monitor_file="$HOME/.config/hypr/primary_monitor"
+
+if [ -f "$primary_monitor_file" ]; then
+    primary_monitor=$(cat "$primary_monitor_file")
+else
+    # Fallback to the first monitor found if the file doesn't exist.
+    primary_monitor=$(hyprctl -j monitors | jq -r '.[0].name')
+fi
+
+focused_monitor=$(hyprctl -j monitors | jq -r '.[] | select(.focused)')
+focused_monitor_name=$(echo "$focused_monitor" | jq -r '.name')
+
+action="workspace"
+workspace=$1
+
+# Check if the first argument is "move"
+if [ "$1" = "move" ]; then
+    action="movetoworkspace"
+    workspace=$2
+elif [ "$1" = "other" ]; then
+	action="movetoworkspace"
+	current_workspace=$(echo "$focused_monitor" | jq -r '.activeWorkspace.id')
+	if [ "$current_workspace" -le 10 ]; then
+		workspace=$((current_workspace + 10))
+	else
+		workspace=$((current_workspace - 10))
+	fi
+fi
+
+# If the focused monitor is not the primary one, offset the workspace number by 10
+[ "$1" != "other" ] && [ "$focused_monitor_name" != "$primary_monitor" ] &&
+	workspace=$((workspace + 10))
+
+# Dispatch the command to hyprctl
+hyprctl dispatch "$action" "$workspace"

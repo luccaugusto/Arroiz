@@ -8,7 +8,7 @@
 
 /** Texts ***********************************/
 .profile {
-  color: #EB6CE8;
+  color: #EB6CE8; /* color6 */
   font-size: 22px;
 }
 
@@ -29,7 +29,7 @@
 
 .in-progress {
   font-size: 18px;
-  color: #e0c3ce;
+  color: #e0c3ce; /* color2 */
 }
 
 .to-do {
@@ -49,7 +49,7 @@
 
 /** Boxes ***********************************/
 .winbox {
-	background-color: #282828;
+	background-color: #282828; /* color8 */
 	border: 2px solid #000;
 	border-radius: 16px;
 }
@@ -68,7 +68,7 @@
 }
 
 .calendar {
-	background-color: #282828;
+	background-color: #282828; /* color8 */
 	border-radius: 16px;
     color: #fff;
     padding: 5px;
@@ -94,8 +94,8 @@
 }
 
 .chart{
-  color: #850c6b;
-  background-color: #404040;
+  color: #850c6b; /* color4 */
+  background-color: #404040; /* color7 */
 }
 
 /** Resources ***********************************/
@@ -150,12 +150,12 @@
 	min-width: 48px;
 }
 .soundbutton {
-  border: 2px solid #EB6CE8;
+  border: 2px solid #EB6CE8; /* color6 */
   border-radius: 10px;
-  background-color: #3A5C84;
+  background-color: #3A5C84; /* color3 */
 }
 .soundactive {
-  background-color: #A54974;
+  background-color: #A54974; /* color4 */
 }
 .soundbutton-content {
   margin: 6px;

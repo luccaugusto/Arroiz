@@ -13,7 +13,7 @@ export XDG_CONFIG_HOME="$CONFIG"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 
-#export XDG_CURRENT_DESKTOP="awesomewm"
+export XDG_CURRENT_DESKTOP="Hyprland"
 # Install Ruby Gems to ~/gems
 export GEM_HOME="$HOME/.local/gems"
 
@@ -26,9 +26,12 @@ export JAVA_HOME='/usr/lib/jvm/java-11-openjdk'
 PATH="$PATH:$(find -L ~/.local/bin -type d -printf %p:)"
 export PATH="$PATH:$JAVA_HOME/bin"
 export PATH="$PATH:$HOME/.local/gems/bin"
+export PATH="$PATH:$HOME/.local/gem/ruby"
 export PATH="$PATH:$HOME/.local/share/gem/ruby"
 export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin"
 export PATH="$PATH:$HOME/.local/share/gem/ruby/3.3.0/bin"
+export PATH="$PATH:$HOME/.local/share/gem/ruby/3.4.0/bin"
+export PATH="$PATH:$HOME/.cargo/bin/"
 
 #Others
 export GROFF_ENCODING=UTF-8
@@ -39,6 +42,9 @@ export EMAIL='lucca@luccaaugusto.xyz'
 export MPD_HOST='127.0.0.59'
 export MPD_PORT='2002'
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
+export QT_QPA_PLATFORM='wayland;xcb'
+export QT_AUTO_SCREEN_SCALE_FACTOR=1
+export QT_QPA_PLATFORMTHEME='qt5ct'
 
 export GTK_USE_PORTAL=1
 

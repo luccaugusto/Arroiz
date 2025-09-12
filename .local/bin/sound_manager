@@ -8,8 +8,9 @@ from subprocess import run, PIPE, DEVNULL
 import json
 from pathlib import Path
 
+DEBUG = False
+
 class Colors:
-    HEADER = '\033[95m'
     OKBLUE = '\033[94m'
     OKCYAN = '\033[96m'
     OKGREEN = '\033[92m'
@@ -18,6 +19,11 @@ class Colors:
     ENDC = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
+    HEADER = '\033[95m'
+
+def debug_log(message: str) -> None:
+    if DEBUG:
+        print(f"{Colors.WARNING}[DEBUG]{Colors.ENDC} {message}")
 
 class CardType:
     OUTPUT = "output"
@@ -42,13 +48,14 @@ class Card:
 
         return properties.get("device.alias", properties.get("device.product.name", ""))
 
-    def __init__(self, profile_name, profile, card_name, sink_name, active=False, display_name=""):
+    def __init__(self, profile_name, profile, card_name, sink_name, active=False, display_name="", alias=None):
         self.profile_name = profile_name
         self.profile = profile
         self.card_name = card_name
         self.sink_name = sink_name
         self.active = active
         self.display_name = display_name
+        self.alias = alias
 
 
 def get_priority_profile(
@@ -78,7 +85,17 @@ def get_cards() -> list[dict[str, Any]]:
     return [card for card in cards if card.get("type") == "PipeWire:Interface:Device"]
 
 
-def current_sink() -> str:
+def get_active_profile(card: dict) -> str | None:
+    """Get the active profile name from a PipeWire card object."""
+    card_info = card.get("info", {})
+    card_params = card_info.get("params", {})
+    profiles = card_params.get("Profile", [])
+
+    return profiles[0].get("name") if len(profiles) > 0 else None
+
+
+def current_sink() -> tuple[str, str | None]:
+    """Returns a tuple of (card_name, active_profile)."""
     sinks = run(["pw-dump"], stdout=PIPE).stdout.decode()
     all_sinks = json.loads(sinks)
 
@@ -94,15 +111,29 @@ def current_sink() -> str:
             break
 
     if not default_sink_name:
-        return ""
+        return ("", None)
 
-    # Then find the corresponding device/card name
+    debug_log(f"Default sink name: {default_sink_name}")
+
+    # Find the corresponding device/card
     for sink in all_sinks:
         if (sink.get("type") == "PipeWire:Interface:Node" and
             sink.get("info", {}).get("props", {}).get("node.name") == default_sink_name):
-            return sink["info"]["props"].get("alsa.card_name", "")
+            card_name = sink["info"]["props"].get("alsa.card_name", "")
 
-    return ""
+            debug_log(f"Card name: {card_name}")
+
+            # Find the corresponding card object to get active profile
+            for card in all_sinks:
+                if (card.get("type") == "PipeWire:Interface:Device" and
+                    card.get("info", {}).get("props", {}).get("alsa.card_name") == card_name):
+                    active_profile = get_active_profile(card)
+                    debug_log(f"Active profile: {active_profile}")
+                    return (card_name, active_profile)
+
+            return (card_name, None)
+
+    return ("", None)
 
 
 def current_source() -> str:
@@ -133,6 +164,7 @@ def current_source() -> str:
 
 
 def set_card_profile(sink_name: str, profile: str) -> None:
+    debug_log(f"Setting card profile - sink: {sink_name}, profile: {profile}")
     # Use pactl instead of pw-cli for setting card profiles
     run(["pactl", "set-card-profile", sink_name, profile])
 
@@ -143,8 +175,9 @@ def disable_cards(cards, exception) -> None:
             run(["pactl", "set-card-profile", card, "off"])
 
 
-# TODO: if card is used as input, set it for IO instead of only output
-def decide_card(cards: dict, device_in_use: str, card_type: str) -> Card:
+def decide_card(cards: dict, device_info: tuple[str, str | None], card_type: str) -> Card:
+    device_in_use, active_profile = device_info
+    debug_log(f"Deciding card for type {card_type}, current device: {device_in_use}, active profile: {active_profile}")
     config_path = get_config_path()
     if not config_path.exists():
         raise Exception("Configuration file not found. Please run with --configure first.")
@@ -156,33 +189,43 @@ def decide_card(cards: dict, device_in_use: str, card_type: str) -> Card:
     if profiles is None:
         raise Exception(f"No {card_type} profiles configured. Please run with --configure first.")
 
-    # Filter profiles to only include cards that are currently available
-    available_profiles = [p for p in profiles if p["card_name"] in cards]
+    # Get list of available configured cards in priority order
+    available_cards = []
+    for profile in profiles:
+        card_name = profile["card_name"]
+        if card_name in cards:  # Check if the card is available
+            available_cards.append({
+                "card_name": card_name,
+                "profile": profile["profile"],
+                "alias": profile.get("alias")
+            })
 
-    if not available_profiles:
+    debug_log(f"Available cards for {card_type}: {available_cards}")
+
+    if not available_cards:
         raise Exception(f"No configured {card_type} devices are currently available")
 
     # Find the current profile in the config and return the next one
-    profile_to_use = None
-    for i, profile in enumerate(available_profiles):
-        if profile["card_name"] == device_in_use:
-            profile_to_use = available_profiles[(i + 1) % len(available_profiles)]
+    current_idx = -1
+    for i, profile in enumerate(available_cards):
+        if (profile["card_name"] == device_in_use and
+            profile["profile"] == active_profile):
+            current_idx = i
             break
 
-    if profile_to_use is None:
-        profile_to_use = available_profiles[0]
+    # Get the next profile (or first if current not found)
+    next_profile = available_cards[(current_idx + 1) % len(available_cards)]
 
-    # Find the matching card to get the sink name
-    matching_card = cards.get(profile_to_use["card_name"])
-    sink_name = matching_card.sink_name if matching_card else profile_to_use.get("card_name", "")
-
+    # Get the matching card to build the Card object
+    matching_card = cards[next_profile["card_name"]]
     return Card(
-        profile_to_use["profile"],
-        {"name": profile_to_use["profile"], "available": True, "priority": 1},
-        profile_to_use["card_name"],
-        sink_name,
+        next_profile["profile"],
+        {"name": next_profile["profile"], "available": True, "priority": 1},
+        next_profile["card_name"],
+        matching_card.sink_name,
         active=True,
-        display_name=profile_to_use["card_name"],
+        display_name=matching_card.display_name,
+        alias=next_profile.get("alias")
     )
 
 def hdmi_connected():
@@ -212,18 +255,18 @@ def get_card_profiles_by_type(card: dict[str, Any], card_type: str) -> list[dict
 
         # Get profile classes
         classes = p.get("classes", [])
-        
+
         has_sink = any("Audio/Sink" in str(c) for c in classes)
         has_source = any("Audio/Source" in str(c) for c in classes)
 
         if card_type == CardType.OUTPUT:
             if has_sink and not has_source:
                 matching_profiles.append(p)
-                
+
         elif card_type == CardType.INPUT:
             if has_source and not has_sink:
                 matching_profiles.append(p)
-                
+
         elif card_type == CardType.IO:
             if has_sink and has_source:
                 matching_profiles.append(p)
@@ -249,31 +292,32 @@ def get_card_profiles_by_type_non_exclusive(card: dict[str, Any], card_type: str
 
         # Get profile classes
         classes = p.get("classes", [])
-        
+
         has_sink = any("Audio/Sink" in str(c) for c in classes)
         has_source = any("Audio/Source" in str(c) for c in classes)
 
         if card_type == CardType.OUTPUT:
             if has_sink:  # Include if it has sink, regardless of source
                 matching_profiles.append(p)
-                
+
         elif card_type == CardType.INPUT:
             if has_source:  # Include if it has source, regardless of sink
                 matching_profiles.append(p)
-                
+
         elif card_type == CardType.IO:
             if has_sink and has_source:  # Keep IO exclusive since it needs both
                 matching_profiles.append(p)
 
     return matching_profiles
 
-def get_configured_cards_by_type(config: dict, card_type: str, all_cards: list[dict[str, Any]], card_in_use: str) -> dict[str, Card]:
+def get_configured_cards_by_type(config: dict, card_type: str, all_cards: list[dict[str, Any]], card_in_use: str) -> list[Card]:
     """
-    Returns a dictionary of cards built from the user's configuration.
+    Returns a list of cards built from the user's configuration.
+    Only includes cards that are currently available.
     """
-    cards = {}
+    cards = []
     configured_profiles = config.get(card_type, [])
-    
+
     # Create a lookup for all available cards
     available_cards_map = {
         card.get("info", {}).get("props", {}).get("alsa.card_name", card.get("info", {}).get("props", {}).get("device.product.name", "")): card
@@ -283,7 +327,7 @@ def get_configured_cards_by_type(config: dict, card_type: str, all_cards: list[d
     for conf_profile in configured_profiles:
         card_name = conf_profile["card_name"]
         profile_name = conf_profile["profile"]
-        
+
         # Only add cards that are currently available
         if card_name in available_cards_map:
             card_data = available_cards_map[card_name]
@@ -292,15 +336,16 @@ def get_configured_cards_by_type(config: dict, card_type: str, all_cards: list[d
             display_name = Card.get_display_name(card_attributes)
             sink = card_attributes.get("device.name", "")
 
-            cards[f"{card_name}_{profile_name}"] = Card(
+            cards.append(Card(
                 profile_name,
                 {"name": profile_name, "available": True, "priority": 1},
                 card_name,
                 sink,
                 active=card_name in card_in_use,
                 display_name=display_name,
-            )
-            
+                alias=conf_profile.get("alias")
+            ))
+
     return cards
 
 def get_default_cards_by_type(all_cards: list[dict[str, Any]], card_type: str, card_in_use: str, configured_cards: list[str]) -> dict[str, Card]:
@@ -311,7 +356,7 @@ def get_default_cards_by_type(all_cards: list[dict[str, Any]], card_type: str, c
     for card in all_cards:
         card_info = card.get("info", {})
         card_attributes = card_info.get("props", {})
-        card_name = card_attributes.get("alsa.card_name", card_attributes.get("device.product.name", ""))
+        card_name = card_attributes.get("alsa.card_name", card_attributes.get("device.name", ""))
 
         if card_name in configured_cards:
             continue
@@ -320,7 +365,7 @@ def get_default_cards_by_type(all_cards: list[dict[str, Any]], card_type: str, c
         profiles = get_card_profiles_by_type(card, card_type)
         if not profiles:
             continue
-            
+
         profile_name, profile = get_priority_profile({"profiles": {p["name"]: p for p in profiles}})
         if profile is None:
             continue
@@ -333,20 +378,24 @@ def get_default_cards_by_type(all_cards: list[dict[str, Any]], card_type: str, c
             sink,
             active=sink in card_in_use,
             display_name=display_name if display_name is not None else card_name,
+            alias=profile.get("alias")
         )
     return cards
 
 def get_cards_by_type(all_cards: list[dict[str, Any]], card_type: str, card_in_use: str, config: dict) -> dict[str, Card]:
     # First, get cards from the configuration
     configured_cards = get_configured_cards_by_type(config, card_type, all_cards, card_in_use)
-    
+
     # Then, get default profiles for cards not in the configuration
-    configured_card_names = [c.card_name for c in configured_cards.values()]
+    configured_card_names = [c.card_name for c in configured_cards]
     default_cards = get_default_cards_by_type(all_cards, card_type, card_in_use, configured_card_names)
-    
-    # Merge the two dictionaries
-    configured_cards.update(default_cards)
-    return configured_cards
+
+    # Create a dictionary with card names as keys
+    result = {}
+    for card in configured_cards:
+        result[card.card_name] = card
+    result.update(default_cards)
+    return result
 
 def get_all_card_profiles_by_type(all_cards: list[dict[str, Any]], card_type: str, non_exclusive: bool = False) -> dict[str, Any]:
     cards_with_profiles = {}
@@ -412,7 +461,7 @@ def configure_cards(all_cards: list[dict[str, Any]]) -> None:
         cards_with_profiles = get_all_card_profiles_by_type(all_cards, card_type, non_exclusive=True)
 
         current_config_for_type = config.get(card_type, [])
-        
+
         # Build a list of unique available profiles from connected devices
         available_card_profiles = []
         seen_profiles = set()
@@ -424,7 +473,7 @@ def configure_cards(all_cards: list[dict[str, Any]]) -> None:
                     seen_profiles.add(profile_key)
 
         print(f"{Colors.BOLD}{Colors.OKCYAN}Configuring {card_type.upper()} profiles{Colors.ENDC}")
-        
+
         # Display currently configured profiles
         print(f"\n{Colors.OKBLUE}Currently configured profiles:{Colors.ENDC}")
         if not current_config_for_type:
@@ -452,25 +501,25 @@ def configure_cards(all_cards: list[dict[str, Any]]) -> None:
 
                 order = []
                 new_profile_list = []
-                
+
                 for o in order_input.split(","):
                     alias = None
                     number_str = o
                     if ":" in o:
                         number_str, alias = o.split(":", 1)
-                    
+
                     number = int(number_str) - 1
 
                     if not (0 <= number < len(available_card_profiles)):
                         raise ValueError("Invalid profile number.")
-                        
+
                     card_name, profile_name = available_card_profiles[number]
                     new_profile_list.append({
                         "card_name": card_name,
                         "profile": profile_name,
                         "alias": alias,
                     })
-                
+
                 # Replace the configuration for the current card type
                 config[card_type] = new_profile_list
                 break
@@ -491,6 +540,9 @@ def _parse_args():
     )
     ap.add_argument(
         "-l", help="List available output and input devices", action="store_true"
+    )
+    ap.add_argument(
+        "--debug", help="Enable debug logs", action="store_true"
     )
     ap.add_argument(
         "-f", help="Format cards info from stdin", action="store_true",
@@ -541,10 +593,17 @@ if __name__ == "__main__":
     arg_parser = _parse_args()
     args = arg_parser.parse_args()
 
-    sink_in_use = current_sink()
+    # Set debug mode
+    DEBUG = args.debug
+    debug_log("Debug mode enabled")
+
+    sink_in_use, active_profile = current_sink()
     source_in_use = current_source()
+    debug_log(f"Current sink: {sink_in_use}, active profile: {active_profile}")
+    debug_log(f"Current source: {source_in_use}")
 
     all_cards = get_cards()
+    debug_log(f"Found {len(all_cards)} total cards")
 
     config_path = get_config_path()
     config = {}
@@ -552,21 +611,27 @@ if __name__ == "__main__":
         with open(config_path) as f:
             try:
                 config = json.load(f)
+                debug_log("Loaded configuration file successfully")
             except json.JSONDecodeError:
+                debug_log("Failed to parse config file - using empty config")
                 pass # Ignore if config is broken
 
     output_cards = get_cards_by_type(all_cards, CardType.OUTPUT, sink_in_use, config)
     input_cards = get_cards_by_type(all_cards, CardType.INPUT, source_in_use, config)
     io_cards = get_cards_by_type(all_cards, CardType.IO, sink_in_use, config)
+    debug_log(f"Found {len(output_cards)} output cards, {len(input_cards)} input cards, {len(io_cards)} IO cards")
+
     output_changed = False
     input_changed = False
 
     if args.t:
-        card_to_use = decide_card({**output_cards, **io_cards}, sink_in_use, CardType.OUTPUT)
+        debug_log("Toggling output devices")
+        card_to_use = decide_card({**output_cards, **io_cards}, (sink_in_use, active_profile), CardType.OUTPUT)
         # TODO: Output card is being used as input, set it as IO
         output_changed = True
     elif args.s:
         sink, profile, card_name, card_type = args.s
+        debug_log(f"Setting card manually - sink: {sink}, profile: {profile}, card: {card_name}, type: {card_type}")
         card_to_use = Card(
             profile,
             {"name": profile, "available": 'yes', "priority": 1},
@@ -576,9 +641,11 @@ if __name__ == "__main__":
         output_changed = card_type.lower() == CardType.OUTPUT or card_type.lower() == CardType.IO
         input_changed = card_type.lower() == CardType.INPUT or card_type.lower() == CardType.IO
     elif args.l or args.f:
+        debug_log("Listing cards")
         list_cards(output_cards, input_cards, io_cards)
         exit(0)
     elif args.configure:
+        debug_log("Entering configuration mode")
         configure_cards(all_cards)
         exit(0)
     else:
@@ -587,20 +654,23 @@ if __name__ == "__main__":
 
     # turn off other cards
     if output_changed:
+        debug_log("Turning off other output cards")
         for name, output_card in output_cards.items():
             if card_to_use.card_name == name:
                 continue
             set_card_profile(output_card.sink_name, "off")
 
     if input_changed:
+        debug_log("Turning off other input cards")
         for name, input_card in input_cards.items():
             if card_to_use.card_name == name:
                 continue
             set_card_profile(input_card.sink_name, "off")
 
+    debug_log(f"Setting active profile - card: {card_to_use.card_name}, profile: {card_to_use.profile_name}")
     set_card_profile(card_to_use.sink_name, card_to_use.profile_name)
 
     card_type = "IO" if output_changed and input_changed else "Output" if output_changed else "Input"
     notification_header = f"Switched {card_type}"
-    notification_body = card_to_use.card_name
+    notification_body = card_to_use.alias if card_to_use.alias else card_to_use.card_name
     run(["notify-send", notification_header, notification_body])

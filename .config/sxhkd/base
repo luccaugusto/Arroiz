@@ -28,13 +28,13 @@ XF86Sleep
 # increase screen brightness
 XF86MonBrightnessUp
 	brightnessctl s 5%+
- super + ctrl + +
+ super + alt + +
 	brightnessctl s 5%+
 
 # decrease screen brightness
 XF86MonBrightnessDown
 	brightnessctl s 5%-
-super + ctrl + minus
+super + alt + minus
 	brightnessctl s 5%-
 
 # Media player controls
@@ -100,8 +100,7 @@ super + ctrl + r
 
 # Print
 Print
-	flameshot gui
-	#screengrab
+	screenshot
 
 # FUNCTION KEYS
 super + F1

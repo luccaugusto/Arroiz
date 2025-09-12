@@ -9,17 +9,18 @@ get_current_monitor()
 	current_monitor="1"
 	if [ "$(pgrep awesome)" ]; then
 		current_monitor="$(awesome-client 'return mouse.screen.index' | cut -d ' ' -f 5)"
+		current_monitor=$((current_monitor - 1))
 	#elif bspwm; then
 		# TODO: make it work for other wms
-	elif [ "$(pgrep hyprland)" ]; then
+	elif [ "$(pgrep Hyprland)" ]; then
 		current_monitor=$(hyprctl -j monitors  | jq '.[] | select(.focused) | .id')
 	fi
 	echo "$current_monitor"
 }
 
 run_eww() {
-	current_desktop=$(get_current_monitor)
-	monitor=$((current_desktop-1))
+	monitor=$(get_current_monitor)
+	echo $monitor
 	eww -c "$config" open-many \
 		sidebar:sidebar \
 		quotes:quotes \

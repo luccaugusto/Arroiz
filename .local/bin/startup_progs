@@ -112,7 +112,7 @@ autostart_apps()
 	[ "$(pgrep blueman-applet)" ] || blueman-applet &
 
 	# Seed torrents, like a good boy
-	[ "$(pgrep -x transmission-qt)" ] || transmission-qt &
+	# [ "$(pgrep -x transmission-gtk)" ] || transmission-gtk &
 
 	# open my email account
 	[ "$(pgrep thunderbird)" ] || thunderbird &
@@ -122,12 +122,12 @@ autostart_apps()
 	# Notifications
 	[ "$(pgrep awesome)" ] || dunst -conf ~/.config/dunst/dunstrc &
 
-	# Utterly amazing transparent terminals
+	# Utterly amazing transparent terminals and lockscreen
 	if [ "$(pgrep -x Xorg)" ]; then
 		[ "$(pgrep picom)" ] || picom --config "$HOME/.config/picom/picom-old.conf" &
-	fi
 
-	xscreensaver --no-splash  &
+		xscreensaver --no-splash  &
+	fi
 
 	#trackpad gestures
 	[ "$(pgrep libinput-gestures)" ] || libinput-gestures-setup start &

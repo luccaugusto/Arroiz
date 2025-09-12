@@ -4,6 +4,9 @@ case "$1" in
 	minecraft)
 		sudo java -jar ~/Documents/jogos/TLauncher*.jar
 		;;
+	fusionfall)
+		~/Documents/Media/jogos/OpenFusion/OpenFusionLauncherLinux/openfusionlauncher &
+		;;
 	*)
 		echo "qual jogo?"
 		;;

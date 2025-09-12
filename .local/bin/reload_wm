@@ -24,4 +24,5 @@ sleep 0.1 &&
 reload_eww &
 restartkanata &
 sleep 0.1 &&
-eval "$reload_cmd"
+eval "$reload_cmd" &&
+move_all_windows

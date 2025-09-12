@@ -3,16 +3,16 @@
 #-Notifies via notify-send when battery is bellow 10%,
 #-also beeps if $BEEP is defined and the script beep exists
 
-#while [ "TRUE" ]
-#do
+while [ "TRUE" ]
+do
 	total=$(batstatus --total)
 	status=$(batstatus --status)
 
 	[ $total -lt 10 ] && [ "$status" == 'Discharging' ] &&
 		#export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus" &&
 		#export DISPLAY=:0.0 &&
-		notify-send -u critical "Battery low" "Battery at $TOTAL%" &&
+		notify-send -u critical "Battery low" "Battery at $total%" &&
 		beep
 
-	#sleep 2m
-#done
+	sleep 2m
+done

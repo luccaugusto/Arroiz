@@ -13,38 +13,36 @@ labels='{
 	"10": "十"
 }'
 
-spaces (){
-	current="$1"
-	monitor_count=$(hyprctl monitors | grep -c Monitor)
+# 1. Determine the correct monitor order (primary first).
+primary_monitor_name=$(cat "$HOME/.config/hypr/primary_monitor")
+all_monitors_json=$(hyprctl monitors -j)
+# JSON array of monitors with the primary one first.
+ordered_monitors_json=$(echo "$all_monitors_json" | jq -c --arg primary "$primary_monitor_name" '[.[] | select(.name == $primary)] + [.[] | select(.name != $primary)]')
 
-	spaces=""
 
-	for i in $(seq 1 "$monitor_count")
-	do
-		monitor_index=$((i - 1))
-		workspace_offset=$((monitor_index * 10))
-		workspace_windows=$(hyprctl workspaces -j | jq 'map({key: .id | tostring, value: .windows}) | from_entries')
-		# The following jq command generates the workspace objects for each monitor.
-		# It calculates a global index for each workspace (1-10, 11-20, etc.)
-		# and assigns a class ("current", "active", "empty") based on its state.
-		spaces="$spaces,\"$monitor_index\":$(seq 1 10 | jq --argjson windows "${workspace_windows}" --argjson labels "${labels}" --arg current "${current}" --argjson offset "${workspace_offset}" --slurp -Mc 'map(. as $local_idx_num | ($local_idx_num | tostring) as $local_idx_str | ($local_idx_num + $offset) as $global_idx | ($global_idx | tostring) as $global_idx_str | {"index": $global_idx_str, "label": $labels[$local_idx_str], "class": if $global_idx_str == $current then "current" else if $windows[$global_idx_str]//0 > 0 then "active" else "empty" end end})')"
-	done
-	echo "${spaces#,}"
-}
+# 2. Get current workspace and focused monitor info.
+focused_monitor_info=$(echo "$all_monitors_json" | jq '.[] | select(.focused)')
+current=$(echo "$focused_monitor_info" | jq '.activeWorkspace.id')
+focused_monitor_name=$(echo "$focused_monitor_info" | jq -r '.name')
 
-# Get information about all monitors in a single call.
-monitor_info=$(hyprctl monitors -j)
-# Find the ID of the focused monitor.
-focused_monitor=$(echo "$monitor_info" | jq '.[] | select(.focused) | .id')
-# Find the ID of the active workspace on the focused monitor.
-current=$(echo "$monitor_info" | jq '.[] | select(.focused) | .activeWorkspace.id')
+# Find the index (0, 1, ...) of the focused monitor in our new ordered list.
+# This tells eww which bar is on the active monitor.
+open_in_monitor_index=$(echo "$ordered_monitors_json" | jq --arg focused_name "$focused_monitor_name" 'map(.name) | index($focused_name)')
 
-workspaces=$(spaces "$current")
 
-# Get a list of open clients (windows) on the current workspace or special workspaces (like scratchpads).
-# The output is formatted to only include the window ID and name, matching x_workspaces.
+# 3. Generate the workspace JSON strings for each monitor.
+spaces=""
+monitor_count=$(echo "$ordered_monitors_json" | jq 'length')
+workspace_windows=$(hyprctl workspaces -j | jq 'map({key: .id | tostring, value: .windows}) | from_entries')
+
+for i in $(seq 0 $((monitor_count - 1))); do
+    monitor_index=$i
+    workspace_offset=$((monitor_index * 10))
+    spaces_for_monitor=$(seq 1 10 | jq --argjson windows "${workspace_windows}" --argjson labels "${labels}" --arg current "${current}" --argjson offset "${workspace_offset}" --slurp -Mc 'map(. as $local_idx_num | ($local_idx_num | tostring) as $local_idx_str | ($local_idx_num + $offset) as $global_idx | ($global_idx | tostring) as $global_idx_str | {"index": $global_idx_str, "label": $labels[$local_idx_str], "class": if $global_idx_str == $current then "current" else if $windows[$global_idx_str]//0 > 0 then "active" else "empty" end end})')
+    spaces="$spaces,\"$monitor_index\":$spaces_for_monitor"
+done
+
 open_clients=$(hyprctl clients -j | jq -c --arg current "$current" '[.[] | select(.workspace.id == ($current|tonumber) or .workspace.id < 0) | {id: .address, name: .class}]')
 
-# Construct the final JSON output.
-echo "{\"open_in_monitor\": \"$focused_monitor\", $workspaces, \"open\": $open_clients}"
+echo "{\"open_in_monitor\": \"$open_in_monitor_index\" ${spaces}, \"open\": $open_clients}"
 

@@ -12,6 +12,7 @@ elif [ "$(pgrep Hyprland)" ]; then
 fi
 
 for i in $(seq 0 "$((monitor_count - 1))"); do
-	echo "Starting eww left-bar-$i on monitor $i"
-	eww -c "$eww_bar_config" open leftbar --id "left-bar-$i" --screen "$i" &
+	monitor_number=$i
+	echo "Starting eww left-bar-$i on monitor $monitor_number"
+	eww -c "$eww_bar_config" open leftbar --id "left-bar-$i" --screen "$monitor_number" &
 done

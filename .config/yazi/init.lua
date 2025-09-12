@@ -11,3 +11,13 @@ function Linemode:size_and_mtime()
 	local size = self._file:size()
 	return ui.Line(string.format(" %s %s ", size and ya.readable_size(size) or "-", time))
 end
+
+require("augment-command"):setup({
+    default_item_group_for_prompt = "selected",
+    enter_directory_after_creation = true,
+	smart_enter = true,
+	smart_paste = true,
+    smooth_scrolling = true,
+    wraparound_file_navigation = true,
+	enter_archives = false,
+})

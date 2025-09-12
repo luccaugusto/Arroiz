@@ -158,7 +158,7 @@
     (tooltip
       (label :text "${sys_info?.disk?.used}/${sys_info?.disk?.size}" :class "info")
       (box :class "winbox" :orientation "v" :space-evenly false :height 150 :width 150 :spacing 8 :valign "center" :style "padding-top: 5px;"
-        (circular-progress :value 92 :clockwise false :start-at 75 :thickness 5 :height 135 :width 135 :class "chart"
+        (circular-progress :value {sys_info?.disk?.percentage ?: 0} :clockwise true :start-at 75 :thickness 5 :height 135 :width 135 :class "chart"
           (box :orientation "v" :space-evenly false :spacing 5 :valign "center"
             (image :path "images/floppy-disk.png" :image-width 60 :image-height 60)
             (label :class "info" :wrap true :text "${sys_info?.disk?.free} free"))))))
@@ -191,7 +191,7 @@
 
 (defwindow sidebar [screen screens_resolutions]
 :monitor screen
-:geometry (geometry :x "-1%"
+:geometry (geometry :x "1%"
   :y "6%"
   :width "25%"
   :height "87%"
@@ -204,8 +204,8 @@
 
 (defwindow quotes [screen screens_resolutions]
 :monitor screen
-:geometry (geometry :x "-1%"
-  :y "-2%"
+:geometry (geometry :x "1%"
+  :y "2%"
   :width {screens_resolutions["screen-${screen}"].width > 1600 ? "25%" : "30%"}
   :height "5%"
   :anchor "bottom right")

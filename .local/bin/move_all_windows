@@ -8,6 +8,7 @@ mode="primary"
 for window in $(wmctrl -l | awk '{print $1"_"$2}'); do
 	window_id=${window%%_*}
 	window_workspace=${window##*_}
+	echo "$window_id $window_workspace"
 	case $mode in
 		primary)
 			new_window_workspace=$((window_workspace % 10))

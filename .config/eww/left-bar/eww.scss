@@ -7,8 +7,8 @@
 
 /** Bar ***********************************/
 .dockbox {
-	background-color: #191919;
-	border: 2px solid #4f4f4f;
+	background-color: #191919; /* color0 */
+	/* border: 2px solid #4f4f4f; */ /* color2 */
 	border-radius: 8px;
     padding: 3px 10px;
     color: #fff;
@@ -21,7 +21,7 @@
 
 .open-window {
   font-size: 16px;
-  border-left: 2px solid #EA425B;
+  border-left: 2px solid #EA425B; /* color4 */
   padding-left: 5px;
 }
 
@@ -32,7 +32,7 @@
   border-radius: 5px;
 }
 .current {
-  border: 2px solid #EB6CE8;
+  border: 2px solid #EB6CE8; /* color6 */
   border-top: 1px solid #777;
   border-left: 1px solid #777;
   border-radius: 3px;

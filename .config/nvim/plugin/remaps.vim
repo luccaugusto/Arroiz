@@ -18,7 +18,7 @@ inoremap <C-w> <S-Right>
 inoremap <C-a> <End>
 inoremap <C-0> <Home>
 inoremap <C-e> <Esc>ea
-inoremap <C-d><C-w> <Esc>dwi
+inoremap <C-x><C-w> <Esc>dwi
 
 "normal mode line break
 nnoremap <C-CR> mzi<CR><Esc>`z
