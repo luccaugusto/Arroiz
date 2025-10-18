@@ -1,50 +1,5 @@
 #!/usr/bin/env sh
 
-setup_w_workspace()
-{
-	monitors=$(hyprctl -j monitors | jq -r '.[].name')
-	num_monitors=$(echo "$monitors" | wc -l)
-
-	if [ "$num_monitors" -gt 1 ]; then
-		# All this to try and get the external monitor to be the primary one, possibly not even worth it
-		# if echo "$monitors" | grep -Eq "eDP-?1"; then
-		# 	primary_monitor=$(echo "$monitors" | grep -Ev "eDP-?1" | head -n 1)
-		# 	secondary_monitor=$(echo "$monitors" | grep -E "eDP-?1" | head -n 1)
-		# 	primary_resolution="preferred"
-		# 	secondary_resolution="1920x1200@120"
-		# else
-		# 	primary_monitor=$(echo "$monitors" | head -n 1)
-		# 	secondary_monitor=$(echo "$monitors" | head -n 2 | tail -n 1)
-		# 	primary_resolution="preferred"
-		# 	secondary_resolution="preferred"
-		# fi
-		primary_monitor=$(echo "$monitors" | head -n 1)
-		secondary_monitor=$(echo "$monitors" | head -n 2 | tail -n 1)
-		primary_resolution="1920x1200@120"
-		secondary_resolution="preferred"
-
-		# Configure monitors - place secondary to the right of primary
-		hyprctl keyword monitor "$primary_monitor,$primary_resolution,auto,1,bitdepth,e"
-		hyprctl keyword monitor "$secondary_monitor,$secondary_resolution,auto,1,bitdepth,e"
-
-		# Assign workspaces 1-10 to primary and 11-20 to secondary
-		for i in $(seq 1 10); do
-			hyprctl keyword workspace "$i,monitor:$primary_monitor"
-		done
-
-		for i in $(seq 11 20); do
-			hyprctl keyword workspace "$i,monitor:$secondary_monitor"
-		done
-	else
-		primary_monitor="eDP-1"
-		hyprctl keyword monitor "eDP-1,1920x1200@120,auto,1,bitdepth,e"
-	fi
-
-	# make space for my bar on top
-	hyprctl keyword monitor ",addreserved,50,0,0,0"
-	echo "$primary_monitor" > ~/.config/hypr/primary_monitor
-}
-
 # set up monitor layout if another monitor is present
 setup_x_workspace()
 {
@@ -69,5 +24,5 @@ setup_x_workspace()
 if [ "$(pgrep Xorg)" ]; then
 	setup_x_workspace
 elif [ "$(pgrep Hyprland)" ]; then
-	setup_w_workspace
+	$HOME/.config/hypr/scripts/monitor_manager.sh
 fi
