@@ -103,6 +103,9 @@ require('Comment').setup()
 
 -- setup nvim tree
 require("nvim-tree").setup({
+	git = {
+		ignore = false,
+	},
 	sort = {
 		sorter = "case_sensitive",
 	},

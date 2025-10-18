@@ -8,6 +8,7 @@ alias gmspdf='groff -ms -Tpdf'
 alias umount_phone='fusermount -u'
 alias doublefont='sudo setfont -d'
 alias ..='cd ..'
+alias ...='cd ../..'
 alias fd='cd && cd "$(find -maxdepth 4 -type d | grep -v '\''\./\.'\'' | sed '\''s/.\///'\'' | fzf)"'
 alias e='$EDITOR'
 alias esets='$EDITOR .config/nvim/plugin/sets.vim'
@@ -27,8 +28,7 @@ elif [ "$(pgrep -x Xwayland)" ]; then
 fi
 
 # MY WEBSITE STUFF
-alias lxyz='ssh lucca@luccaaugusto.xyz'
-alias rxyz='ssh root@luccaaugusto.xyz'
+alias lxyz='kitty +kitten ssh lucca@luccaaugusto.xyz'
 alias site='cd $HOME/repos/site/; bundle exec jekyll serve'
 alias jekser='bundle exec jekyll serve --livereload'
 

@@ -12,6 +12,7 @@ export CONFIG="$HOME/.config"
 export XDG_CONFIG_HOME="$CONFIG"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_RUNTIME_DIR=/run/user/1000
 
 export XDG_CURRENT_DESKTOP="Hyprland"
 # Install Ruby Gems to ~/gems

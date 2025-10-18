@@ -44,6 +44,7 @@ gettext
 gimp
 git
 gnu-free-fonts
+gnome-clocks
 gotop-bin
 gparted
 gperf
@@ -55,6 +56,7 @@ gzip
 htop
 hyprcursor
 hyprland
+hyprland-protocols
 hyprlang
 hyprlock
 hyprpaper
@@ -80,6 +82,7 @@ mkinitcpio-firmware
 mpc
 mpd
 nerd-fonts-complete
+net-tools
 networkmanager
 network-manager-applet
 networkmanager-openvpn
