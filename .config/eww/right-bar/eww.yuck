@@ -9,8 +9,8 @@
 
 
 ;; Battery vars
-(defpoll BATSTATUS :interval "2m" `batstatus --no-icon`)
-(defpoll BATICON :interval "2m" `scripts/battery --icon`)
+(defpoll BATSTATUS :interval "2s" `batstatus --no-icon`)
+(defpoll BATICON :interval "2s" `scripts/battery --icon`)
 
 ;; Keyboard layout
 (defpoll keyboard_layout :interval "1s" "scripts/kb_layout")
