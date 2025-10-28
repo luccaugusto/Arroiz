@@ -75,3 +75,5 @@ alias dockerinspectip='docker inspect --format='\''{{range .NetworkSettings.Netw
 alias rw='cd $HOME/repos/roadway/roadway-app/backend && poetry run nvim ../'
 alias dockerfullclean='docker system prune -a --volumes && docker volume rm $(docker volume ls -qf dangling=true)'
 alias dockervolumeclean='docker volume rm $(docker volume ls -qf dangling=true | grep -v postgres-backend-data)'
+
+alias ga4source='DBT_USERS_SOURCE=ga4 DBT_PAGE_VIEWS_SOURCE=ga4'

@@ -112,7 +112,7 @@ autostart_apps()
 	[ "$(pgrep blueman-applet)" ] || blueman-applet &
 
 	# Seed torrents, like a good boy
-	# [ "$(pgrep -x transmission-gtk)" ] || transmission-gtk &
+	[ "$(pgrep -x transmission-gtk)" ] || transmission-gtk &
 
 	# open my email account
 	[ "$(pgrep thunderbird)" ] || thunderbird &
