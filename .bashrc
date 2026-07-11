@@ -41,3 +41,5 @@ command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
 eval "$(starship init bash)"
+
+. "$HOME/.local/share/../bin/env"

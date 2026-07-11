@@ -161,6 +161,15 @@
   margin: 6px;
 }
 
+/** Monitor Buttons ***********************************/
+.monitor-disabled {
+  opacity: 0.5;
+  background-color: #555; /* Grayed out background */
+}
+.monitor-disabled-text {
+  color: #888; /* Grayed out text */
+}
+
 /** Quotes ***********************************/
 .quote_box {
 	margin: 20px;

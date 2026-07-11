@@ -33,7 +33,7 @@
 (defwindow leftbar [screen]
            :monitor screen
            :geometry (geometry :x "1%"
-                               :y "10px"
+                               :y "-35px"
                                :width "10%"
 							   :height "40px"
                                :anchor "top left")

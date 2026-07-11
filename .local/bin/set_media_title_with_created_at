@@ -69,7 +69,7 @@ set_video_file_name_as_creation_time()
 
 		# handle files with the same timestamp
 		if [ -f "$creation_time_file_name" ]; then
-			colision_count=$(ls -1q ${path}/${creation_time}* | wc -l)
+			colision_count=$(ls -1q "${path}/${creation_time}"* | wc -l)
 			creation_time_file_name="${path}/${creation_time}_${colision_count}.${extension}"
 		fi
 

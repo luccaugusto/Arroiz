@@ -17,3 +17,5 @@ compinit
 eval "$(starship init zsh)"
 
 eval "$(rbenv init -)"
+
+. "$HOME/.local/share/../bin/env"

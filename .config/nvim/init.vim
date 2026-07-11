@@ -61,7 +61,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'vimwiki/vimwiki'
 	Plug 'tpope/vim-endwise'
 
-	Plug 'github/copilot.vim'
+	" Plug 'github/copilot.vim'
 
 	" Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'main' }
 	Plug 'mg979/vim-visual-multi', {'branch': 'master'}
@@ -86,10 +86,12 @@ autocmd BufWritePre * %s/\s\+$//e
 "Custom indentation rules
 autocmd Filetype html              setlocal shiftwidth=4 tabstop=4 expandtab
 autocmd Filetype php               setlocal shiftwidth=4 tabstop=4 expandtab
+autocmd Filetype yaml              setlocal shiftwidth=4 tabstop=4 expandtab
 autocmd Filetype rs                setlocal shiftwidth=4 tabstop=4 noexpandtab
 autocmd Filetype javascript        setlocal shiftwidth=2 tabstop=2 expandtab
 autocmd Filetype typescript        setlocal shiftwidth=2 tabstop=2 expandtab
 autocmd Filetype typescriptreact   setlocal shiftwidth=2 tabstop=2 expandtab
+autocmd Filetype markdown          setlocal wrap linebreak
 
 let loaded_netrwPlugin = 1
 

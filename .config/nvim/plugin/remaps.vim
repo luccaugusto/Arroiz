@@ -89,8 +89,10 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 
 "Faster resizing
-nnoremap <leader>A 5<C-w>>
-nnoremap <leader>S 5<C-w><
+nnoremap <A-l> 2<C-w>>
+nnoremap <A-h> 2<C-w><
+nnoremap <A-k> 2<C-w>+
+nnoremap <A-j> 2<C-w>-
 
 "center cursor on search and J cmd
 nnoremap n nzzzv

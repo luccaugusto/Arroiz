@@ -12,7 +12,7 @@
 #define the files to be backed up
 default_directories_to_backup=("$HOME/Documents/" "$HOME/pics/")
 _media_directories_to_backup=("$HOME/music/" "$HOME/Downloads/")
-exclude_directories=("Media")
+exclude_directories=() #("Media")
 
 escape_spaces()
 {

@@ -2,10 +2,10 @@
 
 case "$1" in
 	minecraft)
-		sudo java -jar ~/Documents/jogos/TLauncher*.jar
+		java -jar ~/Documents/Media/jogos/Minecraft/TLauncher*.jar
 		;;
 	fusionfall)
-		~/Documents/Media/jogos/OpenFusion/OpenFusionLauncherLinux/openfusionlauncher &
+		~/Documents/Media/jogos/OpenFusion/OpenFusionLauncher.AppImage &
 		;;
 	*)
 		echo "qual jogo?"

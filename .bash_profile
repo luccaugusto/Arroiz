@@ -84,3 +84,5 @@ else
 		pgrep -x tmux || tmux
 	fi
 fi
+
+. "$HOME/.local/share/../bin/env"

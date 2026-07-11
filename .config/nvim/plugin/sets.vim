@@ -94,6 +94,7 @@ set completeopt=menu,menuone,noselect
 
 " Vimwiki settings
 let g:vimwiki_list = [{'path': '~/Documents/personal-notes/'}]
+let g:vimwiki_global_ext = 0
 
 let g:copilot_filetypes = { 'xml':  v:false, 'wiki': v:false, 'md':   v:false }
 

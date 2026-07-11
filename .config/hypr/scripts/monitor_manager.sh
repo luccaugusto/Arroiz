@@ -6,6 +6,7 @@
 
 configure_monitor() {
 	monitor_name="$1"
+	scale=1
 
 	# can't see shit in the auto resolution on my laptop screen, lol, too many pixels
 	if [ "$monitor_name" = "eDP-1" ]; then
@@ -14,7 +15,9 @@ configure_monitor() {
 		resolution="preferred"
 	fi
 
-	hyprctl keyword monitor "$monitor_name,$resolution,auto,1,bitdepth,e"
+	hyprctl keyword monitor "$monitor_name,$resolution,auto,$scale,bitdepth,e"
+	# Add space for my bar
+	hyprctl keyword monitor "$monitor_name,addreserved,50,0,0,0"
 }
 
 disable_monitor() {
@@ -32,13 +35,16 @@ assign_workspaces() {
 	for i in $(seq "$start_ws" "$end_ws"); do
 		hyprctl keyword workspace "$i,monitor:$monitor_name"
 	done
+
+	# Focus workspace so monitors start with the correct one
+	hyprctl dispatch workspace "$start_ws"
 }
 
 # Move all windows to the first 10 workspaces to prevent losing windows
 # when switching monitor modes
 move_windows_to_primary_workspaces() {
 	clients=$(hyprctl -j clients | jq -r '.[] | "\(.address) \(.workspace.id)"')
-	
+
 	echo "$clients" | while read -r address workspace_id; do
 		if [ "$workspace_id" -gt 10 ]; then
 			target_ws=$(( ((workspace_id - 1) % 10) + 1 ))
@@ -82,7 +88,7 @@ case "$mode" in
 	laptop)
 		# Move all windows to workspaces 1-10 before disabling monitors
 		move_windows_to_primary_workspaces
-		
+
 		configure_monitor "$laptop_monitor"
 
 		for monitor in $external_monitors; do
@@ -119,8 +125,10 @@ case "$mode" in
 
 		monitor_index=0
 		for monitor in $ordered_monitors; do
-			echo "configuring $monitor"
+			"configuring $monitor"
 			configure_monitor "$monitor"
+
+			# Always configure workspaces
 			assign_workspaces "$monitor" "$monitor_index"
 			monitor_index=$((monitor_index + 1))
 		done
@@ -130,6 +138,7 @@ case "$mode" in
 		;;
 esac
 
-# Add space for my bar
-hyprctl keyword monitor ",addreserved,50,0,0,0"
+# focus first workspace for clean usage
+hyprctl dispatch workspace 1
+
 echo "$primary_monitor" > ~/.config/hypr/primary_monitor

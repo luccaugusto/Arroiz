@@ -3,4 +3,6 @@
 #- update all system packages,
 #- making sure to update the keyring first
 
-sudo pacman -Sy archlinux-keyring && sudo pacman -Syyud; yay -Syu
+sudo pacman -Sy archlinux-keyring && sudo pacman -Syyud;
+yay --diffmenu --answerdiff All --save &&
+yay -Syu

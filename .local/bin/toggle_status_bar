@@ -13,6 +13,7 @@ toggle_eww()
 		killall eww
 	else
 		launch_eww_bars
+		is_open="true"
 	fi
 }
 
@@ -25,7 +26,7 @@ toggle_awesome_bar()
 						s.mybottomwibox.visible = not s.mybottomwibox.visible
 					end
 				end
-				'
+				' &
 }
 
 toggle_bspwm_padding()
@@ -40,16 +41,17 @@ toggle_bspwm_padding()
 
 toggle_hyprland_reserved()
 {
-	if [ "$is_open" = "true" ];then
-		hyprctl keyword monitor  ,addreserved,0,0,0,0
-	else
-		hyprctl keyword monitor  ,addreserved,50,0,0,0
-	fi
+	all_monitors=$(hyprctl -j monitors | jq -r '.[].name')
+	reserved_area=50
+	[ "$is_open" = "true" ] && reserved_area=0
+	for monitor in $all_monitors; do
+		hyprctl keyword monitor  "$monitor,addreserved,$reserved_area,0,0,0"
+	done
 }
 
 toggle_wm_bar()
 {
-	[ "$(pgrep awesome)" ] && toggle_awesome_bar &
+	[ "$(pgrep awesome)" ] && toggle_awesome_bar
 	[ "$(pgrep bspwm)" ] && toggle_bspwm_padding
 	[ "$(pgrep Hyprland)" ] && toggle_hyprland_reserved
 }

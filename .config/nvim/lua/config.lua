@@ -66,22 +66,8 @@ vim.keymap.set({"n", "i", "x"}, "<M-k>", "<Cmd>MultipleCursorsAddUp<CR>")
 vim.keymap.set({"n", "i"}, "<C-LeftMouse>", "<Cmd>MultipleCursorsMouseAddDelete<CR>")
 vim.keymap.set({"n", "x"}, "<Leader>a", "<Cmd>MultipleCursorsAddMatches<CR>")
 
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = { "c", "jsonc", "lua", "vim", "vimdoc", "query", "python", "javascript" },
-  sync_install = false,
-  auto_install = true,
-
-  ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
-  -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
-
-  highlight = {
-    enable = true,
-    additional_vim_regex_highlighting = false,
-  },
-  indent = {
-    enable = true,
-  },
-}
+require('nvim-treesitter').setup {}
+require('nvim-treesitter').install { "c", "vim", "vimdoc", "query", "python", "javascript", "typescript", "json", "make" }
 
 require('telescope').setup{
 	defaults = {
@@ -212,46 +198,32 @@ cmp.setup.cmdline(':', {
 })
 
 -- Setup lspconfig.
-local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-local on_attach = function()
-	-- Mappings.
-	vim.keymap.set("n", "gD",         vim.lsp.buf.declaration            , {buffer=0})
-	vim.keymap.set("n", "gd",         vim.lsp.buf.definition             , {buffer=0})
-	vim.keymap.set("n", "K",          vim.lsp.buf.hover                  , {buffer=0})
-	vim.keymap.set("n", "gi",         vim.lsp.buf.implementation         , {buffer=0})
-	vim.keymap.set("n", "<Leader>rn", vim.lsp.buf.rename                 , {buffer=0})
-	vim.keymap.set("n", "<Leader>ca", vim.lsp.buf.code_action            , {buffer=0})
-	vim.keymap.set("n", "<Leader>dj", vim.diagnostic.goto_next           , {buffer=0})
-	vim.keymap.set("n", "gr",         "<cmd>Telescope lsp_references<CR>", {buffer=0})
-	vim.keymap.set("n", "<Leader>dk", vim.diagnostic.goto_prev           , {buffer=0})
-	vim.keymap.set("n", "<Leader>dt", "<cmd>Telescope diagnostics<CR>"   , {buffer=0})
-	--vim.keymap.set("n", "<Leader>fm", vim.lsp.buf.formatting             , {buffer=0})
-	--vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-	--vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-	--vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-	--vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-end
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-	vim.lsp.diagnostic.on_publish_diagnostics, {
-		underline = true,
-		virtual_text = {
-			spacing = 4,
-			prefix = '~',
-		},
-		-- Use a function to dynamically turn signs off
-		-- and on, using buffer local variables
-		signs = function(bufnr, client_id)
-			local ok, result = pcall(vim.api.nvim_buf_get_var, bufnr, 'show_signs')
-			-- No buffer local variable set, so just enable by default
-			if not ok then
-				return true
-			end
+vim.api.nvim_create_autocmd('LspAttach', {
+	callback = function(args)
+		local opts = { buffer = args.buf }
+		vim.keymap.set("n", "gD",         vim.lsp.buf.declaration            , opts)
+		vim.keymap.set("n", "gd",         vim.lsp.buf.definition             , opts)
+		vim.keymap.set("n", "K",          vim.lsp.buf.hover                  , opts)
+		vim.keymap.set("n", "gi",         vim.lsp.buf.implementation         , opts)
+		vim.keymap.set("n", "<Leader>rn", vim.lsp.buf.rename                 , opts)
+		vim.keymap.set("n", "<Leader>ca", vim.lsp.buf.code_action            , opts)
+		vim.keymap.set("n", "<Leader>dj", function() vim.diagnostic.jump({ count = 1, float = true }) end, opts)
+		vim.keymap.set("n", "<Leader>dk", function() vim.diagnostic.jump({ count = -1, float = true }) end, opts)
+		vim.keymap.set("n", "gr",         "<cmd>Telescope lsp_references<CR>", opts)
+		vim.keymap.set("n", "<Leader>dt", "<cmd>Telescope diagnostics<CR>"   , opts)
+	end,
+})
 
-			return result
-		end,
-	}
-)
+vim.diagnostic.config({
+	underline = true,
+	virtual_text = {
+		spacing = 4,
+		prefix = '~',
+	},
+	signs = true,
+})
 
 -- Copilot chat
 -- require("CopilotChat").setup {
@@ -271,48 +243,17 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
 --
-local configs = require('lspconfig.configs')
-local lspconfig = require('lspconfig')
--- local util = require("lspconfig.util")
---
--- if not configs.ruby_lsp then
--- 	local enabled_features = {
--- 		"documentHighlights",
--- 		"documentSymbols",
--- 		"foldingRanges",
--- 		"selectionRanges",
--- 		-- "semanticHighlighting",
--- 		"formatting",
--- 		"codeActions",
--- 	}
---
--- 	configs.ruby_lsp = {
--- 		default_config = {
--- 			cmd = { "ruby-lsp" },
--- 			filetypes = { "ruby" },
--- 			root_dir = util.root_pattern("Gemfile", ".git"),
--- 			init_options = {
--- 				--enabledFeatures = enabled_features,
--- 				formatter = "auto",
--- 			},
--- 		},
--- 		commands = {
--- 			FormatRuby = {
--- 				function()
--- 					vim.lsp.buf.format({
--- 						name = "ruby_lsp",
--- 						async = true,
--- 					})
--- 				end,
--- 				description = "Format using ruby-lsp",
--- 			},
--- 		},
--- 	}
--- end
---
--- lspconfig.ruby_lsp.setup({ on_attach = on_attach, capabilities = capabilities })
+-- Global LSP defaults (applies to all servers)
+vim.lsp.config('*', {
+	capabilities = capabilities,
+})
 
-local servers = {
+-- Configure intelephense separately to clean up home
+vim.lsp.config('intelephense', {
+	cmd = { 'env', 'HOME=/tmp', 'intelephense', '--stdio' },
+})
+
+vim.lsp.enable({
 	'bashls',
 	'clangd',
 	'emmet_language_server',
@@ -329,20 +270,8 @@ local servers = {
 	'sqlls',
 	'ts_ls',
 	'yamlls',
-}
-for _, lsp in pairs(servers) do
-	lspconfig[lsp].setup {
-		on_attach = on_attach,
-		capabilities = capabilities,
-	}
-end
-
--- Configure intelephense separately to clean up home
-lspconfig.intelephense.setup{
-	on_attach = on_attach,
-	capabilities = capabilities,
-	cmd = { 'env', 'HOME=/tmp', 'intelephense', '--stdio' },
-}
+	'intelephense',
+})
 
 -- basedpyright is listed on server configurations but it's not working out of the box
 --[[ require('lspconfig.configs').basedpyright = {

@@ -1,7 +1,21 @@
 #!/bin/sh
 
-if [ "$(pgrep Xorg)" ]; then
-	arandr &
+# Toggle monitor control widget visibility in the sidebar
+# This script manages the state file that controls the revealer widget
+
+status_file="/tmp/monitor_control_status"
+
+# Initialize the status file if it doesn't exist
+if [ ! -f "$status_file" ]; then
+	echo "false" > "$status_file"
+fi
+
+# Read current state
+current_state=$(tail -n 1 "$status_file")
+
+# Toggle the state
+if [ "$current_state" = "true" ]; then
+	echo "false" >> "$status_file"
 else
-	wdisplays &
+	echo "true" >> "$status_file"
 fi

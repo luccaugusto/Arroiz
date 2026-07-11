@@ -18,6 +18,8 @@
 (defvar todo_list_file "~/Documents/personal-notes/TODO.wiki")
 (defvar sound_control_status "/tmp/sound_control_status")
 (deflisten show_sound_control :initial false "tail -F /tmp/sound_control_status")
+(defvar monitor_control_status "/tmp/monitor_control_status")
+(deflisten show_monitor_control :initial false "tail -F /tmp/monitor_control_status")
 
 (defvar piece_of_wisdom "A foolish man shares his problems, a wise man shares his memes ~ Ancient Philosofer Fuk Yu")
 
@@ -95,6 +97,53 @@
             ))
       ))))
 
+(defwidget monitor_selector []
+(revealer :transition "slidedown" :reveal {show_monitor_control}
+  (box :class "winbox" :style "padding-bottom: 10px" :orientation "v" :space-evenly "false"
+    (box :orientation "h" :style "padding: 10px 20px 5px 20px;"
+      (label :text "Select monitor mode" :class "title" :halign "start"))
+    (box :orientation "v" :style "padding: 10px;"
+      (box :orientation "h" :spacing 10 :space-evenly true :height 70
+        (eventbox
+          :height 60
+          :width 110
+          :cursor "pointer"
+          :halign "center"
+          :class "soundbutton"
+          :onclick "~/.config/hypr/scripts/monitor_manager.sh laptop &"
+          :timeout "5s"
+          (box :orientation "v" :spacing 5 :space-evenly false :class "soundbutton-content" :halign "center" :valign "center"
+            (label :text "Laptop" :class "label")))
+        (eventbox
+          :height 60
+          :width 110
+          :cursor "pointer"
+          :halign "center"
+          :class "soundbutton"
+          :onclick "~/.config/hypr/scripts/monitor_manager.sh external &"
+          :timeout "5s"
+          (box :orientation "v" :spacing 5 :space-evenly false :class "soundbutton-content" :halign "center" :valign "center"
+            (label :text "External" :class "label")))
+        (eventbox
+          :height 60
+          :width 110
+          :cursor "pointer"
+          :halign "center"
+          :class "soundbutton"
+          :onclick "~/.config/hypr/scripts/monitor_manager.sh all &"
+          :timeout "5s"
+          (box :orientation "v" :spacing 5 :space-evenly false :class "soundbutton-content" :halign "center" :valign "center"
+            (label :text "All" :class "label")))
+        (eventbox
+          :height 60
+          :width 110
+          :cursor "not-allowed"
+          :halign "center"
+          :class "soundbutton monitor-disabled"
+          (box :orientation "v" :spacing 5 :space-evenly false :class "soundbutton-content" :halign "center" :valign "center"
+            (label :text "Mirror" :class "label monitor-disabled-text")))
+        )))))
+
 (defwidget tasklist []
 (box :orientation "h" :class "winbox" :height {arraylength(todo_list) > 0 ? 300 : 90}
   (scroll :vscroll true :hscroll false
@@ -162,6 +211,7 @@
             (label :class "info" :wrap true :text "${sys_info?.disk?.free} free"))))))
   (scroll :vscroll true :hscroll false :height {round(screens_resolutions["screen-${screen}"].height * 0.60, 0)}
     (box :orientation "v" :spacing 8 :space-evenly false
+      (monitor_selector)
       (sound_selector)
       (tasklist)
       (box :class "winbox" :orientation "v" :style "padding-top: 10px; padding-bottom: 10px" :space-evenly false :spacing 10
@@ -179,7 +229,7 @@
 (defwindow sidebar [screen screens_resolutions]
 :monitor screen
 :geometry (geometry :x "1%"
-  :y "6%"
+  :y "1%"
   :width "25%"
   :height "87%"
   :anchor "top right")

@@ -18,6 +18,7 @@ alias randompass='echo $(date +%s | sha256sum | base64 | head -c 32)'
 alias restartdunst='killall dunst && dunst -conf ~/.config/dunst/dunstrc &'
 # safer rm
 alias rm='rm -i'
+alias mountntfs="udisksctl mount -t ntfs -b"
 
 if [ "$(pgrep -x Xorg)" ]; then
 	alias clipcopy='xclip -selection clipboard'
@@ -77,3 +78,8 @@ alias dockerfullclean='docker system prune -a --volumes && docker volume rm $(do
 alias dockervolumeclean='docker volume rm $(docker volume ls -qf dangling=true | grep -v postgres-backend-data)'
 
 alias ga4source='DBT_USERS_SOURCE=ga4 DBT_PAGE_VIEWS_SOURCE=ga4'
+alias customsource='DBT_USERS_SOURCE=custom DBT_PAGE_VIEWS_SOURCE=custom'
+alias segmentsource='DBT_USERS_SOURCE=segment_roadway DBT_PAGE_VIEWS_SOURCE=segment_roadway'
+alias sourceenv='set -a && source .env && set +a'
+
+alias hw="headroom wrap "

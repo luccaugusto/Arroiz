@@ -2,13 +2,13 @@ AlsoSaveAsKra=false
 AntialiasSelectionOutline=false
 ArtColorSel.ColorSpace=0
 ArtColorSel.InversedSaturation=false
-ArtColorSel.Light=0
+ArtColorSel.Light=0.5179438663220649
 ArtColorSel.LightPieces=11
 ArtColorSel.NumRings=7
 ArtColorSel.RingPieces=12
-ArtColorSel.SelColorH=0
-ArtColorSel.SelColorS=0
-ArtColorSel.SelColorX=0
+ArtColorSel.SelColorH=0.9974786466183841
+ArtColorSel.SelColorS=0.8534559442852415
+ArtColorSel.SelColorX=0.5179438663220649
 ArtColorSel.defaultHueSteps=12
 ArtColorSel.defaultSaturationSteps=7
 ArtColorSel.defaultValueScaleSteps=11
@@ -40,17 +40,18 @@ CreateBackupFile=true
 ExportConfiguration-ANIMATION_EXPORT=<!DOCTYPE params>\n<params>\n <param name="basename" type="string"><![CDATA[frame]]></param>\n <param name="custom_ffmpeg_options" type="string"><![CDATA[-c:v libx265 -crf 0 -preset medium -profile:v main -pix_fmt yuv420p]]></param>\n <param name="delete_sequence" type="internal">true</param>\n <param name="directory" type="string"><![CDATA[]]></param>\n <param name="encode_video" type="internal">true</param>\n <param name="ffmpeg_path" type="string"><![CDATA[/usr/bin/..//bin/ffmpeg]]></param>\n <param name="filename" type="string"><![CDATA[/home/lucca/Documents/Animations/Portfolio.gif]]></param>\n <param name="first_frame" type="internal">0</param>\n <param name="frame_export/ColorDepthID" type="string"><![CDATA[U8]]></param>\n <param name="frame_export/ColorModelID" type="string"><![CDATA[RGBA]]></param>\n <param name="frame_export/ImageContainsTransparency" type="internal">false</param>\n <param name="frame_export/sRGB" type="internal">true</param>\n <param name="frame_mimetype" type="string"><![CDATA[image/png]]></param>\n <param name="framerate" type="internal">20</param>\n <param name="height" type="internal">1024</param>\n <param name="include_audio" type="internal">true</param>\n <param name="last_document_path" type="string"><![CDATA[/home/lucca/Documents/Animations/Portfolio.kra]]></param>\n <param name="last_frame" type="internal">56</param>\n <param name="only_unique_frames" type="internal">false</param>\n <param name="sequence_start" type="internal">0</param>\n <param name="video_mimetype" type="string"><![CDATA[image/gif]]></param>\n <param name="width" type="internal">1024</param>\n</params>\n
 ExportConfiguration-StrokeSelection=<!DOCTYPE params>\n<params>\n <param type="color" name="color"><![CDATA[<!DOCTYPE color>\n<color>\n <RGB space="sRGB-elle-V2-g10.icc" g="0" b="0" r="0"/>\n</color>\n]]></param>\n <param type="internal" name="colorFillSource">0</param>\n <param type="color" name="customColor"><![CDATA[<!DOCTYPE color>\n<color>\n <RGB space="sRGB-elle-V2-g10.icc" g="0" b="0" r="0"/>\n</color>\n]]></param>\n <param type="color" name="fillColor"><![CDATA[<!DOCTYPE color>\n<color>\n <RGB space="sRGB-elle-V2-g10.icc" g="0" b="0" r="0"/>\n</color>\n]]></param>\n <param type="internal" name="lineColorSource">1</param>\n <param type="internal" name="lineDimension">0</param>\n <param type="internal" name="lineSize">8</param>\n <param type="internal" name="useBrush">false</param>\n</params>\n
 ExportConfiguration-VIDEO_ENCODER=<!DOCTYPE params>\n<params>\n <param name="CodecId" type="string"><![CDATA[libx265]]></param>\n <param name="CustomLineValue" type="string"><![CDATA[]]></param>\n <param name="TheoraBitrate" type="internal">5000</param>\n <param name="customUserOptions" type="string"><![CDATA[-c:v libx265 -crf 0 -preset medium -profile:v main -pix_fmt yuv420p]]></param>\n <param name="h264ConstantRateFactor" type="internal">0</param>\n <param name="h264PresetIndex" type="internal">0</param>\n <param name="h264ProfileIndex" type="internal">5</param>\n <param name="h264TuneIndex" type="internal">1</param>\n <param name="h265ConstantRateFactor" type="internal">0</param>\n <param name="h265PresetIndex" type="internal">5</param>\n <param name="h265ProfileIndex" type="internal">0</param>\n <param name="h265TuneIndex" type="internal">1</param>\n <param name="h265UseHDRMetadata" type="internal">false</param>\n <param name="hdrMetadata/blueX" type="internal">0.131</param>\n <param name="hdrMetadata/blueY" type="internal">0.046</param>\n <param name="hdrMetadata/greenX" type="internal">0.17</param>\n <param name="hdrMetadata/greenY" type="internal">0.797</param>\n <param name="hdrMetadata/maxCLL" type="internal">1000</param>\n <param name="hdrMetadata/maxFALL" type="internal">400</param>\n <param name="hdrMetadata/maxLuminance" type="internal">1000</param>\n <param name="hdrMetadata/minLuminance" type="internal">0.005</param>\n <param name="hdrMetadata/predefinedMasterDisplayId" type="string"><![CDATA[p2100-pq]]></param>\n <param name="hdrMetadata/redX" type="internal">0.708</param>\n <param name="hdrMetadata/redY" type="internal">0.292</param>\n <param name="hdrMetadata/whiteX" type="internal">0.3127</param>\n <param name="hdrMetadata/whiteY" type="internal">0.329</param>\n</params>\n
-ExportConfiguration-image/jpeg=<!DOCTYPE params>\n<params>\n <param name="baseline" type="internal">true</param>\n <param name="exif" type="internal">true</param>\n <param name="filters" type="string"><![CDATA[]]></param>\n <param name="forceSRGB" type="internal">false</param>\n <param name="iptc" type="internal">true</param>\n <param name="optimize" type="internal">true</param>\n <param name="progressive" type="internal">false</param>\n <param name="quality" type="internal">100</param>\n <param name="saveProfile" type="internal">true</param>\n <param name="smoothing" type="internal">0</param>\n <param name="storeAuthor" type="internal">false</param>\n <param name="storeMetaData" type="internal">false</param>\n <param name="subsampling" type="internal">0</param>\n <param name="transparencyFillcolor" type="color"><![CDATA[<!DOCTYPE color>\n<color>\n <RGB space="sRGB-elle-V2-g10.icc" b="1" g="1" r="1"/>\n</color>\n]]></param>\n <param name="xmp" type="internal">true</param>\n</params>\n
-ExportConfiguration-image/png=<!DOCTYPE params>\n<params>\n <param name="alpha" type="internal">true</param>\n <param name="compression" type="internal">9</param>\n <param name="downsample" type="internal">false</param>\n <param name="forceSRGB" type="internal">false</param>\n <param name="indexed" type="internal">false</param>\n <param name="interlaced" type="internal">false</param>\n <param name="saveAsHDR" type="internal">false</param>\n <param name="saveSRGBProfile" type="internal">false</param>\n <param name="storeAuthor" type="internal">true</param>\n <param name="storeMetaData" type="internal">false</param>\n <param name="transparencyFillcolor" type="color"><![CDATA[<!DOCTYPE color>\n<color>\n <RGB space="sRGB-elle-V2-g10.icc" b="1" g="1" r="1"/>\n</color>\n]]></param>\n</params>\n
+ExportConfiguration-image/jpeg=<!DOCTYPE params>\n<params>\n <param type="internal" name="baseline">true</param>\n <param type="internal" name="exif">true</param>\n <param type="string" name="filters"><![CDATA[]]></param>\n <param type="internal" name="forceSRGB">false</param>\n <param type="internal" name="iptc">true</param>\n <param type="internal" name="optimize">true</param>\n <param type="internal" name="progressive">false</param>\n <param type="internal" name="quality">100</param>\n <param type="internal" name="saveProfile">true</param>\n <param type="internal" name="smoothing">0</param>\n <param type="internal" name="storeAuthor">false</param>\n <param type="internal" name="storeMetaData">false</param>\n <param type="internal" name="subsampling">0</param>\n <param type="color" name="transparencyFillcolor"><![CDATA[<!DOCTYPE color>\n<color>\n <RGB b="1" g="1" r="1" space="sRGB-elle-V2-g10.icc"/>\n</color>\n]]></param>\n <param type="internal" name="xmp">true</param>\n</params>\n
+ExportConfiguration-image/png=<!DOCTYPE params>\n<params>\n <param name="alpha" type="internal">true</param>\n <param name="compression" type="internal">9</param>\n <param name="downsample" type="internal">false</param>\n <param name="forceSRGB" type="internal">false</param>\n <param name="indexed" type="internal">false</param>\n <param name="interlaced" type="internal">false</param>\n <param name="saveAsHDR" type="internal">false</param>\n <param name="saveSRGBProfile" type="internal">false</param>\n <param name="storeAuthor" type="internal">true</param>\n <param name="storeMetaData" type="internal">false</param>\n <param name="transparencyFillcolor" type="color"><![CDATA[<!DOCTYPE color>\n<color>\n <RGB space="sRGB-elle-V2-g10.icc" r="1" b="1" g="1"/>\n</color>\n]]></param>\n</params>\n
+ExrDefaultColorProfile=sRGB-elle-V2-g10.icc
 FetchNews=true
-FilterSelector/LastUsedFilter=hsvadjustment
+FilterSelector/LastUsedFilter=threshold
 GamutMasks.viewMode=0
 KineticScrollingEnabled=true
 KineticScrollingGesture=0
 KineticScrollingHideScrollbar=false
 KineticScrollingScrollbar=true
 KineticScrollingSensitivity=75
-KisDlgPreferences/CurrentPage=canvasinput
+KisDlgPreferences/CurrentPage=tablet
 Krita/Ocio/DisplayDevice=sRGB
 Krita/Ocio/DisplayLook=None
 Krita/Ocio/DisplayView=Raw
@@ -60,16 +61,20 @@ Krita/Ocio/OcioConfigPath=
 Krita/Ocio/OcioLockColorVisualRepresentation=false
 Krita/Ocio/OcioLutPath=
 Krita/Ocio/UseOcio=false
-LastBackGroundColor=<!DOCTYPE LastBackGroundColor>\n<LastBackGroundColor>\n <RGB g="1" b="1" r="1" space="sRGB-elle-V2-srgbtrc.icc"/>\n</LastBackGroundColor>\n
+LastBackGroundColor=<!DOCTYPE LastBackGroundColor>\n<LastBackGroundColor>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0" b="0" g="0"/>\n</LastBackGroundColor>\n
+LastColorHistory=<!DOCTYPE LastColorHistory>\n<colors>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.949019610881805" b="0.294117659330368" g="0.266666680574417"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="1" b="0.298039227724075" g="0.945098042488098"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="1" b="1" g="1"/>\n <RGB space="sRGB-elle-V2-g10.icc" r="0" b="0" g="0"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.549019634723663" b="0.921568632125854" g="0.0666666701436043"/>\n <RGB space="sRGB-elle-V2-g10.icc" r="1" b="1" g="1"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.0588235296308994" b="0.772549033164978" g="0.517647087574005"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.992156863212585" b="0.992156863212585" g="0.992156863212585"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0" b="0" g="0"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="1" b="0" g="0.898039221763611"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.662745118141174" b="0.125490203499794" g="0.592156887054443"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.0784313753247261" b="0.0196078438311815" g="0.0784313753247261"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.14509804546833" b="0.0666666701436043" g="0.0862745121121407"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.486274510622025" b="0.192156866192818" g="0.298039227724075"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="1" b="1" g="1"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.705882370471954" b="0.650980412960052" g="0.156862750649452"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.156862750649452" b="0.847058832645416" g="0.847058832645416"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="1" b="0.74117648601532" g="0"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.294117659330368" b="1" g="0.890196084976196"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.549019634723663" b="0.466666668653488" g="0"/>\n <RGB space="sRGB-elle-V2-g10.icc" r="0.294117659330368" b="0.250980406999588" g="0"/>\n <RGB space="sRGB-elle-V2-g10.icc" r="0.0784313753247261" b="0.121568627655506" g="0.0784313753247261"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.7843137383461" b="0.274509817361832" g="0"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.678431391716003" b="0.69803923368454" g="0.176470592617989"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.631372570991516" b="0.172549024224281" g="0.400000005960464"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.686274528503418" b="0.69803923368454" g="0.176470592617989"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.600000023841858" b="0.596078455448151" g="0.596078455448151"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.690196096897125" b="0.701960802078247" g="0.176470592617989"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.596078455448151" b="0.596078455448151" g="0.596078455448151"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.917647063732147" b="0.917647063732147" g="0.917647063732147"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.600000023841858" b="0.600000023841858" g="0.600000023841858"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.635294139385223" b="0.176470592617989" g="0.400000005960464"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.996078431606293" b="0.996078431606293" g="0.996078431606293"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.968627452850342" b="1" g="0.0588235296308994"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.396078437566757" b="1" g="0.976470589637756"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.14509804546833" b="0.737254917621613" g="0.384313732385635"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.890196084976196" b="0.356862753629684" g="0.30588236451149"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="1" b="0.14509804546833" g="0.18823529779911"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.95686274766922" b="0.341176480054855" g="0.372549027204514"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.7843137383461" b="1" g="0.20392157137394"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.501960813999176" b="0.501960813999176" g="0.501960813999176"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="1" b="0.290196090936661" g="0.831372559070587"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.905882358551025" b="0.239215686917305" g="0.239215686917305"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.0274509806185961" b="0.0235294122248888" g="0.0274509806185961"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.24705882370472" b="0.258823543787003" g="0.631372570991516"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.0666666701436043" b="0.0509803928434849" g="0.062745101749897"/>\n <RGB space="sRGB-elle-V2-g10.icc" r="0.17145037651062" b="0.0144655527547002" g="0.590630948543549"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.450980395078659" b="0.125490203499794" g="0.792156875133514"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.458823531866074" b="0.125490203499794" g="0.800000011920929"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="1" b="0" g="0.062745101749897"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="1" b="0.20392157137394" g="0"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="1" b="0.160784319043159" g="0.843137264251709"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0" b="0.960784316062927" g="0.854901969432831"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.18823529779911" b="0.619607865810394" g="0.125490203499794"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="1" b="0.356862753629684" g="0.69803923368454"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.909803926944733" b="0.576470613479614" g="0.752941191196442"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.69803923368454" b="0.0470588244497776" g="0.39215686917305"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="1" b="0.529411792755127" g="0.356862753629684"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.356862753629684" b="1" g="0.772549033164978"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.882352948188782" b="0.596078455448151" g="0.745098054409027"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.172549024224281" b="0.172549024224281" g="0.172549024224281"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.34901961684227" b="0.396078437566757" g="0.352941185235977"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.34901961684227" b="0.396078437566757" g="0.352941185235977"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.749019622802734" b="0.533333361148834" g="0.129411771893501"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.10196078568697" b="0.105882354080677" g="0.0274509806185961"/>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.972549021244049" b="0.996078431606293" g="0.380392163991928"/>\n</colors>\n
 LastEraser=a)_Eraser_Circle
 LastEraser_0=a) Eraser Circle
-LastForeGroundColor=<!DOCTYPE LastForeGroundColor>\n<LastForeGroundColor>\n <RGB g="0" b="0" r="0" space="sRGB-elle-V2-srgbtrc.icc"/>\n</LastForeGroundColor>\n
+LastForeGroundColor=<!DOCTYPE LastForeGroundColor>\n<LastForeGroundColor>\n <RGB space="sRGB-elle-V2-srgbtrc.icc" r="0.949019610881805" b="0.294117659330368" g="0.266666680574417"/>\n</LastForeGroundColor>\n
 LastPreset=b) Basic-5 Size
 LastPreset_-1=b) Basic-5 Size
 LastPreset_0=d)_Ink-2_Fineliner
 LastPreset_3358664425473=d)_Ink-7_Brush_Rough
 LineSmoothingDelayDistance=10
 LineSmoothingDistance=321.8
+LineSmoothingDistanceKeepAspectRatio=true
+LineSmoothingDistanceMax=361.9
+LineSmoothingDistanceMin=361.9
 LineSmoothingFinishStabilizedCurve=false
 LineSmoothingScalableDistance=true
 LineSmoothingSmoothPressure=false
@@ -79,7 +84,7 @@ LineSmoothingType=2
 LineSmoothingUseDelayDistance=true
 NumberOfLayersForNewImage=2
 OpenGLFilterMode=3
-PinnedFonts=xkcd Script,DejaVu Sans,Cantarell,RobotoMono Nerd Font SmBd [pyrs],Serif
+PinnedFonts=Hidden Cinema,Cinema St,DejaVu Sans,Adwaita Mono,Sans Serif
 ResourceCacheDbDirectory=/home/lucca/.local/share/krita
 ResourceDirectory=/home/lucca/.local/share/krita
 ShowEraserOutlineWhilePainting=true
@@ -104,15 +109,19 @@ animationDropFrames=false
 antialiascurves=true
 assistantsDrawMode=0
 autoPinLayers=true
-autoSmoothBezierCurves=true
+autoSmoothBezierCurves=false
+autoZoomTimelineToPlaybackRange=true
 autosavefileshidden=true
 backupfilelocation=0
 backupfilesuffix=~
 baseLength=60
-brushHudSettings=<!DOCTYPE hud_properties>\n<hud_properties>\n <version type="value" value="1"/>\n <paintbrush>\n  <properties_list type="array">\n   <item_0 type="value" value="size"/>\n   <item_1 type="value" value="opacity"/>\n   <item_2 type="value" value="angle"/>\n  </properties_list>\n </paintbrush>\n <colorsmudge>\n  <properties_list type="array">\n   <item_0 type="value" value="size"/>\n   <item_1 type="value" value="opacity"/>\n   <item_2 type="value" value="smudge_mode"/>\n   <item_3 type="value" value="smudge_length"/>\n   <item_4 type="value" value="smudge_color_rate"/>\n  </properties_list>\n </colorsmudge>\n <sketchbrush>\n  <properties_list type="array">\n   <item_0 type="value" value="opacity"/>\n   <item_1 type="value" value="size"/>\n  </properties_list>\n </sketchbrush>\n <hairybrush>\n  <properties_list type="array">\n   <item_0 type="value" value="size"/>\n   <item_1 type="value" value="opacity"/>\n  </properties_list>\n </hairybrush>\n <experimentbrush>\n  <properties_list type="array">\n   <item_0 type="value" value="opacity"/>\n   <item_1 type="value" value="shape_windingfill"/>\n  </properties_list>\n </experimentbrush>\n <spraybrush>\n  <properties_list type="array">\n   <item_0 type="value" value="size"/>\n   <item_1 type="value" value="opacity"/>\n   <item_2 type="value" value="spray_particlecount"/>\n   <item_3 type="value" value="spray_density"/>\n  </properties_list>\n </spraybrush>\n <hatchingbrush>\n  <properties_list type="array">\n   <item_0 type="value" value="size"/>\n   <item_1 type="value" value="opacity"/>\n   <item_2 type="value" value="hatching_angle"/>\n   <item_3 type="value" value="hatching_thickness"/>\n   <item_4 type="value" value="hatching_separation"/>\n  </properties_list>\n </hatchingbrush>\n <gridbrush>\n  <properties_list type="array">\n   <item_0 type="value" value="size"/>\n   <item_1 type="value" value="opacity"/>\n   <item_2 type="value" value="grid_divisionlevel"/>\n  </properties_list>\n </gridbrush>\n <curvebrush>\n  <properties_list type="array">\n   <item_0 type="value" value="opacity"/>\n   <item_1 type="value" value="curve_historysize"/>\n   <item_2 type="value" value="curve_linewidth"/>\n   <item_3 type="value" value="curve_lineopacity"/>\n   <item_4 type="value" value="curve_connectionline"/>\n  </properties_list>\n </curvebrush>\n <dynabrush>\n  <properties_list type="array">\n   <item_0 type="value" value="dyna_diameter"/>\n   <item_1 type="value" value="opacity"/>\n   <item_2 type="value" value="dyna_mass"/>\n   <item_3 type="value" value="dyna_drag"/>\n  </properties_list>\n </dynabrush>\n <particlebrush>\n  <properties_list type="array">\n   <item_0 type="value" value="opacity"/>\n   <item_1 type="value" value="particle_particles"/>\n   <item_2 type="value" value="particle_opecityweight"/>\n   <item_3 type="value" value="particle_iterations"/>\n  </properties_list>\n </particlebrush>\n <duplicate>\n  <properties_list type="array">\n   <item_0 type="value" value="size"/>\n   <item_1 type="value" value="opacity"/>\n   <item_2 type="value" value="clone_healing"/>\n   <item_3 type="value" value="clone_movesource"/>\n  </properties_list>\n </duplicate>\n <deformbrush>\n  <properties_list type="array">\n   <item_0 type="value" value="size"/>\n   <item_1 type="value" value="opacity"/>\n   <item_2 type="value" value="deform_amount"/>\n   <item_3 type="value" value="deform_mode"/>\n  </properties_list>\n </deformbrush>\n <tangentnormal>\n  <properties_list type="array">\n   <item_0 type="value" value="size"/>\n   <item_1 type="value" value="opacity"/>\n  </properties_list>\n </tangentnormal>\n <filter>\n  <properties_list type="array">\n   <item_0 type="value" value="size"/>\n   <item_1 type="value" value="opacity"/>\n  </properties_list>\n </filter>\n <roundmarker>\n  <properties_list type="array">\n   <item_0 type="value" value="opacity"/>\n   <item_1 type="value" value="size"/>\n  </properties_list>\n </roundmarker>\n</hud_properties>\n
+brushEditorSplitterSizes=280,779,266
+brushEditorWindowGeometry=\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\t\xa7\x00\x00\x01\x90\x00\x00\x0e\r\x00\x00\x047\x00\x00\t\xa7\x00\x00\x01\x90\x00\x00\x0e\r\x00\x00\x047\x00\x00\x00\x01\x00\x00\x00\x00\x07\x80\x00\x00\t\xa7\x00\x00\x01\x90\x00\x00\x0e\r\x00\x00\x047
+brushHudSettings=<!DOCTYPE hud_properties>\n<hud_properties>\n <version value="1" type="value"/>\n <paintbrush>\n  <properties_list type="array">\n   <item_0 value="size" type="value"/>\n   <item_1 value="opacity" type="value"/>\n   <item_2 value="angle" type="value"/>\n  </properties_list>\n </paintbrush>\n <colorsmudge>\n  <properties_list type="array">\n   <item_0 value="size" type="value"/>\n   <item_1 value="opacity" type="value"/>\n   <item_2 value="smudge_mode" type="value"/>\n   <item_3 value="smudge_length" type="value"/>\n   <item_4 value="smudge_color_rate" type="value"/>\n  </properties_list>\n </colorsmudge>\n <sketchbrush>\n  <properties_list type="array">\n   <item_0 value="opacity" type="value"/>\n   <item_1 value="size" type="value"/>\n  </properties_list>\n </sketchbrush>\n <hairybrush>\n  <properties_list type="array">\n   <item_0 value="size" type="value"/>\n   <item_1 value="opacity" type="value"/>\n  </properties_list>\n </hairybrush>\n <experimentbrush>\n  <properties_list type="array">\n   <item_0 value="opacity" type="value"/>\n   <item_1 value="shape_windingfill" type="value"/>\n  </properties_list>\n </experimentbrush>\n <spraybrush>\n  <properties_list type="array">\n   <item_0 value="size" type="value"/>\n   <item_1 value="opacity" type="value"/>\n   <item_2 value="spray_particlecount" type="value"/>\n   <item_3 value="spray_density" type="value"/>\n  </properties_list>\n </spraybrush>\n <hatchingbrush>\n  <properties_list type="array">\n   <item_0 value="size" type="value"/>\n   <item_1 value="opacity" type="value"/>\n   <item_2 value="hatching_angle" type="value"/>\n   <item_3 value="hatching_thickness" type="value"/>\n   <item_4 value="hatching_separation" type="value"/>\n  </properties_list>\n </hatchingbrush>\n <gridbrush>\n  <properties_list type="array">\n   <item_0 value="size" type="value"/>\n   <item_1 value="opacity" type="value"/>\n   <item_2 value="grid_divisionlevel" type="value"/>\n  </properties_list>\n </gridbrush>\n <curvebrush>\n  <properties_list type="array">\n   <item_0 value="opacity" type="value"/>\n   <item_1 value="curve_historysize" type="value"/>\n   <item_2 value="curve_linewidth" type="value"/>\n   <item_3 value="curve_lineopacity" type="value"/>\n   <item_4 value="curve_connectionline" type="value"/>\n  </properties_list>\n </curvebrush>\n <dynabrush>\n  <properties_list type="array">\n   <item_0 value="dyna_diameter" type="value"/>\n   <item_1 value="opacity" type="value"/>\n   <item_2 value="dyna_mass" type="value"/>\n   <item_3 value="dyna_drag" type="value"/>\n  </properties_list>\n </dynabrush>\n <particlebrush>\n  <properties_list type="array">\n   <item_0 value="opacity" type="value"/>\n   <item_1 value="particle_particles" type="value"/>\n   <item_2 value="particle_opecityweight" type="value"/>\n   <item_3 value="particle_iterations" type="value"/>\n  </properties_list>\n </particlebrush>\n <duplicate>\n  <properties_list type="array">\n   <item_0 value="size" type="value"/>\n   <item_1 value="opacity" type="value"/>\n   <item_2 value="clone_healing" type="value"/>\n   <item_3 value="clone_movesource" type="value"/>\n  </properties_list>\n </duplicate>\n <deformbrush>\n  <properties_list type="array">\n   <item_0 value="size" type="value"/>\n   <item_1 value="opacity" type="value"/>\n   <item_2 value="deform_amount" type="value"/>\n   <item_3 value="deform_mode" type="value"/>\n  </properties_list>\n </deformbrush>\n <tangentnormal>\n  <properties_list type="array">\n   <item_0 value="size" type="value"/>\n   <item_1 value="opacity" type="value"/>\n  </properties_list>\n </tangentnormal>\n <filter>\n  <properties_list type="array">\n   <item_0 value="size" type="value"/>\n   <item_1 value="opacity" type="value"/>\n  </properties_list>\n </filter>\n <roundmarker>\n  <properties_list type="array">\n   <item_0 value="opacity" type="value"/>\n   <item_1 value="size" type="value"/>\n  </properties_list>\n </roundmarker>\n</hud_properties>\n
 calculateAnimationCacheInBackground=true
 canvasBorderColor=128,128,128
 canvasState=OPENGL_SUCCESS
+canvasSurfaceColorSpaceManagementMode=preferred
 canvasizedlg_heightunit=px
 canvasizedlg_widthunit=px
 canvasizedlg_xoffsetunit=px
@@ -123,6 +132,11 @@ checksize=32
 colorDepthDef=U8
 colorModelDef=RGBA
 colorProfileDef=sRGB-elle-V2-srgbtrc.icc
+colorSamplerPreviewCircleDiameter=180
+colorSamplerPreviewCircleExtraCirclesEnabled=true
+colorSamplerPreviewCircleOutlineEnabled=true
+colorSamplerPreviewCircleThickness=12
+colorSamplerPreviewStyle=1
 colorsettings/forcepalettecolors=false
 compressLayersInKra=false
 convertLayerColorSpaceInProperties=true
@@ -134,6 +148,7 @@ currentInputProfile=Krita Default
 cursorMaincColor=128,255,128
 custom_font_size=-1
 custom_system_font=
+defaultExportMimeType=image/png
 defaultPalette=Concept-cookie
 defaultProofingAdaptationState=1
 defaultProofingBlackpointCompensation=true
@@ -146,6 +161,7 @@ disableTouchOnCanvas=false
 disableTouchRotation=false
 disableVSync=true
 enableBrushSpeedLogging=false
+enableCanvasSurfaceColorSpaceManagement=true
 enableOpenGLFramerateLogging=false
 enablePerfLog=false
 enableProgressReporting=true
@@ -154,7 +170,7 @@ eraserCursorStyle=9
 eraserOutlineStyle=2
 favoriteCompositeOps=normal,erase,multiply,burn,darken,add,dodge,screen,overlay,soft_light_svg,luminize,lighten,saturation,color,divide,nand,and
 favoritePresetsTag=de sempre
-filterdialog/geometry=\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\x07\x84\x00\x00\x00\x83\x00\x00\np\x00\x00\x02\x83\x00\x00\x07\x84\x00\x00\x00\x97\x00\x00\np\x00\x00\x02\x83\x00\x00\x00\x00\x00\x00\x00\x00\x07\x80\x00\x00\x07\x84\x00\x00\x00\x97\x00\x00\np\x00\x00\x02\x83
+filterdialog/geometry=\x01\xd9\xd0\xcb\x00\x03\x00\x00\x00\x00\x0c\x13\x00\x00\x00F\x00\x00\x0e\xff\x00\x00\x022\x00\x00\x0c\x13\x00\x00\x00F\x00\x00\x0e\xff\x00\x00\x022\x00\x00\x00\x01\x00\x00\x00\x00\x07\x80\x00\x00\x0c\x13\x00\x00\x00F\x00\x00\x0e\xff\x00\x00\x022
 filterdialog/rememberlastpreset=false
 forceAlwaysFullSizedEraserOutline=false
 forceAlwaysFullSizedOutline=false
@@ -165,13 +181,15 @@ frameRenderingTimeout=30000
 fullscreenMode=false
 globalSnapBoundingBox=false
 globalSnapExtension=false
-globalSnapImageBounds=true
+globalSnapImageBounds=false
 globalSnapImageCenter=true
 globalSnapIntersection=false
 globalSnapNode=false
 globalSnapOrthogonal=false
 globalSnapToPixel=false
 gmic_qt_plugin_path=
+gridisoverticalcolor=150,150,150
+gridisoverticalstyle=0
 gridmaincolor=99,99,99
 gridmainstyle=0
 gridsubdivisioncolor=150,150,150
@@ -187,9 +205,10 @@ hideScrollbarsFullScreen=true
 hideStatusbarFullScreen=true
 hideTitleBarFullscreen=true
 hideToolbarFullscreen=true
-imageHeightDef=2480
-imageResolutionDef=300
-imageWidthDef=3508
+ignoreHighFunctionKeys=true
+imageHeightDef=256
+imageResolutionDef=100
+imageWidthDef=256
 imagesizedlg_imsizeunit=px
 imagesizedlg_printSizeSeparatly=false
 imagesizedlg_ratioLock=true
@@ -204,11 +223,12 @@ layersizedlg_widthunit=px
 lazyFrameCreationEnabled=false
 levelOfDetailEnabled=true
 logviewer_enabled=false
+longPressEnabled=false
 maxAllowedSpeedValue=30
 maxSwapSize=4096
 maximumBrushSize=1000
 mdiBackgroundColor=77,77,77
-mdiBackgroundColorXML=<!DOCTYPE color>\n<color channeldepth="U16">\n <RGB g="0.301960796117783" b="0.301960796117783" r="0.301960796117783" space="sRGB-elle-V2-srgbtrc.icc"/>\n</color>\n
+mdiBackgroundColorXML=<!DOCTYPE color>\n<color channeldepth="U16">\n <RGB b="0.301960796117783" g="0.301960796117783" r="0.301960796117783" space="sRGB-elle-V2-srgbtrc.icc"/>\n</color>\n
 mdiBackgroundImage=
 mdi_rubberband=1
 mdi_viewmode=1
@@ -218,8 +238,8 @@ memorySoftLimitPercent=2
 monitorProfile=sRGB-elle-V2-srgbtrc.icc
 monitorProfile/OverrideX11=false
 monitorProfile_1=sRGB-elle-V2-srgbtrc.icc
-moveToolChangedValueX=847
-moveToolChangedValueY=161
+moveToolChangedValueX=35
+moveToolChangedValueY=13
 moveToolUnit=0
 needsPixmapCacheWorkaround=false
 newCursorStyle=3
@@ -277,6 +297,7 @@ pasteFormat=0
 pixelGridColor=255,255,255
 pixelGridDrawingThreshold=24
 pngImportProfile=Compatible with Adobe RGB (1998)
+popuppalette/colorHistorySorting=hsv
 popuppalette/selectorSize=140
 popuppalette/showColorHistory=true
 popuppalette/showRotationTrack=true
@@ -285,13 +306,16 @@ popuppalette/useDynamicSlotCount=true
 popuppalette/usevisualcolorselector=false
 preferredVectorImportResolution=300
 presetChooserViewMode=1
-presethistory=b) Basic-2 Opacity,b) Airbrush Soft,c) Pencil-2,a) Eraser Circle,u) Pixel Art Dithering,b) Basic-3 Flow,y) Screentones Regular,y) Screentone Pressure,f) Bristles-3 Large Smooth,b) Basic-5 Size
+presetStripVisible=true
+presethistory=y) Screentone Pressure,k) Blender Blur,k) Blender Basic,b) Basic-5 Size,c) Pencil-1 Hard,c) Pencil-2,b) Basic-6 Details,c) Pencil-3 Large 4B,b) Airbrush Soft,b) Basic-2 Opacity
+renameDuplicatedLayers=true
 renameMergedLayers=true
 renamePastedLayers=true
 renderIntent=0
 saveSessionOnQuit=false
 scratchpadVisible=false
 scrollingcheckers=false
+selectionActionBar=true
 selectionOutlineOpacity=1
 selectionOverlayMaskColor=255,0,0,219
 separateEraserCursor=false
@@ -308,10 +332,13 @@ speedValueSmoothing=3
 swaplocation=/tmp
 switchSelectionCtrlAlt=false
 tabletPressureCurve=0,0;0.300221,0.37751;0.558499,0.690763;1,1;
+tiltDirectionOffset=0
 toolbarslider_1=opacity
 toolbarslider_2=size
 toolbarslider_3=flow
 toolbarslider_4=flow
+toolbarslider_5=flow
+touchPainting=0
 undoStackLimit=100
 useAnimationCacheFrameSizeLimit=true
 useAnimationCacheRegionOfInterest=true
@@ -323,11 +350,13 @@ useEraserBrushSize=true
 useOnDiskAnimationCacheSwapping=true
 useOpenGL=true
 useOpenGLTextureBuffer=true
-useRightMiddleTabletButtonWorkaround=false
+useRightMiddleTabletButtonWorkaround=true
 useSubtractiveBlendingForCmykColorSpaces=true
 useTimestampsForBrushSpeed=false
+useTouchPressureSensitivity=true
 use_custom_system_font=false
 workingColorSpace=CMYKAU16
+zoomHorizontal=false
 zoomMarginSize=0
 zoomSteps=2
 
@@ -336,8 +365,8 @@ active-profile=luccaugusto
 
 [File Dialogs]
 DontUseNativeFileDialog=true
-OpenDocument=/home/lucca/Documents/FDP/marca/estampas_finalizadas/original-files
-SaveAs=/home/lucca/Documents/FDP/marca/mockups
+OpenDocument=/home/lucca/repos/site/assets/backrooms/images
+SaveAs=/home/lucca/repos/danios/sd/art/img
 
 [GradientChooser]
 global/itemSize=medium
@@ -345,13 +374,13 @@ global/itemSizeCustom=32
 global/viewMode=icon
 
 [KisAssistantTool]
-AssistantType=concentric ellipse
+AssistantType=parallel ruler
 
 [KisResourceItemChooser_paintoppresets]
 splitterState_1row=\x00\x00\x00\xff\x00\x00\x00\x01\x00\x00\x00\x02\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\x01\x00\x00\x00\x01\x00
 
 [KisShortcutsDialog Settings]
-Dialog Size=671,506
+Dialog Size=676,493
 
 [KisToolCrop]
 allowGrow=false
@@ -382,15 +411,15 @@ patternTransformScale=100
 [KisToolSelectBase]
 antiAliasSelection=true
 selectionAction=0
-selectionMode=0
+selectionMode=1
 
 [KisToolSelectContiguous]
 feather=1
 fuzziness=18
 limitToCurrentLayer=0
-sampleLayersMode=sampleCurrentLayer
+sampleLayersMode=sampleAllLayers
 sizemod=0
-threshold=18
+threshold=9
 useSelectionAsBoundary=false
 
 [KisToolSelectElliptical]
@@ -403,6 +432,9 @@ filterradius=3
 searchradius=30
 threshold=100
 
+[KisToolSelectPath]
+growSelection=0
+
 [KisToolSelectRectangular]
 growSelection=0
 roundCornersX=0
@@ -411,12 +443,12 @@ roundCornersY=0
 [KisToolSelectSimilar]
 fuzziness=21
 sampleLayersMode=sampleCurrentLayer
-threshold=47
+threshold=30
 
 [KisToolTransform]
 filterId=Bicubic
 forceLodMode=true
-transformAroundRotationCenter=0
+transformAroundRotationCenter=1
 useOverlayPreviewStyle=false
 
 [KoToolBox]
@@ -450,6 +482,17 @@ patternTransformScale=100
 roundCornersX=0
 roundCornersY=0
 
+[KritaShape/KisToolKnife]
+automatic_diagonal_type=thin
+automatic_gutter_angle=2
+automatic_horizontal_type=thick
+automatic_vertical_type=thin
+current_gutter_width_type=thick
+gutter_unit_symbol=px
+special_gutter_width=70
+thick_gutter_width=40
+thin_gutter_width=15
+
 [KritaShape/KisToolMultiBrush]
 axesAngle=0
 handsCount=4
@@ -464,8 +507,8 @@ fillType=1
 outlineType=1
 patternTransformRotation=0
 patternTransformScale=100
-roundCornersX=0
-roundCornersY=0
+roundCornersX=20
+roundCornersY=20
 
 [KritaTransform/KisToolMove]
 forceLodMode=false
@@ -474,9 +517,49 @@ moveToolChangedValueY=333
 moveToolUnit=0
 
 [LiquifyTool]
-mode=0
+mode=2
 
 [LiquifyTool/Move]
+amount=0.05
+amountHasPressure=false
+flow=0.2
+reverseDirection=false
+size=60
+sizeHasPressure=false
+spacing=0.2
+useWashMode=false
+
+[LiquifyTool/Offset]
+amount=0.05
+amountHasPressure=false
+flow=0.2
+reverseDirection=false
+size=60
+sizeHasPressure=false
+spacing=0.2
+useWashMode=false
+
+[LiquifyTool/Rotate]
+amount=0.05
+amountHasPressure=false
+flow=0.2
+reverseDirection=false
+size=60
+sizeHasPressure=false
+spacing=0.2
+useWashMode=false
+
+[LiquifyTool/Scale]
+amount=0.05
+amountHasPressure=false
+flow=0.2
+reverseDirection=false
+size=60
+sizeHasPressure=false
+spacing=0.2
+useWashMode=false
+
+[LiquifyTool/Undo]
 amount=0.05
 amountHasPressure=false
 flow=0.2
@@ -491,31 +574,45 @@ useWashMode=false
 1600x900 screen: Width=1562
 1920x1080 screen: Height=959
 1920x1080 screen: Width=1874
-1920x1200 screen: Height=1079
+1920x1200 screen: Height=1104
 1920x1200 screen: Width=1874
-2 screens: Height=959
+2 screens: Height=984
 2 screens: Width=1874
+2 screens: Window-Maximized=true
 3 screens: Window-Maximized=true
+DP-1 DP-2 Height 1920x1080 DP-2=984
+DP-1 DP-2 Width 1920x1080 DP-2=1874
 Height 1024=991
 Height 1080=1055
 Height 768=745
-State=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AGkAcwB0AG8AZwByAGEAbQBEAG8AYwBrAGUAcgAAAAAA/////wAAAEQA////+wAAABoAUAByAGUAcwBlAHQASABpAHMAdABvAHIAeQAAAAAA/////wAAAFYA////+wAAABIARwBhAG0AdQB0AE0AYQBzAGsAAAAAAP////8AAACjAP////sAAAASAEwAbwBnAEQAbwBjAGsAZQByAAAAAAD/////AAAAdAD////7AAAAMgBTAHYAZwBTAHkAbQBiAG8AbABDAG8AbABsAGUAYwB0AGkAbwBuAEQAbwBjAGsAZQByAAAAAAD/////AAAAdQD////7AAAAFgBUAG8AdQBjAGgARABvAGMAawBlAHIAAAAAAP////8AAAASAP////sAAAAaAEEAcgByAGEAbgBnAGUARABvAGMAawBlAHIAAAAAAP////8AAAAyAP////sAAAAqAHEAdQBpAGMAawBfAHMAZQB0AHQAaQBuAGcAcwBfAGQAbwBjAGsAZQByAAAAAAD/////AAAAdgD////7AAAAOgBjAG8AbQBpAGMAcwBfAHAAcgBvAGoAZQBjAHQAXwBtAGEAbgBhAGcAZQByAF8AZABvAGMAawBlAHIAAAAAAP////8AAACnAP////sAAAAmAGwAYQBzAHQAZABvAGMAdQBtAGUAbgB0AHMAZABvAGMAawBlAHIAAAAAAP////8AAAB0AP////sAAAAQAFMAbgBhAHAAcwBoAG8AdAAAAAAA/////wAAAHUA////+wAAABwAUgBlAGMAbwByAGQAZQByAEQAbwBjAGsAZQByAAAAAAD/////AAAAVgD////7AAAAIABTAHQAbwByAHkAYgBvAGEAcgBkAEQAbwBjAGsAZQByAAAAAAD/////AAAAmAD////7AAAALABXAGkAZABlAEcAYQBtAHUAdABDAG8AbABvAHIAUwBlAGwAZQBjAHQAbwByAAAAAAD/////AAAArQD///8AAAACAAAHgAAAALz8AQAAAAH7AAAAGgBUAG8AbwBsAEIAYQByAEQAbwBjAGsAZQByAAAAAAD/////AAAAAAAAAAAAAAADAAAAAAAAAAD8AQAAAAX7AAAAHABGAGwAaQBwAGIAbwBvAGsARABvAGMAawBlAHIAAAAAAP////8AAAAAAAAAAPsAAAAgAE8AbgBpAG8AbgBTAGsAaQBuAHMARABvAGMAawBlAHIAAAAAAP////8AAAEzAP////sAAAAeAEEAbgBpAG0AYQB0AGkAbwBuAEQAbwBjAGsAZQByAAAAAAD/////AAAAAAAAAAD7AAAAHABUAGkAbQBlAGwAaQBuAGUARABvAGMAawBlAHIAAAAAAP////8AAANrAP////sAAAAqAEEAbgBpAG0AYQB0AGkAbwBuAEMAdQByAHYAZQBzAEQAbwBjAGsAZQByAAAAAAD/////AAAE+gD///8AAAYzAAADaQAAAAQAAAAEAAAACAAAAAj8AAAAAQAAAAIAAAADAAAAFgBtAGEAaQBuAFQAbwBvAGwAQgBhAHIBAAAAAP////8AAAAAAAAAAAAAAB4AQgByAHUAcwBoAGUAcwBBAG4AZABTAHQAdQBmAGYBAAAAZv////8AAAAAAAAAAAAAABYAZQBkAGkAdABUAG8AbwBsAEIAYQByAAAAAAD/////AAAAAAAAAAA=
-ToolBarsMovable=Disabled
+State=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AGkAcwB0AG8AZwByAGEAbQBEAG8AYwBrAGUAcgAAAAAA/////wAAAEQA////+wAAABoAUAByAGUAcwBlAHQASABpAHMAdABvAHIAeQAAAAAA/////wAAAFYA////+wAAABIARwBhAG0AdQB0AE0AYQBzAGsAAAAAAP////8AAACjAP////sAAAASAEwAbwBnAEQAbwBjAGsAZQByAAAAAAD/////AAAAdAD////7AAAAMgBTAHYAZwBTAHkAbQBiAG8AbABDAG8AbABsAGUAYwB0AGkAbwBuAEQAbwBjAGsAZQByAAAAAAD/////AAAAdQD////7AAAAFgBUAG8AdQBjAGgARABvAGMAawBlAHIAAAAAAP////8AAAASAP////sAAAAaAEEAcgByAGEAbgBnAGUARABvAGMAawBlAHIAAAAAAP////8AAAAyAP////sAAAAqAHEAdQBpAGMAawBfAHMAZQB0AHQAaQBuAGcAcwBfAGQAbwBjAGsAZQByAAAAAAD/////AAAAdgD////7AAAAOgBjAG8AbQBpAGMAcwBfAHAAcgBvAGoAZQBjAHQAXwBtAGEAbgBhAGcAZQByAF8AZABvAGMAawBlAHIAAAAAAP////8AAACnAP////sAAAAmAGwAYQBzAHQAZABvAGMAdQBtAGUAbgB0AHMAZABvAGMAawBlAHIAAAAAAP////8AAAB0AP////sAAAAQAFMAbgBhAHAAcwBoAG8AdAAAAAAA/////wAAAHUA////+wAAABwAUgBlAGMAbwByAGQAZQByAEQAbwBjAGsAZQByAAAAAAD/////AAAAVgD////7AAAAIABTAHQAbwByAHkAYgBvAGEAcgBkAEQAbwBjAGsAZQByAAAAAAD/////AAAAmAD////7AAAALABXAGkAZABlAEcAYQBtAHUAdABDAG8AbABvAHIAUwBlAGwAZQBjAHQAbwByAAAAAAD/////AAAAsgD////7AAAAHABUAGUAeAB0AFAAcgBvAHAAZQByAHQAaQBlAHMCAAAEUgAAAN8AAAMuAAAB2vsAAAAcAEIAcgB1AHMAaABIAHUAZABEAG8AYwBrAGUAcgAAAAAA/////wAAAIUA////+wAAABoAbQB1AHQAYQB0AG8AcgBEAG8AYwBrAGUAcgAAAAAA/////wAAAQUA////+wAAADAAcAB5AGsAcgBpAHQAYQBfAHcAbwByAGsAZgBsAG8AdwBfAGIAdQB0AHQAbwBuAHMAAAAAAP////8AAABRAP///wAAAAIAAAeAAAAAvPwBAAAAAfsAAAAaAFQAbwBvAGwAQgBhAHIARABvAGMAawBlAHIAAAAAAP////8AAAAAAAAAAAAAAAMAAAAAAAAAAPwBAAAABfsAAAAcAEYAbABpAHAAYgBvAG8AawBEAG8AYwBrAGUAcgAAAAAA/////wAAAAAAAAAA+wAAACAATwBuAGkAbwBuAFMAawBpAG4AcwBEAG8AYwBrAGUAcgAAAAAA/////wAAATMA////+wAAAB4AQQBuAGkAbQBhAHQAaQBvAG4ARABvAGMAawBlAHIAAAAAAP////8AAAAAAAAAAPsAAAAcAFQAaQBtAGUAbABpAG4AZQBEAG8AYwBrAGUAcgAAAAAA/////wAAA3gA////+wAAACoAQQBuAGkAbQBhAHQAaQBvAG4AQwB1AHIAdgBlAHMARABvAGMAawBlAHIAAAAAAP////8AAAUHAP///wAABhMAAAOCAAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAUAAAAWAG0AYQBpAG4AVABvAG8AbABCAGEAcgEAAAAA/////wAAAAAAAAAAAAAAHgBCAHIAdQBzAGgAZQBzAEEAbgBkAFMAdAB1AGYAZgEAAABm/////wAAAAAAAAAAAAAAFgBlAGQAaQB0AFQAbwBvAGwAQgBhAHIAAAAAAP////8AAAAAAAAAAAAAABwAYwB1AHMAdABvAG0AVABvAG8AbABCAGEAcgAxAAAAAAD/////AAAAAAAAAAAAAAAcAGMAdQBzAHQAbwBtAFQAbwBvAGwAQgBhAHIAMgAAAAAA/////wAAAAAAAAAA
 Width 1280=1266
 Width 1366=1364
 Width 1920=1920
+eDP-1 DP-1 DP-2 Height 1920x1080 DP-1=984
+eDP-1 DP-1 DP-2 Height 1920x1080 DP-2=984
+eDP-1 DP-1 DP-2 Width 1920x1080 DP-1=1874
+eDP-1 DP-1 DP-2 Width 1920x1080 DP-2=1874
+eDP-1 DP-1 Height 1920x1080 DP-1=984
+eDP-1 DP-1 Width 1920x1080 DP-1=1874
+eDP-1 DP-2 DP-1 Height 1920x1080 DP-2=984
+eDP-1 DP-2 DP-1 Width 1920x1080 DP-2=1874
 eDP-1 DP-2 Height 1280x1024=999
 eDP-1 DP-2 Height 1920x1080=1055
+eDP-1 DP-2 Height 1920x1080 DP-2=984
 eDP-1 DP-2 Height 1920x1080 eDP-1=1055
 eDP-1 DP-2 Width 1280x1024=1280
 eDP-1 DP-2 Width 1920x1080=1920
+eDP-1 DP-2 Width 1920x1080 DP-2=1874
 eDP-1 DP-2 Width 1920x1080 eDP-1=1920
 eDP-1 Height 1024x768=743
 eDP-1 Height 1920x1080=1055
 eDP-1 Height 1920x1080 eDP-1=1055
+eDP-1 Height 1920x1200 eDP-1=1104
 eDP-1 Width 1024x768=1024
 eDP-1 Width 1920x1080=1920
 eDP-1 Width 1920x1080 eDP-1=1920
+eDP-1 Width 1920x1200 eDP-1=1874
 eDP1 DP2 Height 1024=999
 eDP1 DP2 Height 1080=1055
 eDP1 DP2 Height 1280x1024=999
@@ -530,7 +627,7 @@ eDP1 Height 1080=1055
 eDP1 Height 1920x1080=1055
 eDP1 Width 1920=1920
 eDP1 Width 1920x1080=1920
-ko_geometry=AdnQywADAAAAAAeXAAAAYgAADugAAAQgAAAHlwAAAGIAAA7oAAAEIAAAAAEAAAAAB4AAAAeXAAAAYgAADugAAAQg
+ko_geometry=AdnQywADAAAAAA8XAAAASQAAFmgAAAQgAAAPFwAAAEkAABZoAAAEIAAAAAIAAAAAB4AAAA8XAAAASQAAFmgAAAQg
 
 [MainWindow][DockWidget AnimationCurvesDocker]
 Collapsed=false
@@ -568,6 +665,14 @@ width=334
 xPosition=0
 yPosition=0
 
+[MainWindow][DockWidget BrushHudDocker]
+DockArea=2
+Locked=false
+height=30
+width=100
+xPosition=0
+yPosition=0
+
 [MainWindow][DockWidget ChannelDocker]
 Collapsed=false
 DockArea=2
@@ -581,8 +686,8 @@ yPosition=0
 Collapsed=false
 DockArea=2
 Locked=true
-height=264
-width=281
+height=179
+width=313
 xPosition=0
 yPosition=16
 
@@ -617,8 +722,8 @@ yPosition=0
 Collapsed=false
 DockArea=2
 Locked=false
-height=527
-width=258
+height=853
+width=1626
 xPosition=0
 yPosition=0
 
@@ -644,8 +749,8 @@ yPosition=16
 Collapsed=false
 DockArea=2
 Locked=true
-height=272
-width=281
+height=405
+width=313
 xPosition=0
 yPosition=16
 
@@ -725,7 +830,7 @@ yPosition=0
 DockArea=2
 Locked=false
 height=369
-width=277
+width=324
 xPosition=0
 yPosition=0
 
@@ -782,6 +887,14 @@ width=400
 xPosition=0
 yPosition=0
 
+[MainWindow][DockWidget TextProperties]
+DockArea=2
+Locked=false
+height=100
+width=0
+xPosition=0
+yPosition=0
+
 [MainWindow][DockWidget TimelineDocker]
 Collapsed=false
 DockArea=8
@@ -795,8 +908,8 @@ yPosition=0
 Collapsed=false
 DockArea=2
 Locked=false
-height=251
-width=281
+height=228
+width=313
 xPosition=0
 yPosition=16
 
@@ -835,6 +948,22 @@ width=640
 xPosition=0
 yPosition=16
 
+[MainWindow][DockWidget mutatorDocker]
+DockArea=2
+Locked=false
+height=464
+width=640
+xPosition=0
+yPosition=16
+
+[MainWindow][DockWidget pykrita_workflow_buttons]
+DockArea=2
+Locked=false
+height=464
+width=640
+xPosition=0
+yPosition=16
+
 [MainWindow][DockWidget quick_settings_docker]
 Collapsed=false
 DockArea=2
@@ -857,198 +986,206 @@ yPosition=16
 pinControls=true
 
 [RecentFiles]
-File1[$e]=$HOME/Documents/IMG/src/promptfolio-logo.kra
-File10[$e]=$HOME/Documents/IMG/src/jumpsuit.kra
-File11[$e]=$HOME/Documents/IMG/src/inPieces.kra
-File12[$e]=$HOME/Documents/FDP/marca/mediakit/banner-quero-usar-camisa-de-banda-mobile.png
-File13[$e]=$HOME/Documents/FDP/marca/guia-de-tamanhos-moletom.png
-File14[$e]=$HOME/Documents/FDP/marca/mediakit/banner-quero-usar-camisa-de-banda.kra
-File15[$e]=$HOME/Documents/FDP/marca/mediakit/banner-quero-usar-camisa-de-banda-mobile.kra
-File16[$e]=$HOME/Documents/IMG/src/lotus-pai-sho.kra
-File17[$e]=$HOME/Documents/IMG/src/folhas.kra
-File18[$e]=$HOME/Documents/IMG/src/rage-ciclops.kra
-File19[$e]=$HOME/Documents/IMG/src/zombariaceleste.kra
-File2[$e]=$HOME/Documents/FDP/FDP_Flames.png
-File20[$e]=$HOME/Documents/IMG/src/tarts_logo.kra
-File21[$e]=$HOME/Documents/IMG/src/icone-LA-folhas.kra
-File22[$e]=$HOME/Documents/IMG/tattoo/sketchbook/fdp.jpg
-File23[$e]=$HOME/Documents/IMG/tattoo/reels-tvc/eu-e-alex.jpeg
-File24[$e]=$HOME/Documents/IMG/tattoo/reels-tvc/eu-e-oskar.jpeg
-File25[$e]=$HOME/Documents/IMG/tattoo/reels-tvc/eu-e-stefan.jpeg
-File26[$e]=$HOME/Documents/IMG/tattoo/tatuagem_do_fundo.kra
-File27[$e]=$HOME/Documents/IMG/src/sua-mae-metalcore.kra
-File28[$e]=$HOME/Documents/IMG/src/logo-ajr.kra
-File29[$e]=$HOME/Documents/IMG/tattoo/tatuagem_do_fundo.png
-File3[$e]=$HOME/Documents/FDP/fdp-metalcore.kra
-File30[$e]=$HOME/Documents/IMG/src/bixo-vaso.kra
-File31[$e]=$HOME/Documents/FDP/marca/mediakit/fundodopoco-preto-sem-fundo.svg
-File32[$e]=$HOME/Documents/FDP/marca/mediakit/logo_circulo_e_FDP.png
-File33[$e]=$HOME/Documents/FDP/marca/mediakit/logo_circulo_e_FDP-adesivo.png
-File34[$e]=$HOME/Documents/IMG/src/posterHalloween.kra
-File35[$e]=$HOME/Documents/FDP/marca/mediakit/fundodopoco-branco-sem-fundo.png
-File36[$e]=$HOME/Documents/FDP/marca/mediakit/fundodopoco-branco-sem-fundo.svg
-File37[$e]=$HOME/Documents/FDP/marca/mediakit/logo-fundo-do-poco-vetorizada.kra
-File38[$e]=$HOME/Documents/FDP/marca/mediakit/logo-fundo-do-poco-extenso.kra
-File39[$e]=$HOME/Documents/IMG/tattoo/flashes.kra
-File4[$e]=$HOME/Documents/IMG/src/bemvindoaofundo.kra
-File40[$e]=$HOME/Documents/IMG/tattoo/ornamental-flashes.kra
-File41[$e]=$HOME/Documents/IMG/tattoo/pirulito.kra
-File42[$e]=$HOME/Documents/sync/tattoo_flashes/flashsheet.png
-File43[$e]=$HOME/Documents/FDP/TemplateCalendario.kra
-File44[$e]=$HOME/Documents/FDP/marca/estampas_finalizadas/trimmed/logo-fundodopoco-peito-preto.png
-File45[$e]=$HOME/Documents/FDP/marca/mediakit/FDP_Logo_circulo.kra
-File46[$e]=$HOME/Documents/sync/Adesivo_10_Anos_Do_Fundo.png
-File47[$e]=$HOME/Documents/freela/calendarioMoreira/calendario-2024.kra
-File48[$e]=$HOME/Documents/FDP/marca/Camisa_Do_Meu_Pai.png
-File49[$e]=$HOME/Documents/FDP/marca/paps-branco.png
-File5[$e]=$HOME/Documents/IMG/src/bemvindoaofundo-alt.kra
-File50[$e]=$HOME/repos/mail-man/solved_captchas/bbwf.png
-File51[$e]=$HOME/Documents/IMG/res/espada-kaique.jpeg
-File52[$e]=$HOME/.config/eww/right-bar/images/ram.png
-File53[$e]=$HOME/.config/eww/sidebar/images/downward-arrow.png
-File54[$e]=$HOME/.config/eww/sidebar/images/upward-arrow.png
-File55[$e]=$HOME/Documents/IMG/src/true-friends.kra
-File56[$e]=$HOME/Documents/FDP/jointheclub.kra
-File57[$e]=$HOME/Documents/PapoDeSauna/pds_s3_ep_base.kra
-File58[$e]=$HOME/.config/eww/sidebar/images/notion-calendar.png
-File59[$e]=$HOME/.config/eww/sidebar/images/monitor-config.png
-File6[$e]=$HOME/Documents/IMG/camisas/prickCMYK.kra
-File60[$e]=$HOME/.config/eww/sidebar/images/monitor-config2.png
-File61[$e]=$HOME/.config/eww/right-bar/images/dotdotdot2-r.png
-File62[$e]=$HOME/.config/eww/sidebar/images/redeye.png
-File63[$e]=$HOME/.config/eww/right-bar/images/menu.png
-File64[$e]=$HOME/.config/eww/sidebar/images/refresh.png
-File65[$e]=$HOME/.config/eww/right-bar/images/icons/battery/charging.png
-File66[$e]=$HOME/.config/rofi/images/calculator.png
-File67[$e]=$HOME/Documents/freela/8mconsultoria/imagens/roda-na-mesa-1.jpeg
-File68[$e]=$HOME/Documents/freela/8mconsultoria/imagens/WhatsApp Image 2024-09-11 at 19.56.46.jpeg
-File69[$e]=$HOME/Documents/freela/8mconsultoria/imagens/WhatsApp Image 2024-09-11 at 19.58.03.jpeg
-File7[$e]=$HOME/Documents/IMG/src/gostosaHeavyMetal.kra
-File70[$e]=$HOME/Documents/freela/8mconsultoria/imagens/WhatsApp Image 2024-09-18 at 13.29.21.jpeg
-File71[$e]=$HOME/Documents/freela/8mconsultoria/imagens/WhatsApp Image 2024-09-18 at 13.35.52.jpeg
-File72[$e]=$HOME/Documents/freela/8mconsultoria/imagens/fvfb.jpg
-File73[$e]=$HOME/.config/eww/right-bar/images/bell.png
-File74[$e]=$HOME/Documents/IMG/src/lee-and-james.kra
-File75[$e]=$HOME/Documents/IMG/src/lee-and-james.jpg
-File76[$e]=$HOME/Documents/IMG/src/os_lunaticos.kra
-File77[$e]=$HOME/Documents/round-circle.kra
-File78[$e]=$HOME/Documents/obs-cam-mask.png
-File79[$e]=$HOME/pics/brain/ShrekPrint.JPG
-File8[$e]=$HOME/Documents/FDP/marca/mediakit/FDP_Logo_circulo.psd
-File80[$e]=$HOME/Documents/IMG/src/shrek-the-first.kra
-File81[$e]=$HOME/Documents/seiva/banner-desktop.kra
-File82[$e]=$HOME/Documents/seiva/banner-mobile.kra
-File83[$e]=$HOME/.config/rofi/images/sleepy-cat.gif
-File84[$e]=$HOME/.config/rofi/images/sleepy-cat.png
-File85[$e]=$HOME/Documents/Media/Viagens/video_viagem_rio/20230131_151549.jpg
-File86[$e]=$HOME/.config/awesome/themes/powerarrow-dark/icons/titlebar/sticky_inactive.png
-File87[$e]=$HOME/.config/awesome/themes/powerarrow-dark/icons/titlebar/close.png
-File88[$e]=$HOME/.config/awesome/themes/powerarrow-dark/icons/titlebar/floating_inactive.png
-File89[$e]=$HOME/.config/awesome/themes/powerarrow-dark/icons/titlebar/floating_active.png
-File9[$e]=$HOME/Documents/IMG/src/stolen-car-radio.kra
-File90[$e]=$HOME/.config/awesome/themes/powerarrow-dark/icons/titlebar/sticky_active.png
-File91[$e]=$HOME/pics/brain/florzinhas-pontilhismo.jpg
-File92[$e]=$HOME/Documents/IMG/src/florzinhas-pontilhismo.kra
-File93[$e]=$HOME/Documents/FDP/marca/man-i-love-frank.kra
-File94[$e]=$HOME/Documents/FDP/marca/bandas-basicao.kra
-File95[$e]=$HOME/Documents/FDP/marca/ballmer_peak.kra
-File96[$e]=$HOME/Documents/IMG/src/4-elementos-hachura.kra
-Name1=promptfolio-logo.kra
-Name10=jumpsuit.kra
-Name11=inPieces.kra
-Name12=banner-quero-usar-camisa-de-banda-mobile.png
-Name13=guia-de-tamanhos-moletom.png
-Name14=banner-quero-usar-camisa-de-banda.kra
-Name15=banner-quero-usar-camisa-de-banda-mobile.kra
-Name16=lotus-pai-sho.kra
-Name17=folhas.kra
-Name18=rage-ciclops.kra
-Name19=zombariaceleste.kra
-Name2=FDP_Flames.png
-Name20=tarts_logo.kra
-Name21=icone-LA-folhas.kra
-Name22=fdp.jpg
-Name23=eu-e-alex.jpeg
-Name24=eu-e-oskar.jpeg
-Name25=eu-e-stefan.jpeg
-Name26=tatuagem_do_fundo.kra
-Name27=sua-mae-metalcore.kra
-Name28=logo-ajr.kra
-Name29=tatuagem_do_fundo.png
-Name3=fdp-metalcore.kra
-Name30=bixo-vaso.kra
-Name31=fundodopoco-preto-sem-fundo.svg
-Name32=logo_circulo_e_FDP.png
-Name33=logo_circulo_e_FDP-adesivo.png
-Name34=posterHalloween.kra
-Name35=fundodopoco-branco-sem-fundo.png
-Name36=fundodopoco-branco-sem-fundo.svg
-Name37=logo-fundo-do-poco-vetorizada.kra
-Name38=logo-fundo-do-poco-extenso.kra
-Name39=flashes.kra
-Name4=bemvindoaofundo.kra
-Name40=ornamental-flashes.kra
-Name41=pirulito.kra
-Name42=flashsheet.png
-Name43=TemplateCalendario.kra
-Name44=logo-fundodopoco-peito-preto.png
-Name45=FDP_Logo_circulo.kra
-Name46=Adesivo_10_Anos_Do_Fundo.png
-Name47=calendario-2024.kra
-Name48=Camisa_Do_Meu_Pai.png
-Name49=paps-branco.png
-Name5=bemvindoaofundo-alt.kra
-Name50=bbwf.png
-Name51=espada-kaique.jpeg
-Name52=ram.png
-Name53=downward-arrow.png
-Name54=upward-arrow.png
-Name55=true-friends.kra
-Name56=jointheclub.kra
-Name57=pds_s3_ep_base.kra
-Name58=notion-calendar.png
-Name59=monitor-config.png
-Name6=prickCMYK.kra
-Name60=monitor-config2.png
-Name61=dotdotdot2-r.png
-Name62=redeye.png
-Name63=menu.png
-Name64=refresh.png
-Name65=charging.png
-Name66=calculator.png
-Name67=roda-na-mesa-1.jpeg
-Name68=WhatsApp Image 2024-09-11 at 19.56.46.jpeg
-Name69=WhatsApp Image 2024-09-11 at 19.58.03.jpeg
-Name7=gostosaHeavyMetal.kra
-Name70=WhatsApp Image 2024-09-18 at 13.29.21.jpeg
-Name71=WhatsApp Image 2024-09-18 at 13.35.52.jpeg
-Name72=fvfb.jpg
-Name73=bell.png
-Name74=lee-and-james.kra
-Name75=lee-and-james.jpg
-Name76=os_lunaticos.kra
-Name77=round-circle.kra
-Name78=obs-cam-mask.png
-Name79=ShrekPrint.JPG
-Name8=FDP_Logo_circulo.psd
-Name80=shrek-the-first.kra
-Name81=banner-desktop.kra
-Name82=banner-mobile.kra
-Name83=sleepy-cat.gif
-Name84=sleepy-cat.png
-Name85=20230131_151549.jpg
-Name86=sticky_inactive.png
-Name87=close.png
-Name88=floating_inactive.png
-Name89=floating_active.png
-Name9=stolen-car-radio.kra
-Name90=sticky_active.png
-Name91=florzinhas-pontilhismo.jpg
-Name92=florzinhas-pontilhismo.kra
-Name93=man-i-love-frank.kra
-Name94=bandas-basicao.kra
-Name95=ballmer_peak.kra
-Name96=4-elementos-hachura.kra
+File1[$e]=$HOME/Documents/IMG/tattoo/pirulito.kra
+File10[$e]=$HOME/repos/mail-man/solved_captchas/bbwf.png
+File100[$e]=$HOME/cumuru/production.kra
+File11[$e]=$HOME/Documents/IMG/res/espada-kaique.jpeg
+File12[$e]=$HOME/.config/eww/right-bar/images/ram.png
+File13[$e]=$HOME/.config/eww/sidebar/images/downward-arrow.png
+File14[$e]=$HOME/.config/eww/sidebar/images/upward-arrow.png
+File15[$e]=$HOME/Documents/IMG/src/true-friends.kra
+File16[$e]=$HOME/Documents/FDP/jointheclub.kra
+File17[$e]=$HOME/Documents/PapoDeSauna/pds_s3_ep_base.kra
+File18[$e]=$HOME/.config/eww/sidebar/images/notion-calendar.png
+File19[$e]=$HOME/.config/eww/sidebar/images/monitor-config.png
+File2[$e]=$HOME/Documents/sync/tattoo_flashes/flashsheet.png
+File20[$e]=$HOME/.config/eww/sidebar/images/monitor-config2.png
+File21[$e]=$HOME/.config/eww/right-bar/images/dotdotdot2-r.png
+File22[$e]=$HOME/.config/eww/sidebar/images/redeye.png
+File23[$e]=$HOME/.config/eww/right-bar/images/menu.png
+File24[$e]=$HOME/.config/eww/sidebar/images/refresh.png
+File25[$e]=$HOME/.config/eww/right-bar/images/icons/battery/charging.png
+File26[$e]=$HOME/.config/rofi/images/calculator.png
+File27[$e]=$HOME/Documents/freela/8mconsultoria/imagens/roda-na-mesa-1.jpeg
+File28[$e]=$HOME/Documents/freela/8mconsultoria/imagens/WhatsApp Image 2024-09-11 at 19.56.46.jpeg
+File29[$e]=$HOME/Documents/freela/8mconsultoria/imagens/WhatsApp Image 2024-09-11 at 19.58.03.jpeg
+File3[$e]=$HOME/Documents/FDP/TemplateCalendario.kra
+File30[$e]=$HOME/Documents/freela/8mconsultoria/imagens/WhatsApp Image 2024-09-18 at 13.29.21.jpeg
+File31[$e]=$HOME/Documents/freela/8mconsultoria/imagens/WhatsApp Image 2024-09-18 at 13.35.52.jpeg
+File32[$e]=$HOME/Documents/freela/8mconsultoria/imagens/fvfb.jpg
+File33[$e]=$HOME/.config/eww/right-bar/images/bell.png
+File34[$e]=$HOME/Documents/IMG/src/lee-and-james.kra
+File35[$e]=$HOME/Documents/IMG/src/lee-and-james.jpg
+File36[$e]=$HOME/Documents/IMG/src/os_lunaticos.kra
+File37[$e]=$HOME/Documents/round-circle.kra
+File38[$e]=$HOME/Documents/obs-cam-mask.png
+File39[$e]=$HOME/pics/brain/ShrekPrint.JPG
+File4[$e]=$HOME/Documents/FDP/marca/estampas_finalizadas/trimmed/logo-fundodopoco-peito-preto.png
+File40[$e]=$HOME/Documents/IMG/src/shrek-the-first.kra
+File41[$e]=$HOME/.config/rofi/images/sleepy-cat.gif
+File42[$e]=$HOME/.config/rofi/images/sleepy-cat.png
+File43[$e]=$HOME/Documents/Media/Viagens/video_viagem_rio/20230131_151549.jpg
+File44[$e]=$HOME/.config/awesome/themes/powerarrow-dark/icons/titlebar/sticky_inactive.png
+File45[$e]=$HOME/.config/awesome/themes/powerarrow-dark/icons/titlebar/close.png
+File46[$e]=$HOME/.config/awesome/themes/powerarrow-dark/icons/titlebar/floating_inactive.png
+File47[$e]=$HOME/.config/awesome/themes/powerarrow-dark/icons/titlebar/floating_active.png
+File48[$e]=$HOME/.config/awesome/themes/powerarrow-dark/icons/titlebar/sticky_active.png
+File49[$e]=$HOME/pics/brain/florzinhas-pontilhismo.jpg
+File5[$e]=$HOME/Documents/FDP/marca/mediakit/FDP_Logo_circulo.kra
+File50[$e]=$HOME/Documents/IMG/src/florzinhas-pontilhismo.kra
+File51[$e]=$HOME/Documents/FDP/marca/man-i-love-frank.kra
+File52[$e]=$HOME/Documents/FDP/marca/bandas-basicao.kra
+File53[$e]=$HOME/Documents/FDP/marca/ballmer_peak.kra
+File54[$e]=$HOME/Documents/IMG/src/4-elementos-hachura.kra
+File55[$e]=$HOME/repos/wallpapers/wild-curiosity.jpg
+File56[$e]=$HOME/Documents/IMG/tattoo/skrillex.kra
+File57[$e]=$HOME/Documents/IMG/src/kta.kra
+File58[$e]=$HOME/Documents/IMG/jogo-felipe/demonho.kra
+File59[$e]=$HOME/Documents/IMG/jogo-felipe/kta.kra
+File6[$e]=$HOME/Documents/sync/Adesivo_10_Anos_Do_Fundo.png
+File60[$e]=$HOME/Documents/IMG/jogo-felipe/manifesto.kra
+File61[$e]=$HOME/Documents/IMG/jogo-felipe/coracaum.kra
+File62[$e]=$HOME/Documents/IMG/jogo-felipe/barra-de-vida.kra
+File63[$e]=$HOME/Documents/IMG/jogo-felipe/game over.kra
+File64[$e]=$HOME/Documents/IMG/jogo-felipe/livro aberto.kra
+File65[$e]=$HOME/Documents/IMG/jogo-felipe/creditos.kra
+File66[$e]=$HOME/Documents/IMG/jogo-felipe/fundo.kra
+File67[$e]=$HOME/Documents/IMG/jogo-felipe/icone.kra
+File68[$e]=$HOME/cumuru/fotos/20260130_181911.JPEG
+File69[$e]=$HOME/cumuru/fotos/20260203_141044.JPG
+File7[$e]=$HOME/Documents/freela/calendarioMoreira/calendario-2024.kra
+File70[$e]=$HOME/Documents/FDP/marca/estampas_finalizadas/original-files/logo-fdp-triangulo-rosa.png
+File71[$e]=$HOME/Documents/IMG/finalizadas/flor-caveira-lucca.jpeg
+File72[$e]=$HOME/Documents/IMG/jogo-felipe/botoes.kra
+File73[$e]=$HOME/repos/promptfolio/public/clippeers.png
+File74[$e]=$HOME/Downloads/shrek/me-shrek-chars.kra
+File75[$e]=$HOME/Downloads/Ilustração_Sem_Título.psd
+File76[$e]=$HOME/Downloads/shrek/adesivos-premios.kra
+File77[$e]=$HOME/Downloads/shrek/pai-mae-shrek.kra
+File78[$e]=$HOME/Downloads/shrek/cardapio.kra
+File79[$e]=$HOME/repos/roadway/roadway-app/webapp/src/public/diet-roadway-logo.png
+File8[$e]=$HOME/Documents/FDP/marca/Camisa_Do_Meu_Pai.png
+File80[$e]=$HOME/repos/site/images/background-2-fullres.jpg
+File81[$e]=$HOME/Documents/FDP/marca/estampas_finalizadas/original-files/flor-assemica.png
+File82[$e]=$HOME/Documents/IMG/jogo-felipe/titulo.kra
+File83[$e]=$HOME/Documents/IMG/src/synth-eye.kra
+File84[$e]=$HOME/repos/site/assets/img/eye.png
+File85[$e]=$HOME/Documents/IMG/src/mao.kra
+File86[$e]=$HOME/repos/site/assets/img/mao.png
+File87[$e]=$HOME/repos/site/assets/img/revista-level-up-aberta.png
+File88[$e]=$HOME/repos/site/assets/img/noise.png
+File89[$e]=$HOME/repos/site/assets/icons/instagram-icon.png
+File9[$e]=$HOME/Documents/FDP/marca/paps-branco.png
+File90[$e]=$HOME/repos/site/assets/img/tattoo-caveira.png
+File91[$e]=$HOME/repos/site/assets/img/pc.png
+File92[$e]=$HOME/repos/site/assets/img/billboard.png
+File93[$e]=$HOME/repos/site/assets/backrooms/images/fundo.kra
+File94[$e]=$HOME/repos/site/assets/backrooms/images/nicolas-cage.png
+File95[$e]=$HOME/repos/site/assets/backrooms/images/door-ahead.png
+File96[$e]=$HOME/repos/site/assets/backrooms/images/door-back.png
+File97[$e]=$HOME/repos/site/assets/backrooms/images/door-left.png
+File98[$e]=$HOME/repos/site/assets/backrooms/images/door-right.png
+File99[$e]=$HOME/Documents/IMG/tattoo/n-senhora-gio.kra
+Name1=pirulito.kra
+Name10=bbwf.png
+Name100=production.kra
+Name11=espada-kaique.jpeg
+Name12=ram.png
+Name13=downward-arrow.png
+Name14=upward-arrow.png
+Name15=true-friends.kra
+Name16=jointheclub.kra
+Name17=pds_s3_ep_base.kra
+Name18=notion-calendar.png
+Name19=monitor-config.png
+Name2=flashsheet.png
+Name20=monitor-config2.png
+Name21=dotdotdot2-r.png
+Name22=redeye.png
+Name23=menu.png
+Name24=refresh.png
+Name25=charging.png
+Name26=calculator.png
+Name27=roda-na-mesa-1.jpeg
+Name28=WhatsApp Image 2024-09-11 at 19.56.46.jpeg
+Name29=WhatsApp Image 2024-09-11 at 19.58.03.jpeg
+Name3=TemplateCalendario.kra
+Name30=WhatsApp Image 2024-09-18 at 13.29.21.jpeg
+Name31=WhatsApp Image 2024-09-18 at 13.35.52.jpeg
+Name32=fvfb.jpg
+Name33=bell.png
+Name34=lee-and-james.kra
+Name35=lee-and-james.jpg
+Name36=os_lunaticos.kra
+Name37=round-circle.kra
+Name38=obs-cam-mask.png
+Name39=ShrekPrint.JPG
+Name4=logo-fundodopoco-peito-preto.png
+Name40=shrek-the-first.kra
+Name41=sleepy-cat.gif
+Name42=sleepy-cat.png
+Name43=20230131_151549.jpg
+Name44=sticky_inactive.png
+Name45=close.png
+Name46=floating_inactive.png
+Name47=floating_active.png
+Name48=sticky_active.png
+Name49=florzinhas-pontilhismo.jpg
+Name5=FDP_Logo_circulo.kra
+Name50=florzinhas-pontilhismo.kra
+Name51=man-i-love-frank.kra
+Name52=bandas-basicao.kra
+Name53=ballmer_peak.kra
+Name54=4-elementos-hachura.kra
+Name55=wild-curiosity.jpg
+Name56=skrillex.kra
+Name57=kta.kra
+Name58=demonho.kra
+Name59=kta.kra
+Name6=Adesivo_10_Anos_Do_Fundo.png
+Name60=manifesto.kra
+Name61=coracaum.kra
+Name62=barra-de-vida.kra
+Name63=game over.kra
+Name64=livro aberto.kra
+Name65=creditos.kra
+Name66=fundo.kra
+Name67=icone.kra
+Name68=20260130_181911.JPEG
+Name69=20260203_141044.JPG
+Name7=calendario-2024.kra
+Name70=logo-fdp-triangulo-rosa.png
+Name71=flor-caveira-lucca.jpeg
+Name72=botoes.kra
+Name73=clippeers.png
+Name74=me-shrek-chars.kra
+Name75=Ilustração_Sem_Título.psd
+Name76=adesivos-premios.kra
+Name77=pai-mae-shrek.kra
+Name78=cardapio.kra
+Name79=diet-roadway-logo.png
+Name8=Camisa_Do_Meu_Pai.png
+Name80=background-2-fullres.jpg
+Name81=flor-assemica.png
+Name82=titulo.kra
+Name83=synth-eye.kra
+Name84=eye.png
+Name85=mao.kra
+Name86=mao.png
+Name87=revista-level-up-aberta.png
+Name88=noise.png
+Name89=instagram-icon.png
+Name9=paps-branco.png
+Name90=tattoo-caveira.png
+Name91=pc.png
+Name92=billboard.png
+Name93=fundo.kra
+Name94=nicolas-cage.png
+Name95=door-ahead.png
+Name96=door-back.png
+Name97=door-left.png
+Name98=door-right.png
+Name99=n-senhora-gio.kra
 maxRecentFileItems=100
 
 [SelectedTags]
@@ -1065,18 +1202,24 @@ workspaces=All
 
 [SvgSymbolCollection]
 currentCollection=0
+displayThumbnails=false
+iconSize=20
 
 [SvgTextTool]
-Geometry=AdnQywADAAAAAAARAAAE1QAAB24AAAjWAAAAEQAABNUAAAduAAAI1gAAAAAAAAAAB4AAAAARAAAE1QAAB24AAAjW
+Geometry=AdnQywADAAAAAAnNAAAAYgAADugAAAQgAAAJzQAAAGIAAA7oAAAEIAAAAAEAAAAAB4AAAAnNAAAAYgAADugAAAQg
+cssStylePresetName=
 defaultAlignment=0
 defaultFont=LT Carpet
 defaultLetterSpacing=0
 defaultSize=72
-windowState=AAAA/wAAAAD9AAAAAAAAB14AAAN2AAAABAAAAAQAAAAIAAAACPwAAAADAAAAAgAAAAEAAAAWAG0AYQBpAG4AVABvAG8AbABCAGEAcgEAAAAA/////wAAAAAAAAAAAAAAAgAAAAEAAAAYAGYAbwBuAHQAUwBlAHQAdABpAG4AZwBzAQAAAAD/////AAAAAAAAAAAAAAACAAAAAQAAABQAZgBvAHIAbQBhAHQAdABpAG4AZwEAAAAA/////wAAAAAAAAAA
+pasteRichtTextByDefault=false
+useCurrentTextProperties=true
+useVisualBidiCursor=true
+windowState=AAAA/wAAAAD9AAAAAAAABRwAAAMzAAAABAAAAAQAAAAIAAAACPwAAAADAAAAAgAAAAEAAAAWAG0AYQBpAG4AVABvAG8AbABCAGEAcgEAAAAA/////wAAAAAAAAAAAAAAAgAAAAEAAAAYAGYAbwBuAHQAUwBlAHQAdABpAG4AZwBzAQAAAAD/////AAAAAAAAAAAAAAACAAAAAQAAABQAZgBvAHIAbQBhAHQAdABpAG4AZwEAAAAA/////wAAAAAAAAAA
 
 [TemplateChooserDialog]
 AlwaysUseTemplate=
-DetailsPaneSplitterSizes=258,235
+DetailsPaneSplitterSizes=271,246
 FullTemplateName[$e]=/usr/share/krita/templates/design/.source/web_design.kra
 LastReturnType=Custom Document
 
@@ -1085,6 +1228,7 @@ colorSelectorConfiguration=3|0|5|0
 customSelectorBackgroundColor=160,160,164
 gamma=2.2
 hsxSettingType=0
+lastUsedColorsPerDocument=false
 lumaG=0.7152
 lumaR=0.2126
 minimalShadeSelectorLineConfig=0|0.2|0|0|0|0|0;1|0|1|1|0|0|0;2|0|-1|1|0|0|0
@@ -1107,7 +1251,7 @@ ShapePluginsDisabled=
 ToolPlugins=,,
 
 [colortoalpha_filter_bookmarks]
-Last Used=<!DOCTYPE params>\n<params version="1">\n <param name="targetcolor" type="internal">#000000</param>\n <param name="threshold" type="internal">100</param>\n</params>\n
+Last Used=<!DOCTYPE params>\n<params version="1">\n <param name="targetcolor" type="internal">#a1df9d</param>\n <param name="threshold" type="internal">100</param>\n</params>\n
 
 [crashprevention]
 CreatingCanvas=false
@@ -1123,7 +1267,7 @@ forceLodMode=true
 showPreview=true
 
 [gaussian blur_filter_bookmarks]
-Last Used=<!DOCTYPE params>\n<params version="1">\n <param name="horizRadius" type="internal">66.56</param>\n <param name="lockAspect" type="internal">true</param>\n <param name="vertRadius" type="internal">66.56</param>\n</params>\n
+Last Used=<!DOCTYPE params>\n<params version="1">\n <param name="horizRadius" type="internal">15.37</param>\n <param name="lockAspect" type="internal">true</param>\n <param name="vertRadius" type="internal">15.37</param>\n</params>\n
 
 [gaussianhighpass_filter_bookmarks]
 Last Used=<!DOCTYPE params>\n<params version="1">\n <param type="internal" name="blurAmount">1</param>\n</params>\n
@@ -1132,7 +1276,7 @@ Last Used=<!DOCTYPE params>\n<params version="1">\n <param type="internal" name=
 Last Used=<!DOCTYPE params>\n<params version="1">\n <param type="internal" name="antiAliasing">true</param>\n <param type="color" name="backGroundColor"><![CDATA[<!DOCTYPE color>\n<color>\n <RGB space="sRGB-elle-V2-g10.icc" b="1" r="1" g="1"/>\n</color>\n]]></param>\n <param type="internal" name="cellSize">8</param>\n <param type="color" name="foreGroundColor"><![CDATA[<!DOCTYPE color>\n<color>\n <RGB space="sRGB-elle-V2-g10.icc" b="0" r="0" g="0"/>\n</color>\n]]></param>\n <param type="internal" name="invert">false</param>\n <param type="internal" name="patternAngle">45</param>\n</params>\n
 
 [hsvadjustment_filter_bookmarks]
-Last Used=<!DOCTYPE params>\n<params version="0">\n <param name="colorize" type="internal">false</param>\n <param name="compatibilityMode" type="internal">false</param>\n <param name="h" type="internal">0</param>\n <param name="s" type="internal">100</param>\n <param name="type" type="internal">1</param>\n <param name="v" type="internal">-28</param>\n</params>\n
+Last Used=<!DOCTYPE params>\n<params version="0">\n <param name="colorize" type="internal">false</param>\n <param name="compatibilityMode" type="internal">false</param>\n <param name="h" type="internal">0</param>\n <param name="s" type="internal">-87</param>\n <param name="type" type="internal">1</param>\n <param name="v" type="internal">1</param>\n</params>\n
 
 [invert_filter_bookmarks]
 Last Used=<!DOCTYPE params>\n<params version="0"/>\n
@@ -1162,10 +1306,10 @@ radioDiscardAlpha=true
 radioSeparateAlpha=false
 
 [levels_filter_bookmarks]
-Last Used=<!DOCTYPE params>\n<params version="2">\n <param name="mode">lightness</param>\n <param name="histogram_mode">linear</param>\n <param name="lightness">0.301397205588822;1;0.435531229728857;0;1</param>\n <param name="number_of_channels">8</param>\n <param name="channel_0">0;1;1;0;1</param>\n <param name="channel_1">0;1;1;0;1</param>\n <param name="channel_2">0;1;1;0;1</param>\n <param name="channel_3">0;1;1;0;1</param>\n <param name="channel_4">0;1;1;0;1</param>\n <param name="channel_5">0;1;1;0;1</param>\n <param name="channel_6">0;1;1;0;1</param>\n <param name="channel_7">0;1;1;0;1</param>\n <param type="internal" name="blackvalue">77</param>\n <param type="internal" name="whitevalue">255</param>\n <param type="internal" name="gammavalue">0.435531229728857</param>\n <param type="internal" name="outblackvalue">0</param>\n <param type="internal" name="outwhitevalue">255</param>\n</params>\n
+Last Used=<!DOCTYPE params>\n<params version="2">\n <param name="mode">lightness</param>\n <param name="histogram_mode">linear</param>\n <param name="lightness">0.646706586826347;1;0.833508586885049;0;1</param>\n <param name="number_of_channels">8</param>\n <param name="channel_0">0;1;1;0;1</param>\n <param name="channel_1">0;1;1;0;1</param>\n <param name="channel_2">0;1;1;0;1</param>\n <param name="channel_3">0;1;1;0;1</param>\n <param name="channel_4">0;1;1;0;1</param>\n <param name="channel_5">0;1;1;0;1</param>\n <param name="channel_6">0;1;1;0;1</param>\n <param name="channel_7">0;1;1;0;1</param>\n <param name="blackvalue" type="internal">165</param>\n <param name="whitevalue" type="internal">255</param>\n <param name="gammavalue" type="internal">0.833508586885049</param>\n <param name="outblackvalue" type="internal">0</param>\n <param name="outwhitevalue" type="internal">255</param>\n</params>\n
 
 [noise_filter_bookmarks]
-Last Used=<!DOCTYPE params>\n<params version="1">\n <param name="level" type="internal">0</param>\n <param name="opacity" type="internal">99</param>\n <param name="seedBlue" type="internal">1773595097</param>\n <param name="seedGreen" type="internal">2020432100</param>\n <param name="seedRed" type="internal">2028720897</param>\n <param name="seedThreshold" type="internal">505185185</param>\n</params>\n
+Last Used=<!DOCTYPE params>\n<params version="1">\n <param type="internal" name="grayscale">false</param>\n <param type="internal" name="level">16</param>\n <param type="internal" name="opacity">100</param>\n <param type="internal" name="seedBlue">1120048829</param>\n <param type="internal" name="seedGreen">112805732</param>\n <param type="internal" name="seedRed">2040332871</param>\n <param type="internal" name="seedThreshold">160051528</param>\n</params>\n
 
 [oilpaint_filter_bookmarks]
 Last Used=<!DOCTYPE params>\n<params version="1">\n <param name="brushSize" type="internal">1</param>\n <param name="smooth" type="internal">30</param>\n</params>\n
@@ -1174,7 +1318,10 @@ Last Used=<!DOCTYPE params>\n<params version="1">\n <param name="brushSize" type
 Last Used=<!DOCTYPE params>\n<params version="1">\n <param type="internal" name="alphaClip">0.5</param>\n <param type="internal" name="alphaDither/noiseSeed">2145174067</param>\n <param type="string" name="alphaDither/pattern"><![CDATA[DITH 0202 GEN ]]></param>\n <param type="internal" name="alphaDither/patternValueMode">0</param>\n <param type="internal" name="alphaDither/spread">1</param>\n <param type="internal" name="alphaDither/thresholdMode">0</param>\n <param type="internal" name="alphaEnabled">true</param>\n <param type="internal" name="alphaIndex">0</param>\n <param type="internal" name="alphaMode">0</param>\n <param type="internal" name="colorspace">0</param>\n <param type="internal" name="dither/colorMode">0</param>\n <param type="internal" name="dither/noiseSeed">233665123</param>\n <param type="internal" name="dither/offsetScale">0.125</param>\n <param type="string" name="dither/pattern"><![CDATA[DITH 0202 GEN ]]></param>\n <param type="internal" name="dither/patternValueMode">0</param>\n <param type="internal" name="dither/spread">1</param>\n <param type="internal" name="dither/thresholdMode">0</param>\n <param type="internal" name="ditherEnabled">false</param>\n <param type="string" name="palette"><![CDATA[Swatch CMYK]]></param>\n</params>\n
 
 [perchannel_filter_bookmarks]
-Last Used=<!DOCTYPE params>\n<params version="1">\n <param name="nTransfers">8</param>\n <param name="curve0">0,0;0.510917,0.217857;0.576419,0.689286;1,1;</param>\n <param name="curve1">0,0;1,1;</param>\n <param name="curve2">0,0;1,1;</param>\n <param name="curve3">0,0;1,1;</param>\n <param name="curve4">0,0;1,1;</param>\n <param name="curve5">0,0;1,1;</param>\n <param name="curve6">0,0;1,1;</param>\n <param name="curve7">0,0;1,1;</param>\n</params>\n
+Last Used=<!DOCTYPE params>\n<params version="1">\n <param name="nTransfers">8</param>\n <param name="curve0">0,0;0.482533,0.177536;0.683406,0.554348;1,1;</param>\n <param name="curve1">0,0;1,1;</param>\n <param name="curve2">0,0;1,1;</param>\n <param name="curve3">0,0;1,1;</param>\n <param name="curve4">0,0;1,1;</param>\n <param name="curve5">0,0;1,1;</param>\n <param name="curve6">0,0;1,1;</param>\n <param name="curve7">0,0;1,1;</param>\n</params>\n
+
+[pixelize_filter_bookmarks]
+Last Used=<!DOCTYPE params>\n<params version="1">\n <param name="keepAspect" type="internal">true</param>\n <param name="pixelHeight" type="internal">7</param>\n <param name="pixelWidth" type="internal">7</param>\n</params>\n
 
 [posterize_filter_bookmarks]
 Last Used=<!DOCTYPE params>\n<params version="0">\n <param name="steps" type="internal">16</param>\n</params>\n
@@ -1195,7 +1342,7 @@ Last Used=<!DOCTYPE params>\n<params version="1">\n <param type="internal" name=
 Theme=Krita darker
 
 [threshold_filter_bookmarks]
-Last Used=<!DOCTYPE params>\n<params version="1">\n <param name="threshold" type="internal">0</param>\n</params>\n
+Last Used=<!DOCTYPE params>\n<params version="1">\n <param name="threshold" type="internal">145</param>\n</params>\n
 
 [tool_color_picker]
 ColorPickerDefaultActivation=<!DOCTYPE params>\n<params>\n <param name="addPalette" type="internal">false</param>\n <param name="blend" type="internal">100</param>\n <param name="normaliseValues" type="internal">false</param>\n <param name="radius" type="internal">1</param>\n <param name="sampleMerged" type="internal">true</param>\n <param name="toForegroundColor" type="internal">true</param>\n <param name="updateColor" type="internal">true</param>\n</params>\n

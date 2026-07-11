@@ -12,9 +12,8 @@ elif [ "$(pgrep -x Hyprland)" ]; then
 fi
 
 reload_eww() {
-	sleep 5 &&
 	killall eww &&
-	launch_eww_bars
+	launch_eww_bars 2>&1 1>/dev/null
 }
 
 

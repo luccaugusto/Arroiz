@@ -4,4 +4,5 @@ EnableSingleApplication=true
 LogUsage=true
 OpenGLRenderer=auto
 canvasState=OPENGL_SUCCESS
+canvasSurfaceBitDepthMode=auto
 rootSurfaceFormat=bt709-g22

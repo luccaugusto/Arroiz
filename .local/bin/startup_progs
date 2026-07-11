@@ -18,10 +18,8 @@ check_system_updates()
 
 last_session_cleanup()
 {
-	# Kill all running docker containers in case i forgot to do it before shutting down
-	docker_pid=$(docker ps | awk 'NR>1{ print $1}')
-	[ "$docker_pid" ] && docker kill $docker_pid # i do want to split
 
+	kill_all_containers
 	# compress the time files into only one file
 	compress_time
 }
@@ -66,7 +64,7 @@ start_eww()
 		sed -i 's/geometry :x "-1%"/geometry :x "1%"/' ~/.config/eww/sidebar/eww.yuck
 		sed -i 's/:y "-2%"/:y "2%"/' ~/.config/eww/sidebar/eww.yuck
 	fi
-	launch_eww_bars
+	toggle_status_bar
 }
 
 run_basic_apps()
@@ -80,7 +78,12 @@ run_basic_apps()
 	# only setting the wallpaper for now, as i want to keep my custom kitty colors
 	# theme_manager --set-wallpaper-only
 
+	# If drawing tablet is connected start the driver
+	[ "$(pgrep -x Hyprland)" ] && [ "$(hyprctl monitors | grep -c 'Kamvas 13')" -gt 0 ] && sh /usr/lib/huiontablet/huiontablet.sh &
+
 	[ "$(pgrep -x kanata)" ] && restartkanata &
+
+
 }
 
 open_slack()
@@ -112,7 +115,8 @@ autostart_apps()
 	[ "$(pgrep blueman-applet)" ] || blueman-applet &
 
 	# Seed torrents, like a good boy
-	[ "$(pgrep -x transmission-gtk)" ] || transmission-gtk &
+	# i'm seeding from my homelab now
+	# [ "$(pgrep -x transmission-qt)" ] || transmission-qt &
 
 	# open my email account
 	[ "$(pgrep thunderbird)" ] || thunderbird &
@@ -137,6 +141,9 @@ autostart_apps()
 
 	# Open slack so i get ready for work
 	open_slack &
+
+	# Get my alarms going
+	# gnome-clocks &
 }
 
 # MAIN

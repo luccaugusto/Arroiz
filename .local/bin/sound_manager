@@ -166,6 +166,7 @@ def current_source() -> str:
 def set_card_profile(sink_name: str, profile: str) -> None:
     debug_log(f"Setting card profile - sink: {sink_name}, profile: {profile}")
     # Use pactl instead of pw-cli for setting card profiles
+    print(f"pactl set-card-profile {sink_name} {profile}")
     run(["pactl", "set-card-profile", sink_name, profile])
 
 

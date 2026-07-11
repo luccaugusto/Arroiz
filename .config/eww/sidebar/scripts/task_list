@@ -6,7 +6,7 @@ list_tasks()
 {
 	# allow for comments in the task list
 	# lines starting with # are ignored
-	todo=$(sed "/^#/d" "$task_list")
+	todo=$(sed "/^#/d" "$task_list" | sed 's/"/\\"/g')
 	parsed_todo=$(echo "$todo" | tr '\n' '|' | sed 's/|/","/g')
 	[ "$parsed_todo" = '","' ] && echo "[]" && exit 0
 

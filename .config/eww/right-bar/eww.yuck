@@ -94,7 +94,7 @@
 (defwindow system [screen]
   :monitor screen
   :geometry (geometry :x "1%"
-    :y "10px"
+    :y "-35px"
     :width "30%"
     :height "40px"
     :anchor "top right")
@@ -109,7 +109,7 @@
 (defwindow calendar [screen]
   :monitor screen
   :geometry (geometry :x "1%"
-    :y "55px"
+    :y "10px"
     :anchor "top right")
   :width "10%"
   :stacking "fg"
@@ -120,7 +120,7 @@
 (defwindow timer [screen total]
   :monitor screen
   :geometry (geometry :x "0"
-    :y "10px"
+    :y "0px"
     :anchor "top center")
   :width "500px"
   :stacking "fg"

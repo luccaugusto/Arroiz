@@ -27,6 +27,7 @@ docker-compose
 dunst
 efibootmgr
 elisa
+ente-auth-bin
 fakeroot
 feh
 ffmpeg

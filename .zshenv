@@ -52,6 +52,8 @@ export GTK_USE_PORTAL=1
 export OPENCV_LOG_LEVEL=0
 export OPENCV_VIDEOIO_PRIORITY_INTEL_MFX=0
 
+export HEADROOM_TELEMETRY=off
+
 [ -f ~/.Xresources ] && [ "$XDG_CURRENT_DESKTOP" != "Hyprland" ] && xrdb -merge ~/.Xresources
 
 # # The next line updates PATH for the Google Cloud SDK.
