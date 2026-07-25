@@ -96,10 +96,3 @@ autocmd Filetype markdown          setlocal wrap linebreak
 let loaded_netrwPlugin = 1
 
 lua require("config")
-
-let g:copilot_filetypes = {
-	\ 'xml': v:false,
-	\ 'wiki': v:false,
-	\ 'markdown': v:false,
-	\ 'md': v:false,
-	\ }

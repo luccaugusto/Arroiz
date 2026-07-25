@@ -11,7 +11,8 @@
 ;; (defvar REDSHIFT_OFF_ICON "images/blueeye.png")
 
 (defpoll random_pic :interval "1h" :initial "images/thonk.png" "scripts/random_pic")
-(defpoll sys_info :interval "2s" :initial "{}" "scripts/sys_info")
+(defpoll sys_info :interval "30s" :initial "{}" "scripts/sys_info")
+(defpoll sound_info :interval "5s" :initial "{}" "sound_manager -l")
 (defpoll task_list_empty_text :interval "10m" :initial "No tasks to do" "scripts/task_list -e")
 (defpoll packages_to_update :interval "12h" :initial 0 "pacman -Qu | wc -l")
 (defpoll todo_list :interval "10m" :initial "[]" "scripts/task_list -l")
@@ -52,14 +53,14 @@
       (box :orientation "h" :spacing 10 :space-evenly true :height 100
         (box :orientation "v" :space-evenly false :spacing 10
           (label :text "Outputs" :class "info")
-          (for card in {sys_info?.sound?.output ?: "[]"}
+          (for card in {sound_info?.output ?: "[]"}
             (eventbox
               :height 50
               :width 120
               :cursor "pointer"
               :halign "center"
               :class "soundbutton ${card.active ? 'soundactive' : ''}"
-              :onclick "sound_manager -s '${card.sink_name}' '${card.profile_name}' '${card.card_name}' 'output' &"
+              :onclick "sound_manager -s '${card.device}' '${card.profile}' 'output' &"
               :timeout "5s"
               (box :orientation "h" :spacing 5 :space-evenly false :class "soundbutton-content" :halign "center"
                 (image :image-width 30 :image-height 30 :path SPEAKER_ICON)
@@ -67,14 +68,14 @@
             ))
         (box :orientation "v" :space-evenly false :spacing 10
           (label :text "Inputs" :class "info")
-          (for card in {sys_info?.sound?.input ?: "[]"}
+          (for card in {sound_info?.input ?: "[]"}
             (eventbox
               :height 50
               :width 120
               :cursor "pointer"
               :halign "center"
               :class "soundbutton ${card.active ? 'soundactive' : ''}"
-              :onclick "sound_manager -s '${card.sink_name}' '${card.profile_name}' '${card.card_name}' 'input' &"
+              :onclick "sound_manager -s '${card.device}' '${card.profile}' 'input' &"
               :timeout "5s"
               (box :orientation "h" :spacing 5 :space-evenly false :class "soundbutton-content" :halign "center"
                 (image :image-width 25 :image-height 25 :path MICROPHONE_ICON)
@@ -82,14 +83,14 @@
             )))
         (box :orientation "v" :space-evenly false :spacing 10
           (label :text "IO" :class "info")
-          (for card in {sys_info?.sound?.io ?: "[]"}
+          (for card in {sound_info?.io ?: "[]"}
             (eventbox
               :height 50
               :width 120
               :cursor "pointer"
               :halign "center"
               :class "soundbutton ${card.active ? 'soundactive' : ''}"
-              :onclick "sound_manager -s '${card.sink_name}' '${card.profile_name}' '${card.card_name}' 'io' &"
+              :onclick "sound_manager -s '${card.device}' '${card.profile}' 'io' &"
               :timeout "5s"
               (box :orientation "h" :spacing 5 :space-evenly false :class "soundbutton-content" :halign "center"
                 (image :image-width 30 :image-height 30 :path SPEAKER_ICON)

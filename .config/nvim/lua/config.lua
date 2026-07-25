@@ -23,7 +23,7 @@ vim.api.nvim_create_autocmd(
 		pattern = "*.py",
         group = "AutoFormat",
         callback = function()
-            vim.cmd("silent !black --line-length 140 -q %")
+            vim.cmd("silent !black -q %")
             vim.cmd("edit")
         end,
     }
@@ -49,17 +49,17 @@ prettier.setup({
   },
 })
 
-vim.api.nvim_create_autocmd(
-    "BufWritePost",
-    {
-		pattern = {"*.js", "*.ts", "*.jsx", "*.tsx"},
-        group = "AutoFormat",
-        callback = function()
-            vim.cmd("silent !prettier --log-level silent -w %")
-            vim.cmd("edit")
-        end,
-    }
-)
+-- vim.api.nvim_create_autocmd(
+--     "BufWritePost",
+--     {
+-- 		pattern = {"*.js", "*.ts", "*.jsx", "*.tsx"},
+--         group = "AutoFormat",
+--         callback = function()
+--             vim.cmd("silent !prettier --log-level silent -w %")
+--             vim.cmd("edit")
+--         end,
+--     }
+-- )
 
 vim.keymap.set({"n", "i", "x"}, "<M-j>", "<Cmd>MultipleCursorsAddDown<CR>")
 vim.keymap.set({"n", "i", "x"}, "<M-k>", "<Cmd>MultipleCursorsAddUp<CR>")
