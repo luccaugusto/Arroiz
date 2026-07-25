@@ -16,20 +16,24 @@ log() {
 # configure pacman
 enable_multilib()
 {
-	{
-		echo "[multilib]"
-		echo "Include = /etc/pacman.d/mirrorlist"
-	} | sudo tee >> "/etc/pacman.conf"
+	if ! grep -q '^\[multilib\]' /etc/pacman.conf; then
+		{
+			echo "[multilib]"
+			echo "Include = /etc/pacman.d/mirrorlist"
+		} | sudo tee -a /etc/pacman.conf > /dev/null
+	fi
 }
 
 enable_sudo_for_wheel()
 {
-	echo '%wheel ALL=(ALL:ALL) ALL' | sudo EDITOR='tee -a' visudo
+	sudo grep -qxF '%wheel ALL=(ALL:ALL) ALL' /etc/sudoers ||
+		echo '%wheel ALL=(ALL:ALL) ALL' | sudo EDITOR='tee -a' visudo
 }
 
 enable_no_sudo_pacman_sy()
 {
-	echo "%wheel ALL=(ALL) NOPASSWD: /usr/bin/pacman -Sy" | sudo EDITOR='tee -a' visudo
+	sudo grep -qxF '%wheel ALL=(ALL) NOPASSWD: /usr/bin/pacman -Sy' /etc/sudoers ||
+		echo "%wheel ALL=(ALL) NOPASSWD: /usr/bin/pacman -Sy" | sudo EDITOR='tee -a' visudo
 }
 
 # docker data-root to /home so it won't fill up my root partition with images
@@ -54,6 +58,7 @@ setup_trackpad_gestures()
 {
 	libinput-gestures-setup autostart start
 
+	sudo mkdir -p /etc/X11/xorg.conf.d
 	sudo cp etc/X11/xorg.conf.d/30-touchpad.conf /etc/X11/xorg.conf.d/30-touchpad.conf
 }
 
@@ -85,7 +90,8 @@ enable_fingerprint()
 		fprintd-enroll -f "$finger" "$USER"
 	done
 
-	sudo systemctl enable fprintd.service
+	# fprintd.service is D-Bus activated and has no [Install] section,
+	# so it cannot (and does not need to) be enabled
 
 	{
 		echo "#%PAM-1.0"
@@ -95,7 +101,7 @@ enable_fingerprint()
 		echo "account   include   system-login"
 		echo "password  include   system-login"
 		echo "session   include   system-login"
-	} | sudo tee > /etc/pam.d/system-local-login
+	} | sudo tee /etc/pam.d/system-local-login > /dev/null
 
 	{
 		echo "#%PAM-1.0"
@@ -106,7 +112,7 @@ enable_fingerprint()
 		echo "account    include      login"
 		echo "password   include      login"
 		echo "session    include      login"
-	} | sudo tee> /etc/pam.d/ly
+	} | sudo tee /etc/pam.d/ly > /dev/null
 }
 
 install_pkg()
@@ -119,7 +125,7 @@ install_pkg()
 
 aur_install()
 {
-	if ! sudo -u "$USER" yay -S --noconfirm "$1"; then
+	if ! sudo -u "$USER" yay -S --noconfirm --needed "$1"; then
 		log "ERROR" "Failed to install AUR package: $1"
 		return 1
 	fi
@@ -138,7 +144,7 @@ install_nvim()
 	gem install --user-install rubocop
 	gem install --user-install solargraph
 	sudo npm install -g @olrtg/emmet-language-server
-	sudo yarn add global yaml-language-server
+	sudo yarn global add yaml-language-server
 	install_pkg neovim
 }
 
@@ -154,20 +160,23 @@ install_yay()
 install_installers()
 {
 	log "INFO" "INSTALLING INSTALLERS:"
-	log "INFO" "[1/7] enabling multilib"
+	log "INFO" "[1/8] enabling multilib"
 	enable_multilib
-	log "INFO" "[2/7] updating pacman and keyring"
+	log "INFO" "[2/8] updating pacman and keyring"
 	sudo pacman -Sy
-	sudo pacman -Sy archlinux-keyring
-	log "INFO" "[3/7] installing npm"
+	sudo pacman -Sy --noconfirm archlinux-keyring
+	log "INFO" "[3/8] installing base-devel and git (needed by makepkg)"
+	install_pkg base-devel
+	install_pkg git
+	log "INFO" "[4/8] installing npm"
 	install_pkg npm
-	log "INFO" "[3/7] installing yarn"
+	log "INFO" "[5/8] installing yarn"
 	sudo npm i -g yarn
-	log "INFO" "[5/7] installing ruby and ruby gems"
+	log "INFO" "[6/8] installing ruby and ruby gems"
 	install_pkg ruby
-	log "INFO" "[6/7] installing pip"
+	log "INFO" "[7/8] installing pip"
 	install_pkg python-pip
-	log "INFO" "[7/7] installing yay"
+	log "INFO" "[8/8] installing yay"
 	install_yay
 	log "INFO" "INSTALLERS INSTALLED"
 }
@@ -177,13 +186,19 @@ install_loop()
 	log "INFO" "INSTALLING PACKAGES FROM PROGS LIST"
 	pkg_count="$(wc -l < progs)"
 	current_pkg=1
+	failed_pkgs=()
 
 	while IFS= read -r pkg
 	do
 		log "INFO" "Installing $pkg [$current_pkg/$pkg_count]"
-		install_pkg "$pkg"
+		# yay handles both official repo and AUR packages (progs has both)
+		aur_install "$pkg" || failed_pkgs+=("$pkg")
 		current_pkg=$((current_pkg + 1))
 	done < progs
+
+	if [ ${#failed_pkgs[@]} -gt 0 ]; then
+		log "WARN" "${#failed_pkgs[@]} package(s) failed to install: ${failed_pkgs[*]}"
+	fi
 }
 
 install_eww()
@@ -203,7 +218,7 @@ install_eww()
 	[ -d ~/.local/bin/vendor ] || mkdir -p ~/.local/bin/vendor
 	cp target/release/eww ~/.local/bin/vendor/weww
 
-	cd ../../..
+	cd ..
 	rm -rf eww/
 }
 
@@ -256,10 +271,11 @@ elif [ "$EUID" = 0 ]; then
 else
 	./deploy_dotfiles.sh
 	setup_hosts
-	setup_groups
 	install_installers
 	install_nvim
 	install_loop
+	# after install_loop so the docker group (created by the docker package) exists
+	setup_groups
 	install_kanata
 	install_eww
 	enable_services
